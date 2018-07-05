@@ -1,0 +1,53 @@
+<resources>
+
+
+    <!-- ************** Base application theme ************** -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@drawable/bg_main</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_24dp</item>
+    </style>
+    <!-- **************************************************** -->
+
+
+    <!-- ************** CardView ************** -->
+    <style name="CardViewStyle" parent="Base.CardView">
+        <item name="cardCornerRadius">12dp</item>
+    </style>
+
+    <style name="CardViewText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <!-- **************************************** -->
+
+
+    <!-- ************** SearchView ************** -->
+    <style name="Theme.SearchView" parent="Theme.AppCompat">
+        <item name="searchViewStyle">@style/MySearchViewStyle</item>
+    </style>
+
+    <style name="MySearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:inputType">textCapCharacters</item>
+        <item name="searchIcon">@drawable/ic_search_24dp</item>
+        <item name="queryBackground">@android:color/transparent</item>
+    </style>
+    <!-- **************************************** -->
+
+
+    <!-- ************** TabLayout ************** -->
+    <style name="TabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabSelectedTextColor">@color/colorAccent</item>
+        <item name="tabTextColor">@color/colorBlack400</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabMaxWidth">0dp</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabBackground">?attr/colorPrimary</item>
+    </style>
+    <!-- **************************************** -->
+
+
+</resources>

@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">bil-app-kotlin</string>
+
+    <!-- ******* Basic data ******* -->
+    <string name="api_make">Märke</string>
+    <string name="api_model">Model</string>
+    <string name="api_status">Status</string>
+    <string name="api_color">Färg</string>
+    <string name="api_type">Typ</string>
+    <string name="api_vehicle_year">Bil år</string>
+    <string name="api_model_year">Model år</string>
+    <!-- ************************** -->
+
+    <!-- ************** Technical data ************** -->
+    <string name="api_power_hp_1">Hästkrafter</string>
+    <string name="api_power_kw_1">Motoreffekt</string>
+    <string name="api_cylinder_volume">Motorvolym</string>
+    <string name="api_top_speed">Toppfart</string>
+    <string name="api_fuel_1">Drivmedel</string>
+    <string name="api_consumption_1">Förbrukning</string>
+    <string name="api_co2_1">Utsläpp CO2</string>
+    <string name="api_transmission">Växellåda</string>
+    <string name="api_four_wheel_drive">Fyrhjulsdrift</string>
+    <string name="api_sound_level">Ljudnivå körning</string>
+    <string name="api_number_of_passengers">Antal passagerare</string>
+    <string name="api_passenger_airbag">Passagerar airbag</string>
+    <string name="api_hitch">Draganordning</string>
+    <string name="api_chassi_code_1">chassi code</string>
+    <string name="api_chassi">Kaross</string>
+    <string name="api_length">Längd</string>
+    <string name="api_width">Bredd</string>
+    <string name="api_height">Höjd</string>
+    <string name="api_kerb_weight">Tjänstevikt</string>
+    <string name="api_total_weight">Totalvikt</string>
+    <string name="api_load_weight">Lastvikt</string>
+    <string name="api_trailer_weight">Släpvagnsvikt</string>
+    <string name="api_unbraked_trailer_weight">Släpvagnsvikt obromsad</string>
+    <string name="api_trailer_weight_b">Släp totalvikt (B)</string>
+    <string name="api_trailer_weight_be">Släp totalvikt (B+)</string>
+    <string name="api_carriage_weight">carriage_weight</string>
+    <string name="api_tire_front">Däck fram</string>
+    <string name="api_tire_back">Däck bak</string>
+    <string name="api_rim_front">Fälg fram</string>
+    <string name="api_rim_back">Fälg bak</string>
+    <string name="api_axel_width">Axellängd</string>
+    <string name="api_category">Kategori</string>
+    <string name="api_eeg">Typgodkännandenr</string>
+    <string name="api_nox_1">Kväveoxider (NOx)</string> <!-- g/ km -->
+    <string name="api_thc_nox_1">Kolväten &amp; kväveoxider </string> <!-- g/ km -->
+    <string name="api_eco_class">Miljöklass</string>
+    <string name="api_emission_class">Utsläppsklass</string>
+    <string name="api_euro_ncap">Euro NCAP</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- ********************************************* -->
+
+
+</resources>

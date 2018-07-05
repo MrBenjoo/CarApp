@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Standard colors used thorought the app -->
+    <color name="colorPrimary">#1E252F</color>
+    <color name="colorPrimaryDark">#1E252F</color>
+    <color name="colorAccent">#4FE3C1</color>
+
+    <!-- Dark scale -->
+    <color name="colorBlack600">#575757</color>
+    <color name="colorBlack500">#7d7d7d</color>
+    <color name="colorBlack400">#757C8E</color>  <!-- original #9f9f9f -->
+    <color name="colorBlack300">#c5c5c5</color>
+    <color name="colorBlack200">#dadadb</color>
+    <color name="colorBlack100">#e9e9ea</color>
+    <color name="colorBlack50">#f5f5f5</color>
+
+    <!-- Main background color -->
+    <color name="colorMainBackground">#1B181C</color>
+
+</resources>

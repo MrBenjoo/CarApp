@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_home">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/ic_settings_black_24dp"
+        android:text="Inställningar"
+        android:textColor="@color/colorBlack400"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="45dp"
+        tools:layout_editor_absoluteY="519dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/ic_settings_black_24dp"
+        android:text="Historik"
+        android:textColor="@color/colorBlack400"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="45dp"
+        tools:layout_editor_absoluteY="573dp" />
+
+</android.support.constraint.ConstraintLayout>
