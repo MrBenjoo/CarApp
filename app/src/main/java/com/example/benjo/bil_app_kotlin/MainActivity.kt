@@ -1,18 +1,17 @@
 package com.example.benjo.bil_app_kotlin
 
-import android.app.Fragment
+
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
 import android.support.v7.widget.SearchView
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_1
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_2
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_3
-import com.example.benjo.bil_app_kotlin.expandable.TestFragment
+import com.example.benjo.bil_app_kotlin.list.expandable.TestFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -52,10 +51,10 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
 
          /* Ta bort sen */
-        val map = HashMap<String, TestFragment>()
-        map[TITLE_TAB_1] = TestFragment()
+        val map = HashMap<String, Fragment>()
+        map[TITLE_TAB_1] = BaseFragment()
         map[TITLE_TAB_2] = TestFragment()
-        map[TITLE_TAB_3] = TestFragment()
+        map[TITLE_TAB_3] = BaseFragment()
         sectionsPageAdapter?.addFragment(map[TITLE_TAB_1], TITLE_TAB_1)
         sectionsPageAdapter?.addFragment(map[TITLE_TAB_2], TITLE_TAB_2)
         sectionsPageAdapter?.addFragment(map[TITLE_TAB_3], TITLE_TAB_3)
