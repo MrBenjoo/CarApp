@@ -1,0 +1,27 @@
+ext {
+
+
+    def RetrofitVersion = '2.4.0'
+    def AppCompatVersion = '27.1.1'
+
+
+    standardDependencies = [
+            appCompat : "com.android.support:appcompat-v7:${AppCompatVersion}",
+            constraint: "com.android.support.constraint:constraint-layout:1.1.2",
+            support   : "com.android.support:support-v4:${AppCompatVersion}"
+    ]
+
+    networkDependencies = [
+            retrofit             : "com.squareup.retrofit2:retrofit:${RetrofitVersion}",
+            retrofitGsonConverter: "com.squareup.retrofit2:converter-gson:${RetrofitVersion}"
+    ]
+
+    listDependencies = [
+            recyclerView         : "com.android.support:recyclerview-v7:${AppCompatVersion}",
+            cardView             : "com.android.support:cardview-v7:${AppCompatVersion}",
+            designLibrary        : "com.android.support:design:${AppCompatVersion}", // used for Tab layout
+            sectionedRecyclerView: "io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:1.2.0"
+    ]
+
+
+}
