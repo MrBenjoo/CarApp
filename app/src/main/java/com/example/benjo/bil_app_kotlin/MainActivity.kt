@@ -11,7 +11,8 @@ import android.widget.ImageView
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_1
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_2
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_3
-import com.example.benjo.bil_app_kotlin.list.expandable.TestFragment
+import com.example.benjo.bil_app_kotlin.list.expandable.ExpandableFragment
+import com.example.benjo.bil_app_kotlin.list.ordinary.BasicListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -44,30 +45,14 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
 
     private fun initPresenter() {
-        /*val map = HashMap<String, BaseFragment>()
-        map[TITLE_TAB_1] = BaseFragment()
-        map[TITLE_TAB_2] = BaseFragment()
-        map[TITLE_TAB_3] = BaseFragment()*/
-
-
-         /* Ta bort sen */
         val map = HashMap<String, Fragment>()
-        map[TITLE_TAB_1] = BaseFragment()
-        map[TITLE_TAB_2] = TestFragment()
-        map[TITLE_TAB_3] = BaseFragment()
+        map[TITLE_TAB_1] = BasicListFragment()
+        map[TITLE_TAB_2] = ExpandableFragment()
+        map[TITLE_TAB_3] = BasicListFragment()
         sectionsPageAdapter?.addFragment(map[TITLE_TAB_1], TITLE_TAB_1)
         sectionsPageAdapter?.addFragment(map[TITLE_TAB_2], TITLE_TAB_2)
         sectionsPageAdapter?.addFragment(map[TITLE_TAB_3], TITLE_TAB_3)
-
-
-        /*addTab(map[TITLE_TAB_1], TITLE_TAB_1)
-        addTab(map[TITLE_TAB_2], TITLE_TAB_2)
-        addTab(map[TITLE_TAB_3], TITLE_TAB_3)*/
-        presenter = Presenter(this, map) // ändra tbx map i presenter till basefragment
-    }
-
-    private fun addTab(fragment: BaseFragment?, title: String) {
-        sectionsPageAdapter?.addFragment(fragment, title)
+        presenter = Presenter(this, map)
     }
 
     fun showText(text: String?) {
@@ -81,7 +66,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     fun internetOff() {
-        showText("Ingen internetanslutning.")
+        showText(resources.getString(R.string.error_no_internet))
         info_img_wifi_off.visibility = ImageView.VISIBLE
     }
 
@@ -101,7 +86,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             true
         }
         else -> {
-            showText("Antalet tecken måste vara mellan 2-7")
+            showText(resources.getString(R.string.error_reg_limit))
             false
         }
     }

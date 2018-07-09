@@ -3,7 +3,7 @@ package com.example.benjo.bil_app_kotlin.list.expandable
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.list.Row
+import com.example.benjo.bil_app_kotlin.list.model.Row
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection
@@ -50,11 +50,11 @@ class ExpandableSection(private val title: String?,
                 sectionAdapter.notifyDataSetChanged()
             }
         }
-
     }
 
     override fun getHeaderViewHolder(view: View?): RecyclerView.ViewHolder {
         return ParentViewHolder(view)
     }
-/* ------------------------------------------------------------------------------------------- */
+    /* ------------------------------------------------------------------------------------------- */
+
 }

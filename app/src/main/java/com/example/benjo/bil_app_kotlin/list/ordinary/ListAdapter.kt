@@ -2,13 +2,11 @@ package com.example.benjo.bil_app_kotlin.list.ordinary
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.list.Row
-import kotlinx.android.synthetic.main.row_list.view.*
+import com.example.benjo.bil_app_kotlin.list.model.Row
 
-class ListAdapter(data: ArrayList<Row>?) : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
+class ListAdapter(data: ArrayList<Row>?) : RecyclerView.Adapter<ViewHolder>() {
     private var data: ArrayList<Row>? = null
 
     init {
@@ -39,8 +37,4 @@ class ListAdapter(data: ArrayList<Row>?) : RecyclerView.Adapter<ListAdapter.View
         notifyDataSetChanged()
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val descRow = itemView.row_tv_desc
-        val dataRow = itemView.row_tv_data
-    }
 }

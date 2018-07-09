@@ -3,11 +3,13 @@ package com.example.benjo.bil_app_kotlin.network.json_parsing
 import com.example.benjo.bil_app_kotlin.Constants
 import com.example.benjo.bil_app_kotlin.MainActivity
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.list.Row
+import com.example.benjo.bil_app_kotlin.list.model.Row
 
 
 class JsonMapping(private val activity: MainActivity) {
 
+    private fun row(id: Int, value: String?): Row = Row(desc(id), value)
+    private fun desc(id: Int): String = activity.resources.getString(id)
 
     fun basicInfoMapping(key: String, value: String?): Row = when (key) {
         Constants.MAKE -> row(R.string.api_make, value)
@@ -61,8 +63,5 @@ class JsonMapping(private val activity: MainActivity) {
         Constants.EURO_NCAP -> row(R.string.api_euro_ncap, value)
         else -> Row("", "")
     }
-
-    private fun row(id: Int, value: String?): Row = Row(desc(id), value)
-    private fun desc(id: Int): String = activity.resources.getString(id)
 
 }

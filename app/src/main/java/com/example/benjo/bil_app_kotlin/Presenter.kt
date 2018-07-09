@@ -11,13 +11,11 @@ import com.example.benjo.bil_app_kotlin.network.retrofit.Lambda
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_1
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_2
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_3
-import com.example.benjo.bil_app_kotlin.list.expandable.TestFragment
-import com.example.benjo.bil_app_kotlin.list.Row
+import com.example.benjo.bil_app_kotlin.list.expandable.ExpandableFragment
+import com.example.benjo.bil_app_kotlin.list.model.Row
+import com.example.benjo.bil_app_kotlin.list.ordinary.BasicListFragment
 import com.example.benjo.bil_app_kotlin.network.*
-import com.example.benjo.bil_app_kotlin.network.json_parsing.BasicInfo
-import com.example.benjo.bil_app_kotlin.network.json_parsing.JsonMapping
-import com.example.benjo.bil_app_kotlin.network.json_parsing.Result
-import com.example.benjo.bil_app_kotlin.network.json_parsing.TechnicalData
+import com.example.benjo.bil_app_kotlin.network.json_parsing.*
 import com.example.benjo.bil_app_kotlin.network.retrofit.SearchRegProvider
 
 import retrofit2.Response
@@ -25,24 +23,29 @@ import retrofit2.Response
 import com.google.gson.GsonBuilder
 
 
-class Presenter(private val activity: MainActivity, map: HashMap<String, Fragment>) : BroadcastReceiver() {
+class Presenter(private val activity: MainActivity,
+                map: HashMap<String, Fragment>) : BroadcastReceiver() {
+
+    /* Log.d Tag */
     private val TAG = "Presenter"
-    /*var fragmentTab1: BaseFragment? = null
-    var fragmentTab2: BaseFragment? = null
-    var fragmentTab3: BaseFragment? = null*/
 
-    var fragmentTab1: BaseFragment? = null
-    var fragmentTab2: TestFragment? = null
-    var fragmentTab3: BaseFragment? = null
+    /* Fragments */
+    private var fragmentTab1: BasicListFragment? = null
+    private var fragmentTab2: ExpandableFragment? = null
+    private var fragmentTab3: BasicListFragment? = null
 
-    var connected = false
-    var startTime: Long = 0
+    /* Miscellaneous stuff */
+    private var connected = false
+    private var startTime: Long = 0
+
+    private fun row(id: Int, value: String?): Row = Row(desc(id), value)
+    private fun desc(id: Int): String = activity.resources.getString(id)
 
 
     init {
-        fragmentTab1 = map[TITLE_TAB_1] as BaseFragment
-        fragmentTab2 = map[TITLE_TAB_2] as TestFragment
-        fragmentTab3 = map[TITLE_TAB_3] as BaseFragment
+        fragmentTab1 = map[TITLE_TAB_1] as BasicListFragment
+        fragmentTab2 = map[TITLE_TAB_2] as ExpandableFragment
+        fragmentTab3 = map[TITLE_TAB_3] as BasicListFragment
         activity.registerReceiver(this, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
     }
 
@@ -54,15 +57,18 @@ class Presenter(private val activity: MainActivity, map: HashMap<String, Fragmen
                     .searchReg(reg)
                     .enqueue(Lambda().callback { throwable, response ->
                         throwable.let { onFailure(throwable) }
-                        response.let { onResponse(response) }
+                        response.let {
+                            testCode()
+                            // onResponse(response)
+                        }
                     })
         }
-        false -> activity.showText("Ingen internetanslutning")
+        false -> activity.showText(activity.resources.getString(R.string.error_no_internet))
     }
 
     private fun onFailure(throwable: Throwable?) {
         if (throwable != null)
-            activity.showText("Kunde inte läsa in data från server")
+            activity.showText(activity.resources.getString(R.string.error_api_failure))
     }
 
     private fun onResponse(response: Response<Result>?) = when (response != null) {
@@ -71,11 +77,12 @@ class Presenter(private val activity: MainActivity, map: HashMap<String, Fragmen
                 if (isSuccessful)
                     processResponse(body())
                 else
-                    activity.showText("Klientfel eller serverfel")
+                    activity.showText(activity.resources.getString(R.string.error_http_code))
             }
         }
         false -> activity.showText("Response == NULL")
     }
+
 
     private fun processResponse(result: Result?) {
         with(GsonBuilder().create()) {
@@ -94,18 +101,6 @@ class Presenter(private val activity: MainActivity, map: HashMap<String, Fragmen
 
     private fun updateTab(tab: Int, map: Map<String, String>?) {
         if (map != null) {
-            /*val list = ArrayList<Row>()
-            for (key in map.keys) {
-                if (key.isNotEmpty() && !map[key].isNullOrEmpty()) {
-                    when (tab) {
-                        1 -> list.add(JsonMapping(activity).basicInfoMapping(key, map[key]))
-                        2 -> list.add(JsonMapping(activity).techInfoMapping(key, map[key]))
-                    }
-                }
-            }*/
-
-
-
             when (tab) {
                 1 -> {
                     val list = ArrayList<Row>()
@@ -119,7 +114,7 @@ class Presenter(private val activity: MainActivity, map: HashMap<String, Fragmen
                 2 -> {
                     fragmentTab2?.updateList("Dimensioner", dimensioner(map))
                     fragmentTab2?.updateList("Teknisk data", teknisk(map))
-                }//fragmentTab2?.updateList(list)
+                }
             }
         }
     }
@@ -168,13 +163,8 @@ class Presenter(private val activity: MainActivity, map: HashMap<String, Fragmen
                 }
             }
         }
-
         return list
     }
-
-
-    private fun row(id: Int, value: String?): Row = Row(desc(id), value)
-    private fun desc(id: Int): String = activity.resources.getString(id)
 
 
     override fun onReceive(context: Context?, intent: Intent?) = when (intent?.action) {
@@ -217,24 +207,31 @@ class Presenter(private val activity: MainActivity, map: HashMap<String, Fragmen
         updateTab(1, mapBasic)
         updateTab(2, mapTechnical)*/
 
+
         // Gson
 
         val gson = GsonBuilder().create()
 
-        val json = gson.toJson(basic)
-        val mapFirst = HashMap<String, String>()
+        val jsonBasic = gson.toJson(basic)
+        val jsonTech = gson.toJson(tehnical)
+        val map1 = HashMap<String, String>()
+        val map2 = HashMap<String, String>()
 
-        val map = gson.fromJson(json, mapFirst::class.java)
+        val mapBasic = gson.fromJson(jsonBasic, map1::class.java)
+        val mapTech = gson.fromJson(jsonBasic, map2::class.java)
 
-        if (map != null) {
-            val list = ArrayList<Row>()
-            for (key in map.keys) {
-                if (map[key] != null) {
-                    list.add(Row(key, map[key]))
-                    Log.d(TAG, "desc = " + key + " data = " + map[key])
-                }
-            }
-        }
+        updateTab(1, mapBasic)
+        updateTab(2, mapTech)
+
+        /* if (map != null) {
+             val list = ArrayList<Row>()
+             for (key in map.keys) {
+                 if (map[key] != null) {
+                     list.add(Row(key, map[key]))
+                     Log.d(TAG, "desc = " + key + " data = " + map[key])
+                 }
+             }
+         }*/
     }
 
 
