@@ -1,15 +1,15 @@
 package com.example.benjo.bil_app_kotlin.network.json_parsing
 
+import android.content.Context
 import com.example.benjo.bil_app_kotlin.Constants
-import com.example.benjo.bil_app_kotlin.MainActivity
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.list.model.Row
+import com.example.benjo.bil_app_kotlin.sections.Row
 
 
-class JsonMapping(private val activity: MainActivity) {
+class JsonMapping(private val context: Context) {
 
     private fun row(id: Int, value: String?): Row = Row(desc(id), value)
-    private fun desc(id: Int): String = activity.resources.getString(id)
+    private fun desc(id: Int): String = context.resources.getString(id)
 
     fun basicInfoMapping(key: String, value: String?): Row = when (key) {
         Constants.MAKE -> row(R.string.api_make, value)

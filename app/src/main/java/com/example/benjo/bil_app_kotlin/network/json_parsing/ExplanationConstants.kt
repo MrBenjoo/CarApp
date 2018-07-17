@@ -63,14 +63,14 @@ class ExplanationConstants {
         /* --------------------------------------------- */
 
 
-        /* --------------- Chassi types --------------- */
-        const val CHASSI_CODE_1           = ""
-        const val CHASSI_CODE_2           = ""
-        const val CHASSI_CODE_3           = ""
-        const val CHASSI_CODE_4           = ""
-        const val CHASSI_CODE_5           = ""
-        const val CHASSI_CODE_6           = ""
-        const val CHASSI_CODE_7           = ""
+        /* --------------- Chassi types --------------- */ // TODO start från 0 ist för 1
+        const val CHASSI_CODE_1           = "Taxi"
+        const val CHASSI_CODE_2           = "Rullstolsanpassat fordon"
+        const val CHASSI_CODE_3           = "Tvåvånings låggolvsbuss"
+        const val CHASSI_CODE_4           = "Cabriolet"
+        const val CHASSI_CODE_5           = "Bärgningsfordon"
+        const val CHASSI_CODE_6           = "Envånings låggolvsbuss"
+        const val CHASSI_CODE_7           = "Motviktstruck"
         const val CHASSI_CODE_8           = ""
         const val CHASSI_CODE_9           = ""
         const val CHASSI_CODE_10           = ""

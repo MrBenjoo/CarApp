@@ -1,25 +1,30 @@
 package com.example.benjo.bil_app_kotlin
 
 
-import android.support.v7.app.AppCompatActivity
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v7.widget.SearchView
-import android.view.View
 import android.widget.ImageView
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_1
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_2
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_3
-import com.example.benjo.bil_app_kotlin.list.expandable.ExpandableFragment
-import com.example.benjo.bil_app_kotlin.list.ordinary.BasicListFragment
+import com.example.benjo.bil_app_kotlin.base.BaseActivity
+import com.example.benjo.bil_app_kotlin.home.HomeActivity
+import com.example.benjo.bil_app_kotlin.sections.tech.FragmentTech
+import com.example.benjo.bil_app_kotlin.sections.tech.PresenterTech
+import com.example.benjo.bil_app_kotlin.sections.basic.FragmentBasic
+import com.example.benjo.bil_app_kotlin.sections.basic.PresenterBasic
+import com.example.benjo.bil_app_kotlin.network.MyReceiver
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.search_view.*
 
 
-class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
+class MainActivity : BaseActivity() {
     private val TAG = "MainActivity"
-    private var presenter: Presenter? = null
-    private var sectionsPageAdapter: SectionsPageAdapter? = null
+    private lateinit var sectionsPageAdapter: SectionsPageAdapter
+    private lateinit var receiver: MyReceiver
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +32,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         setContentView(R.layout.activity_main)
         initToolbar()
         initTabs()
+        initBroadcast()
         initPresenter()
     }
 
@@ -43,25 +49,27 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         container.adapter = sectionsPageAdapter
     }
 
-
-    private fun initPresenter() {
-        val map = HashMap<String, Fragment>()
-        map[TITLE_TAB_1] = BasicListFragment()
-        map[TITLE_TAB_2] = ExpandableFragment()
-        map[TITLE_TAB_3] = BasicListFragment()
-        sectionsPageAdapter?.addFragment(map[TITLE_TAB_1], TITLE_TAB_1)
-        sectionsPageAdapter?.addFragment(map[TITLE_TAB_2], TITLE_TAB_2)
-        sectionsPageAdapter?.addFragment(map[TITLE_TAB_3], TITLE_TAB_3)
-        presenter = Presenter(this, map)
+    private fun initBroadcast() {
+        receiver = MyReceiver(this)
+        registerReceiver(receiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
     }
 
-    fun showText(text: String?) {
-        Snackbar.make(findViewById<View>(android.R.id.content), text.toString(), Snackbar.LENGTH_LONG).show()
+    private fun initPresenter() {
+        val fragmentTab1 = FragmentBasic()
+        val fragmentTab2 = FragmentTech()
+        val fragmentTab3 = FragmentBasic()
+        with(sectionsPageAdapter) {
+            addFragment(fragmentTab1, TITLE_TAB_1)
+            addFragment(fragmentTab2, TITLE_TAB_2)
+            addFragment(fragmentTab3, TITLE_TAB_3)
+        }
+        tabBasicPresenter = PresenterBasic(fragmentTab1)
+        tabTechPresenter = PresenterTech(fragmentTab2)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        showText("onBackPressed")
-        //onBackPressed();
+        startActivity(HomeActivity.newIntent(this))
+        finish()
         return true
     }
 
@@ -76,20 +84,10 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter?.onDestroy()
+        unregisterReceiver(receiver)
     }
 
-    override fun onQueryTextSubmit(query: String?): Boolean = when (query?.length) {
-        in 2..7 -> {
-            search_view.onActionViewCollapsed()
-            presenter?.search(query?.trim())
-            true
-        }
-        else -> {
-            showText(resources.getString(R.string.error_reg_limit))
-            false
-        }
+    companion object {
+        fun newIntent(context: Context): Intent = Intent(context, MainActivity::class.java)
     }
-
-    override fun onQueryTextChange(newText: String?): Boolean = false
 }

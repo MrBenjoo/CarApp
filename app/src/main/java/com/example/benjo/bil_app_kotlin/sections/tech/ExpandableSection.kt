@@ -1,9 +1,9 @@
-package com.example.benjo.bil_app_kotlin.list.expandable
+package com.example.benjo.bil_app_kotlin.sections.tech
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.list.model.Row
+import com.example.benjo.bil_app_kotlin.sections.Row
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection

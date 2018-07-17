@@ -1,11 +1,8 @@
 package com.example.benjo.bil_app_kotlin
 
-import android.os.Parcelable
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.util.Log
-import android.view.ViewGroup
 
 class SectionsPageAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
     private val fragmentList = arrayListOf<Fragment?>()

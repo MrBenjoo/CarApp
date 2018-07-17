@@ -1,4 +1,4 @@
-package com.example.benjo.bil_app_kotlin.list.ordinary
+package com.example.benjo.bil_app_kotlin.sections.basic
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
