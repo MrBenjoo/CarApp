@@ -3,6 +3,7 @@ package com.example.benjo.bil_app_kotlin
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.util.Log
 
 class SectionsPageAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
     private val fragmentList = arrayListOf<Fragment?>()
@@ -28,6 +29,7 @@ class SectionsPageAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
             2 -> return BaseFragment()
             else -> return null
         }*/
+        Log.d("SectionPageAdapter", "getItem $position")
         return fragmentList[position]
     }
 
@@ -35,6 +37,8 @@ class SectionsPageAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
         return fragmentList.size
        // return 3
     }
+
+
 
 
 

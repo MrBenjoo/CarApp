@@ -9,15 +9,15 @@ import com.example.benjo.bil_app_kotlin.R
 import kotlinx.android.synthetic.main.search_view.*
 
 abstract class BaseActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
-    lateinit var tabBasicPresenter: Contract.Presenter
-    lateinit var tabTechPresenter: Contract.Presenter
+    lateinit var presenterBasic: Contract.Presenter
+    lateinit var presenterTech: Contract.Presenter
 
 
     override fun onQueryTextSubmit(query: String?) = when(query?.length) {
         in 2..7 -> {
             search_view.onActionViewCollapsed()
-            tabBasicPresenter.search(query?.trim())
-            tabTechPresenter.search(query?.trim())
+            presenterBasic.search(query?.trim())
+            //presenterTech.search(query?.trim())
             true
         }
         else -> {

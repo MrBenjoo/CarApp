@@ -1,5 +1,6 @@
 package com.example.benjo.bil_app_kotlin.sections.tech
 
+import android.util.Log
 import com.example.benjo.bil_app_kotlin.MainPresenter
 import com.example.benjo.bil_app_kotlin.base.Contract
 import com.example.benjo.bil_app_kotlin.network.json_parsing.JsonHandler
@@ -8,6 +9,7 @@ import com.example.benjo.bil_app_kotlin.network.json_parsing.TechnicalData
 import com.google.gson.GsonBuilder
 
 class PresenterTech(val view: Contract.ViewTech) : Contract.Presenter {
+
 
     init {
         view.presenter = this
@@ -20,12 +22,12 @@ class PresenterTech(val view: Contract.ViewTech) : Contract.Presenter {
             if (response.isSuccessful)
                 processResponse(response.body())
             else
-                view.showError()
+                view.showErrorHTTP()
         }
         view.hideProgress()
     }
 
-    override fun processResponse(response: Result?) {
+     private fun processResponse(response: Result?) {
         with(GsonBuilder().create()) {
             val mapTech = fromJson(toJson(response?.carInfo?.technical?.data),
                     HashMap<String, String?>()::class.java)
@@ -33,7 +35,13 @@ class PresenterTech(val view: Contract.ViewTech) : Contract.Presenter {
         }
     }
 
-    override fun updateTab(map: HashMap<String, String?>?) {
+    override fun update(json: String?) {
+        with(GsonBuilder().create()) {
+            updateTab(fromJson(json, HashMap<String, String?>()::class.java))
+        }
+    }
+
+     private fun updateTab(map: HashMap<String, String?>?) {
         with(JsonHandler(view.getContext())) {
             val techSection = techSection(map)
             val dimensionsSection = dimensionsSection(map)
@@ -58,5 +66,6 @@ class PresenterTech(val view: Contract.ViewTech) : Contract.Presenter {
         val mapBasic = gson.fromJson(jsonBasic, HashMap<String, String?>()::class.java)
         updateTab(mapBasic)
     }
+
 
 }

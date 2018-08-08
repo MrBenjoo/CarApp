@@ -8,7 +8,7 @@ interface BaseView<T> {
 
     fun hideProgress()
 
-    fun showError()
+    fun showErrorHTTP()
 
     fun getContext(): Context
 

@@ -1,12 +1,14 @@
 package com.example.benjo.bil_app_kotlin.sections.basic
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.sections.Row
 
 class ListAdapter(data: ArrayList<Row>?) : RecyclerView.Adapter<ViewHolder>() {
+    private val TAG = "ListAdapter"
     private var data: ArrayList<Row>? = null
 
     init {
@@ -32,6 +34,7 @@ class ListAdapter(data: ArrayList<Row>?) : RecyclerView.Adapter<ViewHolder>() {
     }
 
     fun setList(list: ArrayList<Row>) {
+        Log.d(TAG, "setList")
         this.data?.clear()
         this.data?.addAll(list)
         notifyDataSetChanged()

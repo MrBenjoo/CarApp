@@ -1,5 +1,6 @@
 package com.example.benjo.bil_app_kotlin.sections.basic
 
+import android.util.Log
 import com.example.benjo.bil_app_kotlin.MainPresenter
 import com.example.benjo.bil_app_kotlin.base.Contract
 import com.example.benjo.bil_app_kotlin.network.json_parsing.BasicInfo
@@ -9,6 +10,8 @@ import com.google.gson.GsonBuilder
 
 class PresenterBasic(val view: Contract.View) : Contract.Presenter {
 
+    private val TAG = "PresenterBasic"
+
     init {
         view.presenter = this
     }
@@ -17,27 +20,42 @@ class PresenterBasic(val view: Contract.View) : Contract.Presenter {
         view.showProgess()
         val response = MainPresenter(view.getContext()).search(reg)
         if (response != null) {
-            if (response.isSuccessful)
-                processResponse(response.body())
+            if (response.isSuccessful) {
+                val json = response.body()?.carInfo?.basic?.data.toString()
+                update(json)//processResponse(response.body())
+            }
             else
-                view.showError()
+                view.showErrorHTTP()
         }
         view.hideProgress()
     }
 
-    override fun processResponse(response: Result?) {
+    /*private fun processResponse(response: Result?) {
         with(GsonBuilder().create()) {
             val mapBasic = fromJson(toJson(response?.carInfo?.basic?.data),
                     HashMap<String, String?>()::class.java)
             updateTab(mapBasic)
         }
-    }
+    }*/
 
-    override fun updateTab(map: HashMap<String, String?>?) {
+    private fun updateTab(map: HashMap<String, String?>?) {
         val list = JsonHandler(view.getContext()).basicSection(map)
         if (!list.isEmpty()) view.updateList(list)
     }
 
+    override fun update(json: String?) {
+        with(GsonBuilder().create()) {
+            Log.d(TAG, "update started...")
+            val mapBasic = fromJson(json, HashMap<String, String?>()::class.java)
+            val list = JsonHandler(view.getContext()).basicSection(mapBasic)
+            if (!list.isEmpty()) {
+                Log.d(TAG, "updating... (basic list is NOT empty)")
+                view.updateList(list)
+            } else {
+                Log.d(TAG, "updating... (basic list is NOT empty)")
+            }
+        }
+    }
 
 
     private fun testCode() {

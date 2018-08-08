@@ -12,5 +12,7 @@ interface Contract {
         fun updateList(title: String, list: ArrayList<Row>)
     }
 
+    interface ViewHome : BaseView<Presenter>
+
     interface Presenter : BasePresenter
 }

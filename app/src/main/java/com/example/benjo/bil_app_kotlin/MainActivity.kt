@@ -6,11 +6,13 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_1
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_2
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_3
 import com.example.benjo.bil_app_kotlin.base.BaseActivity
+import com.example.benjo.bil_app_kotlin.base.Contract
 import com.example.benjo.bil_app_kotlin.home.HomeActivity
 import com.example.benjo.bil_app_kotlin.sections.tech.FragmentTech
 import com.example.benjo.bil_app_kotlin.sections.tech.PresenterTech
@@ -35,6 +37,7 @@ class MainActivity : BaseActivity() {
         initBroadcast()
         initPresenter()
     }
+
 
     private fun initToolbar() {
         setSupportActionBar(toolbar)
@@ -63,8 +66,8 @@ class MainActivity : BaseActivity() {
             addFragment(fragmentTab2, TITLE_TAB_2)
             addFragment(fragmentTab3, TITLE_TAB_3)
         }
-        tabBasicPresenter = PresenterBasic(fragmentTab1)
-        tabTechPresenter = PresenterTech(fragmentTab2)
+        presenterBasic = PresenterBasic(fragmentTab1)
+        presenterTech = PresenterTech(fragmentTab2)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -90,4 +93,5 @@ class MainActivity : BaseActivity() {
     companion object {
         fun newIntent(context: Context): Intent = Intent(context, MainActivity::class.java)
     }
+
 }
