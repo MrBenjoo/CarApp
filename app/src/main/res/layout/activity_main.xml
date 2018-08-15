@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".tabview.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -51,6 +51,14 @@
                     android:layout_centerVertical="true"
                     android:theme="@style/Theme.SearchView"
                     />
+
+                <ImageView
+                    android:id="@+id/img_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/info_img_wifi_off"
+                    android:background="@drawable/ic_save_24dp" />
 
 
 

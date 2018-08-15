@@ -1,17 +1,20 @@
-package com.example.benjo.bil_app_kotlin.home
+package com.example.benjo.bil_app_kotlin.saved
 
 import com.example.benjo.bil_app_kotlin.base.BaseView
 import com.example.benjo.bil_app_kotlin.sections.Row
 
-interface HomeContract {
+interface SavedContract {
 
     interface View : BaseView<Presenter> {
-        //fun updateView(list: ArrayList<Row>)
+        fun updateView(list: ArrayList<Row>)
     }
 
     interface Presenter : BasePresenter {
-        fun search(reg: String?)
+        fun loadSavedCars()
+        fun attachView(view : View)
+        fun showSavedCars(list: ArrayList<Row>)
     }
 
     interface BasePresenter
+
 }

@@ -1,11 +1,10 @@
 package com.example.benjo.bil_app_kotlin.sections.basic
 
 import android.util.Log
-import com.example.benjo.bil_app_kotlin.MainPresenter
+import com.example.benjo.bil_app_kotlin.tabview.MainPresenter
 import com.example.benjo.bil_app_kotlin.base.Contract
 import com.example.benjo.bil_app_kotlin.network.json_parsing.BasicInfo
 import com.example.benjo.bil_app_kotlin.network.json_parsing.JsonHandler
-import com.example.benjo.bil_app_kotlin.network.json_parsing.Result
 import com.google.gson.GsonBuilder
 
 class PresenterBasic(val view: Contract.View) : Contract.Presenter {

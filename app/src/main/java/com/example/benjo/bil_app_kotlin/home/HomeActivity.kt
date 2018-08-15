@@ -4,53 +4,28 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.SearchView
+import androidx.navigation.findNavController
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.base.Contract
-import kotlinx.android.synthetic.main.search_view.*
+import com.example.benjo.bil_app_kotlin.saved.SavedContract
+import com.example.benjo.bil_app_kotlin.saved.SavedPresenter
 
 
-class HomeActivity : AppCompatActivity(), SearchView.OnQueryTextListener, Contract.ViewHome {
-    override lateinit var presenter: Contract.Presenter
+class HomeActivity : AppCompatActivity() {
+
+    lateinit var presenter: HomeContract.Presenter
+    lateinit var savedPresenter: SavedContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        initPresenter()
-        search_view.setOnQueryTextListener(this)
+        val homeFrag = HomeFragment()
+        presenter = HomePresenter(homeFrag, this)
+        homeFrag.presenter = presenter
+        savedPresenter = SavedPresenter(applicationContext)
     }
 
-    private fun initPresenter() {
-        presenter = HomePresenter(this,this)
-    }
 
-    override fun showProgess() {
-
-    }
-
-    override fun hideProgress() {
-
-    }
-
-    override fun showErrorHTTP() {
-
-    }
-
-    override fun getContext(): Context = this
-
-    override fun onQueryTextSubmit(query: String?): Boolean = when(query?.length) {
-        in 2..7 -> {
-            search_view.onActionViewCollapsed()
-            presenter.search(query?.trim())
-            true
-        }
-        else -> {
-            //showText(resources.getString(R.string.error_reg_limit))
-            false
-        }
-    }
-
-    override fun onQueryTextChange(newText: String?): Boolean = false
+    override fun onSupportNavigateUp() = findNavController(R.id.mainNavigationFragment).navigateUp()
 
     companion object {
         fun newIntent(context: Context): Intent = Intent(context, HomeActivity::class.java)

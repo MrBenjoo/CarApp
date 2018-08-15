@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
-import com.example.benjo.bil_app_kotlin.MainActivity
+import com.example.benjo.bil_app_kotlin.tabview.MainActivity
 
 class MyReceiver(val activity: MainActivity) : BroadcastReceiver() {
 

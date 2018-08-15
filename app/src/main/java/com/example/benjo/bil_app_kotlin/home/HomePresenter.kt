@@ -1,23 +1,21 @@
 package com.example.benjo.bil_app_kotlin.home
 
 import android.content.Intent
-import com.example.benjo.bil_app_kotlin.MainActivity
-import com.example.benjo.bil_app_kotlin.MainPresenter
-import com.example.benjo.bil_app_kotlin.base.Contract
+import android.util.Log
+import com.example.benjo.bil_app_kotlin.tabview.MainActivity
 import com.example.benjo.bil_app_kotlin.network.json_parsing.BasicInfo
 import com.example.benjo.bil_app_kotlin.network.json_parsing.Result
 import com.example.benjo.bil_app_kotlin.network.json_parsing.TechnicalData
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 
 
-class HomePresenter(val view: Contract.ViewHome, val activity: HomeActivity): Contract.Presenter {
+class HomePresenter(val view: HomeContract.View,
+                    val activity: HomeActivity) : HomeContract.Presenter {
+    private val TAG = "HomePresenter"
 
-    override fun update(json: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     init {
+        Log.d(TAG, "init...")
         view.presenter = this
     }
 
@@ -56,6 +54,5 @@ class HomePresenter(val view: Contract.ViewHome, val activity: HomeActivity): Co
         //intent.putExtra("tech", jsonTech)
         /*view.getContext()*/activity.startActivity(intent)
     }
-
 
 }

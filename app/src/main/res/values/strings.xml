@@ -57,5 +57,8 @@
     <string name="error_http_code">Klientfel eller serverfel</string>
     <string name="error_reg_limit">Antalet tecken måste vara mellan 2&#8211;7</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

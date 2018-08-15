@@ -1,4 +1,4 @@
-package com.example.benjo.bil_app_kotlin
+package com.example.benjo.bil_app_kotlin.tabview
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager

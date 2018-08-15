@@ -5,7 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.example.benjo.bil_app_kotlin.MainActivity
+import com.example.benjo.bil_app_kotlin.tabview.MainActivity
 import com.example.benjo.bil_app_kotlin.sections.Row
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import com.example.benjo.bil_app_kotlin.base.BaseFragment

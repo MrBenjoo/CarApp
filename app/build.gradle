@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply from: 'src/main/java/dependencies.gradle'
 
+apply plugin: 'kotlin-kapt'
+
 
 android {
     compileSdkVersion 27
@@ -31,6 +33,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation standardDependencies.values()
+    implementation 'com.android.support:support-v4:27.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -38,9 +41,15 @@ dependencies {
     implementation networkDependencies.values()
     implementation listDependencies.values()
 
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+
     // Leakcanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+
+    implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha04'
+    implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0-alpha04'
 
 
 }

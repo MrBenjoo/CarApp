@@ -1,91 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_home"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_home">
+    android:layout_height="match_parent">
 
-    <!-- <SearchView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="132dp"
+    <fragment
+        android:id="@+id/mainNavigationFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:searchIcon="@drawable/ic_search_128dp"/> -->
+        app:navGraph="@navigation/navigation_graph" />
 
-    <include layout="@layout/search_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="132dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:searchIcon="@drawable/ic_search_128dp" >
-    </include>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="352dp"
-        android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_38dp"
-        android:drawablePadding="10dp"
-        android:drawableStart="@drawable/ic_history_white_24dp"
-        android:text="Historik"
-        android:textColor="#FFFFFF"
-        android:textSize="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="24dp"
-        android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_38dp"
-        android:drawablePadding="10dp"
-        android:drawableStart="@drawable/ic_save_white_24dp"
-        android:text="Sparat"
-        android:textColor="#FFFFFF"
-        android:textSize="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="24dp"
-        android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_38dp"
-        android:drawablePadding="10dp"
-        android:drawableStart="@drawable/ic_settings_black_24dp"
-        android:text="Inställningar"
-        android:textColor="#FFFFFF"
-        android:textSize="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" /><![CDATA[
-
-    " />
-
-
-]]>
 </android.support.constraint.ConstraintLayout>

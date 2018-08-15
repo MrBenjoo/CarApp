@@ -1,7 +1,6 @@
 package com.example.benjo.bil_app_kotlin.sections.tech
 
-import android.util.Log
-import com.example.benjo.bil_app_kotlin.MainPresenter
+import com.example.benjo.bil_app_kotlin.tabview.MainPresenter
 import com.example.benjo.bil_app_kotlin.base.Contract
 import com.example.benjo.bil_app_kotlin.network.json_parsing.JsonHandler
 import com.example.benjo.bil_app_kotlin.network.json_parsing.Result

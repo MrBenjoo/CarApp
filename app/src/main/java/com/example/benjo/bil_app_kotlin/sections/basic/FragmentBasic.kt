@@ -1,15 +1,13 @@
 package com.example.benjo.bil_app_kotlin.sections.basic
 
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.example.benjo.bil_app_kotlin.MainActivity
+import com.example.benjo.bil_app_kotlin.tabview.MainActivity
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.base.Contract
-import com.example.benjo.bil_app_kotlin.home.HomeActivity
 import com.example.benjo.bil_app_kotlin.sections.Row
 import kotlinx.android.synthetic.main.fragment_base.*
 
