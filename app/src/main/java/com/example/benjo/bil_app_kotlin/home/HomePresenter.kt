@@ -2,11 +2,10 @@ package com.example.benjo.bil_app_kotlin.home
 
 import android.content.Intent
 import android.util.Log
-import com.example.benjo.bil_app_kotlin.tabview.MainActivity
-import com.example.benjo.bil_app_kotlin.network.json_parsing.BasicInfo
-import com.example.benjo.bil_app_kotlin.network.json_parsing.Result
-import com.example.benjo.bil_app_kotlin.network.json_parsing.TechnicalData
+import com.example.benjo.bil_app_kotlin.network.json_parsing.*
+import com.example.benjo.bil_app_kotlin.tabview.TabsActivity
 import com.google.gson.GsonBuilder
+import java.util.*
 
 
 class HomePresenter(val view: HomeContract.View,
@@ -33,26 +32,65 @@ class HomePresenter(val view: HomeContract.View,
     }
 
     private fun processResponse(body: Result?) {
-        val basic = BasicInfo("Volvo S80", "S80", "I trafik", "Svart", "Personbil", "2003", "2003")
-        val tehnical = TechnicalData("180", "230", "1798 ", "200 ", "Bensin / Etanol", "7.4",
-                "177", "manuell ", "ja", "71", "4", "ja", "fan vet jag",
-                "1500", "Herrgårdsvagn", "3000", "1500", "2000", "3000", "4000",
-                "5100", "4000", "6000", "1610", "2360", "1300",
-                "205/50 R17 93W", "205/50 R17 93W", "7Jx17x52,5", "7Jx17x52,5", "axel_width", "M1", null/*"e4*2001/116*0076*13"*/, "nox_1",
-                null, "2005", "emission_class", null)
+        /* ------------------------------------------------------------- Används endast för att testa UI -------------------------------------------------------------*/
+        val mColors = arrayOf("Svart", "Vit", "Blå", "Orange", "Silver")
+        val mMake = arrayOf("Volvo S80", "Volvo S70", "Volvo S60", "Volvo S50", "Volvo S40")
+
+        val attrData = Attributes("RON810", (Random().nextInt(20) + 1).toString())
+        val basicData = BasicInfo(mMake[Random().nextInt(5)], "S80", "I trafik", mColors[Random().nextInt(5)], "Personbil", "2003", "2003")
+        val techData = TechnicalData("180",
+                "230",
+                "1798 ",
+                "200 ",
+                "Bensin / Etanol",
+                "7.4",
+                "177",
+                "manuell ",
+                "ja",
+                "71",
+                "4",
+                "ja",
+                "fan vet jag",
+                "1500",
+                "Herrgårdsvagn",
+                "3000",
+                "1500",
+                "2000",
+                "3000",
+                "4000",
+                "5100",
+                "4000",
+                "6000",
+                "1610",
+                "2360",
+                "1300",
+                "205/50 R17 93W",
+                "205/50 R17 93W",
+                "7Jx17x52,5",
+                "7Jx17x52,5",
+                "axel_width",
+                "M1",
+                null/*"e4*2001/116*0076*13"*/,
+                "nox_1",
+                null,
+                "2005",
+                "emission_class",
+                null)
+        val result = Result(CarInfo(attrData, Basic(basicData), Technical(techData)))
+        /* --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
         val gson = GsonBuilder().create()
 
-        val intent = Intent(/*view.getContext()*/activity, MainActivity::class.java)
-        //val basicData = body?.carInfo?.basic?.data
-        //val techData = body?.carInfo?.technical?.data
-        val jsonBasic = gson.toJson(basic)
-        val jsonTech = gson.toJson(tehnical)
-        //val jsonTech = Gson().toJson(techData)
-        intent.putExtra("basic", jsonBasic)
-        intent.putExtra("technical", jsonTech)
-        //intent.putExtra("tech", jsonTech)
-        /*view.getContext()*/activity.startActivity(intent)
+        val intent = Intent(activity, TabsActivity::class.java)
+        val jsonResult = gson.toJson(result).toString()
+        Log.d(TAG, "processResponse ->  OBJECT to JSON = $jsonResult")
+
+        val classResult = gson.fromJson(jsonResult, Result::class.java)
+        Log.d(TAG, "processResponse ->  JSON to OBJECT = ${classResult?.carInfo?.attributes?.regno}")
+
+        intent.putExtra("jsonResult", jsonResult)
+
+        activity.startActivity(intent)
     }
 
 }

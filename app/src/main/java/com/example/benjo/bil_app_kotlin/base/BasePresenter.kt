@@ -4,7 +4,8 @@ import com.example.benjo.bil_app_kotlin.network.json_parsing.Result
 
 interface BasePresenter {
 
-    fun update(json: String?)
+
+    fun update(jsonResult: String?)
 
     fun search(reg: String?)
 

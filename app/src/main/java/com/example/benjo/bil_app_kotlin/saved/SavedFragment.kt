@@ -2,6 +2,7 @@ package com.example.benjo.bil_app_kotlin.saved
 
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -12,13 +13,23 @@ import android.view.ViewGroup
 
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.home.HomeActivity
-import com.example.benjo.bil_app_kotlin.sections.Row
-import com.example.benjo.bil_app_kotlin.sections.basic.ListAdapter
-import kotlinx.android.synthetic.main.fragment_base.*
+import com.example.benjo.bil_app_kotlin.tabview.sections.Row
+import com.example.benjo.bil_app_kotlin.adapters.SavedListAdapter
+import com.example.benjo.bil_app_kotlin.room.CarData
+import com.example.benjo.bil_app_kotlin.tabview.TabsActivity
+import kotlinx.android.synthetic.main.fragment_saved.*
 
 class SavedFragment : Fragment(), SavedContract.View {
+
+    override fun showCar(car: CarData) {
+        val intent = Intent(context, TabsActivity::class.java)
+        intent.putExtra("jsonResult", car.json)
+        activity?.startActivity(intent)
+    }
+
     private val arrayList = arrayListOf<Row>()
-    private var listAdapter: ListAdapter? = null
+    //private var listAdapter: ListAdapter? = null
+    private var savedListAdapter: SavedListAdapter? = null
     override lateinit var presenter: SavedContract.Presenter
 
     override fun showProgess() {
@@ -35,70 +46,48 @@ class SavedFragment : Fragment(), SavedContract.View {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Log.d("SavedFragment", "onCreateView -> R.layout.fragment_base")
-        return inflater.inflate(R.layout.fragment_base, container, false)
+        return inflater.inflate(R.layout.fragment_saved, container, false)
     }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if(context is HomeActivity) {
-            presenter = (context as HomeActivity).savedPresenter
+        if (context is HomeActivity) {
+            presenter = (context).savedPresenter
         }
-        Log.d("SavedFragment", "onAttach -> " + context?.packageName)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.attachView(this)
+        frag_saved_toolbar.setNavigationOnClickListener { activity?.onBackPressed() }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        listAdapter = ListAdapter(arrayList)
-        with(list) {
+        //listAdapter = ListAdapter(arrayList)
+        savedListAdapter = SavedListAdapter(arrayListOf<CarData>(), { rowItem : CarData -> itemClicked(rowItem) })
+        with(fragment_saved_list) {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity?.applicationContext)
-            adapter = listAdapter
+            //adapter = listAdapter
+            adapter = savedListAdapter
         }
+       // listAdapter!!.clickListener = { row: Row -> itemClicked(row) }
 
-        if (listAdapter == null) {
-            Log.d("SavedFragment", "onActivityCreated -> listAdapter is null")
-        } else {
-            Log.d("SavedFragment", "onActivityCreated -> listAdapter is not null")
-        }
     }
 
     override fun onResume() {
         super.onResume()
-        if (listAdapter == null) {
-            Log.d("SavedFragment", "onResume (start) -> listAdapter is null")
-        } else {
-            Log.d("SavedFragment", "onResume (start) -> listAdapter is not null")
-        }
-
         presenter.loadSavedCars()
-
-        if (listAdapter == null) {
-            Log.d("SavedFragment", "onResume (end) -> listAdapter is null")
-        } else {
-            Log.d("SavedFragment", "onResume (end) -> listAdapter is not null")
-        }
     }
 
-    override fun updateView(list: ArrayList<Row>) {
-        if (listAdapter == null) {
-            Log.d("SavedFragment", "updateView -> listAdapter is null")
-        } else {
-            Log.d("SavedFragment", "updateView -> listAdapter is not null")
+    override fun updateView(list: ArrayList<CarData>) {
+        savedListAdapter?.setList(list)
+    }
 
-        }
-
-        if (::presenter.isInitialized) {
-            Log.d("SavedFragment", "updateView -> presenter isInitialized")
-        } else {
-            Log.d("SavedFragment", "updateView -> presenter isNotInitialized")
-        }
-        listAdapter?.setList(list)
+    private fun itemClicked(rowItem: CarData) {
+        Log.d("SavedFragment", "Clicked: ${rowItem.json}")
+        presenter.getCarFromDB(rowItem.vin)
     }
 
     override fun getContext(): Context = activity!!.applicationContext

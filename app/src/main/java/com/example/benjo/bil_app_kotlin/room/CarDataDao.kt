@@ -18,4 +18,7 @@ interface CarDataDao {
     @Query("DELETE from carDataTable")
     fun deleteAll()
 
+    @Query("SELECT * from carDataTable WHERE vin = :vin")
+    fun getCar(vin: Int) : CarData
+
 }

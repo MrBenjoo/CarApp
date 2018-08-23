@@ -4,9 +4,9 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
-import com.example.benjo.bil_app_kotlin.tabview.MainActivity
+import com.example.benjo.bil_app_kotlin.tabview.TabsActivity
 
-class MyReceiver(val activity: MainActivity) : BroadcastReceiver() {
+class MyReceiver(val activity: TabsActivity) : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) = when (intent?.action) {
         ConnectivityManager.CONNECTIVITY_ACTION ->

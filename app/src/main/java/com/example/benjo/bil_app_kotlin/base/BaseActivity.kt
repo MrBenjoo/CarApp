@@ -6,18 +6,21 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SearchView
 import android.view.View
 import com.example.benjo.bil_app_kotlin.R
+import com.example.benjo.bil_app_kotlin.tabview.MainPresenter
+import com.example.benjo.bil_app_kotlin.tabview.sections.SectionsContract
 import kotlinx.android.synthetic.main.search_view.*
 
 abstract class BaseActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
-    lateinit var presenterBasic: Contract.Presenter
-    lateinit var presenterTech: Contract.Presenter
+    lateinit var presenterBasic: SectionsContract.Presenter
+    lateinit var presenterTech: SectionsContract.Presenter
 
 
-    override fun onQueryTextSubmit(query: String?) = when(query?.length) {
+    override fun onQueryTextSubmit(query: String?) = when (query?.length) {
         in 2..7 -> {
             search_view.onActionViewCollapsed()
-            presenterBasic.search(query?.trim())
-            //presenterTech.search(query?.trim())
+            val response = MainPresenter(this).search(query?.trim())
+            presenterBasic.updateTab(response)
+            presenterTech.updateTab(response)
             true
         }
         else -> {

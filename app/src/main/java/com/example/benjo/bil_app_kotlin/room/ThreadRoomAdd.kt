@@ -1,17 +1,20 @@
-package com.example.benjo.bil_app_kotlin.tabview
+package com.example.benjo.bil_app_kotlin.room
 
 import android.util.Log
-import com.example.benjo.bil_app_kotlin.room.CarData
-import com.example.benjo.bil_app_kotlin.room.CarDataBase
+import com.example.benjo.bil_app_kotlin.network.json_parsing.Result
+import com.example.benjo.bil_app_kotlin.tabview.MainPresenter
+import com.google.gson.GsonBuilder
 
 class ThreadRoomAdd(val instance: CarDataBase?,
-                    val json: String?,
+                    val response: Result?,
                     val presenter: MainPresenter) : Runnable {
 
     private val TAG = "ThreadRoomAdd"
 
     override fun run() {
-        val car = CarData(null, 11, json!!)
+        val gson = GsonBuilder().create()
+        val json = gson.toJson(response)
+        val car = CarData(null, response?.carInfo?.attributes?.vin!!.toInt(), json!!)
         val list = instance?.carDataDao()?.getAll()
         var exist = false
         if (list != null) {
@@ -22,10 +25,12 @@ class ThreadRoomAdd(val instance: CarDataBase?,
                 }
             }
         }
+
         if (!exist) {
             instance?.carDataDao()?.insert(car)
             Log.d(TAG, "car saved")
         }
 
     }
+
 }

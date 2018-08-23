@@ -1,25 +1,30 @@
-package com.example.benjo.bil_app_kotlin.sections.tech
+package com.example.benjo.bil_app_kotlin.tabview.sections.tech
 
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import com.example.benjo.bil_app_kotlin.tabview.MainActivity
-import com.example.benjo.bil_app_kotlin.sections.Row
+import com.example.benjo.bil_app_kotlin.tabview.TabsActivity
+import com.example.benjo.bil_app_kotlin.tabview.sections.Row
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.base.Contract
+import com.example.benjo.bil_app_kotlin.tabview.sections.SectionsContract
 import kotlinx.android.synthetic.main.fragment_base.*
 
 
-class FragmentTech : BaseFragment(), Contract.ViewTech {
+class FragmentTech : BaseFragment(), SectionsContract.ViewTech {
     private val TAG = "FragmentTech"
     private lateinit var sectionAdapter: SectionedRecyclerViewAdapter
-    override lateinit var presenter: Contract.Presenter
+    override lateinit var presenter: SectionsContract.Presenter
 
 
     override fun getContext(): Context = activity!!.applicationContext
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        presenter = (context as TabsActivity).presenterTech
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,12 +35,9 @@ class FragmentTech : BaseFragment(), Contract.ViewTech {
 
     override fun onResume() {
         super.onResume()
-        val result = activity!!.intent.getStringExtra("technical")
-        presenter = (activity as MainActivity).presenterTech
-        if (result != null) {
-            Log.d(TAG, "onResume -- result is NOT null")
-            Log.d(TAG, result)
-            presenter.update(result)
+        val jsonResult = activity!!.intent.getStringExtra("jsonResult")
+        if (jsonResult != null) {
+            presenter.update(jsonResult)
         }
     }
 

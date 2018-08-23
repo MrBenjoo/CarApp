@@ -3,7 +3,7 @@ package com.example.benjo.bil_app_kotlin.network.json_parsing
 import android.content.Context
 import com.example.benjo.bil_app_kotlin.Constants
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.sections.Row
+import com.example.benjo.bil_app_kotlin.tabview.sections.Row
 
 
 class JsonMapping(private val context: Context) {

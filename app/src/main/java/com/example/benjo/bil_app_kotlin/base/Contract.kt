@@ -1,6 +1,6 @@
 package com.example.benjo.bil_app_kotlin.base
 
-import com.example.benjo.bil_app_kotlin.sections.Row
+import com.example.benjo.bil_app_kotlin.tabview.sections.Row
 
 interface Contract {
 
@@ -14,5 +14,7 @@ interface Contract {
 
     interface ViewHome : BaseView<Presenter>
 
-    interface Presenter : BasePresenter
+    interface Presenter : BasePresenter {
+
+    }
 }

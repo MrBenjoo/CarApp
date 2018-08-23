@@ -30,5 +30,4 @@ class HomeActivity : AppCompatActivity() {
     companion object {
         fun newIntent(context: Context): Intent = Intent(context, HomeActivity::class.java)
     }
-
 }

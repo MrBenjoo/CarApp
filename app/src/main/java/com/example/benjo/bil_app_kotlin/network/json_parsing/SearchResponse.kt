@@ -5,7 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class Result(@SerializedName("data") val carInfo: CarInfo?)
 
-data class CarInfo(val basic: Basic?, val technical: Technical?)
+data class CarInfo(val attributes: Attributes?, val basic: Basic?, val technical: Technical?)
+
+data class Attributes(val regno: String?, val vin: String?)
 
 data class Basic(val data: BasicInfo?)
 

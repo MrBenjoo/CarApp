@@ -10,7 +10,6 @@ import android.view.ViewGroup
 
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.home.HomeContract
-import com.example.benjo.bil_app_kotlin.sections.Row
 
 class SettingsFragment : Fragment(), HomeContract.View {
 
