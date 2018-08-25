@@ -1,9 +1,9 @@
-package com.example.benjo.bil_app_kotlin.tabview.tech
+package com.example.benjo.bil_app_kotlin.tabs.tech
 
 import android.util.Log
 import com.example.benjo.bil_app_kotlin.network.json.JsonHandler
 import com.example.benjo.bil_app_kotlin.network.json.Result
-import com.example.benjo.bil_app_kotlin.tabview.SectionsContract
+import com.example.benjo.bil_app_kotlin.tabs.SectionsContract
 import com.google.gson.GsonBuilder
 import retrofit2.Response
 

@@ -15,18 +15,27 @@ import com.example.benjo.bil_app_kotlin.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.search_view.*
 
+
 class HomeFragment : Fragment(), SearchView.OnQueryTextListener, HomeContract.View {
     private val TAG = "HomeFragment"
     override lateinit var presenter: HomeContract.Presenter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+
+
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?):
+            View? = inflater.inflate(R.layout.fragment_home, container, false)
+
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (context is HomeActivity)
+            presenter = context.presenter
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tv_history.setOnClickListener { Navigation.findNavController(it).navigate(R.id.historyFragment) }
         tv_saved.setOnClickListener { Navigation.findNavController(it).navigate(R.id.savedFragment) }
         tv_settings.setOnClickListener { Navigation.findNavController(it).navigate(R.id.settingsFragment) }
         search_view.setOnQueryTextListener(this)
@@ -44,28 +53,8 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener, HomeContract.Vi
         }
     }
 
-    override fun showProgess() {
-
-    }
-
-    override fun hideProgress() {
-
-    }
-
-    override fun showErrorHTTP() {
-
-    }
-
-    override fun getContext(): Context {
-        return activity!!.applicationContext
-    }
-
+    override fun getContext(): Context = activity!!.applicationContext
 
     override fun onQueryTextChange(newText: String?): Boolean = false
 
-
-    override fun onResume() {
-        super.onResume()
-        presenter = (activity as HomeActivity).presenter
-    }
 }

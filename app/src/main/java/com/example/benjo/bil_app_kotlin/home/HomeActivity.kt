@@ -18,9 +18,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        val homeFrag = HomeFragment()
-        presenter = HomePresenter(homeFrag, this)
-        homeFrag.presenter = presenter
+        presenter = HomePresenter(HomeFragment(), this)
         savedPresenter = SavedPresenter(applicationContext)
     }
 

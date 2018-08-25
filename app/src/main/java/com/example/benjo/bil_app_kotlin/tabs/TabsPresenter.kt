@@ -1,4 +1,4 @@
-package com.example.benjo.bil_app_kotlin.tabview
+package com.example.benjo.bil_app_kotlin.tabs
 
 import android.content.Context
 import android.util.Log
@@ -8,21 +8,20 @@ import com.example.benjo.bil_app_kotlin.network.json.Result
 import com.example.benjo.bil_app_kotlin.network.retrofit.Lambda
 import com.example.benjo.bil_app_kotlin.network.retrofit.SearchRegProvider
 import com.example.benjo.bil_app_kotlin.room.CarData
-import com.google.gson.GsonBuilder
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import retrofit2.Response
 
-class MainPresenter(val context : Context){
-    private val TAG = "MainPresenter"
+class TabsPresenter(val context: Context) {
+    private val TAG = "TabsPresenter"
 
 
     fun search(reg: String?): Response<Result>? {
         var mResponse: Response<Result>? = null
         val connected = Connectivity(context).isConnected()
-        if(connected) {
+        if (connected) {
             SearchRegProvider
                     .provideSearchReg()
                     .searchReg(reg)
@@ -37,33 +36,32 @@ class MainPresenter(val context : Context){
         return mResponse
     }
 
-    fun saveToDatabase(jsonResponse: Result?) {
-        Log.d(TAG, "*************** SAVE IMAGE CLICKED ***************")
-        /*Thread(ThreadRoomAdd(CarDataBase.getInstance(context), jsonResponse, this))
-                .start()*/
+    fun saveToDatabase(vin: Int, jsonResponse: String) {
+        val car = CarData(null, vin, jsonResponse)
+
         launch(UI) {
-            val car = CarData(null,
-                    jsonResponse?.carInfo?.attributes?.vin!!.toInt(),
-                    GsonBuilder().create().toJson(jsonResponse))
-            var exist = false
             async(CommonPool) {
                 val instance = CarDataBase.getInstance(context)
                 val list = instance?.carDataDao()?.getAll()
-                if (list != null) {
-                    for (item in list) {
-                        if (item.vin == car.vin) {
-                            Log.d(TAG, "cant save car bcuz it already exist")
-                            exist = true
-                        }
-                    }
-                }
-
-                if (!exist) {
+                val exist = checkIfCarExist(list, vin)
+                if (exist)
+                    Log.d(TAG, "saveToDatabase -> car was not saved")
+                else
                     instance?.carDataDao()?.insert(car)
-                    Log.d(TAG, "car saved")
-                }
             }
         }
     }
+
+    private fun checkIfCarExist(list: List<CarData>?, vin: Int): Boolean {
+        if (list != null) {
+            for (item in list) {
+                if (item.vin == vin) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
 
 }

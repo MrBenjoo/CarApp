@@ -1,8 +1,8 @@
-package com.example.benjo.bil_app_kotlin.network.json_parsing
+package com.example.benjo.bil_app_kotlin.network.json
 
 import android.content.Context
 import com.example.benjo.bil_app_kotlin.Constants
-import com.example.benjo.bil_app_kotlin.tabview.sections.Row
+import com.example.benjo.bil_app_kotlin.tabs.Row
 
 class JsonHandler(private val context: Context) {
 

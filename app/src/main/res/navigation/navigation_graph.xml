@@ -6,18 +6,9 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/historyFragment"
-        android:name="com.example.benjo.bil_app_kotlin.history.HistoryFragment"
-        android:label="fragment_history"
-        tools:layout="@layout/fragment_history" />
-    <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.benjo.bil_app_kotlin.home.HomeFragment"
         android:label="HomeFragment">
-        <action
-            android:id="@+id/action_homeFragment_to_historyFragment"
-            app:destination="@id/historyFragment"
-            app:enterAnim="@anim/nav_default_enter_anim" />
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@+id/settingsFragment" />

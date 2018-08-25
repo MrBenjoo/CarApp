@@ -1,4 +1,4 @@
-package com.example.benjo.bil_app_kotlin.network.json_parsing
+package com.example.benjo.bil_app_kotlin.network.json
 
 import com.google.gson.annotations.SerializedName
 

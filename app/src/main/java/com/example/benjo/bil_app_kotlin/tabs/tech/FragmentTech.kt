@@ -1,14 +1,14 @@
-package com.example.benjo.bil_app_kotlin.tabview.tech
+package com.example.benjo.bil_app_kotlin.tabs.tech
 
 
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import com.example.benjo.bil_app_kotlin.tabview.TabsActivity
-import com.example.benjo.bil_app_kotlin.tabview.Row
+import com.example.benjo.bil_app_kotlin.tabs.TabsActivity
+import com.example.benjo.bil_app_kotlin.tabs.Row
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
-import com.example.benjo.bil_app_kotlin.tabview.SectionsContract
+import com.example.benjo.bil_app_kotlin.tabs.SectionsContract
 import kotlinx.android.synthetic.main.fragment_base.*
 
 
@@ -41,7 +41,7 @@ class FragmentTech : BaseFragment(), SectionsContract.ViewTech {
     }
 
     override fun updateList(title: String, list: ArrayList<Row>) {
-        sectionAdapter.addSection(ExpandableSection(title, list, sectionAdapter))
+        sectionAdapter.addSection(ExpandableAdapter(title, list, sectionAdapter))
         sectionAdapter.notifyDataSetChanged()
     }
 }

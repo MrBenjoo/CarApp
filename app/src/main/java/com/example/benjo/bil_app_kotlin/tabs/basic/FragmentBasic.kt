@@ -1,14 +1,14 @@
-package com.example.benjo.bil_app_kotlin.tabview.basic
+package com.example.benjo.bil_app_kotlin.tabs.basic
 
 
 import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.example.benjo.bil_app_kotlin.adapters.ListAdapter
-import com.example.benjo.bil_app_kotlin.tabview.TabsActivity
+import com.example.benjo.bil_app_kotlin.tabs.TabsActivity
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
-import com.example.benjo.bil_app_kotlin.tabview.Row
-import com.example.benjo.bil_app_kotlin.tabview.SectionsContract
+import com.example.benjo.bil_app_kotlin.tabs.Row
+import com.example.benjo.bil_app_kotlin.tabs.SectionsContract
 import kotlinx.android.synthetic.main.fragment_base.*
 
 

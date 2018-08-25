@@ -13,36 +13,14 @@ import android.view.ViewGroup
 
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.home.HomeActivity
-import com.example.benjo.bil_app_kotlin.tabview.sections.Row
 import com.example.benjo.bil_app_kotlin.adapters.SavedListAdapter
 import com.example.benjo.bil_app_kotlin.room.CarData
-import com.example.benjo.bil_app_kotlin.tabview.TabsActivity
+import com.example.benjo.bil_app_kotlin.tabs.TabsActivity
 import kotlinx.android.synthetic.main.fragment_saved.*
 
 class SavedFragment : Fragment(), SavedContract.View {
-
-    override fun showCar(car: CarData) {
-        val intent = Intent(context, TabsActivity::class.java)
-        intent.putExtra("jsonResult", car.json)
-        activity?.startActivity(intent)
-    }
-
-    private val arrayList = arrayListOf<Row>()
-    //private var listAdapter: ListAdapter? = null
     private var savedListAdapter: SavedListAdapter? = null
     override lateinit var presenter: SavedContract.Presenter
-
-    override fun showProgess() {
-
-    }
-
-    override fun hideProgress() {
-
-    }
-
-    override fun showErrorHTTP() {
-
-    }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -51,9 +29,8 @@ class SavedFragment : Fragment(), SavedContract.View {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (context is HomeActivity) {
-            presenter = (context).savedPresenter
-        }
+        if (context is HomeActivity)
+            presenter = context.savedPresenter
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,16 +41,13 @@ class SavedFragment : Fragment(), SavedContract.View {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        //listAdapter = ListAdapter(arrayList)
-        savedListAdapter = SavedListAdapter(arrayListOf<CarData>(), { rowItem : CarData -> itemClicked(rowItem) })
+        savedListAdapter = SavedListAdapter(arrayListOf<CarData>(), { rowItem: CarData -> itemClicked(rowItem) })
         with(fragment_saved_list) {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(activity?.applicationContext)
             //adapter = listAdapter
             adapter = savedListAdapter
         }
-       // listAdapter!!.clickListener = { row: Row -> itemClicked(row) }
-
     }
 
     override fun onResume() {
@@ -83,6 +57,12 @@ class SavedFragment : Fragment(), SavedContract.View {
 
     override fun updateView(list: ArrayList<CarData>) {
         savedListAdapter?.setList(list)
+    }
+
+    override fun showCar(car: CarData) {
+        val intent = Intent(context, TabsActivity::class.java)
+        intent.putExtra("jsonResult", car.json)
+        activity?.startActivity(intent)
     }
 
     private fun itemClicked(rowItem: CarData) {

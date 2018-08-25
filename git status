@@ -1,0 +1,71 @@
+[33mcommit 3f31ca9fd5a76317d52cce176c85bce26ed38946[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: mrbenjoo <benjo_953@hotmail.com>
+Date:   Thu Aug 23 23:41:50 2018 +0200
+
+    saving car to db & get car from db to show on UI works but its ugly (needs to be fixed)
+
+[33mcommit 3a7c17645c5a7d6d5a2d15ae8c744457bba84c71[m
+Author: mrbenjoo <benjo_953@hotmail.com>
+Date:   Wed Aug 15 17:00:25 2018 +0200
+
+    added room, jetpack navigation and cleaned some code
+
+[33mcommit 7d4e0ba166f2e6445f07253109e7365ef485ade1[m
+Author: mrbenjoo <benjo_953@hotmail.com>
+Date:   Wed Aug 8 16:54:09 2018 +0200
+
+    sending car info from HomeActivity to MainActivy
+
+[33mcommit fc2775ad200ac728cacc27bedff72f2c367cdead[m
+Author: mrbenjoo <benjo_953@hotmail.com>
+Date:   Wed Jul 18 01:20:01 2018 +0200
+
+    updated kotlin to 1.2.51
+
+[33mcommit 4c940d8b5367b04594c0480fb64e808a7f1bcf84[m
+Author: mrbenjoo <benjo_953@hotmail.com>
+Date:   Wed Jul 18 01:13:42 2018 +0200
+
+    organized the code to follow MVP design
+
+[33mcommit 36087001100f4b5c4761e17732d8ec5924f1a2d7[m
+Author: mrbenjoo <benjo_953@hotmail.com>
+Date:   Wed Jul 11 00:24:57 2018 +0200
+
+    added more sections to expandable list & added json handler class
+
+[33mcommit 34272da7b183a021c827f91d9a847a2e9ce5479e[m
+Author: mrbenjoo <benjo_953@hotmail.com>
+Date:   Mon Jul 9 22:39:05 2018 +0200
+
+    Build files setup is nicer now
+
+[33mcommit 9241a0aa65bc204afc5185ce507ad68658aca6b6[m
+Author: mrbenjoo <benjo_953@hotmail.com>
+Date:   Mon Jul 9 18:50:21 2018 +0200
+
+    cleaned some shit
+
+[33mcommit eb0d44a1296fdf2741607e2ceeb9becc1e9d167f[m
+Author: mrbenjoo <benjo_953@hotmail.com>
+Date:   Fri Jul 6 03:27:37 2018 +0200
+
+    expandable list in progess (TODO: optimization & adding more content)
+
+[33mcommit 6c6141f1d1d6b443701042be557734a1dc19bc43[m
+Author: mrbenjoo <benjo_953@hotmail.com>
+Date:   Fri Jul 6 01:59:19 2018 +0200
+
+    Initial project version
+
+[33mcommit 558340066292a0d111befbeaa4f7c9e86e0ebc6c[m
+Author: mrbenjoo <benjo_953@hotmail.com>
+Date:   Fri Jul 6 01:29:58 2018 +0200
+
+    initial project version
+
+[33mcommit 05a40ccfae85e65450c11983958fca93422ad8b1[m
+Author: mrbenjoo <benjo_953@hotmail.com>
+Date:   Fri Jul 6 01:17:34 2018 +0200
+
+    initial project version

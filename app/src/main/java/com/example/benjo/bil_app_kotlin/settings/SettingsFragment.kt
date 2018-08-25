@@ -19,19 +19,6 @@ class SettingsFragment : Fragment(), HomeContract.View {
     override fun getContext(): Context = activity!!.applicationContext
 
 
-    override fun showProgess() {
-
-    }
-
-    override fun hideProgress() {
-
-    }
-
-    override fun showErrorHTTP() {
-
-    }
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_settings, container, false)

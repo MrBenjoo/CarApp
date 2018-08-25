@@ -1,4 +1,4 @@
-package com.example.benjo.bil_app_kotlin.tabview
+package com.example.benjo.bil_app_kotlin.tabs
 
 
 import android.content.Context
@@ -13,10 +13,10 @@ import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_3
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseActivity
 import com.example.benjo.bil_app_kotlin.home.HomeActivity
-import com.example.benjo.bil_app_kotlin.tabview.tech.FragmentTech
-import com.example.benjo.bil_app_kotlin.tabview.tech.PresenterTech
-import com.example.benjo.bil_app_kotlin.tabview.basic.FragmentBasic
-import com.example.benjo.bil_app_kotlin.tabview.basic.PresenterBasic
+import com.example.benjo.bil_app_kotlin.tabs.tech.FragmentTech
+import com.example.benjo.bil_app_kotlin.tabs.tech.PresenterTech
+import com.example.benjo.bil_app_kotlin.tabs.basic.FragmentBasic
+import com.example.benjo.bil_app_kotlin.tabs.basic.PresenterBasic
 import com.example.benjo.bil_app_kotlin.network.MyReceiver
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
@@ -74,7 +74,9 @@ class TabsActivity : BaseActivity() {
         img_save.setOnClickListener {
             val gson = GsonBuilder().create()
             val jsonResponse = presenterBasic.getJson()
-            MainPresenter(applicationContext).saveToDatabase(jsonResponse) }
+            val vin = jsonResponse?.carInfo?.attributes?.vin!!.toInt()
+            val json = GsonBuilder().create().toJson(jsonResponse)
+            TabsPresenter(applicationContext).saveToDatabase(vin, json) }
     }
 
     override fun onSupportNavigateUp(): Boolean {

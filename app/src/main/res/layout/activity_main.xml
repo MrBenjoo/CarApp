@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".tabview.TabsActivity">
+    tools:context=".tabs.TabsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"

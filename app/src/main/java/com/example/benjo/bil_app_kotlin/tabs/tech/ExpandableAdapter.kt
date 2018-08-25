@@ -8,7 +8,7 @@ import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection
 
-class ExpandableSection(private val title: String?,
+class ExpandableAdapter(private val title: String?,
                         private val list: List<Row>,
                         private val sectionAdapter: SectionedRecyclerViewAdapter) : StatelessSection(SectionParameters
         .builder()

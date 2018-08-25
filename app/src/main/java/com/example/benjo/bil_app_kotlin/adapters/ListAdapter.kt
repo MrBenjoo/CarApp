@@ -5,8 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.tabview.sections.Row
-import com.example.benjo.bil_app_kotlin.tabview.sections.basic.ViewHolder
+import com.example.benjo.bil_app_kotlin.tabs.Row
+import com.example.benjo.bil_app_kotlin.tabs.basic.ViewHolder
 
 class ListAdapter(data: ArrayList<Row>?) : RecyclerView.Adapter<ViewHolder>() {
     private val TAG = "ListAdapter"

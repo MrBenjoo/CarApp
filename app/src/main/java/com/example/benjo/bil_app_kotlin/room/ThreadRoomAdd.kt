@@ -1,13 +1,13 @@
 package com.example.benjo.bil_app_kotlin.room
 
 import android.util.Log
-import com.example.benjo.bil_app_kotlin.network.json_parsing.Result
-import com.example.benjo.bil_app_kotlin.tabview.MainPresenter
+import com.example.benjo.bil_app_kotlin.network.json.Result
+import com.example.benjo.bil_app_kotlin.tabs.TabsPresenter
 import com.google.gson.GsonBuilder
 
 class ThreadRoomAdd(val instance: CarDataBase?,
                     val response: Result?,
-                    val presenter: MainPresenter) : Runnable {
+                    val presenter: TabsPresenter) : Runnable {
 
     private val TAG = "ThreadRoomAdd"
 

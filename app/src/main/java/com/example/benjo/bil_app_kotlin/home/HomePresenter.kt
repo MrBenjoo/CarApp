@@ -2,25 +2,25 @@ package com.example.benjo.bil_app_kotlin.home
 
 import android.content.Intent
 import android.util.Log
-import com.example.benjo.bil_app_kotlin.network.json_parsing.*
-import com.example.benjo.bil_app_kotlin.tabview.TabsActivity
+import com.example.benjo.bil_app_kotlin.network.json.*
+import com.example.benjo.bil_app_kotlin.tabs.TabsActivity
 import com.google.gson.GsonBuilder
 import java.util.*
 
 
 class HomePresenter(val view: HomeContract.View,
                     val activity: HomeActivity) : HomeContract.Presenter {
+
+    override fun attachView(v: HomeContract.View) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     private val TAG = "HomePresenter"
 
 
-    init {
-        Log.d(TAG, "init...")
-        view.presenter = this
-    }
-
     override fun search(reg: String?) {
        // view.showProgess()
-        /*val response = MainPresenter(view.getContext()).search(reg)
+        /*val response = TabsPresenter(view.getContext()).search(reg)
         if (response != null) {
             if (response.isSuccessful)
                 processResponse(response.body())

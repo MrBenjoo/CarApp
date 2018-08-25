@@ -1,6 +1,6 @@
 package com.example.benjo.bil_app_kotlin.network.retrofit
 
-import com.example.benjo.bil_app_kotlin.network.json_parsing.Result
+import com.example.benjo.bil_app_kotlin.network.json.Result
 import retrofit2.Call
 
 class SearchReg(val apiService: BilUppgifterApi) {
