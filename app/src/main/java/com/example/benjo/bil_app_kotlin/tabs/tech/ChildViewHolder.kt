@@ -1,4 +1,4 @@
-package com.example.benjo.bil_app_kotlin.tabview.sections.tech
+package com.example.benjo.bil_app_kotlin.tabview.tech
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

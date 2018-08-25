@@ -1,14 +1,19 @@
-package com.example.benjo.bil_app_kotlin.tabview.sections.basic
+package com.example.benjo.bil_app_kotlin.tabview.basic
 
 import android.util.Log
-import com.example.benjo.bil_app_kotlin.base.Contract
-import com.example.benjo.bil_app_kotlin.network.json_parsing.JsonHandler
-import com.example.benjo.bil_app_kotlin.network.json_parsing.Result
-import com.example.benjo.bil_app_kotlin.tabview.sections.SectionsContract
+import com.example.benjo.bil_app_kotlin.network.json.JsonHandler
+import com.example.benjo.bil_app_kotlin.network.json.Result
+import com.example.benjo.bil_app_kotlin.tabview.SectionsContract
 import com.google.gson.GsonBuilder
 import retrofit2.Response
 
-class PresenterBasic(val view: SectionsContract.ViewBasic) : SectionsContract.Presenter {
+class PresenterBasic(val view: SectionsContract.ViewBasic) : SectionsContract.BasicPresenter {
+
+
+    override fun attachView(v: SectionsContract.ViewBasic) {
+
+    }
+
     private val TAG = "PresenterBasic"
     private var objResult: Result? = null
 
@@ -17,7 +22,7 @@ class PresenterBasic(val view: SectionsContract.ViewBasic) : SectionsContract.Pr
     Denna metoden anropas varje gång man söker från tabview.
      */
     override fun updateTab(response: Response<Result>?) {
-        view.showProgess()
+
         if (response != null) {
             if (response.isSuccessful) {
                 val jsonBasic = response.body()?.carInfo?.basic?.data
@@ -28,9 +33,8 @@ class PresenterBasic(val view: SectionsContract.ViewBasic) : SectionsContract.Pr
                     if (!list.isEmpty()) view.updateList(list)
                 }
             } else
-                view.showErrorHTTP()
+               Log.d(TAG, "error")
         }
-        view.hideProgress()
     }
 
     override fun getJson(): Result? = objResult

@@ -1,15 +1,21 @@
-package com.example.benjo.bil_app_kotlin.tabview.sections.tech
+package com.example.benjo.bil_app_kotlin.tabview.tech
 
 import android.util.Log
-import com.example.benjo.bil_app_kotlin.base.Contract
-import com.example.benjo.bil_app_kotlin.network.json_parsing.JsonHandler
-import com.example.benjo.bil_app_kotlin.network.json_parsing.Result
-import com.example.benjo.bil_app_kotlin.tabview.sections.SectionsContract
+import com.example.benjo.bil_app_kotlin.network.json.JsonHandler
+import com.example.benjo.bil_app_kotlin.network.json.Result
+import com.example.benjo.bil_app_kotlin.tabview.SectionsContract
 import com.google.gson.GsonBuilder
 import retrofit2.Response
 
-class PresenterTech(val view: SectionsContract.ViewTech) : SectionsContract.Presenter {
+class PresenterTech(val view: SectionsContract.ViewTech) : SectionsContract.TechPresenter {
+
+
+    override fun attachView(v: SectionsContract.ViewTech) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     private var jsonTechText: Result? = null
+    private val TAG = "PresenterTech"
 
 
     override fun getJson(): Result? = jsonTechText
@@ -18,7 +24,6 @@ class PresenterTech(val view: SectionsContract.ViewTech) : SectionsContract.Pres
         Denna metoden anropas varje gång man söker från tabview.
          */
     override fun updateTab(response: Response<Result>?) {
-        view.showProgess()
         if (response != null) {
             if (response.isSuccessful) {
                 val jsonTech = response.body()?.carInfo?.technical?.data
@@ -28,9 +33,8 @@ class PresenterTech(val view: SectionsContract.ViewTech) : SectionsContract.Pres
                     updateTab(mapTech)
                 }
             } else
-                view.showErrorHTTP()
+                Log.d(TAG, "error")
         }
-        view.hideProgress()
     }
 
 
