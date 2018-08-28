@@ -4,7 +4,7 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import android.arch.persistence.room.Query
-import com.example.benjo.bil_app_kotlin.room.CarData
+
 
 @Dao
 interface CarDataDao {
@@ -19,6 +19,9 @@ interface CarDataDao {
     fun deleteAll()
 
     @Query("SELECT * from carDataTable WHERE vin = :vin")
-    fun getCar(vin: Int) : CarData
+    fun getCar(vin: Int): CarData
+
+    @Query("DELETE from carDataTable WHERE vin = :vin")
+    fun deleteCar(vin: Int)
 
 }

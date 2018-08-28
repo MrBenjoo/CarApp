@@ -16,6 +16,7 @@ interface SavedContract {
         fun showSavedCars(list: ArrayList<CarData>)
         fun getCarFromDB(vin: Int)
         fun showCar(car: CarData)
+        fun deleteCarFromDB(vin: Int): Boolean
     }
 
 

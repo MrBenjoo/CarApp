@@ -8,7 +8,9 @@ import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.room.CarData
 import kotlinx.android.synthetic.main.row_list.view.*
 
-class SavedListAdapter(var savedList: ArrayList<CarData>?, val clickListener: (CarData) -> Unit) : RecyclerView.Adapter<SavedListAdapter.SavedViewHolder>() {
+class SavedListAdapter(var savedList: ArrayList<CarData>?,
+                       val clickListener: (CarData) -> Unit,
+                       val longClickListener: (CarData) -> Boolean) : RecyclerView.Adapter<SavedListAdapter.SavedViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SavedViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.row_list, parent, false)
@@ -20,10 +22,9 @@ class SavedListAdapter(var savedList: ArrayList<CarData>?, val clickListener: (C
             with(holder) {
                 descRow.text = it[position].id.toString()
                 dataRow.text = it[position].vin.toString()
-                bind(it[position], clickListener)
+                bind(it[position], clickListener, longClickListener)
             }
         }
-
     }
 
     override fun getItemCount(): Int {
@@ -41,8 +42,10 @@ class SavedListAdapter(var savedList: ArrayList<CarData>?, val clickListener: (C
         val descRow = itemView.row_tv_desc
         val dataRow = itemView.row_tv_data
 
-        fun bind(row: CarData, clickListener: (CarData) -> Unit) {
+        fun bind(row: CarData, clickListener: (CarData) -> Unit, longClickListener: (CarData) -> Boolean) {
             itemView.setOnClickListener { clickListener(row) }
+            itemView.setOnLongClickListener { longClickListener(row) }
+
         }
     }
 
