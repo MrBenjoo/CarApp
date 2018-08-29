@@ -6,28 +6,29 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.widget.ImageView
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_1
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_2
 import com.example.benjo.bil_app_kotlin.Constants.Companion.TITLE_TAB_3
 import com.example.benjo.bil_app_kotlin.R
+import com.example.benjo.bil_app_kotlin.adapters.AdapterTabsPage
 import com.example.benjo.bil_app_kotlin.base.BaseActivity
 import com.example.benjo.bil_app_kotlin.home.HomeActivity
-import com.example.benjo.bil_app_kotlin.tabs.tech.FragmentTech
-import com.example.benjo.bil_app_kotlin.tabs.tech.PresenterTech
-import com.example.benjo.bil_app_kotlin.tabs.basic.FragmentBasic
-import com.example.benjo.bil_app_kotlin.tabs.basic.PresenterBasic
-import com.example.benjo.bil_app_kotlin.network.MyReceiver
+import com.example.benjo.bil_app_kotlin.tabs.tech.TechFragment
+import com.example.benjo.bil_app_kotlin.tabs.tech.TechPresenter
+import com.example.benjo.bil_app_kotlin.tabs.basic.BasicFragment
+import com.example.benjo.bil_app_kotlin.tabs.basic.BasicPresenter
+import com.example.benjo.bil_app_kotlin.network.ConnectivityHandler
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.search_view.*
+
 
 
 class TabsActivity : BaseActivity() {
     private val TAG = "TabsActivity"
-    private lateinit var sectionsPageAdapter: SectionsPageAdapter
-    private lateinit var receiver: MyReceiver
-
+    private lateinit var adapterTabsPage: AdapterTabsPage
+    private lateinit var receiver: ConnectivityHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +37,7 @@ class TabsActivity : BaseActivity() {
         initTabs()
         initBroadcast()
         initPresenter()
-        initListener()
+        initSaveListener()
     }
 
     private fun initToolbar() {
@@ -48,35 +49,39 @@ class TabsActivity : BaseActivity() {
 
     private fun initTabs() {
         tabs.setupWithViewPager(container)
-        sectionsPageAdapter = SectionsPageAdapter(supportFragmentManager)
-        container.adapter = sectionsPageAdapter
+        adapterTabsPage = AdapterTabsPage(supportFragmentManager)
+        container.adapter = adapterTabsPage
     }
 
     private fun initBroadcast() {
-        receiver = MyReceiver(this)
+        receiver = ConnectivityHandler(this)
         registerReceiver(receiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
     }
 
+    /* TODO flytta till sectionspageadapter? */
     private fun initPresenter() {
-        val fragmentTab1 = FragmentBasic()
-        val fragmentTab2 = FragmentTech()
-        val fragmentTab3 = FragmentBasic()
-        with(sectionsPageAdapter) {
+        val fragmentTab1 = BasicFragment()
+        val fragmentTab2 = TechFragment()
+        val fragmentTab3 = BasicFragment()
+        with(adapterTabsPage) {
             addFragment(fragmentTab1, TITLE_TAB_1)
             addFragment(fragmentTab2, TITLE_TAB_2)
             addFragment(fragmentTab3, TITLE_TAB_3)
         }
-        presenterBasic = PresenterBasic(fragmentTab1)
-        presenterTech = PresenterTech(fragmentTab2)
+        presenterBasic = BasicPresenter(fragmentTab1)
+        presenterTech = TechPresenter(fragmentTab2)
+        presenter = TabsPresenter(this)
     }
 
-    private fun initListener() {
+    private fun initSaveListener() {
         img_save.setOnClickListener {
-            val gson = GsonBuilder().create()
             val jsonResponse = presenterBasic.getJson()
             val vin = jsonResponse?.carInfo?.attributes?.vin!!.toInt()
             val json = GsonBuilder().create().toJson(jsonResponse)
-            TabsPresenter(applicationContext).saveToDatabase(vin, json) }
+            val saved = presenter.saveToDatabase(vin, json)
+            if(saved) showText(R.string.view_tabs_car_saved)
+            else showText(R.string.view_tabs_car_not_saved)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -86,7 +91,7 @@ class TabsActivity : BaseActivity() {
     }
 
     fun internetOff() {
-        showText(resources.getString(R.string.error_no_internet))
+        showText(R.string.error_no_internet)
         info_img_wifi_off.visibility = ImageView.VISIBLE
     }
 
@@ -97,6 +102,12 @@ class TabsActivity : BaseActivity() {
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(receiver)
+    }
+
+    override fun getContext(): Context = applicationContext
+
+    override fun showText(textID: Int) {
+        Snackbar.make(tabs_root_view, textID, Snackbar.LENGTH_LONG).show()
     }
 
     companion object {

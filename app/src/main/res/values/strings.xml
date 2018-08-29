@@ -62,4 +62,10 @@
     <string name="frag_save_car_not_deleted">Det gick inte att ta bort bilen från listan.</string>
 
 
+    <!-- TabsActivity related messages -->
+    <string name="view_tabs_car_not_saved">Bilen har redan sparats.</string>
+    <string name="view_tabs_car_saved">Bilen sparades till din lista.</string>
+
+
+
 </resources>

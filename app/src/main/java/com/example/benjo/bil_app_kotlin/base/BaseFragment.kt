@@ -1,5 +1,6 @@
 package com.example.benjo.bil_app_kotlin.base
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -13,12 +14,12 @@ import kotlinx.android.synthetic.main.fragment_base.*
 abstract class BaseFragment : Fragment() {
     private val TAG = "BaseFragment"
 
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?):
             View? = inflater.inflate(R.layout.fragment_base, container, false)
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initList()
@@ -38,5 +39,7 @@ abstract class BaseFragment : Fragment() {
     fun showText(text: String?) {
         (activity as TabsActivity).showText(text)
     }
+
+    override fun getContext(): Context = activity!!.applicationContext
 
 }

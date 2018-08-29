@@ -2,6 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tabs_root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -24,41 +25,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+
                 <ImageView
                     android:id="@+id/info_img_wifi_off"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toStartOf="@id/search_view"
-                    android:background="@drawable/ic_wifi_off_24dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_toStartOf="@id/img_save"
+                    android:background="@drawable/ic_stat_wifi_off"
                     android:visibility="invisible" />
-
-                <!--  <android.support.v7.widget.SearchView
-                    android:id="@+id/search_view_main"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:theme="@style/Theme.SearchView" />  -->
-
-                  <include layout="@layout/search_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:theme="@style/Theme.SearchView"
-                    />
 
                 <ImageView
                     android:id="@+id/img_save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/info_img_wifi_off"
-                    android:background="@drawable/ic_save_24dp" />
+                    android:layout_marginEnd="5dp"
+                    android:layout_toLeftOf="@id/search_view"
+                    android:background="@drawable/ic_save" />
 
-
-
+                <android.support.v7.widget.SearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:theme="@style/Theme.SearchView" />
 
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>

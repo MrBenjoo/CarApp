@@ -11,9 +11,9 @@ import com.example.benjo.bil_app_kotlin.saved.SavedPresenter
 
 
 class HomeActivity : AppCompatActivity() {
-
     lateinit var presenter: HomeContract.Presenter
     lateinit var savedPresenter: SavedContract.Presenter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +21,6 @@ class HomeActivity : AppCompatActivity() {
         presenter = HomePresenter(HomeFragment(), this)
         savedPresenter = SavedPresenter(applicationContext)
     }
-
 
     override fun onSupportNavigateUp() = findNavController(R.id.mainNavigationFragment).navigateUp()
 

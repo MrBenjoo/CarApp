@@ -1,0 +1,11 @@
+package com.example.benjo.bil_app_kotlin.tabs.basic
+
+import android.support.v7.widget.RecyclerView
+import android.view.View
+import kotlinx.android.synthetic.main.item_row_view.view.*
+
+class BasicVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    val descRow = itemView.row_tv_desc
+    val dataRow = itemView.row_tv_data
+
+}
