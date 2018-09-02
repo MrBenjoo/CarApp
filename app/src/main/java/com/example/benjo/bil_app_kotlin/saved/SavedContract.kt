@@ -9,6 +9,8 @@ interface SavedContract {
     interface View : BaseView<Presenter> {
         fun updateView(list: ArrayList<CarData>)
         fun showCar(car: CarData)
+        fun showDialogOnMultipleDeletion()
+        fun onDestroyActionMode()
     }
 
     interface Presenter : BasePresenter<View> {
@@ -17,6 +19,10 @@ interface SavedContract {
         fun getCarFromDB(vin: Int)
         fun showCar(car: CarData)
         fun deleteCarFromDB(vin: Int): Boolean
+        fun onMultipleClick(multiList: ArrayList<CarData>,
+                                      singleList: ArrayList<CarData>,
+                                      position: Int): ArrayList<CarData>
+
     }
 
 

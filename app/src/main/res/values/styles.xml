@@ -6,11 +6,15 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:actionModeBackground">@color/colorPrimary</item>
         <item name="android:windowBackground">@drawable/bg_main</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_menu_arrow_back</item>
+        <item name="actionModeCloseDrawable">@drawable/ic_action_mode_clear</item>
+        <item name="android:windowActionBarOverlay">false</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
     <!-- **************************************************** -->
-
 
     <!-- ************** CardView ************** -->
     <style name="CardViewStyle" parent="Base.CardView">
@@ -20,7 +24,7 @@
     <style name="CardViewText">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
     <!-- **************************************** -->
 

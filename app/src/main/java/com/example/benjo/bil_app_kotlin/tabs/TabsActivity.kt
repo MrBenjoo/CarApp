@@ -22,7 +22,7 @@ import com.example.benjo.bil_app_kotlin.tabs.basic.BasicPresenter
 import com.example.benjo.bil_app_kotlin.network.ConnectivityHandler
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
-
+import kotlinx.coroutines.experimental.runBlocking
 
 
 class TabsActivity : BaseActivity() {
@@ -78,7 +78,7 @@ class TabsActivity : BaseActivity() {
             val jsonResponse = presenterBasic.getJson()
             val vin = jsonResponse?.carInfo?.attributes?.vin!!.toInt()
             val json = GsonBuilder().create().toJson(jsonResponse)
-            val saved = presenter.saveToDatabase(vin, json)
+            val saved = runBlocking { presenter.saveToDatabase(vin, json) }
             if(saved) showText(R.string.view_tabs_car_saved)
             else showText(R.string.view_tabs_car_not_saved)
         }

@@ -18,8 +18,11 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        /*setSupportActionBar(toolbar_home)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)*/
         presenter = HomePresenter(HomeFragment(), this)
-        savedPresenter = SavedPresenter(applicationContext)
+        savedPresenter = SavedPresenter()
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.mainNavigationFragment).navigateUp()
@@ -27,4 +30,5 @@ class HomeActivity : AppCompatActivity() {
     companion object {
         fun newIntent(context: Context): Intent = Intent(context, HomeActivity::class.java)
     }
+
 }

@@ -32,15 +32,15 @@ class TabsPresenter(val view: TabsContract.ViewTabs) : TabsContract.TabsPresente
         return mResponse
     }
 
-    override fun saveToDatabase(vin: Int, jsonResponse: String): Boolean {
+    override suspend fun saveToDatabase(vin: Int, jsonResponse: String): Boolean {
         var saved = false
-        runBlocking {
+        //runBlocking {
             saved = async(CommonPool) { insertCar(vin, jsonResponse) }.await()
-        }
+        //}
         return saved
     }
 
-    private fun insertCar(vin: Int, jsonResponse: String): Boolean {
+    /*private*/ fun insertCar(vin: Int, jsonResponse: String): Boolean {
         val car = CarData(null, vin, jsonResponse)
         val instance = CarDataBase.getInstance(view.getContext())
         val exist = checkIfCarExist(instance, vin)
@@ -48,7 +48,7 @@ class TabsPresenter(val view: TabsContract.ViewTabs) : TabsContract.TabsPresente
         return !exist
     }
 
-    private fun checkIfCarExist(instance: CarDataBase?, vin: Int): Boolean {
+    /*private*/ fun checkIfCarExist(instance: CarDataBase?, vin: Int): Boolean {
         val list = instance?.carDataDao()?.getAll()
         if (list != null) {
             for (item in list) {

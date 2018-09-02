@@ -1,12 +1,16 @@
 package com.example.benjo.bil_app_kotlin.saved
 
-import android.content.Context
+
 import com.example.benjo.bil_app_kotlin.room.CarData
 import com.example.benjo.bil_app_kotlin.room.CarDataBase
 import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.android.UI
 
-class SavedPresenter(val context: Context) : SavedContract.Presenter {
+class SavedPresenter : SavedContract.Presenter {
+
+
+
+
     private val TAG = "SavedPresenter"
     private lateinit var view: SavedContract.View
 
@@ -14,7 +18,7 @@ class SavedPresenter(val context: Context) : SavedContract.Presenter {
     override fun loadSavedCars() {
         launch(UI) {
             val list = withContext(CommonPool) {
-                CarDataBase.getInstance(context)?.carDataDao()?.getAll()
+                CarDataBase.getInstance(view.getContext())?.carDataDao()?.getAll()
             }
             if (list != null) {
                 val arrayList = copyListToArrayList(list)
@@ -23,6 +27,8 @@ class SavedPresenter(val context: Context) : SavedContract.Presenter {
         }
     }
 
+
+
     override fun showSavedCars(list: ArrayList<CarData>) {
         view.updateView(list)
     }
@@ -30,7 +36,7 @@ class SavedPresenter(val context: Context) : SavedContract.Presenter {
     override fun getCarFromDB(vin: Int) {
         launch(UI) {
             val car = withContext(CommonPool) {
-                CarDataBase.getInstance(context)?.carDataDao()?.getCar(vin)
+                CarDataBase.getInstance(view.getContext())?.carDataDao()?.getCar(vin)
             }
             if (car != null) showCar(car)
         }
@@ -38,7 +44,7 @@ class SavedPresenter(val context: Context) : SavedContract.Presenter {
 
     override fun deleteCarFromDB(vin: Int): Boolean {
         var car: CarData? = null
-        with(CarDataBase.getInstance(context)!!.carDataDao()) {
+        with(CarDataBase.getInstance(view.getContext())!!.carDataDao()) {
             launch(UI) {
                 launch { deleteCar(vin) }
                 car = async(CommonPool) { getCar(vin) }.await()
@@ -61,6 +67,17 @@ class SavedPresenter(val context: Context) : SavedContract.Presenter {
             arrayList.add(CarData(null, item.vin, item.json))
         }
         return arrayList
+    }
+
+    override fun onMultipleClick(multiList: ArrayList<CarData>,
+                                 singleList: ArrayList<CarData>,
+                                 position: Int): ArrayList<CarData> {
+        if (multiList.contains(singleList[position])) {
+            multiList.remove(singleList[position])
+        } else
+            multiList.add(singleList[position])
+
+        return multiList
     }
 
 }

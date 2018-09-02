@@ -16,7 +16,7 @@ interface TabsContract {
     }
 
     interface TabsPresenter {
-        fun saveToDatabase(vin: Int, jsonResponse: String) : Boolean
+        suspend fun saveToDatabase(vin: Int, jsonResponse: String) : Boolean
         fun search(reg: String?): Response<Result>?
     }
     /* ----------- */
