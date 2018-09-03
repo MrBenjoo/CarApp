@@ -2,6 +2,7 @@ package com.example.benjo.bil_app_kotlin.home
 
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -13,6 +14,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 
 import com.example.benjo.bil_app_kotlin.R
+import com.example.benjo.bil_app_kotlin.tabs.TabsActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -29,8 +31,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener, HomeContract.Vi
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (context is HomeActivity)
-            presenter = context.presenter
+        if (context is HomeActivity) presenter = context.presenter
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,6 +39,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener, HomeContract.Vi
         tv_saved.setOnClickListener { Navigation.findNavController(it).navigate(R.id.savedFragment) }
         tv_settings.setOnClickListener { Navigation.findNavController(it).navigate(R.id.settingsFragment) }
         home_search_view.setOnQueryTextListener(this)
+        presenter.attachView(this)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean = when (query?.length) {
@@ -50,6 +52,12 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener, HomeContract.Vi
             showText(R.string.error_reg_limit)
             false
         }
+    }
+
+    override fun startTabActivity(json: String) {
+        val intent = Intent(activity, TabsActivity::class.java)
+        intent.putExtra("jsonResult", json)
+        activity?.startActivity(intent)
     }
 
     fun showText(textId: Int) {

@@ -15,19 +15,20 @@ import kotlinx.android.synthetic.main.fragment_base.*
 class BasicFragment : BaseFragment(), TabsContract.ViewBasic {
     private val TAG = "BasicFragment"
     private lateinit var adapterBasicList: AdapterBasicList
-    override lateinit var presenter: TabsContract.Presenter
+    override lateinit var presenter: TabsContract.BasicPresenter
 
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is TabsActivity)
-            presenter = context.presenterBasic
+            presenter = context.basicPresenter
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapterBasicList = AdapterBasicList(arrayListOf<Row>())
+        adapterBasicList = AdapterBasicList(arrayListOf())
         list.adapter = adapterBasicList
+        presenter.attachView(this)
     }
 
     override fun onResume() {

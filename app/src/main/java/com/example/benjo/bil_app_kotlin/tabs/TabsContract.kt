@@ -23,7 +23,7 @@ interface TabsContract {
 
 
     /* Technical tab related */
-    interface ViewTech : BaseView<Presenter> {
+    interface ViewTech : BaseView<TechPresenter> {
         fun updateList(title: String, list: ArrayList<Row>)
     }
 
@@ -32,7 +32,7 @@ interface TabsContract {
 
 
     /* Basic Tab related */
-    interface ViewBasic : BaseView<Presenter> {
+    interface ViewBasic : BaseView<BasicPresenter> {
         fun updateList(list: ArrayList<Row>)
     }
 
@@ -43,7 +43,6 @@ interface TabsContract {
     interface Presenter {
         fun updateTab(response: Response<Result>?)
         fun update(jsonResult: String?)
-        fun getJson() : Result?
     }
 
 

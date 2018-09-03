@@ -5,7 +5,9 @@ import com.example.benjo.bil_app_kotlin.base.BaseView
 
 interface HomeContract {
 
-    interface View : BaseView<Presenter>
+    interface View : BaseView<Presenter> {
+        fun startTabActivity(json: String)
+    }
 
     interface Presenter : BasePresenter<View> {
         fun search(reg: String?)

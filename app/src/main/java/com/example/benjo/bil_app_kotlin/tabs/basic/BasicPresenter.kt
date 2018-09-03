@@ -7,15 +7,14 @@ import com.example.benjo.bil_app_kotlin.tabs.TabsContract
 import com.google.gson.GsonBuilder
 import retrofit2.Response
 
-class BasicPresenter(val view: TabsContract.ViewBasic) : TabsContract.BasicPresenter {
+class BasicPresenter : TabsContract.BasicPresenter {
+    private val TAG = "BasicPresenter"
+    private lateinit var view: TabsContract.ViewBasic
 
 
     override fun attachView(v: TabsContract.ViewBasic) {
-
+        this.view = v
     }
-
-    private val TAG = "BasicPresenter"
-    private var objResult: Result? = null
 
 
     /*
@@ -26,18 +25,15 @@ class BasicPresenter(val view: TabsContract.ViewBasic) : TabsContract.BasicPrese
         if (response != null) {
             if (response.isSuccessful) {
                 val jsonBasic = response.body()?.carInfo?.basic?.data
-                objResult = response.body()
                 with(GsonBuilder().create()) {
                     val mapBasic = fromJson(toJson(jsonBasic), HashMap<String, String?>()::class.java)
                     val list = JsonHandler(view.getContext()).basicSection(mapBasic)
                     if (!list.isEmpty()) view.updateList(list)
                 }
             } else
-               Log.d(TAG, "error")
+                Log.d(TAG, "error")
         }
     }
-
-    override fun getJson(): Result? = objResult
 
 
     /*
@@ -46,7 +42,7 @@ class BasicPresenter(val view: TabsContract.ViewBasic) : TabsContract.BasicPrese
      */
     override fun update(jsonResult: String?) {
         val gson = GsonBuilder().create()
-        objResult = gson.fromJson(jsonResult, Result::class.java)
+        var objResult = gson.fromJson(jsonResult, Result::class.java)
         objResult.let {
             val jsonBasicText = gson.toJson(it?.carInfo?.basic?.data)
             val mapBasic = gson.fromJson(jsonBasicText, HashMap<String, String?>()::class.java)
@@ -56,7 +52,8 @@ class BasicPresenter(val view: TabsContract.ViewBasic) : TabsContract.BasicPrese
                 view.updateList(list)
             } else {
                 Log.d(TAG, "update -> view will not be updated (list is null)")
-            }}
+            }
+        }
     }
 
 

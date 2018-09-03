@@ -16,19 +16,20 @@ import kotlinx.android.synthetic.main.fragment_base.*
 class TechFragment : BaseFragment(), TabsContract.ViewTech {
     private val TAG = "TechFragment"
     private lateinit var sectionAdapter: SectionedRecyclerViewAdapter
-    override lateinit var presenter: TabsContract.Presenter
+    override lateinit var presenter: TabsContract.TechPresenter
 
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is TabsActivity)
-            presenter = context.presenterTech
+            presenter = context.techPresenter
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sectionAdapter = SectionedRecyclerViewAdapter()
         list.adapter = sectionAdapter
+        presenter.attachView(this)
     }
 
 

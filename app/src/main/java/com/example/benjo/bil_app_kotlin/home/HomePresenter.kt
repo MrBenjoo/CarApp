@@ -8,18 +8,19 @@ import com.google.gson.GsonBuilder
 import java.util.*
 
 
-class HomePresenter(val view: HomeContract.View,
-                    val activity: HomeActivity) : HomeContract.Presenter {
-
-    override fun attachView(v: HomeContract.View) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+class HomePresenter : HomeContract.Presenter {
 
     private val TAG = "HomePresenter"
+    private lateinit var view : HomeContract.View
 
+
+
+    override fun attachView(v: HomeContract.View) {
+        this.view = v
+    }
 
     override fun search(reg: String?) {
-       // view.showProgess()
+        // view.showProgess()
         /*val response = TabsPresenter(view.getContext()).search(reg)
         if (response != null) {
             if (response.isSuccessful)
@@ -38,7 +39,8 @@ class HomePresenter(val view: HomeContract.View,
 
         val attrData = Attributes("RON810", (Random().nextInt(20) + 1).toString())
         val basicData = BasicInfo(mMake[Random().nextInt(5)], "S80", "I trafik", mColors[Random().nextInt(5)], "Personbil", "2003", "2003")
-        val techData = TechnicalData("180",
+        val techData = TechnicalData(
+                "180",
                 "230",
                 "1798 ",
                 "200 ",
@@ -79,18 +81,9 @@ class HomePresenter(val view: HomeContract.View,
         val result = Result(CarInfo(attrData, Basic(basicData), Technical(techData)))
         /* --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-        val gson = GsonBuilder().create()
+        val  jsonResult = GsonBuilder().create().toJson(result).toString()
+        view.startTabActivity(jsonResult)
 
-        val intent = Intent(activity, TabsActivity::class.java)
-        val jsonResult = gson.toJson(result).toString()
-        Log.d(TAG, "processResponse ->  OBJECT to JSON = $jsonResult")
-
-        val classResult = gson.fromJson(jsonResult, Result::class.java)
-        Log.d(TAG, "processResponse ->  JSON to OBJECT = ${classResult?.carInfo?.attributes?.regno}")
-
-        intent.putExtra("jsonResult", jsonResult)
-
-        activity.startActivity(intent)
     }
 
 }

@@ -7,22 +7,19 @@ import com.example.benjo.bil_app_kotlin.tabs.TabsContract
 import com.google.gson.GsonBuilder
 import retrofit2.Response
 
-class TechPresenter(val view: TabsContract.ViewTech) : TabsContract.TechPresenter {
+class TechPresenter : TabsContract.TechPresenter {
+    private val TAG = "TechPresenter"
+    private lateinit var view: TabsContract.ViewTech
 
 
     override fun attachView(v: TabsContract.ViewTech) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        this.view = v
     }
 
-    private var jsonTechText: Result? = null
-    private val TAG = "TechPresenter"
-
-
-    override fun getJson(): Result? = jsonTechText
 
     /*
         Denna metoden anropas varje gång man söker från tabview.
-         */
+    */
     override fun updateTab(response: Response<Result>?) {
         if (response != null) {
             if (response.isSuccessful) {
