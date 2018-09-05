@@ -3,6 +3,7 @@ package com.example.benjo.bil_app_kotlin.saved
 
 import com.example.benjo.bil_app_kotlin.data.repository.CarRepository
 import com.example.benjo.bil_app_kotlin.data.room.CarData
+import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 
 
 class SavedPresenter(private val carRepository: CarRepository) : SavedContract.Presenter {
@@ -12,7 +13,7 @@ class SavedPresenter(private val carRepository: CarRepository) : SavedContract.P
 
     override fun loadSavedCars() {
         val list = carRepository.getAllCars()
-        if (list != null) showSavedCars(copyListToArrayList(list))
+        if (list != null) showSavedCars(CommonUtils().listToArrayList(list))
     }
 
     override fun getCarFromDB(vin: Int) {
@@ -47,15 +48,5 @@ class SavedPresenter(private val carRepository: CarRepository) : SavedContract.P
 
         return multiList
     }
-
-
-    private fun copyListToArrayList(list: List<CarData>): ArrayList<CarData> {
-        val arrayList = arrayListOf<CarData>()
-        for (item in list) {
-            arrayList.add(CarData(null, item.vin, item.json))
-        }
-        return arrayList
-    }
-
 
 }
