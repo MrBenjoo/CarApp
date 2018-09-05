@@ -3,7 +3,7 @@ package com.example.benjo.bil_app_kotlin.adapters
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.tabs.Row
+import com.example.benjo.bil_app_kotlin.data.model.Row
 import com.example.benjo.bil_app_kotlin.tabs.tech.TechChildVH
 import com.example.benjo.bil_app_kotlin.tabs.tech.TechParentVH
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters

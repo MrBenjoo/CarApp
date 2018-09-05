@@ -12,6 +12,8 @@ import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.home.HomeContract
 
 class SettingsFragment : Fragment(), HomeContract.View {
+
+
     override fun startTabActivity(json: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

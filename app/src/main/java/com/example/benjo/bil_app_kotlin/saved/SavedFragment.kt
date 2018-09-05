@@ -1,23 +1,21 @@
 package com.example.benjo.bil_app_kotlin.saved
 
+
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.home.HomeActivity
 import com.example.benjo.bil_app_kotlin.adapters.AdapterSavedList
-import com.example.benjo.bil_app_kotlin.room.CarData
+import com.example.benjo.bil_app_kotlin.data.room.CarData
 import com.example.benjo.bil_app_kotlin.tabs.TabsActivity
 import kotlinx.android.synthetic.main.fragment_saved.*
 import kotlinx.android.synthetic.main.dialog_delete_car.view.*
 import android.view.*
-import com.example.benjo.bil_app_kotlin.BaseFragmentHome
+import com.example.benjo.bil_app_kotlin.base.BaseFragmentHome
 import com.example.benjo.bil_app_kotlin.builder.FragmentToolbar
 import com.example.benjo.bil_app_kotlin.builder.ToolbarManager
 

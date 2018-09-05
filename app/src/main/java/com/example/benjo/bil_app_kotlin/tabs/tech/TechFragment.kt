@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.example.benjo.bil_app_kotlin.adapters.AdapterExpandableList
 import com.example.benjo.bil_app_kotlin.tabs.TabsActivity
-import com.example.benjo.bil_app_kotlin.tabs.Row
+import com.example.benjo.bil_app_kotlin.data.model.Row
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.tabs.TabsContract
@@ -35,8 +35,9 @@ class TechFragment : BaseFragment(), TabsContract.ViewTech {
 
     override fun onResume() {
         super.onResume()
-        val jsonResult = activity!!.intent.getStringExtra("jsonResult")
-        if (jsonResult != null) presenter.update(jsonResult)
+        val jsonString = activity!!.intent.getStringExtra("jsonResult")
+        val jsonResult = if (jsonString != null) presenter.fromJson(jsonString) else null
+        presenter.updateTab(jsonResult)
     }
 
     override fun updateList(title: String, list: ArrayList<Row>) {

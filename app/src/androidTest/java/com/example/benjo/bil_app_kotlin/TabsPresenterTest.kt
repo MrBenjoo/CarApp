@@ -1,6 +1,7 @@
 package com.example.benjo.bil_app_kotlin
 
 import android.support.test.runner.AndroidJUnit4
+import com.example.benjo.bil_app_kotlin.data.repository.CarRepository
 import com.example.benjo.bil_app_kotlin.tabs.TabsActivity
 import com.example.benjo.bil_app_kotlin.tabs.TabsContract
 import com.example.benjo.bil_app_kotlin.tabs.TabsPresenter
@@ -11,8 +12,6 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 
 
@@ -23,11 +22,14 @@ class TabsPresenterTest {
 
     private lateinit var presenter : TabsContract.TabsPresenter
 
+    @Mock
+    private lateinit var repo : CarRepository
+
     @Before
     fun setup() {
-        //MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.initMocks(this)
         view = TabsActivity()
-        presenter = TabsPresenter(view)
+        presenter = TabsPresenter(view, repo)
     }
 
     @Test

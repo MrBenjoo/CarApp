@@ -2,7 +2,7 @@ package com.example.benjo.bil_app_kotlin.saved
 
 import com.example.benjo.bil_app_kotlin.base.BasePresenter
 import com.example.benjo.bil_app_kotlin.base.BaseView
-import com.example.benjo.bil_app_kotlin.room.CarData
+import com.example.benjo.bil_app_kotlin.data.room.CarData
 
 interface SavedContract {
 
@@ -15,13 +15,13 @@ interface SavedContract {
 
     interface Presenter : BasePresenter<View> {
         fun loadSavedCars()
-        fun showSavedCars(list: ArrayList<CarData>)
         fun getCarFromDB(vin: Int)
-        fun showCar(car: CarData)
         fun deleteCarFromDB(vin: Int): Boolean
+        fun showSavedCars(list: ArrayList<CarData>)
+        fun showCar(car: CarData)
         fun onMultipleClick(multiList: ArrayList<CarData>,
-                                      singleList: ArrayList<CarData>,
-                                      position: Int): ArrayList<CarData>
+                            singleList: ArrayList<CarData>,
+                            position: Int): ArrayList<CarData>
 
     }
 

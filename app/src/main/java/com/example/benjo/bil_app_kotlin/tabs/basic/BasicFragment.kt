@@ -7,7 +7,7 @@ import android.view.View
 import com.example.benjo.bil_app_kotlin.adapters.AdapterBasicList
 import com.example.benjo.bil_app_kotlin.tabs.TabsActivity
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
-import com.example.benjo.bil_app_kotlin.tabs.Row
+import com.example.benjo.bil_app_kotlin.data.model.Row
 import com.example.benjo.bil_app_kotlin.tabs.TabsContract
 import kotlinx.android.synthetic.main.fragment_base.*
 
@@ -33,8 +33,9 @@ class BasicFragment : BaseFragment(), TabsContract.ViewBasic {
 
     override fun onResume() {
         super.onResume()
-        val jsonResult = activity!!.intent.getStringExtra("jsonResult")
-        if (jsonResult != null) presenter.update(jsonResult)
+        val jsonString = activity!!.intent.getStringExtra("jsonResult")
+        val jsonResult = if (jsonString != null) presenter.fromJson(jsonString) else null
+        presenter.updateTab(jsonResult)
     }
 
     override fun updateList(list: ArrayList<Row>) {

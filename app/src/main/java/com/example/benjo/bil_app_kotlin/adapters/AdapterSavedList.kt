@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.room.CarData
+import com.example.benjo.bil_app_kotlin.data.room.CarData
 import kotlinx.android.synthetic.main.item_row_view.view.*
 import kotlinx.android.synthetic.main.item_row_with_cb.view.*
 

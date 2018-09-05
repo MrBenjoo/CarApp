@@ -1,11 +1,11 @@
 package com.example.benjo.bil_app_kotlin.tabs.tech
 
-import android.util.Log
-import com.example.benjo.bil_app_kotlin.network.json.JsonHandler
-import com.example.benjo.bil_app_kotlin.network.json.Result
+
+import com.example.benjo.bil_app_kotlin.utils.JsonHandler
+import com.example.benjo.bil_app_kotlin.data.model.Result
 import com.example.benjo.bil_app_kotlin.tabs.TabsContract
 import com.google.gson.GsonBuilder
-import retrofit2.Response
+
 
 class TechPresenter : TabsContract.TechPresenter {
     private val TAG = "TechPresenter"
@@ -16,26 +16,17 @@ class TechPresenter : TabsContract.TechPresenter {
         this.view = v
     }
 
-
-    /*
-        Denna metoden anropas varje gång man söker från tabview.
-    */
-    override fun updateTab(response: Response<Result>?) {
-        if (response != null) {
-            if (response.isSuccessful) {
-                val jsonTech = response.body()?.carInfo?.technical?.data
-
-                with(GsonBuilder().create()) {
-                    val mapTech = fromJson(toJson(jsonTech), HashMap<String, String?>()::class.java)
-                    updateTab(mapTech)
-                }
-            } else
-                Log.d(TAG, "error")
-        }
+    override fun updateTab(response: Result?) {
+        val gson = GsonBuilder().create()
+        val jsonStringTech = gson.toJson(response?.carInfo?.technical?.data)
+        val mapTech = gson.fromJson(jsonStringTech, HashMap<String, String?>()::class.java)
+        updateTechSections(mapTech)
     }
 
+    override fun fromJson(json: String): Result =
+            GsonBuilder().create().fromJson(json, Result::class.java)
 
-    private fun updateTab(map: HashMap<String, String?>?) {
+    private fun updateTechSections(map: HashMap<String, String?>?) {
         with(JsonHandler(view.getContext())) {
             val techSection = techSection(map)
             val dimensionsSection = dimensionsSection(map)
@@ -43,20 +34,6 @@ class TechPresenter : TabsContract.TechPresenter {
             if (!techSection.isEmpty()) view.updateList("Teknisk data", techSection)
             if (!dimensionsSection.isEmpty()) view.updateList("Dimensioner", dimensionsSection)
             if (!otherSection.isEmpty()) view.updateList("Övrigt", otherSection)
-        }
-    }
-
-
-    /*
-    Denna metoden anropas när onResume körs. Det vill säga när man startar TabsActivity från
-    HomeActivity.
-     */
-    override fun update(jsonResult: String?) {
-        with(GsonBuilder().create()) {
-            val objResult = fromJson(jsonResult, Result::class.java)
-            val jsonTechText = toJson(objResult.carInfo?.technical?.data)
-            val mapTech = fromJson(jsonTechText, HashMap<String, String?>()::class.java)
-            updateTab(mapTech)
         }
     }
 
