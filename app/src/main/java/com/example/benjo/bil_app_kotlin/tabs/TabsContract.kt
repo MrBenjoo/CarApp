@@ -4,7 +4,8 @@ package com.example.benjo.bil_app_kotlin.tabs
 import com.example.benjo.bil_app_kotlin.base.BasePresenter
 import com.example.benjo.bil_app_kotlin.base.BaseView
 
-import com.example.benjo.bil_app_kotlin.network.json.Result
+import com.example.benjo.bil_app_kotlin.data.model.Result
+import com.example.benjo.bil_app_kotlin.data.model.Row
 import retrofit2.Response
 
 interface TabsContract {
@@ -16,8 +17,9 @@ interface TabsContract {
     }
 
     interface TabsPresenter {
-        suspend fun saveToDatabase(vin: Int, jsonResponse: String) : Boolean
+        fun saveToDatabase(vin: Int, jsonResponse: String) : Boolean
         fun search(reg: String?): Response<Result>?
+        fun validateResponse(response : Response<Result>?) : Result?
     }
     /* ----------- */
 
@@ -41,8 +43,8 @@ interface TabsContract {
 
 
     interface Presenter {
-        fun updateTab(response: Response<Result>?)
-        fun update(jsonResult: String?)
+        fun updateTab(response: Result?)
+        fun fromJson(json: String): Result
     }
 
 

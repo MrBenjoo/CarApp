@@ -11,19 +11,20 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SearchView
 import android.view.View
 import android.widget.ImageView
-import com.example.benjo.bil_app_kotlin.Constants
+import com.example.benjo.bil_app_kotlin.utils.Constants
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.adapters.AdapterTabsPage
+import com.example.benjo.bil_app_kotlin.data.room.CarDataBase
+import com.example.benjo.bil_app_kotlin.data.repository.CarRepositoryImpl
 import com.example.benjo.bil_app_kotlin.home.HomeActivity
 import com.example.benjo.bil_app_kotlin.tabs.tech.TechPresenter
 import com.example.benjo.bil_app_kotlin.tabs.basic.BasicPresenter
-import com.example.benjo.bil_app_kotlin.network.ConnectivityHandler
-import com.example.benjo.bil_app_kotlin.network.json.Result
+import com.example.benjo.bil_app_kotlin.utils.ConnectivityHandler
+import com.example.benjo.bil_app_kotlin.data.model.Result
 import com.example.benjo.bil_app_kotlin.tabs.basic.BasicFragment
 import com.example.benjo.bil_app_kotlin.tabs.tech.TechFragment
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.experimental.runBlocking
 import retrofit2.Response
 
 
@@ -50,7 +51,7 @@ class TabsActivity : AppCompatActivity(), SearchView.OnQueryTextListener, TabsCo
     private fun initPresenters() {
         basicPresenter = BasicPresenter()
         techPresenter = TechPresenter()
-        presenter = TabsPresenter(this)
+        presenter = TabsPresenter(this, CarRepositoryImpl(CarDataBase.getInstance(applicationContext)!!))
     }
 
     private fun initToolbar() {
@@ -81,7 +82,7 @@ class TabsActivity : AppCompatActivity(), SearchView.OnQueryTextListener, TabsCo
         val result = newJson ?: intentJson()
         val vin = result?.carInfo?.attributes?.vin!!.toInt()
         val json = GsonBuilder().create().toJson(result)
-        val saved = runBlocking { presenter.saveToDatabase(vin, json) }
+        val saved = presenter.saveToDatabase(vin, json)
         if (saved) showText(R.string.view_tabs_car_saved)
         else showText(R.string.view_tabs_car_not_saved)
     }
@@ -94,8 +95,11 @@ class TabsActivity : AppCompatActivity(), SearchView.OnQueryTextListener, TabsCo
         in 2..7 -> {
             search_view.onActionViewCollapsed()
             response = presenter.search(query?.trim())
-            basicPresenter.updateTab(response)
-            techPresenter.updateTab(response)
+            val validatedResponse = presenter.validateResponse(response)
+            if(validatedResponse != null) {
+                basicPresenter.updateTab(validatedResponse)
+                techPresenter.updateTab(validatedResponse)
+            }
             true
         }
         else -> {

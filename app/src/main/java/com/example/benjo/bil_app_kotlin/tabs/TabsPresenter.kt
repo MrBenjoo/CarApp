@@ -1,22 +1,19 @@
 package com.example.benjo.bil_app_kotlin.tabs
 
-import com.example.benjo.bil_app_kotlin.room.CarDataBase
-import com.example.benjo.bil_app_kotlin.network.ConnectivityStatus
-import com.example.benjo.bil_app_kotlin.network.json.Result
-import com.example.benjo.bil_app_kotlin.network.retrofit.Lambda
-import com.example.benjo.bil_app_kotlin.network.retrofit.SearchRegProvider
-import com.example.benjo.bil_app_kotlin.room.CarData
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.runBlocking
+import com.example.benjo.bil_app_kotlin.data.model.Result
+import com.example.benjo.bil_app_kotlin.retrofit.Lambda
+import com.example.benjo.bil_app_kotlin.retrofit.SearchRegProvider
+import com.example.benjo.bil_app_kotlin.data.room.CarData
+import com.example.benjo.bil_app_kotlin.data.repository.CarRepository
+import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import retrofit2.Response
 
-class TabsPresenter(val view: TabsContract.ViewTabs) : TabsContract.TabsPresenter {
+class TabsPresenter(val view: TabsContract.ViewTabs, val carRepository: CarRepository) : TabsContract.TabsPresenter {
     private val TAG = "TabsPresenter"
 
     override fun search(reg: String?): Response<Result>? {
         var mResponse: Response<Result>? = null
-        val connected = ConnectivityStatus(view.getContext()).isConnected()
+        val connected = CommonUtils().isConnected(view.getContext())
         if (connected) {
             SearchRegProvider
                     .provideSearchReg()
@@ -32,33 +29,19 @@ class TabsPresenter(val view: TabsContract.ViewTabs) : TabsContract.TabsPresente
         return mResponse
     }
 
-    override suspend fun saveToDatabase(vin: Int, jsonResponse: String): Boolean {
-        var saved = false
-        //runBlocking {
-        saved = async(CommonPool) { insertCar(vin, jsonResponse) }.await()
-        //}
-        return saved
-    }
-
-    /*private*/ fun insertCar(vin: Int, jsonResponse: String): Boolean {
-        val car = CarData(null, vin, jsonResponse)
-        val instance = CarDataBase.getInstance(view.getContext())
-        val exist = checkIfCarExist(instance, vin)
-        if (!exist) instance?.carDataDao()?.insert(car)
-        return !exist
-    }
-
-    /*private*/ fun checkIfCarExist(instance: CarDataBase?, vin: Int): Boolean {
-        val list = instance?.carDataDao()?.getAll()
-        if (list != null) {
-            for (item in list) {
-                if (item.vin == vin) {
-                    return true
-                }
+    override fun validateResponse(response: Response<Result>?): Result? =
+            when (response?.isSuccessful) {
+                true -> response.body()
+                else -> null
             }
-        }
-        return false
-    }
 
+    override fun saveToDatabase(vin: Int, jsonResponse: String): Boolean =
+            when (carRepository.getCar(vin) == null) {
+                true -> {
+                    carRepository.insertCar(CarData(null, vin, jsonResponse))
+                    true
+                }
+                else -> false
+            }
 
 }
