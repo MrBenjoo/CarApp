@@ -1,11 +1,7 @@
 package com.example.benjo.bil_app_kotlin.home
 
-import android.content.Intent
-import android.util.Log
-import com.example.benjo.bil_app_kotlin.network.json.*
-import com.example.benjo.bil_app_kotlin.tabs.TabsActivity
-import com.google.gson.GsonBuilder
-import java.util.*
+import com.example.benjo.bil_app_kotlin.data.model.*
+import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 
 
 class HomePresenter : HomeContract.Presenter {
@@ -34,56 +30,8 @@ class HomePresenter : HomeContract.Presenter {
 
     private fun processResponse(body: Result?) {
         /* ------------------------------------------------------------- Används endast för att testa UI -------------------------------------------------------------*/
-        val mColors = arrayOf("Svart", "Vit", "Blå", "Orange", "Silver")
-        val mMake = arrayOf("Volvo S80", "Volvo S70", "Volvo S60", "Volvo S50", "Volvo S40")
-
-        val attrData = Attributes("RON810", (Random().nextInt(20) + 1).toString())
-        val basicData = BasicInfo(mMake[Random().nextInt(5)], "S80", "I trafik", mColors[Random().nextInt(5)], "Personbil", "2003", "2003")
-        val techData = TechnicalData(
-                "180",
-                "230",
-                "1798 ",
-                "200 ",
-                "Bensin / Etanol",
-                "7.4",
-                "177",
-                "manuell ",
-                "ja",
-                "71",
-                "4",
-                "ja",
-                "fan vet jag",
-                "1500",
-                "Herrgårdsvagn",
-                "3000",
-                "1500",
-                "2000",
-                "3000",
-                "4000",
-                "5100",
-                "4000",
-                "6000",
-                "1610",
-                "2360",
-                "1300",
-                "205/50 R17 93W",
-                "205/50 R17 93W",
-                "7Jx17x52,5",
-                "7Jx17x52,5",
-                "axel_width",
-                "M1",
-                null/*"e4*2001/116*0076*13"*/,
-                "nox_1",
-                null,
-                "2005",
-                "emission_class",
-                null)
-        val result = Result(CarInfo(attrData, Basic(basicData), Technical(techData)))
-        /* --------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-        val  jsonResult = GsonBuilder().create().toJson(result).toString()
+        val jsonResult = CommonUtils().loadJSONFromAsset(view.getContext(), "biluppgifter.json")
         view.startTabActivity(jsonResult)
-
     }
 
 }
