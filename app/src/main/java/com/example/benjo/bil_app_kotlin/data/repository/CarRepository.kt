@@ -6,11 +6,11 @@ interface CarRepository {
 
     fun insertCar(carData: CarData)
 
-    fun getCar(vin: Int): CarData?
+    fun getCar(vin: String): CarData?
 
     fun getAllCars(): List<CarData>?
 
     fun deleteAll()
 
-    fun deleteCar(vin: Int)
+    fun deleteCar(vin: String)
 }

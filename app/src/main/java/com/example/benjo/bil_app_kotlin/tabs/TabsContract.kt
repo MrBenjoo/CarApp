@@ -6,6 +6,7 @@ import com.example.benjo.bil_app_kotlin.base.BaseView
 
 import com.example.benjo.bil_app_kotlin.data.model.Result
 import com.example.benjo.bil_app_kotlin.data.model.Row
+import com.example.benjo.bil_app_kotlin.data.room.CarData
 import retrofit2.Response
 
 interface TabsContract {
@@ -17,7 +18,7 @@ interface TabsContract {
     }
 
     interface TabsPresenter {
-        fun saveToDatabase(vin: Int, jsonResponse: String) : Boolean
+        fun saveToDatabase(car: CarData) : Boolean
         fun search(reg: String?): Response<Result>?
         fun validateResponse(response : Response<Result>?) : Result?
     }

@@ -13,7 +13,7 @@ class CarRepositoryImpl(private val roomDataSource: CarDataBase) : CarRepository
         runAsync { roomDataSource.carDataDao().insert(carData) }
     }
 
-    override fun getCar(vin: Int): CarData? {
+    override fun getCar(vin: String): CarData? {
         var car: CarData? = null
         runAsync { car = roomDataSource.carDataDao().getCar(vin) }
         return car
@@ -29,7 +29,7 @@ class CarRepositoryImpl(private val roomDataSource: CarDataBase) : CarRepository
         runAsync { roomDataSource.carDataDao().deleteAll() }
     }
 
-    override fun deleteCar(vin: Int) {
+    override fun deleteCar(vin: String) {
         runAsync { roomDataSource.carDataDao().deleteCar(vin) }
     }
 

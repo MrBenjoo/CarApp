@@ -15,8 +15,8 @@ interface SavedContract {
 
     interface Presenter : BasePresenter<View> {
         fun loadSavedCars()
-        fun getCarFromDB(vin: Int)
-        fun deleteCarFromDB(vin: Int): Boolean
+        fun getCarFromDB(vin: String)
+        fun deleteCarFromDB(vin: String): Boolean
         fun showSavedCars(list: ArrayList<CarData>)
         fun showCar(car: CarData)
         fun onMultipleClick(multiList: ArrayList<CarData>,

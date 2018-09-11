@@ -35,10 +35,10 @@ class TabsPresenter(val view: TabsContract.ViewTabs, val carRepository: CarRepos
                 else -> null
             }
 
-    override fun saveToDatabase(vin: Int, jsonResponse: String): Boolean =
-            when (carRepository.getCar(vin) == null) {
+    override fun saveToDatabase(car : CarData): Boolean =
+            when (carRepository.getCar(car.vin) == null) {
                 true -> {
-                    carRepository.insertCar(CarData(null, vin, jsonResponse))
+                    carRepository.insertCar(car)
                     true
                 }
                 else -> false

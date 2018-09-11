@@ -16,8 +16,8 @@ import kotlinx.android.synthetic.main.fragment_saved.*
 import kotlinx.android.synthetic.main.dialog_delete_car.view.*
 import android.view.*
 import com.example.benjo.bil_app_kotlin.base.BaseFragmentHome
-import com.example.benjo.bil_app_kotlin.builder.FragmentToolbar
-import com.example.benjo.bil_app_kotlin.builder.ToolbarManager
+import com.example.benjo.bil_app_kotlin.utils.builder.FragmentToolbar
+import com.example.benjo.bil_app_kotlin.utils.builder.ToolbarManager
 
 
 class SavedFragment : BaseFragmentHome(), SavedContract.View {

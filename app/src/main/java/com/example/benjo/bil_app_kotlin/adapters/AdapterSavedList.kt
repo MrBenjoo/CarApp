@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.data.room.CarData
-import kotlinx.android.synthetic.main.item_row_view.view.*
+import kotlinx.android.synthetic.main.item_row_view_saved.view.*
 import kotlinx.android.synthetic.main.item_row_with_cb.view.*
 
 class AdapterSavedList(
@@ -17,14 +17,6 @@ class AdapterSavedList(
     private var savedList = ArrayList<CarData>()
     private var savedMultiList = ArrayList<CarData>()
     private var multiSelected = false
-
-    var fieldProperty: Int = 0
-
-    var setterPropertyForField: Int
-        get() = fieldProperty
-        set(value) {
-            fieldProperty = value
-        }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
@@ -38,22 +30,26 @@ class AdapterSavedList(
 
     private fun viewSaved(parent: ViewGroup): RecyclerView.ViewHolder =
             ViewHolderSaved(LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_row_view, parent, false))
+                    .inflate(R.layout.item_row_view_saved, parent, false))
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = when (holder.itemViewType) {
         1 -> {
             with(holder as ViewHolderCb) {
-                descRowCb.text = savedList[position].id.toString()
-                dataRowCb.text = savedList[position].vin.toString()
+                reg.text = savedList[position].reg
+                model.text = savedList[position].model
+                modelYear.text = savedList[position].modelYear
+                type.text = savedList[position].type
                 holder.cb.isChecked = savedMultiList.contains(savedList[position])
                 bind(savedList[position], clickListener, longClickListener)
             }
         }
         else -> {
             with(holder as ViewHolderSaved) {
-                descRow.text = savedList[position].id.toString()
-                dataRow.text = savedList[position].vin.toString()
+                reg.text = savedList[position].reg
+                model.text = savedList[position].model
+                modelYear.text = savedList[position].modelYear
+                type.text = savedList[position].type
                 bind(savedList[position], clickListener, longClickListener)
             }
         }
@@ -82,8 +78,10 @@ class AdapterSavedList(
 
 
     class ViewHolderSaved(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val descRow = itemView.row_tv_desc
-        val dataRow = itemView.row_tv_data
+        val reg = itemView.tv_saved_reg
+        val model = itemView.tv_saved_model
+        val modelYear = itemView.tv_saved_year
+        val type = itemView.tv_saved_type
 
 
         fun bind(row: CarData, clickListener: (CarData, Int) -> Unit, longClickListener: (CarData, Int) -> Boolean) {
@@ -93,13 +91,15 @@ class AdapterSavedList(
     }
 
     class ViewHolderCb(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val descRowCb = itemView.row_tv_desc_cb
-        val dataRowCb = itemView.row_tv_data_cb
-        val cb = itemView.row_cb
+        val reg = itemView.row_saved_tv_reg_cb
+        val model = itemView.row_saved_tv_model_cb
+        val modelYear = itemView.row_saved_tv_model_year_cb
+        val type = itemView.row_saved_tv_type_cb
+        val cb = itemView.row_saved_cb
 
         fun bind(row: CarData, clickListener: (CarData, Int) -> Unit, longClickListener: (CarData, Int) -> Boolean) {
             itemView.setOnClickListener { clickListener(row, adapterPosition) }
-            itemView.row_cb.setOnClickListener { clickListener(row, adapterPosition) }
+            itemView.row_saved_cb.setOnClickListener { clickListener(row, adapterPosition) }
             itemView.setOnLongClickListener { longClickListener(row, adapterPosition) }
         }
     }

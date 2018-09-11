@@ -8,8 +8,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.benjo.bil_app_kotlin.base.BasePresenter
-import com.example.benjo.bil_app_kotlin.builder.ToolbarManager
 
 abstract class BaseFragmentHome : Fragment() {
 

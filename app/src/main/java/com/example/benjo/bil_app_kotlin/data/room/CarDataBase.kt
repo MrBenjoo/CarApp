@@ -4,8 +4,12 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
+import android.arch.persistence.db.SupportSQLiteDatabase
+import android.arch.persistence.room.migration.Migration
 
-@Database(entities = arrayOf(CarData::class), version = 1)
+
+
+@Database(entities = arrayOf(CarData::class), version = 3)
 abstract class CarDataBase : RoomDatabase() {
 
     abstract fun carDataDao(): CarDataDao
@@ -22,6 +26,7 @@ abstract class CarDataBase : RoomDatabase() {
                 synchronized(CarDataBase::class) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             CarDataBase::class.java, "cars.db")
+                            .fallbackToDestructiveMigration()
                             .build()
                 }
             }
@@ -31,5 +36,13 @@ abstract class CarDataBase : RoomDatabase() {
         fun destroyInstance() {
             INSTANCE = null
         }
+
+        val MIGRATION_1_2: Migration = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE 'carDataTable' ADD COLUMN 'vin' TEXT");
+            }
+        }
     }
+
+
 }

@@ -21,6 +21,7 @@ import com.example.benjo.bil_app_kotlin.tabs.tech.TechPresenter
 import com.example.benjo.bil_app_kotlin.tabs.basic.BasicPresenter
 import com.example.benjo.bil_app_kotlin.utils.ConnectivityHandler
 import com.example.benjo.bil_app_kotlin.data.model.Result
+import com.example.benjo.bil_app_kotlin.data.room.CarData
 import com.example.benjo.bil_app_kotlin.tabs.basic.BasicFragment
 import com.example.benjo.bil_app_kotlin.tabs.tech.TechFragment
 import com.google.gson.GsonBuilder
@@ -80,11 +81,17 @@ class TabsActivity : AppCompatActivity(), SearchView.OnQueryTextListener, TabsCo
     private fun onImgSaveClick() {
         val newJson = response?.body()
         val result = newJson ?: intentJson()
-        val vin = result?.carInfo?.attributes?.vin!!.toInt()
-        val json = GsonBuilder().create().toJson(result)
-        val saved = presenter.saveToDatabase(vin, json)
-        if (saved) showText(R.string.view_tabs_car_saved)
-        else showText(R.string.view_tabs_car_not_saved)
+        with(result?.carInfo!!) {
+            val reg = attributes?.regno!!
+            val model = basic?.data?.model!!
+            val modelYear = basic.data.model_year!!
+            val type = basic.data.type!!
+            val vin = attributes.vin!!
+            val json = GsonBuilder().create().toJson(result)
+            val saved = presenter.saveToDatabase(CarData(null, reg, model, modelYear, type, vin, json))
+            if (saved) showText(R.string.view_tabs_car_saved)
+            else showText(R.string.view_tabs_car_not_saved)
+        }
     }
 
     private fun intentJson(): Result? {
@@ -96,7 +103,7 @@ class TabsActivity : AppCompatActivity(), SearchView.OnQueryTextListener, TabsCo
             search_view.onActionViewCollapsed()
             response = presenter.search(query?.trim())
             val validatedResponse = presenter.validateResponse(response)
-            if(validatedResponse != null) {
+            if (validatedResponse != null) {
                 basicPresenter.updateTab(validatedResponse)
                 techPresenter.updateTab(validatedResponse)
             }

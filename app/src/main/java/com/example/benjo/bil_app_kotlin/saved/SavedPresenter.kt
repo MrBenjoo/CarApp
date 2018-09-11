@@ -16,12 +16,12 @@ class SavedPresenter(private val carRepository: CarRepository) : SavedContract.P
         if (list != null) showSavedCars(CommonUtils().listToArrayList(list))
     }
 
-    override fun getCarFromDB(vin: Int) {
+    override fun getCarFromDB(vin: String) {
         val car = carRepository.getCar(vin)
         if (car != null) showCar(car)
     }
 
-    override fun deleteCarFromDB(vin: Int): Boolean {
+    override fun deleteCarFromDB(vin: String): Boolean {
         carRepository.deleteCar(vin)
         return carRepository.getCar(vin) == null
     }

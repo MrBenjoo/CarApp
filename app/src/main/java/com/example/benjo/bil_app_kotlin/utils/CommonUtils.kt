@@ -31,7 +31,7 @@ class CommonUtils {
     fun listToArrayList(list: List<CarData>): ArrayList<CarData> {
         val arrayList = arrayListOf<CarData>()
         for (item in list) {
-            arrayList.add(CarData(null, item.vin, item.json))
+            arrayList.add(CarData(null, item.reg, item.model, item.modelYear, item.type, item.vin, item.json))
         }
         return arrayList
     }

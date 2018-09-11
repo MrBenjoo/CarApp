@@ -1,4 +1,4 @@
-package com.example.benjo.bil_app_kotlin.builder
+package com.example.benjo.bil_app_kotlin.utils.builder
 
 import android.support.v7.widget.Toolbar
 import android.util.Log
