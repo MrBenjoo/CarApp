@@ -3,8 +3,8 @@ package com.example.benjo.bil_app_kotlin
 import android.support.test.runner.AndroidJUnit4
 import com.example.benjo.bil_app_kotlin.data.repository.CarRepository
 import com.example.benjo.bil_app_kotlin.tabs.TabsActivity
-import com.example.benjo.bil_app_kotlin.tabs.TabsContract
-import com.example.benjo.bil_app_kotlin.tabs.TabsPresenter
+import com.example.benjo.bil_app_kotlin.ui.tab.TabsContract
+import com.example.benjo.bil_app_kotlin.ui.tab.TabsPresenter
 import kotlinx.coroutines.experimental.runBlocking
 import org.junit.Test
 

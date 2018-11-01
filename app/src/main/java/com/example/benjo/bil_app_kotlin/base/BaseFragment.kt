@@ -2,42 +2,36 @@ package com.example.benjo.bil_app_kotlin.base
 
 import android.content.Context
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.benjo.bil_app_kotlin.tabs.TabsActivity
-import com.example.benjo.bil_app_kotlin.R
-import kotlinx.android.synthetic.main.fragment_base.*
+import com.example.benjo.bil_app_kotlin.ui.home.HomeActivity
 
 abstract class BaseFragment : Fragment() {
     private val TAG = "BaseFragment"
+    private lateinit var viewForSnackbar : View
 
+    abstract fun layoutId() : Int
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?):
-            View? = inflater.inflate(R.layout.fragment_base, container, false)
+            View? = inflater.inflate(layoutId(), container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initList()
         super.onViewCreated(view, savedInstanceState)
+        viewForSnackbar = (activity as HomeActivity).findViewById<View>(android.R.id.content)
     }
 
-
-    private fun initList() {
-        /* init list adapter here */
-        with(list) {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(activity?.applicationContext)
-            /* set adapter here */
-        }
+    fun showText(textID: Int) {
+        Snackbar.make(viewForSnackbar, textID, Snackbar.LENGTH_LONG).show()
     }
 
     fun showText(text: String?) {
-        (activity as TabsActivity).showText(text)
+        Snackbar.make(viewForSnackbar, text.toString(), Snackbar.LENGTH_LONG).show()
     }
 
     override fun getContext(): Context = activity!!.applicationContext

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.data.model.Row
-import com.example.benjo.bil_app_kotlin.tabs.basic.BasicVH
+import com.example.benjo.bil_app_kotlin.ui.basic.BasicVH
 
 class AdapterBasicList(data: ArrayList<Row>?) : RecyclerView.Adapter<BasicVH>() {
     private val TAG = "AdapterBasicList"
@@ -18,7 +18,7 @@ class AdapterBasicList(data: ArrayList<Row>?) : RecyclerView.Adapter<BasicVH>() 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BasicVH {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_row_view, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.view_row_tabs, parent, false)
         return BasicVH(view)
     }
 

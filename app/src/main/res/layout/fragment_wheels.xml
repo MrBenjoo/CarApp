@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/view_wheels"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.comparing.ParentCompareFragment"
+    tools:layout_editor_absoluteY="25dp">
+
+
+    <android.support.design.card.MaterialCardView
+        android:id="@+id/card_tire"
+        android:layout_width="317dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:cardBackgroundColor="#1E252F"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/colorBlack400"
+        app:strokeWidth="1dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_tire_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:letterSpacing="0.15"
+                android:text="Däck"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/view_tire_under_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view_tire_under_title"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/colorBlack400"
+                app:layout_constraintBottom_toTopOf="@+id/gl_tire_top"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/gl_tire_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <TextView
+                android:id="@+id/tv_tire_model_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:letterSpacing="0.1"
+                android:text="TextView"
+                android:textColor="@color/colorBlack300"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/gl_tire_top" />
+
+            <View
+                android:id="@+id/view_tire_vertical_1"
+                android:layout_width="1dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorBlack400"
+                app:layout_constraintBottom_toTopOf="@+id/gl_tire_middle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_tire_model_1"
+                app:layout_constraintVertical_bias="0.6" />
+
+            <TextView
+                android:id="@+id/tv_tire_desc_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:letterSpacing="0.1"
+                android:text="bak:"
+                android:textColor="@color/colorBlack400"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/view_tire_vertical_1"
+                app:layout_constraintTop_toTopOf="@+id/view_tire_vertical_1" />
+
+            <TextView
+                android:id="@+id/tv_tire_back_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:letterSpacing="0.1"
+                android:text="TextView"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/tv_tire_desc_back"
+                app:layout_constraintTop_toTopOf="@+id/tv_tire_desc_back" />
+
+            <TextView
+                android:id="@+id/tv_tire_desc_front"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.1"
+                android:text="fram:"
+                android:textColor="@color/colorBlack400"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/view_tire_vertical_1"
+                app:layout_constraintStart_toStartOf="@+id/tv_tire_desc_back" />
+
+            <TextView
+                android:id="@+id/tv_tire_front_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:letterSpacing="0.1"
+                android:text="TextView"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_tire_desc_front"
+                app:layout_constraintStart_toEndOf="@+id/tv_tire_desc_front" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/gl_tire_middle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.55" />
+
+            <View
+                android:id="@+id/view_tire_middle"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:background="@color/colorBlack400"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/gl_tire_middle" />
+
+            <TextView
+                android:id="@+id/tv_tire_model_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:letterSpacing="0.1"
+                android:text="TextView"
+                android:textColor="@color/colorBlack300"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/gl_tire_middle" />
+
+            <View
+                android:id="@+id/view_tire_vertical_2"
+                android:layout_width="1dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorBlack400"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_tire_model_2" />
+
+            <TextView
+                android:id="@+id/tv_tire_desc_back_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:letterSpacing="0.1"
+                android:text="bak:"
+                android:textColor="@color/colorBlack400"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/view_tire_vertical_2"
+                app:layout_constraintTop_toTopOf="@+id/view_tire_vertical_2" />
+
+            <TextView
+                android:id="@+id/tv_tire_back_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:letterSpacing="0.1"
+                android:text="TextView"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/tv_tire_desc_back_2"
+                app:layout_constraintTop_toTopOf="@+id/tv_tire_desc_back_2" />
+
+            <TextView
+                android:id="@+id/tv_tire_desc_front_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.1"
+                android:text="fram:"
+                android:textColor="@color/colorBlack400"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/view_tire_vertical_2"
+                app:layout_constraintStart_toStartOf="@+id/tv_tire_desc_back_2" />
+
+            <TextView
+                android:id="@+id/tv_tire_front_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:letterSpacing="0.1"
+                android:text="TextView"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_tire_desc_front_2"
+                app:layout_constraintStart_toEndOf="@+id/tv_tire_desc_front_2" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.design.card.MaterialCardView>
+
+    <android.support.design.card.MaterialCardView
+        android:id="@+id/card_rim"
+        android:layout_width="317dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="#1E252F"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_tire"
+        app:strokeColor="@color/colorBlack400"
+        app:strokeWidth="1dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_rim_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:letterSpacing="0.15"
+                android:text="Fälgar"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/view_rim_under_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view_rim_under_title"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:background="@color/colorBlack400"
+                app:layout_constraintBottom_toTopOf="@+id/gl_rim_card_top"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/gl_rim_card_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <TextView
+                android:id="@+id/tv_rim_model_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:letterSpacing="0.1"
+                android:text="TextView"
+                android:textColor="@color/colorBlack300"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/gl_rim_card_top" />
+
+            <View
+                android:id="@+id/view_rim_vertical_1"
+                android:layout_width="1dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorBlack400"
+                app:layout_constraintBottom_toTopOf="@+id/view_rim_middle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_rim_model_1" />
+
+            <TextView
+                android:id="@+id/tv_rim_desc_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:letterSpacing="0.1"
+                android:text="bak:"
+                android:textColor="@color/colorBlack400"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/view_rim_vertical_1"
+                app:layout_constraintTop_toTopOf="@+id/view_rim_vertical_1" />
+
+            <TextView
+                android:id="@+id/tv_rim_back_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:letterSpacing="0.1"
+                android:text="TextView"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/tv_rim_desc_back"
+                app:layout_constraintTop_toTopOf="@+id/tv_rim_desc_back" />
+
+            <TextView
+                android:id="@+id/tv_rim_desc_front"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:letterSpacing="0.1"
+                android:text="fram:"
+                android:textColor="@color/colorBlack400"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/view_rim_vertical_1"
+                app:layout_constraintStart_toEndOf="@+id/view_rim_vertical_1" />
+
+            <TextView
+                android:id="@+id/tv_rim_front_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:letterSpacing="0.1"
+                android:text="TextView"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_rim_desc_front"
+                app:layout_constraintStart_toEndOf="@+id/tv_rim_desc_front" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/gl_rim_card_middle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.55" />
+
+            <View
+                android:id="@+id/view_rim_middle"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:background="@color/colorBlack400"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/gl_rim_card_middle" />
+
+            <TextView
+                android:id="@+id/tv_rim_model_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:letterSpacing="0.1"
+                android:text="TextView"
+                android:textColor="@color/colorBlack300"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/gl_rim_card_middle" />
+
+            <View
+                android:id="@+id/view_rim_vertical_2"
+                android:layout_width="1dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorBlack400"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_rim_model_2" />
+
+            <TextView
+                android:id="@+id/tv_rim_desc_back_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:letterSpacing="0.1"
+                android:text="bak:"
+                android:textColor="@color/colorBlack400"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/view_rim_vertical_2"
+                app:layout_constraintTop_toTopOf="@+id/view_rim_vertical_2" />
+
+            <TextView
+                android:id="@+id/tv_rim_back_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:letterSpacing="0.1"
+                android:text="TextView"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/tv_rim_desc_back_2"
+                app:layout_constraintTop_toTopOf="@+id/tv_rim_desc_back_2" />
+
+            <TextView
+                android:id="@+id/tv_rim_desc_front_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:letterSpacing="0.1"
+                android:text="fram:"
+                android:textColor="@color/colorBlack400"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/view_rim_vertical_2"
+                app:layout_constraintStart_toEndOf="@+id/view_rim_vertical_2" />
+
+            <TextView
+                android:id="@+id/tv_rim_front_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:letterSpacing="0.1"
+                android:text="TextView"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/tv_rim_desc_front_2"
+                app:layout_constraintTop_toTopOf="@+id/tv_rim_desc_front_2" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.design.card.MaterialCardView>
+
+
+</android.support.constraint.ConstraintLayout>

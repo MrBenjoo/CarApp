@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.data.room.CarData
-import kotlinx.android.synthetic.main.item_row_view_saved.view.*
-import kotlinx.android.synthetic.main.item_row_with_cb.view.*
+import kotlinx.android.synthetic.main.view_row_view_saved.view.*
+import kotlinx.android.synthetic.main.view_row_with_cb.view.*
 
 class AdapterSavedList(
         val clickListener: (CarData, Int) -> Unit,
@@ -26,11 +26,11 @@ class AdapterSavedList(
 
     private fun viewCb(parent: ViewGroup): RecyclerView.ViewHolder =
             ViewHolderCb(LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_row_with_cb, parent, false))
+                    .inflate(R.layout.view_row_with_cb, parent, false))
 
     private fun viewSaved(parent: ViewGroup): RecyclerView.ViewHolder =
             ViewHolderSaved(LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_row_view_saved, parent, false))
+                    .inflate(R.layout.view_row_view_saved, parent, false))
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = when (holder.itemViewType) {

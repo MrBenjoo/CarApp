@@ -4,14 +4,14 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
-import com.example.benjo.bil_app_kotlin.tabs.TabsActivity
+import com.example.benjo.bil_app_kotlin.ui.tab.TabsContract
 
-class ConnectivityHandler(val activity: TabsActivity) : BroadcastReceiver() {
+class ConnectivityHandler(val view: TabsContract.ViewTabs) : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) = when (intent?.action) {
         ConnectivityManager.CONNECTIVITY_ACTION ->
-            with(activity) {
-                if (CommonUtils().isConnected(applicationContext)) {
+            with(view) {
+                if (CommonUtils().isConnected(view.getContext())) {
                     internetOn()
                 } else {
                     internetOff()

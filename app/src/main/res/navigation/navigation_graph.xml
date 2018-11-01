@@ -7,27 +7,57 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.benjo.bil_app_kotlin.home.HomeFragment"
+        android:name="com.example.benjo.bil_app_kotlin.ui.home.HomeFragment"
         android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
-            app:destination="@+id/settingsFragment"
-            app:enterAnim="@anim/nav_default_pop_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
+            app:destination="@+id/settingsFragment" />
         <action
             android:id="@+id/action_homeFragment_to_savedFragment2"
-            app:destination="@id/savedFragment"
-            app:enterAnim="@anim/nav_default_pop_enter_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
+            app:destination="@id/savedFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_tabsFragment"
+            app:destination="@id/tabsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.benjo.bil_app_kotlin.settings.SettingsFragment"
+        android:name="com.example.benjo.bil_app_kotlin.ui.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/savedFragment"
-        android:name="com.example.benjo.bil_app_kotlin.saved.SavedFragment"
+        android:name="com.example.benjo.bil_app_kotlin.ui.saved.SavedFragment"
         android:label="fragment_saved"
         tools:layout="@layout/fragment_saved" />
+    <fragment
+        android:id="@+id/tabsFragment"
+        android:name="com.example.benjo.bil_app_kotlin.ui.tab.TabsFragment"
+        android:label="TabsFragment" >
+        <action
+            android:id="@+id/action_tabsFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.example.benjo.bil_app_kotlin.ui.comparing.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <argument
+            android:name="firstJson"
+            app:argType="string" />
+        <argument
+            android:name="secondJson"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_menuFragment_to_baseCompareFragment"
+            app:destination="@id/baseCompareFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/baseCompareFragment"
+        android:name="com.example.benjo.bil_app_kotlin.ui.comparing.ParentCompareFragment"
+        android:label="fragment_base_compare"
+        tools:layout="@layout/fragment_parent_compare" />
+
 </navigation>

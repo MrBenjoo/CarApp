@@ -4,8 +4,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.data.model.Row
-import com.example.benjo.bil_app_kotlin.tabs.tech.TechChildVH
-import com.example.benjo.bil_app_kotlin.tabs.tech.TechParentVH
+import com.example.benjo.bil_app_kotlin.ui.tech.TechChildVH
+import com.example.benjo.bil_app_kotlin.ui.tech.TechParentVH
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection
@@ -14,8 +14,8 @@ class AdapterExpandableList(private val title: String?,
                             private val list: List<Row>,
                             private val sectionAdapter: SectionedRecyclerViewAdapter) : StatelessSection(SectionParameters
         .builder()
-        .itemResourceId(R.layout.item_row_view)
-        .headerResourceId(R.layout.expandable_header_view)
+        .itemResourceId(R.layout.view_row_tabs)
+        .headerResourceId(R.layout.view_expandable_header)
         .build()) {
 
     internal var expanded = true

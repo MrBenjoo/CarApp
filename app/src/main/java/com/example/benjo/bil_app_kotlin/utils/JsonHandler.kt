@@ -26,7 +26,7 @@ class JsonHandler(private val context: Context) {
         val newMap = HashMap<String, String?>()
         with(Constants) {
             with(map!!) {
-                with(Explanation()) {
+                with(ExplanationHandler()) {
                     newMap[HP_1] = text(get(HP_1), get(HP_2), get(HP_3))
                     newMap[KW_1] = text(get(KW_1), get(KW_2), get(KW_3))
                     newMap[FUEL_1] = text(fuelType(get(FUEL_1)), fuelType(get(FUEL_2)))

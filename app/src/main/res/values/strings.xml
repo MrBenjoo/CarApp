@@ -66,6 +66,8 @@
     <string name="view_tabs_car_not_saved">Bilen har redan sparats.</string>
     <string name="view_tabs_car_saved">Bilen sparades till din lista.</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -1,8 +1,8 @@
 package com.example.benjo.bil_app_kotlin
 
-import com.example.benjo.bil_app_kotlin.saved.SavedContract
-import com.example.benjo.bil_app_kotlin.saved.SavedFragment
-import com.example.benjo.bil_app_kotlin.saved.SavedPresenter
+import com.example.benjo.bil_app_kotlin.ui.saved.SavedContract
+import com.example.benjo.bil_app_kotlin.ui.saved.SavedFragment
+import com.example.benjo.bil_app_kotlin.ui.saved.SavedPresenter
 import org.junit.Before
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
