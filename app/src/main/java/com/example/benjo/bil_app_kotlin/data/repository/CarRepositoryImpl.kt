@@ -1,45 +1,42 @@
 package com.example.benjo.bil_app_kotlin.data.repository
 
-import com.example.benjo.bil_app_kotlin.data.repository.CarRepository
+
+import android.util.Log
 import com.example.benjo.bil_app_kotlin.data.room.CarData
 import com.example.benjo.bil_app_kotlin.data.room.CarDataBase
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.runBlocking
+
+
+/*
+    When a coroutine calls a function marked suspend, instead of blocking until that
+    function returns like a normal function call, it suspends execution until
+    the result is ready then it resumes where it left off with the result.
+    While it's suspended waiting for a result, it unblocks the thread that it's running
+    on so other functions or coroutines can run.
+*/
 
 class CarRepositoryImpl(private val roomDataSource: CarDataBase) : CarRepository {
 
-    override fun insertCar(carData: CarData) {
-        runAsync { roomDataSource.carDataDao().insert(carData) }
+    override suspend fun insertCar(carData: CarData) {
+        roomDataSource.carDataDao().insert(carData)
     }
 
-    override fun getCar(vin: String): CarData? {
-        var car: CarData? = null
-        runAsync { car = roomDataSource.carDataDao().getCar(vin) }
-        return car
+    override suspend fun getCar(vin: String): CarData? {
+        return roomDataSource.carDataDao().getCar(vin)
     }
 
-    override fun getAllCars(): List<CarData>? {
-        var list: List<CarData>? = null
-        runAsync { list = roomDataSource.carDataDao().getAll() }
-        return list
+    override suspend fun getAllCars(): List<CarData>? {
+        return roomDataSource.carDataDao().getAll()
     }
 
-    override fun deleteAll() {
-        runAsync { roomDataSource.carDataDao().deleteAll() }
+    override suspend fun deleteAll() {
+        roomDataSource.carDataDao().deleteAll()
     }
 
-    override fun deleteCar(vin: String) {
-        runAsync { roomDataSource.carDataDao().deleteCar(vin) }
+    override suspend fun deleteCar(vin: String) {
+        roomDataSource.carDataDao().deleteCar(vin)
     }
 
-    fun runAsync(function: () -> Unit) {
-        runBlocking {
-            async(CommonPool) {
-                function()
-            }.await()
-        }
+    override suspend fun deleteCheckedCars() : Int {
+        return roomDataSource.carDataDao().deleteCheckedCars()
     }
-
-
 }

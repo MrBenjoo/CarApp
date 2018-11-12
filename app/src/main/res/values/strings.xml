@@ -51,16 +51,49 @@
     <string name="api_emission_class">Utsläppsklass</string>
     <string name="api_euro_ncap">Euro NCAP</string>
 
+
+    <!-- Comparing titles -->
+    <string name="title_compare_length">Längd</string>
+    <string name="title_compare_width">Bredd</string>
+    <string name="title_compare_height">Höjd</string>
+    <string name="title_compare_axel_width">Axelbredd</string>
+
+
+    <string name="title_compare_thc_nox">Thc Nox</string>
+    <string name="title_compare_nox">Nox</string>
+    <string name="title_compare_co2">Koldioxid</string>
+    <string name="title_compare_consumption">Förbräning</string>
+    <string name="title_compare_fuel">Bränsle</string>
+    <string name="title_compare_eco_class">Eko klass</string>
+    <string name="title_compare_emission">Utsläpp</string>
+
+    <string name="title_compare_top_speed">Top hastighet</string>
+    <string name="title_compare_cylinder_volume">Motorvolym</string>
+    <string name="title_compare_kilowatt">Kilowatt</string>
+    <string name="title_compare_horsepower">Hästkrafter</string>
+
+    <!-- vad motsvarar dessa? -->
+    <string name="title_compare_carriage_weight">Tjänstevikt</string>
+    <string name="title_compare_trailer_weight_be">Släp totalvikt (B+)</string>
+    <string name="title_compare_trailer_weight_b">Släp totalvikt (B)</string>
+    <string name="title_compare_unbraked_trailer_weight">Släpvagnsvikt obromsad</string>
+    <string name="title_compare_trailer_weight">Släpvagnsvikt</string>
+    <string name="title_compare_load_weight">Lastvikt</string>
+    <string name="title_compare_total_weight">Totalvikt</string>
+    <string name="title_compare_kerb_weight">Kerg weight(ska ändras)</string>
+
+
     <!-- Errors -->
     <string name="error_no_internet">Ingen internetanslutning</string>
     <string name="error_api_failure">Kunde inte läsa in data från server</string>
     <string name="error_http_code">Klientfel eller serverfel</string>
     <string name="error_reg_limit">Antalet tecken måste vara mellan 2&#8211;7</string>
 
-    <!-- SavedFragment related -->
+    <!-- SavedView related -->
     <string name="frag_save_car_deleted">Bilen togs bort från listan.</string>
     <string name="frag_save_car_not_deleted">Det gick inte att ta bort bilen från listan.</string>
-
+    <string name="saved_list_empty">Listan är tom</string>
+    <string name="saved_list_nbr_deleted_cars">%1$d bilar togs bort från listan</string>
 
     <!-- TabsActivity related messages -->
     <string name="view_tabs_car_not_saved">Bilen har redan sparats.</string>

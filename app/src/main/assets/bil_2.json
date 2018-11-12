@@ -2,40 +2,40 @@
   "data": {
     "type": "vehicle",
     "attributes": {
-      "regno": "RON810",
-      "vin": "YV1MW084282424649"
+      "regno": "TJZ119",
+      "vin": "AUDI1MW084282154649"
     },
     "links": [
       {
         "rel": "self",
-        "uri": "vehicle/vin/YV1MW084282424649"
+        "uri": "vehicle/vin/AUDI1MW084282154649"
       },
       {
         "rel": "biluppgifter",
-        "uri": "https://biluppgifter.se/fordon/RON810"
+        "uri": "https://biluppgifter.se/fordon/TJZ119"
       }
     ],
     "basic": {
       "data": {
-        "make": "Volvo",
-        "model": "V50 1.8 F",
+        "make": "Audi",
+        "model": "S8 Turbo",
         "status": 2,
-        "color": "Grå",
+        "color": "Blå",
         "type": "PB",
-        "vehicle_year": 2008,
-        "model_year": 2008
+        "vehicle_year": 2010,
+        "model_year": 2010
       }
     },
     "technical": {
       "data": {
-        "power_hp_1": 125,
+        "power_hp_1": 200,
         "power_hp_2": null,
         "power_hp_3": null,
         "power_kw_1": 92,
         "power_kw_2": null,
         "power_kw_3": null,
         "cylinder_volume": 1798,
-        "top_speed": 200,
+        "top_speed": 300,
         "fuel_1": 1,
         "fuel_2": 7,
         "consumption_1": 7.4,

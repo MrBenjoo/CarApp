@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.benjo.bil_app_kotlin.ui.home.HomeFragment"
+        android:name="com.example.benjo.bil_app_kotlin.ui.home.HomeView"
         android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
@@ -27,12 +27,12 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/savedFragment"
-        android:name="com.example.benjo.bil_app_kotlin.ui.saved.SavedFragment"
+        android:name="com.example.benjo.bil_app_kotlin.ui.saved.SavedView"
         android:label="fragment_saved"
         tools:layout="@layout/fragment_saved" />
     <fragment
         android:id="@+id/tabsFragment"
-        android:name="com.example.benjo.bil_app_kotlin.ui.tab.TabsFragment"
+        android:name="com.example.benjo.bil_app_kotlin.ui.tab.TabsView"
         android:label="TabsFragment" >
         <action
             android:id="@+id/action_tabsFragment_to_menuFragment"

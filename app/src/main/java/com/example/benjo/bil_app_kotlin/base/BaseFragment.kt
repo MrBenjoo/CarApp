@@ -11,15 +11,18 @@ import com.example.benjo.bil_app_kotlin.ui.home.HomeActivity
 
 abstract class BaseFragment : Fragment() {
     private val TAG = "BaseFragment"
-    private lateinit var viewForSnackbar : View
+    private lateinit var viewForSnackbar: View
 
-    abstract fun layoutId() : Int
+    abstract fun layoutId(): Int
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?):
-            View? = inflater.inflate(layoutId(), container, false)
+            View? {
+        setHasOptionsMenu(true)
+        return inflater.inflate(layoutId(), container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

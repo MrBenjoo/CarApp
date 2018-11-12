@@ -9,12 +9,13 @@ import androidx.navigation.Navigation
 
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
-import com.example.benjo.bil_app_kotlin.ui.tab.TabsFragment
+import com.example.benjo.bil_app_kotlin.data.model.Result
+import com.example.benjo.bil_app_kotlin.ui.tab.TabsView
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
-class HomeFragment : BaseFragment(), SearchView.OnQueryTextListener, HomeContract.View {
-    private val TAG = "HomeFragment"
+class HomeView : BaseFragment(), SearchView.OnQueryTextListener, HomeContract.View {
+    private val TAG = "HomeView"
     override lateinit var presenter: HomeContract.Presenter
 
     override fun layoutId(): Int = R.layout.fragment_home
@@ -46,12 +47,12 @@ class HomeFragment : BaseFragment(), SearchView.OnQueryTextListener, HomeContrac
 
     override fun onResume() {
         super.onResume()
-        if (TabsFragment.isComparing) tv_compare.visibility = View.VISIBLE
+        if (TabsView.startComparing) tv_compare.visibility = View.VISIBLE
         else tv_compare.visibility = View.GONE
     }
 
-    override fun saveJsonAndOpenTabs(json: String) {
-        (activity as HomeActivity).firstJson = json
+    override  fun saveJsonAndOpenTabs(result: Result?) {
+        (activity as HomeActivity).resultCar1 = result
         Navigation.findNavController(this.view!!).navigate(R.id.tabsFragment)
     }
 

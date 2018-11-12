@@ -3,8 +3,9 @@ package com.example.benjo.bil_app_kotlin.adapters
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.FragmentStatePagerAdapter
 
-class AdapterTabsPage(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
+class AdapterTabsPage(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
     private val fragmentList = arrayListOf<Fragment?>()
     private val titleList = arrayListOf<String>()
 

@@ -7,6 +7,8 @@ import com.example.benjo.bil_app_kotlin.base.BaseView
 import com.example.benjo.bil_app_kotlin.data.model.Result
 import com.example.benjo.bil_app_kotlin.data.model.Row
 import com.example.benjo.bil_app_kotlin.data.room.CarData
+import com.example.benjo.bil_app_kotlin.ui.basic.BasicAdapter
+import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import retrofit2.Response
 
 interface TabsContract {
@@ -14,40 +16,42 @@ interface TabsContract {
 
     /* Tab Related */
     interface ViewTabs : BaseView<TabsPresenter> {
-        fun showText(textID: Int)
         fun internetOn()
         fun internetOff()
     }
 
     interface TabsPresenter {
-        fun saveToDatabase(car: CarData) : Boolean
-        fun search(reg: String?): Response<Result>?
+        fun search(reg: String?): Result?
         fun validateResponse(response : Response<Result>?) : Result?
+        fun onImgSaveClicked(result : Result?)
     }
     /* ----------- */
 
 
     /* Technical tab related */
     interface ViewTech : BaseView<TechPresenter> {
-        fun updateList(title: String, list: ArrayList<Row>)
+        fun setAdapter(adapter: SectionedRecyclerViewAdapter)
     }
 
-    interface TechPresenter : BasePresenter<ViewTech>, Presenter
+    interface TechPresenter : BasePresenter<ViewTech>, Presenter {
+        fun bind()
+    }
     /* -------------------- */
 
 
     /* Basic Tab related */
     interface ViewBasic : BaseView<BasicPresenter> {
-        fun updateList(list: ArrayList<Row>)
+        fun setAdapter(adapter : BasicAdapter)
     }
 
-    interface BasicPresenter : BasePresenter<ViewBasic>, Presenter
+    interface BasicPresenter : BasePresenter<ViewBasic>, Presenter {
+        fun bind()
+    }
     /* ------------------*/
 
 
     interface Presenter {
-        fun updateTab(response: Result?)
-        fun fromJson(json: String): Result
+        fun updateTab(result: Result?)
     }
 
 

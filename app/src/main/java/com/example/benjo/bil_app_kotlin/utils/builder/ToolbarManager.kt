@@ -2,6 +2,7 @@ package com.example.benjo.bil_app_kotlin.utils.builder
 
 import android.support.v7.widget.Toolbar
 import android.util.Log
+import com.example.benjo.bil_app_kotlin.R
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
@@ -10,9 +11,10 @@ class ToolbarManager constructor(
         private var builder: FragmentToolbar,
         private var container: View) {
 
-    fun prepareToolbar() {
+    fun prepareToolbar() : Toolbar? {
+        var fragmentToolbar : Toolbar? = null
         if (builder.resId != FragmentToolbar.NO_TOOLBAR) {
-            val fragmentToolbar = container.findViewById(builder.resId) as Toolbar
+            /*val*/ fragmentToolbar = container.findViewById(builder.resId) as Toolbar
             container.findViewById(builder.resId) as Toolbar
 
             if (builder.title != -1) {
@@ -30,10 +32,10 @@ class ToolbarManager constructor(
                 }
             }
             if (builder.navBackId != -1) {
-                Log.d("ToolbarManager", "prepareToolbar -> builder.navBackId != -1")
                 val navigation = container.findViewById(builder.navBackId) as? ImageView
                 navigation?.setOnClickListener { builder.navBackListener() }
             }
         }
+        return fragmentToolbar
     }
 }

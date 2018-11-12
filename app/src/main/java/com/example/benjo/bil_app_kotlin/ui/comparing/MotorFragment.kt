@@ -1,6 +1,7 @@
 package com.example.benjo.bil_app_kotlin.ui.comparing
 
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
@@ -37,7 +38,7 @@ class MotorFragment : BaseFragment() {
 
     private fun setupTopSpeed(compare: Compare) {
         listOfMotorData.add(ComparableData(
-                "Top Speed",
+                context.resources.getString(R.string.title_compare_top_speed),
                 compare.car_1?.vehicle_data?.vehData!!.model,
                 compare.car_1.technical_data?.motor?.top_speed,
                 compare.car_2?.vehicle_data?.vehData!!.model,
@@ -47,7 +48,7 @@ class MotorFragment : BaseFragment() {
 
     private fun setupCylinderVolume(compare: Compare) {
         listOfMotorData.add(ComparableData(
-                "Cylinder Volume",
+                context.resources.getString(R.string.title_compare_cylinder_volume),
                 compare.car_1?.vehicle_data?.vehData!!.model,
                 compare.car_1.technical_data?.motor?.cylinder_volume,
                 compare.car_2?.vehicle_data?.vehData!!.model,
@@ -57,7 +58,7 @@ class MotorFragment : BaseFragment() {
 
     private fun setupKilowatt(compare: Compare) {
         listOfMotorData.add(ComparableData(
-                "Kilowatt",
+                context.resources.getString(R.string.title_compare_kilowatt),
                 compare.car_1?.vehicle_data?.vehData!!.model,
                 compare.car_1.technical_data?.motor?.power_kw,
                 compare.car_2?.vehicle_data?.vehData!!.model,
@@ -67,7 +68,7 @@ class MotorFragment : BaseFragment() {
 
     private fun setupHorsepower(compare: Compare) {
         listOfMotorData = arrayListOf(ComparableData(
-                "Horsepower",
+                context.resources.getString(R.string.title_compare_horsepower),
                 compare.car_1?.vehicle_data?.vehData!!.model,
                 compare.car_1.technical_data?.motor?.power_hp,
                 compare.car_2?.vehicle_data?.vehData!!.model,

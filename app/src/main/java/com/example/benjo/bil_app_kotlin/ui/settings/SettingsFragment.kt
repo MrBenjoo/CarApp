@@ -9,14 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.benjo.bil_app_kotlin.R
+import com.example.benjo.bil_app_kotlin.data.model.Result
 import com.example.benjo.bil_app_kotlin.ui.home.HomeContract
 
 class SettingsFragment : Fragment(), HomeContract.View {
-
-
-    override fun saveJsonAndOpenTabs(json: String) {
+    override fun showText(text: String?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    override fun saveJsonAndOpenTabs(result: Result?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
 
     override lateinit var presenter: HomeContract.Presenter
 
@@ -29,5 +33,7 @@ class SettingsFragment : Fragment(), HomeContract.View {
         return inflater.inflate(R.layout.fragment_settings, container, false)
     }
 
-
+    override fun showText(textID: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

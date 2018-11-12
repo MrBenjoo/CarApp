@@ -11,14 +11,17 @@ import com.example.benjo.bil_app_kotlin.data.model.Compare
 import com.example.benjo.bil_app_kotlin.data.model.Result
 import com.example.benjo.bil_app_kotlin.data.repository.CarRepositoryImpl
 import com.example.benjo.bil_app_kotlin.data.room.CarDataBase
+import com.example.benjo.bil_app_kotlin.ui.basic.BasicAdapter
 import com.example.benjo.bil_app_kotlin.ui.saved.SavedContract
 import com.example.benjo.bil_app_kotlin.ui.saved.SavedPresenter
 import com.example.benjo.bil_app_kotlin.ui.tab.TabsContract
 import com.example.benjo.bil_app_kotlin.ui.basic.BasicPresenter
+import com.example.benjo.bil_app_kotlin.ui.saved.SavedAdapter
 import com.example.benjo.bil_app_kotlin.ui.tech.TechPresenter
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import com.example.benjo.bil_app_kotlin.utils.JsonCompare
 import com.google.gson.GsonBuilder
+import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 
 
 class HomeActivity : AppCompatActivity() {
@@ -28,8 +31,8 @@ class HomeActivity : AppCompatActivity() {
     lateinit var techPresenter: TabsContract.TechPresenter
 
     var selected: Float = 0F
-    var firstJson : String? = null
-    var secondJson : String? = null
+    var resultCar1 : Result? = null
+    var resultCar2 : Result? = null
     lateinit var compare : Compare
 
 
@@ -37,10 +40,11 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         presenter = HomePresenter()
-        basicPresenter = BasicPresenter()
-        techPresenter = TechPresenter()
-        savedPresenter = SavedPresenter(CarRepositoryImpl(CarDataBase.getInstance(applicationContext)!!))
-
+        basicPresenter = BasicPresenter(BasicAdapter(arrayListOf()))
+        techPresenter = TechPresenter(SectionedRecyclerViewAdapter())
+        savedPresenter = SavedPresenter(
+                CarRepositoryImpl(CarDataBase.getInstance(applicationContext)!!),
+                SavedAdapter())
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.mainNavigationFragment).navigateUp()
@@ -54,13 +58,14 @@ class HomeActivity : AppCompatActivity() {
         Snackbar.make(findViewById<View>(android.R.id.content), text.toString(), Snackbar.LENGTH_LONG).show()
     }
 
-    fun saveSecondJson(secondJson: String?) {
-        this.secondJson = secondJson
+    fun saveResultCar1(resultCar1: Result?) {
+        this.resultCar1 = resultCar1
+        basicPresenter.updateTab(resultCar1)
+        techPresenter.updateTab(resultCar1)
     }
 
-    fun saveFirstJson(firstJson: String?) {
-        this.firstJson = firstJson
+    fun saveResultCar2(resultCar2: Result?) {
+        this.resultCar2 = resultCar2
     }
-
 
 }

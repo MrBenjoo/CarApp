@@ -1,10 +1,13 @@
 package com.example.benjo.bil_app_kotlin.adapters
 
+
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.data.model.ComparableData
+import com.example.benjo.bil_app_kotlin.data.model.Normalization
 import com.example.benjo.bil_app_kotlin.ui.comparing.CommonViewHolder
 
 
@@ -16,7 +19,6 @@ class CommonCompAdapter(val listOfComparableData: ArrayList<ComparableData>) : R
     }
 
     override fun getItemCount(): Int = listOfComparableData.size
-
 
     override fun onBindViewHolder(holder: CommonViewHolder, position: Int) = with(listOfComparableData) {
         val title = this[position].title
@@ -31,7 +33,14 @@ class CommonCompAdapter(val listOfComparableData: ArrayList<ComparableData>) : R
     private fun normalizeOn(title: String, holder: CommonViewHolder, position: Int) {
         val carOneData = listOfComparableData[position].carOneData
         val carTwoData = listOfComparableData[position].carTwoData
-        when (title) {
+
+        if(carOneData == null || carTwoData == null) {
+        } else {
+            holder.barCarOne.progress = Normalization(title, carOneData.toInt()).perfom()
+            holder.barCarTwo.progress = Normalization(title, carTwoData.toInt()).perfom()
+        }
+
+       /* when (title) {
             "Length" -> {
                 holder.barCarOne.progress = normalizationLength(carOneData)
                 holder.barCarTwo.progress = normalizationLength(carTwoData)
@@ -45,7 +54,7 @@ class CommonCompAdapter(val listOfComparableData: ArrayList<ComparableData>) : R
                 holder.barCarTwo.progress = normalizationHeight(carTwoData)
             }
             else -> Unit
-        }
+        }*/
     }
 
     private fun normalizationLength(dimension: String?): Int = when (dimension != null) {

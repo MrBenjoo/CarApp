@@ -39,6 +39,7 @@ dependencies {
     implementation listDependencies.values()
     implementation jetpackDependencies.values()
 
+    implementation 'com.android.support:support-v4:28.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -54,14 +55,21 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
     /* Coroutines */
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.25.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.27.0-eap13"
 
     implementation 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
 
 
+    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.11.0'
+    //androidTestImplementation "io.mockk:mockk-android:1.8.12.kotlin13"
+
+    testImplementation "io.mockk:mockk:1.8.12.kotlin13"
 
 
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+
+    implementation 'org.greenrobot:eventbus:3.1.1'
 
 
 }

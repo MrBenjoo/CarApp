@@ -1,4 +1,4 @@
-package com.example.benjo.bil_app_kotlin.retrofit
+package com.example.benjo.bil_app_kotlin.domain
 
 import retrofit2.Call
 import retrofit2.Callback

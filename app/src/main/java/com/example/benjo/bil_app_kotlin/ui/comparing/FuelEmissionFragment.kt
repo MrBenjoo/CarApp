@@ -1,6 +1,7 @@
 package com.example.comparing.ui.comparing
 
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
@@ -39,7 +40,7 @@ class FuelEmissionFragment : BaseFragment() {
 
     private fun setupThcNox(compare: Compare) {
         arrListFuelEmission.add(ComparableData(
-                "Thc Nox",
+                context.resources.getString(R.string.title_compare_thc_nox),
                 compare.car_1?.vehicle_data?.vehData?.model,
                 compare.car_1?.technical_data?.fuelEmission?.thc_nox,
                 compare.car_2?.vehicle_data?.vehData?.model,
@@ -49,7 +50,7 @@ class FuelEmissionFragment : BaseFragment() {
 
     private fun setupNox(compare: Compare) {
         arrListFuelEmission.add(ComparableData(
-                "Nox",
+                context.resources.getString(R.string.title_compare_nox),
                 compare.car_1?.vehicle_data?.vehData?.model,
                 compare.car_1?.technical_data?.fuelEmission?.nox,
                 compare.car_2?.vehicle_data?.vehData?.model,
@@ -59,7 +60,7 @@ class FuelEmissionFragment : BaseFragment() {
 
     private fun setupCo2(compare: Compare) {
         arrListFuelEmission.add(ComparableData(
-                "Co2",
+                context.resources.getString(R.string.title_compare_co2),
                 compare.car_1?.vehicle_data?.vehData?.model,
                 compare.car_1?.technical_data?.fuelEmission?.co2,
                 compare.car_2?.vehicle_data?.vehData?.model,
@@ -69,7 +70,7 @@ class FuelEmissionFragment : BaseFragment() {
 
     private fun setupConsumption(compare: Compare) {
         arrListFuelEmission.add(ComparableData(
-                "Consumption",
+                context.resources.getString(R.string.title_compare_consumption),
                 compare.car_1?.vehicle_data?.vehData?.model,
                 compare.car_1?.technical_data?.fuelEmission?.consumption,
                 compare.car_2?.vehicle_data?.vehData?.model,
@@ -79,17 +80,17 @@ class FuelEmissionFragment : BaseFragment() {
 
     private fun setupFuelEcoEmission(compare: Compare) {
         arrListFuelEmission = arrayListOf(FuelEcoEmission(
-                "Fuel",
+                context.resources.getString(R.string.title_compare_fuel),
                 compare.car_1?.vehicle_data?.vehData!!.model,
                 compare.car_1.technical_data?.fuelEmission?.fuel,
                 compare.car_2?.vehicle_data?.vehData!!.model,
                 compare.car_2.technical_data?.fuelEmission?.fuel,
-                "EcoClass",
+                context.resources.getString(R.string.title_compare_eco_class),
                 compare.car_1.vehicle_data.vehData.model,
                 compare.car_1.technical_data?.fuelEmission?.eco_class,
                 compare.car_2.vehicle_data.vehData.model,
                 compare.car_2.technical_data?.fuelEmission?.eco_class,
-                "Emission",
+                context.resources.getString(R.string.title_compare_emission),
                 compare.car_1.vehicle_data.vehData.model,
                 compare.car_1.technical_data?.fuelEmission?.emission,
                 compare.car_2.vehicle_data.vehData.model,

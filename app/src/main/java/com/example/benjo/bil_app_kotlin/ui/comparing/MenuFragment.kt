@@ -17,6 +17,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.google.gson.GsonBuilder
+import java.lang.Exception
 
 
 class MenuFragment : BaseFragment(), OnChartValueSelectedListener {

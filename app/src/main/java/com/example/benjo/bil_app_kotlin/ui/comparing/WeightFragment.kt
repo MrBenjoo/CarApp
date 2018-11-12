@@ -1,6 +1,7 @@
 package com.example.benjo.bil_app_kotlin.ui.comparing
 
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
@@ -41,7 +42,7 @@ class WeightFragment : BaseFragment() {
 
     private fun setupCarriageWeight(compare: Compare) {
         weights.add(ComparableData(
-                "Carriage Weight",
+                context.resources.getString(R.string.title_compare_carriage_weight),
                 compare.car_1?.vehicle_data?.vehData!!.model,
                 compare.car_1.technical_data?.weights?.carriage_weight,
                 compare.car_2?.vehicle_data?.vehData!!.model,
@@ -50,7 +51,7 @@ class WeightFragment : BaseFragment() {
 
     private fun setupTrailerWeightBE(compare: Compare) {
         weights.add(ComparableData(
-                "Trailer Weight BE",
+                context.resources.getString(R.string.title_compare_trailer_weight_be),
                 compare.car_1?.vehicle_data?.vehData!!.model,
                 compare.car_1.technical_data?.weights?.trailer_weight_be,
                 compare.car_2?.vehicle_data?.vehData!!.model,
@@ -60,7 +61,7 @@ class WeightFragment : BaseFragment() {
 
     private fun setupTrailerWeightB(compare: Compare) {
         weights.add(ComparableData(
-                "Trailer Weight B",
+                context.resources.getString(R.string.title_compare_trailer_weight_b),
                 compare.car_1?.vehicle_data?.vehData!!.model,
                 compare.car_1.technical_data?.weights?.trailer_weight_b,
                 compare.car_2?.vehicle_data?.vehData!!.model,
@@ -69,7 +70,7 @@ class WeightFragment : BaseFragment() {
 
     private fun setupUnbrakedTrailerWeight(compare: Compare) {
         weights.add(ComparableData(
-                "Unbraked Trailer Weight",
+                context.resources.getString(R.string.title_compare_unbraked_trailer_weight),
                 compare.car_1?.vehicle_data?.vehData!!.model,
                 compare.car_1.technical_data?.weights?.unbraked_trailer_weight,
                 compare.car_2?.vehicle_data?.vehData!!.model,
@@ -78,7 +79,7 @@ class WeightFragment : BaseFragment() {
 
     private fun setupTrailerWeight(compare: Compare) {
         weights.add(ComparableData(
-                "Trailer Weight",
+                context.resources.getString(R.string.title_compare_trailer_weight),
                 compare.car_1?.vehicle_data?.vehData!!.model,
                 compare.car_1.technical_data?.weights?.trailer_weight,
                 compare.car_2?.vehicle_data?.vehData!!.model,
@@ -87,7 +88,7 @@ class WeightFragment : BaseFragment() {
 
     private fun setupLoadWeight(compare: Compare) {
         weights.add(ComparableData(
-                "Load Weight",
+                context.resources.getString(R.string.title_compare_load_weight),
                 compare.car_1?.vehicle_data?.vehData!!.model,
                 compare.car_1.technical_data?.weights?.total_weight,
                 compare.car_2?.vehicle_data?.vehData!!.model,
@@ -96,7 +97,7 @@ class WeightFragment : BaseFragment() {
 
     private fun setupTotalWeight(compare: Compare) {
         weights.add(ComparableData(
-                "Total Weight",
+                context.resources.getString(R.string.title_compare_total_weight),
                 compare.car_1?.vehicle_data?.vehData!!.model,
                 compare.car_1.technical_data?.weights?.total_weight,
                 compare.car_2?.vehicle_data?.vehData!!.model,
@@ -105,7 +106,7 @@ class WeightFragment : BaseFragment() {
 
     private fun setupKerbWeight(compare: Compare) {
         weights = arrayListOf(ComparableData(
-                "Kerb Weight",
+                context.resources.getString(R.string.title_compare_kerb_weight),
                 compare.car_1?.vehicle_data?.vehData!!.model,
                 compare.car_1.technical_data?.weights?.kerb_weight,
                 compare.car_2?.vehicle_data?.vehData!!.model,

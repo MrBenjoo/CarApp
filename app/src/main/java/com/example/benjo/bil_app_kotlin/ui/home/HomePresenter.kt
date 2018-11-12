@@ -2,6 +2,7 @@ package com.example.benjo.bil_app_kotlin.ui.home
 
 import com.example.benjo.bil_app_kotlin.data.model.*
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
+import com.google.gson.GsonBuilder
 
 
 class HomePresenter : HomeContract.Presenter {
@@ -9,10 +10,8 @@ class HomePresenter : HomeContract.Presenter {
     private val TAG = "HomePresenter"
     private lateinit var view : HomeContract.View
 
-
-
-    override fun attachView(v: HomeContract.View) {
-        this.view = v
+    override fun attachView(view: HomeContract.View) {
+        this.view = view
     }
 
     override fun search(reg: String?) {
@@ -30,8 +29,9 @@ class HomePresenter : HomeContract.Presenter {
 
     private fun processResponse(body: Result?) {
         /* ------------------------------------------------------------- Används endast för att testa UI -------------------------------------------------------------*/
-        val homeSrchJson = CommonUtils().loadJSONFromAsset(view.getContext(), "bil_1.json")
-        view.saveJsonAndOpenTabs(homeSrchJson) // sparar json i homeactivity
+        val jsonCarOne = CommonUtils().loadJSONFromAsset(view.getContext(), "bil_1.json")
+        val result = GsonBuilder().create().fromJson(jsonCarOne, Result::class.java)
+        view.saveJsonAndOpenTabs(result) // sparar json i homeactivity
     }
 
 }

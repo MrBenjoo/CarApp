@@ -4,13 +4,16 @@ import com.example.benjo.bil_app_kotlin.data.room.CarData
 
 interface CarRepository {
 
-    fun insertCar(carData: CarData)
+    suspend fun insertCar(carData: CarData)
 
-    fun getCar(vin: String): CarData?
+    suspend fun getCar(vin: String): CarData?
 
-    fun getAllCars(): List<CarData>?
+    suspend fun getAllCars(): List<CarData>?
 
-    fun deleteAll()
+    suspend fun deleteAll()
 
-    fun deleteCar(vin: String)
+    suspend fun deleteCar(vin: String)
+
+    suspend fun deleteCheckedCars() : Int
+
 }

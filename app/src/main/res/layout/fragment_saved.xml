@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".ui.saved.SavedFragment">
+    tools:context=".ui.saved.SavedView">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar_saved"
@@ -24,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_menu_arrow_back"/>
+
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
@@ -31,6 +32,7 @@
         android:id="@+id/fragment_saved_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" >
 
     </android.support.v7.widget.RecyclerView>

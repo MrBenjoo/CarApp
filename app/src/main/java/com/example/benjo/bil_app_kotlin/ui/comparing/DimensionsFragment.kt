@@ -1,6 +1,7 @@
 package com.example.benjo.bil_app_kotlin.ui.comparing
 
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
@@ -38,7 +39,7 @@ class DimensionsFragment : BaseFragment() {
 
     private fun setupLength(compare: Compare) {
         arrListDimensions = arrayListOf(ComparableData(
-                "Length",
+                context.resources.getString(R.string.title_compare_length),
                 compare.car_1?.vehicle_data?.vehData!!.model,
                 compare.car_1.technical_data?.dimensions!!.length,
                 compare.car_2?.vehicle_data?.vehData!!.model,
@@ -48,7 +49,7 @@ class DimensionsFragment : BaseFragment() {
 
     private fun setupWidth(compare: Compare) {
         arrListDimensions.add(ComparableData(
-                "Width",
+                context.resources.getString(R.string.title_compare_width),
                 compare.car_1?.vehicle_data?.vehData!!.model,
                 compare.car_1.technical_data?.dimensions!!.width,
                 compare.car_2?.vehicle_data?.vehData!!.model,
@@ -58,7 +59,7 @@ class DimensionsFragment : BaseFragment() {
 
     private fun setupHeight(compare: Compare) {
         arrListDimensions.add(ComparableData(
-                "Height",
+                context.resources.getString(R.string.title_compare_height),
                 compare.car_1?.vehicle_data?.vehData!!.model,
                 compare.car_1.technical_data?.dimensions!!.height,
                 compare.car_2?.vehicle_data?.vehData!!.model,
@@ -68,7 +69,7 @@ class DimensionsFragment : BaseFragment() {
 
     private fun setupAxelWidth(compare: Compare) {
         arrListDimensions.add(ComparableData(
-                "Axel Width",
+                context.resources.getString(R.string.title_compare_axel_width),
                 compare.car_1?.vehicle_data?.vehData!!.model,
                 compare.car_1.technical_data?.dimensions!!.axel_width,
                 compare.car_2?.vehicle_data?.vehData!!.model,

@@ -24,4 +24,8 @@ interface CarDataDao {
     @Query("DELETE from carDataTable WHERE vin = :vin")
     fun deleteCar(vin: String)
 
+    @Query("DELETE FROM carDataTable WHERE isChecked like 1")
+    fun deleteCheckedCars() : Int
+
+
 }
