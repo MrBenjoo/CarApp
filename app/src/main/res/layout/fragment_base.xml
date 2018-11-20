@@ -4,22 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".base.BaseFragment"
-    android:id="@+id/fragmentBase">
+    tools:context=".base.BaseFragment">
 
     <ProgressBar
-        android:id="@+id/progessBar"
+        android:id="@+id/progressbar_base"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone"/>
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/list"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        android:id="@+id/recyclerview_base"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
 </RelativeLayout>

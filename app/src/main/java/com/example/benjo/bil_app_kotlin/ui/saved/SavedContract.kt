@@ -4,7 +4,6 @@ package com.example.benjo.bil_app_kotlin.ui.saved
 import android.view.ActionMode
 import com.example.benjo.bil_app_kotlin.base.BasePresenter
 import com.example.benjo.bil_app_kotlin.base.BaseView
-import com.example.benjo.bil_app_kotlin.data.model.EventData
 import com.example.benjo.bil_app_kotlin.data.room.CarData
 
 interface SavedContract {
@@ -30,6 +29,9 @@ interface SavedContract {
         fun onEvent(event: SavedListEvent<EventData>)
     }
 }
+
+data class EventData(val row : CarData,
+                     val position : Int)
 
 sealed class SavedListEvent<out T> {
     data class OnLongClick<out EventData>(val data: EventData) : SavedListEvent<EventData>()

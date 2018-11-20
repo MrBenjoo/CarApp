@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_compare_title"
+        style="@style/TitleCompare"
+        android:layout_marginTop="2dp"
+        android:text="Title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_compare_car_one"
+        style="@style/CarCompare"
+        android:layout_marginStart="16dp"
+        android:text="CarOne"
+        app:layout_constraintStart_toEndOf="@+id/vertical_line"
+        app:layout_constraintTop_toTopOf="@+id/vertical_line" />
+
+    <TextView
+        android:id="@+id/tv_compare_car_one_val"
+        style="@style/CarCompareVal"
+        android:layout_marginStart="16dp"
+        android:text="CarOneVal"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_compare_car_one"
+        app:layout_constraintStart_toEndOf="@+id/tv_compare_car_one" />
+
+    <TextView
+        android:id="@+id/tv_compare_car_two"
+        style="@style/CarCompare"
+        android:layout_marginTop="8dp"
+        android:text="CarTwo"
+        app:layout_constraintBottom_toBottomOf="@+id/vertical_line"
+        app:layout_constraintStart_toStartOf="@+id/tv_compare_car_one"
+        app:layout_constraintTop_toBottomOf="@+id/tv_compare_car_one" />
+
+    <TextView
+        android:id="@+id/tv_compare_car_two_val"
+        style="@style/CarCompareVal"
+        android:text="CarTwoVal"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_compare_car_two"
+        app:layout_constraintStart_toStartOf="@+id/tv_compare_car_one_val" />
+
+    <View
+        android:id="@+id/vertical_line"
+        style="@style/VerticalLine"
+        android:layout_width="2dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_compare_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_compare_title" />
+
+</android.support.constraint.ConstraintLayout>

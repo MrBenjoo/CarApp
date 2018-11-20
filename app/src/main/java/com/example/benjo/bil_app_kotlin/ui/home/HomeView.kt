@@ -9,7 +9,7 @@ import androidx.navigation.Navigation
 
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
-import com.example.benjo.bil_app_kotlin.data.model.Result
+import com.example.benjo.bil_app_kotlin.domain.Result
 import com.example.benjo.bil_app_kotlin.ui.tab.TabsView
 import kotlinx.android.synthetic.main.fragment_home.*
 

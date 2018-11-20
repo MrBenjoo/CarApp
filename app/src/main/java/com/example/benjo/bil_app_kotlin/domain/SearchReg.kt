@@ -1,11 +1,11 @@
 package com.example.benjo.bil_app_kotlin.domain
 
-import com.example.benjo.bil_app_kotlin.data.model.Result
-import retrofit2.Call
+import kotlinx.coroutines.Deferred
+import retrofit2.Response
 
 class SearchReg(val apiService: BilUppgifterApi) {
 
-    fun searchReg(reg: String?): Call<Result> {
+    fun searchReg(reg: String?): Deferred<Response<Result>> {
         return apiService.search(reg)
     }
 

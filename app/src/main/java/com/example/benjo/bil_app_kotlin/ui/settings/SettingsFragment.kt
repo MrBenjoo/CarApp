@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.data.model.Result
+import com.example.benjo.bil_app_kotlin.domain.Result
 import com.example.benjo.bil_app_kotlin.ui.home.HomeContract
 
 class SettingsFragment : Fragment(), HomeContract.View {

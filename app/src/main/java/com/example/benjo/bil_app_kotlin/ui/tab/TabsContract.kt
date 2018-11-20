@@ -4,9 +4,7 @@ package com.example.benjo.bil_app_kotlin.ui.tab
 import com.example.benjo.bil_app_kotlin.base.BasePresenter
 import com.example.benjo.bil_app_kotlin.base.BaseView
 
-import com.example.benjo.bil_app_kotlin.data.model.Result
-import com.example.benjo.bil_app_kotlin.data.model.Row
-import com.example.benjo.bil_app_kotlin.data.room.CarData
+import com.example.benjo.bil_app_kotlin.domain.Result
 import com.example.benjo.bil_app_kotlin.ui.basic.BasicAdapter
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import retrofit2.Response
@@ -18,11 +16,19 @@ interface TabsContract {
     interface ViewTabs : BaseView<TabsPresenter> {
         fun internetOn()
         fun internetOff()
+        fun showResponseCode(code: Int)
+        fun updateResult(result : Result)
+        fun showMsgCarSaved()
+        fun showMsgCarAlreadySaved()
+        fun isComparing() : Boolean
+        fun showCompareView(result: Result)
+        fun setProgressVisible()
+        fun setProgressInvisible()
+        fun onCloseSearchCompare() : Boolean
     }
 
     interface TabsPresenter {
-        fun search(reg: String?): Result?
-        fun validateResponse(response : Response<Result>?) : Result?
+        fun search(reg: String?)
         fun onImgSaveClicked(result : Result?)
     }
     /* ----------- */

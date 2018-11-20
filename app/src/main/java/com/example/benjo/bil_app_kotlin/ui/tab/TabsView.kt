@@ -10,14 +10,15 @@ import android.widget.ImageView
 import androidx.navigation.Navigation
 
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.adapters.AdapterTabsPage
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.data.repository.CarRepositoryImpl
 import com.example.benjo.bil_app_kotlin.data.room.CarDataBase
+import com.example.benjo.bil_app_kotlin.domain.Result
 import com.example.benjo.bil_app_kotlin.ui.home.HomeActivity
 import com.example.benjo.bil_app_kotlin.ui.basic.BasicView
 import com.example.benjo.bil_app_kotlin.ui.history.HistoryFragment
 import com.example.benjo.bil_app_kotlin.ui.tech.TechView
+import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import com.example.benjo.bil_app_kotlin.utils.ConnectivityHandler
 import com.example.benjo.bil_app_kotlin.utils.Constants
 import com.google.gson.GsonBuilder
@@ -27,7 +28,7 @@ import kotlinx.android.synthetic.main.fragment_tabs.*
 class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.ViewTabs {
     private val TAG = "TabsView"
 
-    private lateinit var adapterTabsPage: AdapterTabsPage
+    private lateinit var tabsAdapter: TabsAdapter
     override lateinit var presenter: TabsContract.TabsPresenter
     private lateinit var receiver: ConnectivityHandler
 
@@ -37,29 +38,19 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
 
     override fun layoutId(): Int = R.layout.fragment_tabs
 
-    override fun onQueryTextSubmit(query: String?) = when (query?.length) {
+    override fun onQueryTextSubmit(reg: String?) = when (reg?.length) {
         in 2..7 -> {
-            search_view.onActionViewCollapsed()
-            val homeActivity = activity as HomeActivity
-            if (startComparing) {
-                onCloseSearchCompare()
-
-                // read a fake JSON to simulate the real situation
-                val gson = GsonBuilder().create()
-                homeActivity.saveResultCar2(presenter.search(query?.trim()))
-
-                // convert the cars result to json and send it to MenuFragment to compare
-                val action = with(homeActivity) {
-                    TabsViewDirections.actionTabsFragmentToMenuFragment(
-                            gson.toJson(resultCar1),
-                            gson.toJson(resultCar2))
-                }
-
-                // navigate to MenuFragment
-                Navigation.findNavController(view!!).navigate(action)
-
-            } else {
-                homeActivity.saveResultCar1(presenter.search(query?.trim()))
+            searchview_tabs.onActionViewCollapsed()
+            val connected = CommonUtils().isConnected(context)
+            if (connected) {
+                // problemet jag hade innan var att jag anropade
+                // homeActivity.saveResultCar1(presenter.search(reg?.trim()))
+                // vilket resultera i att search funktionen returnerade result
+                // som var null eftersom launch inte väntade på resultatet.
+                // Detta fixade jag genom att i search funktionen vänta på resultatet
+                // och sen anropa (activity as HomeActivity).saveResultCar1(result)
+                // via view.updateResult(result: Result)
+                presenter.search(reg?.trim())
             }
             true
         }
@@ -67,6 +58,28 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
             showText(resources.getString(R.string.error_reg_limit))
             false
         }
+    }
+
+    override fun setProgressVisible() {
+        progressbar_tabs.visibility = View.VISIBLE
+    }
+
+    override fun setProgressInvisible() {
+        progressbar_tabs.visibility = View.INVISIBLE
+    }
+
+    override fun showCompareView(result: Result) {
+        val homeActivity = activity as HomeActivity
+        onCloseSearchCompare()
+        homeActivity.saveResultCar2(result)
+        // convert the cars result to json and send it to CompareMenuView to compare
+        val gson = GsonBuilder().create()
+        val action = TabsViewDirections.actionTabsFragmentToMenuFragment(
+                gson.toJson(homeActivity.resultCar1),
+                gson.toJson(homeActivity.resultCar2))
+
+        // navigate to CompareMenuView
+        Navigation.findNavController(view!!).navigate(action)
     }
 
     private fun onImgSaveClick() {
@@ -79,7 +92,7 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
         presenter = TabsPresenter(this, CarRepositoryImpl(CarDataBase.getInstance(context)!!))
         initTabs()
         initListeners()
-        iv_toolbar_compare.isSelected = startComparing
+        img_tabs_compare.isSelected = startComparing
     }
 
     private fun initBroadcast() {
@@ -88,10 +101,10 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
     }
 
     private fun initTabs() {
-        tabs.setupWithViewPager(container_tabs)
-        adapterTabsPage = AdapterTabsPage(childFragmentManager)
-        container_tabs.adapter = adapterTabsPage
-        with(adapterTabsPage) {
+        tablayout_tabs.setupWithViewPager(viewpager_tabs)
+        tabsAdapter = TabsAdapter(childFragmentManager)
+        viewpager_tabs.adapter = tabsAdapter
+        with(tabsAdapter) {
             addFragment(BasicView(), Constants.TITLE_TAB_1)
             addFragment(TechView(), Constants.TITLE_TAB_2)
             addFragment(HistoryFragment(), Constants.TITLE_TAB_3)
@@ -99,11 +112,11 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
     }
 
     private fun initListeners() {
-        img_save.setOnClickListener { onImgSaveClick() }
-        search_view.setOnQueryTextListener(this)
-        search_view.setOnCloseListener { onCloseSearchCompare() }
-        iv_toolbar_compare.setOnClickListener {
-            with(iv_toolbar_compare) {
+        img_tabs_save.setOnClickListener { onImgSaveClick() }
+        searchview_tabs.setOnQueryTextListener(this)
+        searchview_tabs.setOnCloseListener { onCloseSearchCompare() }
+        img_tabs_compare.setOnClickListener {
+            with(img_tabs_compare) {
                 isSelected = !isSelected
                 startComparing = isSelected
             }
@@ -111,9 +124,13 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
         }
     }
 
-    private fun onCloseSearchCompare(): Boolean {
+    override fun updateResult(result: Result) {
+        (activity as HomeActivity).saveResultCar1(result)
+    }
+
+    override fun onCloseSearchCompare(): Boolean {
         if (startComparing) {
-            iv_toolbar_compare.isSelected = false
+            img_tabs_compare.isSelected = false
             startComparing = false
             hideBottomCompareText()
         }
@@ -123,7 +140,7 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
     private fun onComparing() {
         if (startComparing) {
             showBottomCompareText()
-            search_view.isIconified = false
+            searchview_tabs.isIconified = false
         } else hideBottomCompareText()
     }
 
@@ -137,12 +154,20 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
 
     override fun internetOff() {
         showText(R.string.error_no_internet)
-        info_img_wifi_off.visibility = ImageView.VISIBLE
+        img_tabs_wifi_off.visibility = ImageView.VISIBLE
     }
 
     override fun internetOn() {
-        info_img_wifi_off.visibility = ImageView.INVISIBLE
+        img_tabs_wifi_off.visibility = ImageView.INVISIBLE
     }
+
+    override fun showResponseCode(code: Int) = showText("Response code: " + code.toString())
+
+    override fun showMsgCarSaved() = showText(R.string.view_tabs_car_saved)
+
+    override fun showMsgCarAlreadySaved() = showText(R.string.view_tabs_car_not_saved)
+
+    override fun isComparing(): Boolean = startComparing
 
     override fun onResume() {
         initBroadcast()

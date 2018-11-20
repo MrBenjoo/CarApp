@@ -43,7 +43,7 @@
     <string name="api_rim_front">Fälg fram</string>
     <string name="api_rim_back">Fälg bak</string>
     <string name="api_axel_width">Axellängd</string>
-    <string name="api_category">Kategori</string>
+    <string name="api_category">Fordonskategori EU</string>
     <string name="api_eeg">Typgodkännandenr</string>
     <string name="api_nox_1">Kväveoxider (NOx)</string> <!-- g/ km -->
     <string name="api_thc_nox_1">Kolväten &amp; kväveoxider </string> <!-- g/ km -->
@@ -52,35 +52,63 @@
     <string name="api_euro_ncap">Euro NCAP</string>
 
 
-    <!-- Comparing titles -->
-    <string name="title_compare_length">Längd</string>
-    <string name="title_compare_width">Bredd</string>
-    <string name="title_compare_height">Höjd</string>
-    <string name="title_compare_axel_width">Axelbredd</string>
+    <!-- ''''''''''''''''''''''''''''' Comparing titles ''''''''''''''''''''''''''''' -->
 
+    <!-- *********************** FORDONSDATA *********************** -->
+    <string name="title_compare_model_year">Modellår</string>
+    <string name="title_compare_vehicle_year">Fordonsår</string>
+    <string name="title_compare_vehicle_type">Fordonstyp</string>
+    <string name="title_compare_reg">Registreringsnummer</string>
+    <string name="title_compare_status">Status</string>
+    <string name="title_compare_color">Färg</string>
+    <string name="title_compare_chassi">Kaross</string>
+    <string name="title_compare_category">Fordonskategori EU</string>
+    <string name="title_compare_eeg">Typgodkännandenr</string>
+    <!-- ************************************************************* -->
 
-    <string name="title_compare_thc_nox">Thc Nox</string>
-    <string name="title_compare_nox">Nox</string>
-    <string name="title_compare_co2">Koldioxid</string>
-    <string name="title_compare_consumption">Förbräning</string>
-    <string name="title_compare_fuel">Bränsle</string>
-    <string name="title_compare_eco_class">Eko klass</string>
-    <string name="title_compare_emission">Utsläpp</string>
+    <!-- *********************** DIMENSIONER *********************** -->
+    <string name="title_compare_kerb_weight">Tjänstevikt [kg]</string>
+    <string name="title_compare_total_weight">Totalvikt [kg]</string>
+    <string name="title_compare_load_weight">Lastvikt [kg]</string>
+    <string name="title_compare_trailer_weight_be">Släp totalvikt (B+) [kg]</string>
+    <string name="title_compare_trailer_weight_b">Släp totalvikt (B) [kg]</string>
+    <string name="title_compare_unbraked_trailer_weight">Släpvagnsvikt obromsad [kg]</string>
+    <string name="title_compare_trailer_weight">Släpvagnsvikt [kg]</string>
+    <string name="title_compare_carriage_weight">wtf is carriage weight [kg]</string>
 
-    <string name="title_compare_top_speed">Top hastighet</string>
-    <string name="title_compare_cylinder_volume">Motorvolym</string>
-    <string name="title_compare_kilowatt">Kilowatt</string>
+    <string name="title_compare_length">Längd [mm]</string>
+    <string name="title_compare_width">Bredd [mm]</string>
+    <string name="title_compare_height">Höjd [mm]</string>
+    <string name="title_compare_axel_width">Axelavstånd</string>
+
+    <string name="title_compare_tire_back">bak</string>
+    <string name="title_compare_wheel">Däck</string>
+    <string name="title_compare_tire_front">fram</string>
+    <string name="title_compare_rim_title">Fälgar</string>
+    <!-- *********************************************************** -->
+
+    <!-- *********************** ENVIRONMENT *********************** -->
+    <string name="title_compare_fuel">Drivmedel</string>
+    <string name="title_compare_eco_class">Miljöklass</string>
+    <string name="title_compare_four_wheel_drive">Fyrhjulsdrift</string>
+    <string name="title_compare_transmission">Fyrhjulsdrift</string>
+    <string name="title_compare_consumption">Förbrukning [liter/100km]</string>
+    <string name="title_compare_co2">Utsläpp CO2 [g/km]</string>
+    <string name="title_compare_nox">Kväveoxider (NOX) [mg/km]</string>
+    <string name="title_compare_thc_nox">Oförbränt bränsle (Thc+NOX)</string>
+
     <string name="title_compare_horsepower">Hästkrafter</string>
+    <string name="title_compare_kilowatt">Motoreffekt [kW]</string>
+    <string name="title_compare_cylinder_volume">Motorvolym [cm^3]</string>
+    <string name="title_compare_top_speed">Toppfart [km/h]</string>
 
-    <!-- vad motsvarar dessa? -->
-    <string name="title_compare_carriage_weight">Tjänstevikt</string>
-    <string name="title_compare_trailer_weight_be">Släp totalvikt (B+)</string>
-    <string name="title_compare_trailer_weight_b">Släp totalvikt (B)</string>
-    <string name="title_compare_unbraked_trailer_weight">Släpvagnsvikt obromsad</string>
-    <string name="title_compare_trailer_weight">Släpvagnsvikt</string>
-    <string name="title_compare_load_weight">Lastvikt</string>
-    <string name="title_compare_total_weight">Totalvikt</string>
-    <string name="title_compare_kerb_weight">Kerg weight(ska ändras)</string>
+    <string name="title_compare_number_of_passengers">Antal passagerare</string>
+    <string name="title_compare_passenger_airbag">Passagerar airbag</string>
+    <string name="title_compare_hitch">Draganordning</string>
+    <string name="title_compare_sound_level">Ljudnivå körning [dB]</string>
+    <!-- *********************************************************** -->
+
+    <!-- ''''''''''''''''''''''''''' COMPARING TITLES END ''''''''''''''''''''''''''''' -->
 
 
     <!-- Errors -->
@@ -98,9 +126,6 @@
     <!-- TabsActivity related messages -->
     <string name="view_tabs_car_not_saved">Bilen har redan sparats.</string>
     <string name="view_tabs_car_saved">Bilen sparades till din lista.</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

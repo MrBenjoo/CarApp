@@ -1,10 +1,9 @@
 package com.example.benjo.bil_app_kotlin.utils
 
-import android.content.Context
 import com.example.benjo.bil_app_kotlin.data.model.KeyValues
 import com.example.benjo.bil_app_kotlin.data.model.Row
 
-class JsonHandler(private val context: Context) {
+class JsonHandler {
 
     fun basicSection(map: HashMap<String, String?>?): ArrayList<Row> {
         val newMap = HashMap<String, String?>()
@@ -91,7 +90,7 @@ class JsonHandler(private val context: Context) {
     private fun filterNotNullValues(section: Int, map: Map<String, String?>): ArrayList<Row> {
         val result = ArrayList<Row>()
 
-        with(JsonMapping(context)) {
+        with(JsonMapping()) {
             for ((key, value) in map)
                 when (section) {
                     1 -> if (value != null) result.add(basicInfoMapping(key, value))

@@ -1,14 +1,14 @@
 package com.example.benjo.bil_app_kotlin.utils
 
-import android.content.Context
+
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.data.model.Row
 
 
-class JsonMapping(private val context: Context) {
+class JsonMapping {
 
     private fun row(id: Int, value: String?): Row = Row(desc(id), value)
-    private fun desc(id: Int): String = context.resources.getString(id)
+    private fun desc(id: Int): String = MemoryLeaks.getContext().resources.getString(id)
 
     fun basicInfoMapping(key: String, value: String?): Row = when (key) {
         Constants.MAKE -> row(R.string.api_make, value)

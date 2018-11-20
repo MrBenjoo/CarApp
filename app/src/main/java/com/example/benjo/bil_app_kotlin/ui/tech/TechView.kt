@@ -31,8 +31,8 @@ class TechView : BaseFragment(), TabsContract.ViewTech {
     }
 
     override fun setAdapter(adapter: SectionedRecyclerViewAdapter) {
-        list.setHasFixedSize(true)
-        list.adapter = adapter
+        recyclerview_base.setHasFixedSize(true)
+        recyclerview_base.adapter = adapter
     }
 
     override fun onResume() {

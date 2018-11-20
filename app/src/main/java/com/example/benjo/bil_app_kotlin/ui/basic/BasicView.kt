@@ -30,8 +30,8 @@ class BasicView : BaseFragment(), TabsContract.ViewBasic {
     }
 
     override fun setAdapter(adapter: BasicAdapter) {
-        list.setHasFixedSize(true)
-        list.adapter = adapter
+        recyclerview_base.setHasFixedSize(true)
+        recyclerview_base.adapter = adapter
     }
 
     override fun onResume() {

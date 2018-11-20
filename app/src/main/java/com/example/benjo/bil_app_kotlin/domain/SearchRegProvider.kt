@@ -5,4 +5,5 @@ object SearchRegProvider {
     fun provideSearchReg(): SearchReg {
         return SearchReg(BilUppgifterApi.Factory.create())
     }
+
 }

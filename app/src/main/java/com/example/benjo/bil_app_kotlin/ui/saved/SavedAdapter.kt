@@ -1,15 +1,13 @@
 package com.example.benjo.bil_app_kotlin.ui.saved
 
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.data.model.EventData
 import com.example.benjo.bil_app_kotlin.data.room.CarData
-import kotlinx.android.synthetic.main.view_row_view_saved.view.*
-import kotlinx.android.synthetic.main.view_row_with_cb.view.*
+import kotlinx.android.synthetic.main.item_saved_row.view.*
+import kotlinx.android.synthetic.main.item_saved_row_cb.view.*
 import org.greenrobot.eventbus.EventBus
 
 class SavedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -25,11 +23,11 @@ class SavedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private fun viewActionMode(parent: ViewGroup): RecyclerView.ViewHolder =
             ViewHolderActionMode(LayoutInflater.from(parent.context)
-                    .inflate(R.layout.view_row_with_cb, parent, false))
+                    .inflate(R.layout.item_saved_row_cb, parent, false))
 
     private fun viewSavedCars(parent: ViewGroup): RecyclerView.ViewHolder =
             ViewHolderSavedCars(LayoutInflater.from(parent.context)
-                    .inflate(R.layout.view_row_view_saved, parent, false))
+                    .inflate(R.layout.item_saved_row, parent, false))
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = when (holder.itemViewType) {
         1 -> {

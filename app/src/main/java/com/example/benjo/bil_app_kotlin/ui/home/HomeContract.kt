@@ -2,7 +2,7 @@ package com.example.benjo.bil_app_kotlin.ui.home
 
 import com.example.benjo.bil_app_kotlin.base.BasePresenter
 import com.example.benjo.bil_app_kotlin.base.BaseView
-import com.example.benjo.bil_app_kotlin.data.model.Result
+import com.example.benjo.bil_app_kotlin.domain.Result
 
 interface HomeContract {
 

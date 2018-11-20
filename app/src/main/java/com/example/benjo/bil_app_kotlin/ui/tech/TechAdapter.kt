@@ -8,15 +8,15 @@ import com.example.benjo.bil_app_kotlin.data.model.Row
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection
-import kotlinx.android.synthetic.main.view_expandable_header.view.*
-import kotlinx.android.synthetic.main.view_row_tabs.view.*
+import kotlinx.android.synthetic.main.item_tabs_expandable_row.view.*
+import kotlinx.android.synthetic.main.item_tabs_row.view.*
 
 class TechAdapter(private val title: String?,
                   private val list: List<Row>,
                   private val sectionAdapter: SectionedRecyclerViewAdapter) : StatelessSection(SectionParameters
         .builder()
-        .itemResourceId(R.layout.view_row_tabs)
-        .headerResourceId(R.layout.view_expandable_header)
+        .itemResourceId(R.layout.item_tabs_row)
+        .headerResourceId(R.layout.item_tabs_expandable_row)
         .build()) {
 
     internal var expanded = true

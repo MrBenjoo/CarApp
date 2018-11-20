@@ -2,12 +2,10 @@ package com.example.benjo.bil_app_kotlin.ui.saved
 
 
 import android.view.ActionMode
-import com.example.benjo.bil_app_kotlin.data.model.EventData
 import com.example.benjo.bil_app_kotlin.data.repository.CarRepository
 import com.example.benjo.bil_app_kotlin.data.room.CarData
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import kotlinx.coroutines.*
-import kotlinx.coroutines.android.Main
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import kotlin.coroutines.CoroutineContext

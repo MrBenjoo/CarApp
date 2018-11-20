@@ -1,6 +1,6 @@
 package com.example.benjo.bil_app_kotlin.ui.home
 
-import com.example.benjo.bil_app_kotlin.data.model.*
+import com.example.benjo.bil_app_kotlin.domain.Result
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import com.google.gson.GsonBuilder
 

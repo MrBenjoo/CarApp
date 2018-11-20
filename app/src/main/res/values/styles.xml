@@ -54,4 +54,71 @@
     <!-- **************************************** -->
 
 
+    <style name="TitleCompare">
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorBlack300</item>
+    </style>
+
+    <style name="CarCompare">
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorBlack400</item>
+    </style>
+
+    <style name="CarCompareVal">
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="VerticalLine">
+        <item name="android:background">@color/colorBlack400</item>
+    </style>
+
+    <style name="MaterialCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="strokeColor">@color/colorBlack400</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardBackgroundColor">#1E252F</item>
+        <item name="cardCornerRadius">10dp</item>
+    </style>
+
+
+    <style name="SmartTabLayout">
+        <item name="stl_defaultTabTextColor">#FFFFFF</item>
+        <item name="stl_defaultTabTextHorizontalPadding">18dp</item>
+        <item name="stl_dividerColor">@android:color/transparent</item>
+        <item name="stl_dividerThickness">0dp</item>
+        <item name="stl_indicatorAlwaysInCenter">true</item>
+        <item name="stl_indicatorColor">@color/colorBlack600</item>
+        <item name="stl_indicatorCornerRadius">18dp</item>
+        <item name="stl_indicatorGravity">center</item>
+        <item name="stl_indicatorInterpolation">smart</item>
+        <item name="stl_indicatorThickness">36dp</item>
+        <item name="stl_underlineColor">@android:color/transparent</item>
+        <item name="stl_underlineThickness">0dp</item>
+    </style>
+
+
+    <!--app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appbar_compare_parent"
+        app:stl_defaultTabTextColor="#FFFFFF"
+        app:stl_defaultTabTextHorizontalPadding="18dp"
+        app:stl_dividerColor="@android:color/transparent"
+        app:stl_dividerThickness="0dp"
+        app:stl_indicatorAlwaysInCenter="true"
+        app:stl_indicatorColor="@color/colorBlack600"
+        app:stl_indicatorCornerRadius="18dp"
+        app:stl_indicatorGravity="center"
+        app:stl_indicatorInterpolation="smart"
+        app:stl_indicatorThickness="36dp"
+        app:stl_underlineColor="@android:color/transparent"
+        app:stl_underlineThickness="0dp" -->
+
+
 </resources>

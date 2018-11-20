@@ -34,42 +34,29 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+
     implementation standardDependencies.values()
     implementation networkDependencies.values()
     implementation listDependencies.values()
     implementation jetpackDependencies.values()
+    implementation misc.values()
 
-    implementation 'com.android.support:support-v4:28.0.0'
+    /* ------------- Test libraries ------------- */
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-
-
     androidTestImplementation 'org.mockito:mockito-android:2.7.22'
-    testImplementation 'org.mockito:mockito-core:2.7.22'
-    kapt "android.arch.persistence.room:compiler:1.1.1"
-
-    /* Leakcanary */
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
-
-    /* Coroutines */
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.27.0-eap13"
-
-    implementation 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
-
-
     androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.11.0'
     //androidTestImplementation "io.mockk:mockk-android:1.8.12.kotlin13"
-
+    testImplementation 'org.mockito:mockito-core:2.7.22'
     testImplementation "io.mockk:mockk:1.8.12.kotlin13"
+    /* -------------------------------------------*/
 
-
-    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
-
-    implementation 'org.greenrobot:eventbus:3.1.1'
-
+    /* ------------- LeakCanary ------------- */
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    /* -------------------------------------- */
 
 }

@@ -10,18 +10,18 @@ ext {
             appCompat : "com.android.support:appcompat-v7:${AppCompatVersion}",
             constraint: "com.android.support.constraint:constraint-layout:1.1.2",
             support   : "com.android.support:support-v4:${AppCompatVersion}",
-            design    :  "com.android.support:design:${AppCompatVersion}"
+            design    : "com.android.support:design:${AppCompatVersion}"
     ]
 
     networkDependencies = [
             retrofit             : "com.squareup.retrofit2:retrofit:${RetrofitVersion}",
-            retrofitGsonConverter: "com.squareup.retrofit2:converter-gson:${RetrofitVersion}"
+            retrofitGsonConverter: "com.squareup.retrofit2:converter-gson:${RetrofitVersion}",
+            okhttp3              : "com.squareup.okhttp3:okhttp:3.11.0"
     ]
 
     listDependencies = [
             recyclerView         : "com.android.support:recyclerview-v7:${AppCompatVersion}",
             cardView             : "com.android.support:cardview-v7:${AppCompatVersion}",
-            designLibrary        : "com.android.support:design:${AppCompatVersion}", // used for Tab layout
             sectionedRecyclerView: "io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:1.2.0"
     ]
 
@@ -29,6 +29,14 @@ ext {
             room              : "android.arch.persistence.room:runtime:1.1.1",
             navigationFragment: "android.arch.navigation:navigation-fragment-ktx:${NavigationVersion}",
             navigationUI      : "android.arch.navigation:navigation-ui-ktx:${NavigationVersion}"
+    ]
+
+    misc = [
+            smartTabLayout   : "com.ogaclejapan.smarttablayout:library:1.6.1@aar",
+            charts           : "com.github.PhilJay:MPAndroidChart:v3.1.0-alpha",
+            eventBus         : "org.greenrobot:eventbus:3.1.1",
+            coroutines       : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0",
+            coroutinesAdapter: "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
     ]
 
 

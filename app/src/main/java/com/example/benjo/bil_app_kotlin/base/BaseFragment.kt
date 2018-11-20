@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.ui.home.HomeActivity
 
 abstract class BaseFragment : Fragment() {
-    private val TAG = "BaseFragment"
     private lateinit var viewForSnackbar: View
 
     abstract fun layoutId(): Int

@@ -3,12 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.comparing.MenuFragment">
+    tools:context=".ui.comparing.CompareMenuView">
 
     <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/pie_comp_menu"
+        android:id="@+id/piechart_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 
 </FrameLayout>

@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.dialog_delete_car.view.*
 import android.view.*
 import androidx.navigation.Navigation
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
-import com.example.benjo.bil_app_kotlin.data.model.Result
+import com.example.benjo.bil_app_kotlin.domain.Result
 import com.example.benjo.bil_app_kotlin.utils.builder.FragmentToolbar
 import com.example.benjo.bil_app_kotlin.utils.builder.ToolbarManager
 import com.google.gson.GsonBuilder
@@ -64,7 +64,7 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback {
     }
 
 
-    override fun setAdapter(savedAdapter: SavedAdapter) = with(fragment_saved_list) {
+    override fun setAdapter(savedAdapter: SavedAdapter) = with(recyclerview_saved) {
         setHasFixedSize(true)
         adapter = savedAdapter
     }
@@ -110,7 +110,7 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback {
 
     private fun builder(): FragmentToolbar = FragmentToolbar.Builder()
             .withId(R.id.toolbar_saved)
-            .withNavBackListener({ activity!!.onBackPressed() }, R.id.nav_back_saved)
+            .withNavBackListener({ activity!!.onBackPressed() }, R.id.img_saved_nav_back)
             .withMenu(R.menu.menu_saved_view)
             .build()
 

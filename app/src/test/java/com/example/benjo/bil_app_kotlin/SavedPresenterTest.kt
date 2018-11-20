@@ -1,12 +1,8 @@
 package com.example.benjo.bil_app_kotlin
 
-import com.example.benjo.bil_app_kotlin.data.model.EventData
 import com.example.benjo.bil_app_kotlin.data.repository.CarRepository
 import com.example.benjo.bil_app_kotlin.data.room.CarData
-import com.example.benjo.bil_app_kotlin.ui.saved.SavedAdapter
-import com.example.benjo.bil_app_kotlin.ui.saved.SavedContract
-import com.example.benjo.bil_app_kotlin.ui.saved.SavedListEvent
-import com.example.benjo.bil_app_kotlin.ui.saved.SavedPresenter
+import com.example.benjo.bil_app_kotlin.ui.saved.*
 import io.mockk.*
 import org.junit.Before
 import org.junit.Test

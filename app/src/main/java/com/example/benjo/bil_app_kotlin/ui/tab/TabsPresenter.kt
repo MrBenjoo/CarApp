@@ -1,71 +1,86 @@
 package com.example.benjo.bil_app_kotlin.ui.tab
 
 import android.util.Log
-import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.data.model.Result
+import android.util.MalformedJsonException
+import com.example.benjo.bil_app_kotlin.domain.Result
 import com.example.benjo.bil_app_kotlin.data.room.CarData
 import com.example.benjo.bil_app_kotlin.data.repository.CarRepository
+import com.example.benjo.bil_app_kotlin.domain.SearchRegProvider
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import com.google.gson.GsonBuilder
+import com.google.gson.JsonSyntaxException
 import kotlinx.coroutines.*
-import kotlinx.coroutines.android.Main
-import retrofit2.Response
+import java.lang.Exception
 import kotlin.coroutines.CoroutineContext
 import kotlin.random.Random
 
-class TabsPresenter(val view: TabsContract.ViewTabs,
-                    val carRepository: CarRepository) : TabsContract.TabsPresenter, CoroutineScope {
+class TabsPresenter(val view: TabsContract.ViewTabs, val carRepository: CarRepository) : TabsContract.TabsPresenter, CoroutineScope {
     private val TAG = "TabsPresenter"
-
     private var jobTracker: Job = Job()
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + jobTracker
 
-    override fun search(reg: String?): Result? {
-        var mResponse: Result? = null
-        val connected = CommonUtils().isConnected(view.getContext())
-        if (connected) {
-            // the real code that will be used
-            /*SearchRegProvider
-                    .provideSearchReg()
-                    .searchReg(reg)
-                    .enqueue(Lambda().callback { throwable, response ->
-                        throwable.let { /*onFailure(throwable)*/ }
-                        response.let {
-                            mResponse = response
-                        }
-                    })*/
-
-            // Simulate a fake json response
-            val randomInt = Random.nextInt(2) + 1 // between 0 (inclusive) and n (exclusive)
-            val jsonFileName = "bil_" + randomInt.toString() + ".json"
-            Log.d(TAG, jsonFileName)
-            return GsonBuilder().create().fromJson(
-                    CommonUtils()
-                            .loadJSONFromAsset(view.getContext(),
-                                    jsonFileName), Result::class.java)
-        } else return mResponse
-    }
-
-    override fun validateResponse(response: Response<Result>?): Result? {
-        when (response?.isSuccessful) {
-            true -> return response.body()
-            else -> return null
-        }
-    }
-
-    private fun saveToDatabase(car: CarData): Boolean {
-        var saved = false
+    override fun search(reg: String?) {
+        Log.d(TAG, "search($reg) -> before searchReal($reg)")
         launch {
-            val carFromRoom = async(Dispatchers.IO) { carRepository.getCar(car.vin) }.await()
-            if (carFromRoom == null) {
-                launch(Dispatchers.IO) { carRepository.insertCar(car) }
-                saved = true
-            }
+            //async { searchReal(reg) }.await()
+            async { searchFake(reg) }.await()
         }
-        return saved
     }
+
+    private suspend fun searchReal(reg: String?): Result? {
+        var result: Result? = null
+        val request = SearchRegProvider.provideSearchReg().searchReg(reg)
+        val response = request.await()
+        if (response.isSuccessful) {
+            result = response.body()
+            if (result != null) {
+                if (view.isComparing()) {
+                    view.showCompareView(result)
+                } else {
+                    view.updateResult(result)
+                }
+            } else Log.d(TAG, "searchReal($reg) -> result == null")
+        } else view.showResponseCode(response.code())
+        return result
+    }
+
+    private fun searchFake(reg: String?) = launch {
+        view.setProgressVisible()
+        val randomInt = Random.nextInt(3) + 1 // between 0 (inclusive) and n (exclusive)
+        val jsonFileName = "bil_" + randomInt.toString() + ".json"
+        try {
+            val result = GsonBuilder().create().fromJson(CommonUtils().loadJSONFromAsset(
+                    view.getContext(),
+                    jsonFileName), Result::class.java)
+
+            if (result != null) {
+                if (view.isComparing()) {
+                    view.showCompareView(result)
+                } else {
+                    view.updateResult(result)
+                }
+            } else {
+                Log.d(TAG, "searchFake($reg) -> result == null")
+            }
+        } catch (jsonException: JsonSyntaxException) {
+            Log.d(TAG, "jsonException")
+            view.onCloseSearchCompare()
+            view.showText(jsonException.message)
+        }
+        view.setProgressInvisible()
+    }
+
+    private fun saveToDatabase(car: CarData) = launch {
+        val carDatabase = async(Dispatchers.IO) { carRepository.getCar(car.vin) }.await()
+        if (carDatabase == null) {
+            async(Dispatchers.IO) { carRepository.insertCar(car) }.await()
+            val saved = async(Dispatchers.IO) { carRepository.getCar(car.vin) }.await()
+            if (saved != null) view.showMsgCarSaved()
+        } else view.showMsgCarAlreadySaved()
+    }
+
 
     override fun onImgSaveClicked(result: Result?) {
         with(result?.carInfo!!) {
@@ -76,9 +91,7 @@ class TabsPresenter(val view: TabsContract.ViewTabs,
             val vin = attributes.vin!!
             val json = GsonBuilder().create().toJson(result)
             for (i in 0..10) {
-                val saved = saveToDatabase(CarData(i.toLong(), reg, model, modelYear, type, i.toString()/*vin*/, json))
-                if (saved) view.showText(R.string.view_tabs_car_saved)
-                else view.showText(R.string.view_tabs_car_not_saved)
+                saveToDatabase(CarData(i.toLong(), reg, model, modelYear, type, i.toString()/*vin*/, json))
             }
         }
     }

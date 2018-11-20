@@ -4,11 +4,12 @@ package com.example.benjo.bil_app_kotlin.ui.home
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import androidx.navigation.findNavController
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.data.model.Compare
-import com.example.benjo.bil_app_kotlin.data.model.Result
+import com.example.benjo.bil_app_kotlin.domain.Result
 import com.example.benjo.bil_app_kotlin.data.repository.CarRepositoryImpl
 import com.example.benjo.bil_app_kotlin.data.room.CarDataBase
 import com.example.benjo.bil_app_kotlin.ui.basic.BasicAdapter
@@ -18,9 +19,6 @@ import com.example.benjo.bil_app_kotlin.ui.tab.TabsContract
 import com.example.benjo.bil_app_kotlin.ui.basic.BasicPresenter
 import com.example.benjo.bil_app_kotlin.ui.saved.SavedAdapter
 import com.example.benjo.bil_app_kotlin.ui.tech.TechPresenter
-import com.example.benjo.bil_app_kotlin.utils.CommonUtils
-import com.example.benjo.bil_app_kotlin.utils.JsonCompare
-import com.google.gson.GsonBuilder
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 
 
@@ -60,6 +58,8 @@ class HomeActivity : AppCompatActivity() {
 
     fun saveResultCar1(resultCar1: Result?) {
         this.resultCar1 = resultCar1
+        Log.d("HomeActivity", "REG: " + resultCar1?.carInfo?.attributes?.regno)
+        Log.d("HomeActivity", "make: " + resultCar1?.carInfo?.basic?.data?.make  + "color: " + resultCar1?.carInfo?.basic?.data?.color)
         basicPresenter.updateTab(resultCar1)
         techPresenter.updateTab(resultCar1)
     }
