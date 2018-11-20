@@ -2,7 +2,7 @@ package com.example.benjo.bil_app_kotlin.ui.comparing.tabs
 
 import com.example.benjo.bil_app_kotlin.ui.comparing.CompareRow
 import com.example.benjo.bil_app_kotlin.ui.comparing.constants
-import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.ComparData
+import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.CompareData
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.data.model.Compare
 import com.example.benjo.bil_app_kotlin.data.model.CompareDimensionOther
@@ -14,7 +14,7 @@ class TabDimensionOther: CompareRow() {
         val carOneData = getCarOneData((activity as HomeActivity).compare)
         val carTwoData = getCarTwoData((activity as HomeActivity).compare)
         list.add(
-                ComparData(
+                CompareData(
                         constants.TYPE_COMMONN,
                         string(R.string.title_compare_length),
                         carModelOne,
@@ -24,7 +24,7 @@ class TabDimensionOther: CompareRow() {
                 )
         )
         list.add(
-                ComparData(
+                CompareData(
                         constants.TYPE_COMMONN,
                         string(R.string.title_compare_width),
                         carModelOne,
@@ -34,7 +34,7 @@ class TabDimensionOther: CompareRow() {
                 )
         )
         list.add(
-                ComparData(
+                CompareData(
                         constants.TYPE_COMMONN,
                         string(R.string.title_compare_height),
                         carModelOne,
@@ -44,7 +44,7 @@ class TabDimensionOther: CompareRow() {
                 )
         )
         list.add(
-                ComparData(
+                CompareData(
                         constants.TYPE_COMMONN,
                         string(R.string.title_compare_axel_width),
                         carModelOne,

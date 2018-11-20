@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.CompareRowRenderer
+import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.RendererCompareRow
 import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.ItemModel
 import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.RendererAdapter
 import com.example.benjo.bil_app_kotlin.R
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_base.*
 
 abstract class CompareRow : Fragment() {
     lateinit var renderRecyclerAdapter: RendererAdapter
-    lateinit var renderer: CompareRowRenderer
+    lateinit var renderer: RendererCompareRow
      var carModelOne : String? = null
      var carModelTwo: String? = null
     var list = arrayListOf<ItemModel>()
@@ -30,7 +30,7 @@ abstract class CompareRow : Fragment() {
             View? {
         setHasOptionsMenu(true)
         renderRecyclerAdapter = RendererAdapter()
-        renderer = CompareRowRenderer()
+        renderer = RendererCompareRow()
         renderer.type = TYPE_COMMONN
         return inflater.inflate(R.layout.fragment_base, container, false)
     }

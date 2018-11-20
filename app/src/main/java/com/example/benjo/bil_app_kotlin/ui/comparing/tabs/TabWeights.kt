@@ -3,7 +3,7 @@ package com.example.benjo.bil_app_kotlin.ui.comparing.tabs
 
 import com.example.benjo.bil_app_kotlin.ui.comparing.CompareRow
 import com.example.benjo.bil_app_kotlin.ui.comparing.constants
-import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.ComparData
+import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.CompareData
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.data.model.Compare
 import com.example.benjo.bil_app_kotlin.data.model.CompareWeights
@@ -17,7 +17,7 @@ class TabWeights: CompareRow() {
         val carOneData = getCarOneData((activity as HomeActivity).compare)
         val carTwoData = getCarTwoData((activity as HomeActivity).compare)
         list.add(
-                ComparData(
+                CompareData(
                         constants.TYPE_COMMONN,
                         string(R.string.title_compare_total_weight),
                         carModelOne,
@@ -26,7 +26,7 @@ class TabWeights: CompareRow() {
                         carTwoData.totalWeight)
         )
         list.add(
-                ComparData(
+                CompareData(
                         constants.TYPE_COMMONN,
                         string(R.string.title_compare_load_weight),
                         carModelOne,
@@ -36,7 +36,7 @@ class TabWeights: CompareRow() {
         )
 
         list.add(
-                ComparData(
+                CompareData(
                         constants.TYPE_COMMONN,
                         string(R.string.title_compare_trailer_weight),
                         carModelOne,
@@ -46,7 +46,7 @@ class TabWeights: CompareRow() {
         )
 
         list.add(
-                ComparData(
+                CompareData(
                         constants.TYPE_COMMONN,
                         string(R.string.title_compare_unbraked_trailer_weight),
                         carModelOne,
@@ -56,7 +56,7 @@ class TabWeights: CompareRow() {
         )
 
         list.add(
-                ComparData(
+                CompareData(
                         constants.TYPE_COMMONN,
                         string(R.string.title_compare_trailer_weight_b),
                         carModelOne,
@@ -66,7 +66,7 @@ class TabWeights: CompareRow() {
         )
 
         list.add(
-                ComparData(
+                CompareData(
                         constants.TYPE_COMMONN,
                         string(R.string.title_compare_trailer_weight_be),
                         carModelOne,

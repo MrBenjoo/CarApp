@@ -23,7 +23,7 @@ class TabTechOther : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         renderRecyclerAdapter = RendererAdapter()
 
-        val compareRowRenderer = CompareRowRenderer()
+        val compareRowRenderer = RendererCompareRow()
         compareRowRenderer.type = TYPE_COMMONN
 
         val techOtherRenderer = TechOtherRenderer()
@@ -58,7 +58,7 @@ class TabTechOther : BaseFragment() {
         }
 
 
-        list.add(ComparData(TYPE_COMMONN,
+        list.add(CompareData(TYPE_COMMONN,
                 string(R.string.title_compare_sound_level),
                 carModelOne,
                 carOneData.soundLevel,

@@ -5,7 +5,7 @@ import com.example.benjo.bil_app_kotlin.data.model.Compare
 import com.example.benjo.bil_app_kotlin.data.model.CompareMotor
 import com.example.benjo.bil_app_kotlin.ui.comparing.CompareRow
 import com.example.benjo.bil_app_kotlin.ui.comparing.constants.Companion.TYPE_COMMONN
-import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.ComparData
+import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.CompareData
 import com.example.benjo.bil_app_kotlin.ui.home.HomeActivity
 import com.example.benjo.bil_app_kotlin.R
 
@@ -17,7 +17,7 @@ class TabMotor : CompareRow() {
         val carOneData = getCarOneData((activity as HomeActivity).compare)
         val carTwoData = getCarTwoData((activity as HomeActivity).compare)
         list.add(
-                ComparData(
+                CompareData(
                         TYPE_COMMONN,
                         string(R.string.title_compare_horsepower),
                         carModelOne,
@@ -27,7 +27,7 @@ class TabMotor : CompareRow() {
                 )
         )
         list.add(
-                ComparData(
+                CompareData(
                         TYPE_COMMONN,
                         string(R.string.title_compare_kilowatt),
                         carModelOne,
@@ -37,7 +37,7 @@ class TabMotor : CompareRow() {
                 )
         )
         list.add(
-                ComparData(
+                CompareData(
                         TYPE_COMMONN,
                         string(R.string.title_compare_cylinder_volume),
                         carModelOne,
@@ -47,7 +47,7 @@ class TabMotor : CompareRow() {
                 )
         )
         list.add(
-                ComparData(
+                CompareData(
                         TYPE_COMMONN,
                         string(R.string.title_compare_top_speed),
                         carModelOne,

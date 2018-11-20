@@ -21,7 +21,7 @@ class CommonHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val barCarTwo = itemView.bar_comparing_model_two
 }
 
-data class ComparData(
+data class CompareData(
         val TYPE: Int = TYPE_COMMONN,
         val title: String?,
         val carModelOne: String?,
@@ -33,7 +33,7 @@ data class ComparData(
     override fun getType(): Int = TYPE
 }
 
-class CompareRowRenderer : Renderer<ComparData, CommonHolder>() {
+class RendererCompareRow : Renderer<CompareData, CommonHolder>() {
 
     override fun createViewHolder(parent: ViewGroup?): CommonHolder {
         return CommonHolder(
@@ -45,7 +45,7 @@ class CompareRowRenderer : Renderer<ComparData, CommonHolder>() {
         )
     }
 
-    override fun bindView(model: ComparData, holder: CommonHolder) {
+    override fun bindView(model: CompareData, holder: CommonHolder) {
         val carOneData = model.carOneData
         val carTwoData = model.carTwoData
 
@@ -55,9 +55,12 @@ class CompareRowRenderer : Renderer<ComparData, CommonHolder>() {
         holder.carModelTwo.text = model.carModelTwo ?: "NA"
         holder.carTwoData.text = model.carTwoData ?: "NA"
 
-        if (carOneData != null || carTwoData != null) {
-            holder.barCarOne.progress = Normalization(model.title!!, carOneData!!).perform()
-            holder.barCarTwo.progress = Normalization(model.title, carTwoData!!).perform()
+        if (carOneData != null ) {
+            holder.barCarOne.progress = Normalization(holder.title.text.toString(), carOneData).perform()
+        }
+        
+        if (carTwoData != null) {
+            holder.barCarTwo.progress = Normalization(holder.title.text.toString(), carTwoData).perform()
         }
     }
 

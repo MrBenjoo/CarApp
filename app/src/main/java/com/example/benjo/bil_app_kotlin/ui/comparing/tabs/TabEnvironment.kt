@@ -5,8 +5,8 @@ import android.view.View
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.ItemModel
 import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.RendererAdapter
-import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.CompareRowRenderer
-import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.ComparData
+import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.RendererCompareRow
+import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.CompareData
 import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.EnvModel
 import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.EnvRender
 import com.example.benjo.bil_app_kotlin.R
@@ -31,7 +31,7 @@ class TabEnvironment : BaseFragment() {
         val list = arrayListOf<ItemModel>()
 
         val envRenderer = EnvRender()
-        val commonRenderer = CompareRowRenderer()
+        val commonRenderer = RendererCompareRow()
 
         commonRenderer.type = TYPE_COMMONN
         envRenderer.type = TYPE_ENVIRONMENT
@@ -69,28 +69,28 @@ class TabEnvironment : BaseFragment() {
                     transType(carTwoData.transmission)
             ))
 
-            list.add(ComparData(TYPE_COMMONN,
+            list.add(CompareData(TYPE_COMMONN,
                     string(R.string.title_compare_consumption),
                     carModelOne,
                     carOneData.consumption,
                     carModelTwo,
                     carTwoData.consumption))
 
-            list.add(ComparData(TYPE_COMMONN,
+            list.add(CompareData(TYPE_COMMONN,
                     string(R.string.title_compare_co2),
                     carModelOne,
                     carOneData.co2,
                     carModelTwo,
                     carTwoData.co2))
 
-            list.add(ComparData(TYPE_COMMONN,
+            list.add(CompareData(TYPE_COMMONN,
                     string(R.string.title_compare_nox),
                     carModelOne,
                     carOneData.nox,
                     carModelTwo,
                     carTwoData.nox))
 
-            list.add(ComparData(TYPE_COMMONN,
+            list.add(CompareData(TYPE_COMMONN,
                     string(R.string.title_compare_thc_nox),
                     carModelOne,
                     carOneData.thcNox,
