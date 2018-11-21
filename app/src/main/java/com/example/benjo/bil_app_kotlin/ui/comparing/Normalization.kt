@@ -1,4 +1,4 @@
-package com.example.benjo.bil_app_kotlin.data.model
+package com.example.benjo.bil_app_kotlin.ui.comparing
 
 
 import com.example.benjo.bil_app_kotlin.R

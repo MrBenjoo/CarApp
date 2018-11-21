@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.data.model.Normalization
+import com.example.benjo.bil_app_kotlin.ui.comparing.Normalization
 import com.example.benjo.bil_app_kotlin.utils.Constants.Companion.RENDERER_TYPE_COMMON
 import kotlinx.android.synthetic.main.view_compare_row_include.view.*
 

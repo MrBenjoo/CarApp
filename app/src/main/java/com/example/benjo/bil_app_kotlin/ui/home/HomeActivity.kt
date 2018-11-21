@@ -8,7 +8,7 @@ import android.util.Log
 import android.view.View
 import androidx.navigation.findNavController
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.data.model.Compare
+import com.example.benjo.bil_app_kotlin.ui.comparing.Compare
 import com.example.benjo.bil_app_kotlin.domain.Result
 import com.example.benjo.bil_app_kotlin.data.repository.CarRepositoryImpl
 import com.example.benjo.bil_app_kotlin.data.room.CarDataBase

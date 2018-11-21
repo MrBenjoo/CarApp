@@ -3,12 +3,10 @@ package com.example.benjo.bil_app_kotlin.ui.comparing
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.data.model.Compare
 import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.ItemModel
 import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.RendererAdapter
 import com.example.benjo.bil_app_kotlin.utils.Constants.Companion.EVENT_GET_COMPARE_DATA

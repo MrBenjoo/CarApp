@@ -1,8 +1,8 @@
 package com.example.benjo.bil_app_kotlin.utils
 
-import com.example.benjo.bil_app_kotlin.data.model.*
 import com.example.benjo.bil_app_kotlin.domain.*
 import com.example.benjo.bil_app_kotlin.domain.Technical
+import com.example.benjo.bil_app_kotlin.ui.comparing.*
 
 
 class JsonCompare {

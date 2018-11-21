@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.data.model.Row
+import com.example.benjo.bil_app_kotlin.ui.tab.Row
 import kotlinx.android.synthetic.main.item_tabs_row.view.*
 
 class BasicAdapter(val data: ArrayList<Row>?) : RecyclerView.Adapter<BasicAdapter.BasicViewHolder>() {

@@ -1,7 +1,10 @@
-package com.example.benjo.bil_app_kotlin.utils
+package com.example.benjo.bil_app_kotlin.domain
 
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.data.model.Row
+import com.example.benjo.bil_app_kotlin.ui.tab.Row
+import com.example.benjo.bil_app_kotlin.utils.Constants
+import com.example.benjo.bil_app_kotlin.utils.ExplanationHandler
+import com.example.benjo.bil_app_kotlin.utils.MemoryLeaks
 
 class JsonHandler {
 

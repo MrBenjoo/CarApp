@@ -3,8 +3,8 @@ package com.example.benjo.bil_app_kotlin.ui.basic
 
 import android.util.Log
 import android.util.MalformedJsonException
-import com.example.benjo.bil_app_kotlin.utils.JsonHandler
-import com.example.benjo.bil_app_kotlin.data.model.Row
+import com.example.benjo.bil_app_kotlin.domain.JsonHandler
+import com.example.benjo.bil_app_kotlin.ui.tab.Row
 import com.example.benjo.bil_app_kotlin.ui.tab.TabsContract
 import com.google.gson.GsonBuilder
 import com.example.benjo.bil_app_kotlin.domain.Result

@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
-import com.example.benjo.bil_app_kotlin.data.model.Compare
+import com.example.benjo.bil_app_kotlin.ui.comparing.Compare
 import com.example.benjo.bil_app_kotlin.utils.Constants
 import kotlinx.android.synthetic.main.fragment_wheels.*
 import org.greenrobot.eventbus.EventBus

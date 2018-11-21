@@ -6,8 +6,7 @@ import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "carDataTable")
 data class CarData(@PrimaryKey(autoGenerate = true)
-                   @ColumnInfo(name = "id")
-                   var id: Long?,
+                   @ColumnInfo(name = "id") var id: Long?,
                    @ColumnInfo(name = "reg") var reg: String,
                    @ColumnInfo(name = "model") var model: String,
                    @ColumnInfo(name = "modelYear") var modelYear: String,
