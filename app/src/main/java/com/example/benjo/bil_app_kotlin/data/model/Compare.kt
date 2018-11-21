@@ -42,7 +42,7 @@ data class Compare(val carOneData: CompareData?, val carTwoData: CompareData?) {
     fun vehicleDataOne(): CompareVehicleData? = carOneData?.vehicle
 
 
-    fun vehicleDataTwo(): CompareVehicleData? = carTwoData?.vehicle
+    fun vehicleDataTwo(): CompareVehicleData? = carTwoData?.vehicle 
 
 }
 
