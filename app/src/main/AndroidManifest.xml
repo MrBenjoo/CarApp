@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.benjo.bil_app_kotlin.ui.home.HomeActivity"
+            android:name="com.example.benjo.bil_app_kotlin.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>

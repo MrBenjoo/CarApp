@@ -10,7 +10,7 @@ import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.ui.comparing.CompareAdapter
 import com.example.benjo.bil_app_kotlin.ui.comparing.CompareMenuView
-import com.example.benjo.bil_app_kotlin.ui.home.HomeActivity
+import com.example.benjo.bil_app_kotlin.MainActivity
 import com.example.benjo.bil_app_kotlin.utils.builder.FragmentToolbar
 
 import kotlinx.android.synthetic.main.fragment_compare_parent.*
@@ -40,11 +40,11 @@ class ParentView : BaseFragment() {
         // Build toolbar
         ToolbarManager(builder(), view).prepareToolbar()
 
-        Log.d("ParentView", (activity as HomeActivity).compare.toString())
+        Log.d("ParentView", (activity as MainActivity).compare.toString())
 
     }
 
-    private fun prepareFragmentsMap() = when ((activity as HomeActivity).selected) {
+    private fun prepareFragmentsMap() = when ((activity as MainActivity).selected) {
         CompareMenuView.TEKNISK -> {
             mapFragments["Motor"] = MotorView()
             mapFragments["Miljö"] = EnvironmentView()

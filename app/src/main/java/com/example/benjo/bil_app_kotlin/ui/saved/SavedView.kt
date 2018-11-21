@@ -8,12 +8,14 @@ import android.support.v7.widget.Toolbar
 import android.view.ActionMode
 
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.ui.home.HomeActivity
+import com.example.benjo.bil_app_kotlin.MainActivity
 import com.example.benjo.bil_app_kotlin.data.room.CarData
 import kotlinx.android.synthetic.main.dialog_delete_car.view.*
 import android.view.*
 import androidx.navigation.Navigation
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
+import com.example.benjo.bil_app_kotlin.data.repository.CarRepositoryImpl
+import com.example.benjo.bil_app_kotlin.data.room.CarDataBase
 import com.example.benjo.bil_app_kotlin.domain.Result
 import com.example.benjo.bil_app_kotlin.utils.builder.FragmentToolbar
 import com.example.benjo.bil_app_kotlin.utils.builder.ToolbarManager
@@ -71,7 +73,7 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback {
 
     override fun showCar(car: CarData) {
         showText("showCar: " + car.vin + " (TODO)")
-        (activity as HomeActivity).resultCar1 = GsonBuilder().create().fromJson(car.json, Result::class.java)
+        (activity as MainActivity).resultCar1 = GsonBuilder().create().fromJson(car.json, Result::class.java)
         Navigation.findNavController(this.view!!).navigate(R.id.tabsFragment)
     }
 
@@ -86,7 +88,8 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (context is HomeActivity) presenter = context.savedPresenter
+        presenter = SavedPresenter(
+                CarRepositoryImpl(CarDataBase.getInstance(context!!)!!), SavedAdapter())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -14,7 +14,8 @@ import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.data.repository.CarRepositoryImpl
 import com.example.benjo.bil_app_kotlin.data.room.CarDataBase
 import com.example.benjo.bil_app_kotlin.domain.Result
-import com.example.benjo.bil_app_kotlin.ui.home.HomeActivity
+import com.example.benjo.bil_app_kotlin.MainActivity
+
 import com.example.benjo.bil_app_kotlin.ui.basic.BasicView
 import com.example.benjo.bil_app_kotlin.ui.history.HistoryFragment
 import com.example.benjo.bil_app_kotlin.ui.tech.TechView
@@ -23,6 +24,7 @@ import com.example.benjo.bil_app_kotlin.utils.ConnectivityHandler
 import com.example.benjo.bil_app_kotlin.utils.Constants
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_tabs.*
+import org.greenrobot.eventbus.EventBus
 
 
 class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.ViewTabs {
@@ -48,7 +50,7 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
                 // vilket resultera i att search funktionen returnerade result
                 // som var null eftersom launch inte väntade på resultatet.
                 // Detta fixade jag genom att i search funktionen vänta på resultatet
-                // och sen anropa (activity as HomeActivity).saveResultCar1(result)
+                // och sen anropa (activity as MainActivity).saveResultCar1(result)
                 // via view.updateResult(result: Result)
                 presenter.search(reg?.trim())
             }
@@ -69,21 +71,20 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
     }
 
     override fun showCompareView(result: Result) {
-        val homeActivity = activity as HomeActivity
+        val homeActivity = activity as MainActivity
         onCloseSearchCompare()
-        homeActivity.saveResultCar2(result)
         // convert the cars result to json and send it to CompareMenuView to compare
         val gson = GsonBuilder().create()
         val action = TabsViewDirections.actionTabsFragmentToMenuFragment(
                 gson.toJson(homeActivity.resultCar1),
-                gson.toJson(homeActivity.resultCar2))
+                gson.toJson(result))
 
         // navigate to CompareMenuView
         Navigation.findNavController(view!!).navigate(action)
     }
 
     private fun onImgSaveClick() {
-        val result = (activity as HomeActivity).resultCar1
+        val result = (activity as MainActivity).resultCar1
         presenter.onImgSaveClicked(result)
     }
 
@@ -125,7 +126,7 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
     }
 
     override fun updateResult(result: Result) {
-        (activity as HomeActivity).saveResultCar1(result)
+        EventBus.getDefault().post(result)
     }
 
     override fun onCloseSearchCompare(): Boolean {
@@ -176,7 +177,7 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
 
     override fun onPause() {
         super.onPause()
-        (activity as HomeActivity).unregisterReceiver(receiver)
+        (activity as MainActivity).unregisterReceiver(receiver)
     }
 
     override fun onQueryTextChange(newText: String?): Boolean = false

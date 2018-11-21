@@ -78,8 +78,8 @@ class WeightsView : BaseCompareView() {
 
     /*
     override fun initlistOfItems() {
-        val carOneData? = getcarOneData?((activity as HomeActivity).compare)
-        val carTwoData? = getcarTwoData?((activity as HomeActivity).compare)
+        val carOneData? = getcarOneData?((activity as MainActivity).compare)
+        val carTwoData? = getcarTwoData?((activity as MainActivity).compare)
         listOfItems.add(
                 CompareData(
                         RENDERER_TYPE_COMMON,

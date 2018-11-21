@@ -6,6 +6,7 @@ import com.example.benjo.bil_app_kotlin.domain.SearchRegProvider
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.*
+import org.greenrobot.eventbus.EventBus
 import kotlin.coroutines.CoroutineContext
 
 
@@ -34,7 +35,8 @@ class HomePresenter : HomeContract.Presenter, CoroutineScope {
         /* ------------------------------------------------------------- Används endast för att testa UI -------------------------------------------------------------*/
         val jsonCarOne = CommonUtils().loadJSONFromAsset(view.getContext(), "bil_1.json")
         val result = GsonBuilder().create().fromJson(jsonCarOne, Result::class.java)
-        view.saveJsonAndOpenTabs(result) // sparar json i homeactivity
+        EventBus.getDefault().post(result) // saves the result in MainActivity and updates Basic- and TechView list
+        view.navigateToTabs()
     }
 
     private suspend fun searchReal(reg: String?): Result? {
@@ -44,7 +46,8 @@ class HomePresenter : HomeContract.Presenter, CoroutineScope {
         if (response.isSuccessful) {
             result = response.body()
             if (result != null) {
-                    view.saveJsonAndOpenTabs(result)
+                EventBus.getDefault().post(result) // saves the result in MainActivity and updates Basic- and TechView list
+                view.navigateToTabs()
             } else Log.d(TAG, "searchReal($reg) -> result == null")
         } else view.showResponseCode(response.code())
         return result

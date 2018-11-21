@@ -7,7 +7,7 @@ import com.example.benjo.bil_app_kotlin.domain.Result
 interface HomeContract {
 
     interface View : BaseView<Presenter> {
-        fun saveJsonAndOpenTabs(result: Result?)
+        fun navigateToTabs()
         fun showResponseCode(code: Int)
     }
 

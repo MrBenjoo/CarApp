@@ -4,12 +4,11 @@ package com.example.benjo.bil_app_kotlin.ui.home
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.SearchView
+import android.util.Log
 import android.view.View
 import androidx.navigation.Navigation
-
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
-import com.example.benjo.bil_app_kotlin.domain.Result
 import com.example.benjo.bil_app_kotlin.ui.tab.TabsView
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -22,15 +21,15 @@ class HomeView : BaseFragment(), SearchView.OnQueryTextListener, HomeContract.Vi
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (context is HomeActivity) presenter = context.presenter
+        presenter = HomePresenter()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        presenter.attachView(this)
         tv_saved.setOnClickListener { Navigation.findNavController(it).navigate(R.id.savedFragment) }
         tv_settings.setOnClickListener { Navigation.findNavController(it).navigate(R.id.settingsFragment) }
         home_search_view.setOnQueryTextListener(this)
-        presenter.attachView(this)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean = when (query?.length) {
@@ -51,10 +50,7 @@ class HomeView : BaseFragment(), SearchView.OnQueryTextListener, HomeContract.Vi
         else tv_compare.visibility = View.GONE
     }
 
-    override  fun saveJsonAndOpenTabs(result: Result?) {
-        (activity as HomeActivity).resultCar1 = result
-        Navigation.findNavController(this.view!!).navigate(R.id.tabsFragment)
-    }
+    override fun navigateToTabs() = Navigation.findNavController(this.view!!).navigate(R.id.tabsFragment)
 
     override fun onQueryTextChange(newText: String?): Boolean = false
 

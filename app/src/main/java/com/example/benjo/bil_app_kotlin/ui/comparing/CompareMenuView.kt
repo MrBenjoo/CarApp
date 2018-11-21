@@ -9,7 +9,7 @@ import androidx.navigation.Navigation
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.domain.Result
-import com.example.benjo.bil_app_kotlin.ui.home.HomeActivity
+import com.example.benjo.bil_app_kotlin.MainActivity
 import com.example.benjo.bil_app_kotlin.utils.JsonCompare
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.Entry
@@ -43,7 +43,7 @@ class CompareMenuView : BaseFragment(), OnChartValueSelectedListener {
         initPieData()
         initPieChart()
         navController = Navigation.findNavController(view)
-        (activity as HomeActivity).compare = with(CompareMenuViewArgs.fromBundle(arguments)) {
+        (activity as MainActivity).compare = with(CompareMenuViewArgs.fromBundle(arguments)) {
             setupCompareJson(firstJson, secondJson)!!
         }
     }
@@ -90,15 +90,15 @@ class CompareMenuView : BaseFragment(), OnChartValueSelectedListener {
 
     override fun onValueSelected(e: Entry?, h: Highlight?) = when (e?.y) {
         TEKNISK -> {
-            (activity as HomeActivity).selected = TEKNISK
+            (activity as MainActivity).selected = TEKNISK
             navController.navigate(R.id.baseCompareFragment)
         }
         DIMENSIONER -> {
-            (activity as HomeActivity).selected = DIMENSIONER
+            (activity as MainActivity).selected = DIMENSIONER
             navController.navigate(R.id.baseCompareFragment)
         }
         FORDONSDATA -> {
-            (activity as HomeActivity).selected = FORDONSDATA
+            (activity as MainActivity).selected = FORDONSDATA
             navController.navigate(R.id.baseCompareFragment)
         }
         else -> Unit
