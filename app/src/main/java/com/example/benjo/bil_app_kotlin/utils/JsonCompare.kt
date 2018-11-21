@@ -40,12 +40,12 @@ class JsonCompare {
                 setupTechOtherData(carResult?.data))
     }
 
-    private fun setupMotorData(data: TechnicalData?): CompareMotor? {
+    private fun setupMotorData(data: TechnicalInfo?): CompareMotor? {
         return CompareMotor(data?.power_hp_1, data?.power_kw_1,
                 data?.cylinder_volume, data?.top_speed)
     }
 
-    private fun setupEnvironmentData(data: TechnicalData?): CompareEnvironment? {
+    private fun setupEnvironmentData(data: TechnicalInfo?): CompareEnvironment? {
         if (data != null) {
             with(data) {
                 return CompareEnvironment(fuel_1, consumption_1, co2_1, transmission,
@@ -55,7 +55,7 @@ class JsonCompare {
         return null
     }
 
-    private fun setupTechOtherData(data: TechnicalData?): CompareTechnicalOther? {
+    private fun setupTechOtherData(data: TechnicalInfo?): CompareTechnicalOther? {
         if (data != null) {
             with(data) {
                 return CompareTechnicalOther(sound_level_1, number_of_passengers, passenger_airbag, hitch)
@@ -71,11 +71,11 @@ class JsonCompare {
                 setupDimensOtherData(technical?.data))
     }
 
-    private fun setupWheels(data: TechnicalData?): CompareWheels = with(data!!) {
+    private fun setupWheels(data: TechnicalInfo?): CompareWheels = with(data!!) {
         CompareWheels(tire_front, tire_back, rim_front, rim_back)
     }
 
-    private fun setupWeights(data: TechnicalData?): CompareWeights = with(data!!) {
+    private fun setupWeights(data: TechnicalInfo?): CompareWeights = with(data!!) {
         CompareWeights(kerb_weight,
                 total_weight,
                 load_weight,
@@ -86,7 +86,7 @@ class JsonCompare {
                 carriage_weight)
     }
 
-    private fun setupDimensOtherData(data: TechnicalData?): CompareDimensionOther? {
+    private fun setupDimensOtherData(data: TechnicalInfo?): CompareDimensionOther? {
         return CompareDimensionOther(data?.length, data?.width, data?.height, data?.axel_width)
     }
 

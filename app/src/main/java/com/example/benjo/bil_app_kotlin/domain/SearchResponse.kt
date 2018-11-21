@@ -11,7 +11,7 @@ data class Attributes(val regno: String?, val vin: String?)
 
 data class Basic(val data: BasicInfo?)
 
-data class Technical(val data: TechnicalData?)
+data class Technical(val data: TechnicalInfo?)
 
 data class BasicInfo(
         val make: String?,
@@ -23,7 +23,7 @@ data class BasicInfo(
         val model_year: String?
 )
 
-data class TechnicalData(
+data class TechnicalInfo(
         val power_hp_1: String?,
         val power_hp_2: String?,
         val power_hp_3: String?,

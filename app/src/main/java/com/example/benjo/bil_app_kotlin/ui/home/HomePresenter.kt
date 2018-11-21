@@ -22,11 +22,11 @@ class HomePresenter : HomeContract.Presenter, CoroutineScope {
         get() = Dispatchers.Main + jobTracker
 
     override fun search(reg: String?) {
-        launch {
+       /* launch {
             async { searchReal(reg) }.await()
-        }
+        }*/
 
-       // processResponse(null) // test...
+        processResponse(null) // test...
 
     }
 

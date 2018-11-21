@@ -24,8 +24,8 @@ class TabsPresenter(val view: TabsContract.ViewTabs, val carRepository: CarRepos
     override fun search(reg: String?) {
         Log.d(TAG, "search($reg) -> before searchReal($reg)")
         launch {
-            async { searchReal(reg) }.await()
-            //async { searchFake(reg) }.await()
+            //async { searchReal(reg) }.await()
+            async { searchFake(reg) }.await()
         }
     }
 
@@ -91,7 +91,7 @@ class TabsPresenter(val view: TabsContract.ViewTabs, val carRepository: CarRepos
             val vin = attributes.vin!!
             val json = GsonBuilder().create().toJson(result)
             for (i in 0..10) {
-                saveToDatabase(CarData(i.toLong(), reg, model, modelYear, type, i.toString()/*vin*/, json))
+                //saveToDatabase(CarData(i.toLong(), reg, model, modelYear, type, i.toString()/*vin*/, json))
             }
         }
     }

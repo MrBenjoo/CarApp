@@ -81,10 +81,12 @@ class CompareMenuView : BaseFragment(), OnChartValueSelectedListener {
         piechart_menu.setOnChartValueSelectedListener(this)
     }
 
+
     private fun setupCompareJson(firstJson: String, secondJson: String): Compare? {
-        return JsonCompare().setupCompareJson(
+       return JsonCompare().setupCompareJson(
                 GsonBuilder().create().fromJson(firstJson, Result::class.java),
                 GsonBuilder().create().fromJson(secondJson, Result::class.java))
+        return null
     }
 
     override fun onValueSelected(e: Entry?, h: Highlight?) = when (e?.y) {

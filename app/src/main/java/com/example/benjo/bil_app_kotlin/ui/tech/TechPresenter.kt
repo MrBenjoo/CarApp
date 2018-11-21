@@ -40,11 +40,11 @@ class TechPresenter(val adapter: SectionedRecyclerViewAdapter) : TabsContract.Te
 
     }
 
-    private fun updateTechSections(map: HashMap<String, String?>?) {
+    private fun updateTechSections(map: HashMap<String, String?>) {
         with(JsonHandler()) {
-            val techSection = techSection(map)
-            val dimensionsSection = dimensionsSection(map)
-            val otherSection = otherSection(map)
+            val techSection = technicalSectionList(map)
+            val dimensionsSection = dimensionsSectionList(map)
+            val otherSection = otherSectionList(map)
             adapter.removeAllSections()
             if (!techSection.isEmpty()) updateList("Teknisk data", techSection)
             if (!dimensionsSection.isEmpty()) updateList("Dimensioner", dimensionsSection)
