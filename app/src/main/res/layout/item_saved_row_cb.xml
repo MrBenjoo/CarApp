@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="10dp"
-        android:text="model:"
+        android:text="techModel:"
         android:textColor="@color/colorBlack400"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"

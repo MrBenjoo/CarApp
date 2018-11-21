@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/baseCompareFragment"
-        android:name="com.example.benjo.bil_app_kotlin.ui.comparing.tabs.TabViewParent"
+        android:name="com.example.benjo.bil_app_kotlin.ui.comparing.view.ParentView"
         android:label="fragment_base_compare"
         tools:layout="@layout/fragment_compare_parent" />
 

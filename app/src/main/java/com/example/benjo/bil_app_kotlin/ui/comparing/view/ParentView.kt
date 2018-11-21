@@ -1,4 +1,4 @@
-package com.example.benjo.bil_app_kotlin.ui.comparing.tabs
+package com.example.benjo.bil_app_kotlin.ui.comparing.view
 
 
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.View
 import com.example.benjo.bil_app_kotlin.utils.builder.ToolbarManager
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
+import com.example.benjo.bil_app_kotlin.ui.comparing.CompareAdapter
 import com.example.benjo.bil_app_kotlin.ui.comparing.CompareMenuView
 import com.example.benjo.bil_app_kotlin.ui.home.HomeActivity
 import com.example.benjo.bil_app_kotlin.utils.builder.FragmentToolbar
@@ -15,7 +16,7 @@ import com.example.benjo.bil_app_kotlin.utils.builder.FragmentToolbar
 import kotlinx.android.synthetic.main.fragment_compare_parent.*
 
 
-class TabViewParent : BaseFragment() {
+class ParentView : BaseFragment() {
     private var mapFragments = HashMap<String, Fragment>()
 
 
@@ -24,7 +25,7 @@ class TabViewParent : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapterTabsPage = TabCompareAdapter(childFragmentManager)
+        val adapterTabsPage = CompareAdapter(childFragmentManager)
         viewpager_compare_parent.adapter = adapterTabsPage
 
         // Add fragments to map
@@ -39,23 +40,23 @@ class TabViewParent : BaseFragment() {
         // Build toolbar
         ToolbarManager(builder(), view).prepareToolbar()
 
-        Log.d("TabViewParent", (activity as HomeActivity).compare.toString())
+        Log.d("ParentView", (activity as HomeActivity).compare.toString())
 
     }
 
     private fun prepareFragmentsMap() = when ((activity as HomeActivity).selected) {
         CompareMenuView.TEKNISK -> {
-            mapFragments["Motor"] = TabMotor()
-            mapFragments["Miljö"] = TabEnvironment()
-            mapFragments["Övrigt"] = TabTechOther()
+            mapFragments["Motor"] = MotorView()
+            mapFragments["Miljö"] = EnvironmentView()
+            mapFragments["Övrigt"] = OtherTechView()
         }
         CompareMenuView.DIMENSIONER -> {
-            mapFragments["Vikter"] = TabWeights()
-            mapFragments["Hjul"] = TabWheels()
-            mapFragments["Övrigt"] = TabDimensionOther()
+            mapFragments["Vikter"] = WeightsView()
+            mapFragments["Hjul"] = WheelsView()
+            mapFragments["Övrigt"] = OtherDimensionsView()
         }
         CompareMenuView.FORDONSDATA -> {
-            mapFragments["Fordonsdata"] = TabFordonsData()
+            mapFragments["Fordonsdata"] = VehicleView()
         }
         else -> Unit
     }

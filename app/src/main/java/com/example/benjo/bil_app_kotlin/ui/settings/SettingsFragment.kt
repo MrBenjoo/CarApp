@@ -13,12 +13,17 @@ import com.example.benjo.bil_app_kotlin.domain.Result
 import com.example.benjo.bil_app_kotlin.ui.home.HomeContract
 
 class SettingsFragment : Fragment(), HomeContract.View {
+
+    override fun showResponseCode(code: Int) {
+
+    }
+
     override fun showText(text: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun saveJsonAndOpenTabs(result: Result?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
 

@@ -8,6 +8,7 @@ interface HomeContract {
 
     interface View : BaseView<Presenter> {
         fun saveJsonAndOpenTabs(result: Result?)
+        fun showResponseCode(code: Int)
     }
 
     interface Presenter : BasePresenter<View> {

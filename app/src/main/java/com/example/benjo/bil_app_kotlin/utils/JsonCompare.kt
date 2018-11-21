@@ -14,12 +14,14 @@ class JsonCompare {
     private fun setupCarOne(car1Result: Result?): CompareData? =
             CompareData(setupVehicleData(car1Result?.carInfo),
                     setupTechnicalData(car1Result?.carInfo?.technical),
-                    setupDimensionData(car1Result?.carInfo?.technical))
+                    setupDimensionData(car1Result?.carInfo?.technical),
+                    car1Result?.carInfo?.basic?.data?.model)
 
     private fun setupCarTwo(car2Result: Result?): CompareData? =
             CompareData(setupVehicleData(car2Result?.carInfo),
                     setupTechnicalData(car2Result?.carInfo?.technical),
-                    setupDimensionData(car2Result?.carInfo?.technical))
+                    setupDimensionData(car2Result?.carInfo?.technical),
+                    car2Result?.carInfo?.basic?.data?.model)
 
 
     private fun setupVehicleData(carInfo: CarInfo?): CompareVehicleData? {
@@ -78,9 +80,9 @@ class JsonCompare {
                 total_weight,
                 load_weight,
                 trailer_weight,
-                unbraked_trailer_weight,
                 trailer_weight_b,
                 trailer_weight_be,
+                unbraked_trailer_weight,
                 carriage_weight)
     }
 

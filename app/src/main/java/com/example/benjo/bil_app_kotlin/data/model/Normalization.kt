@@ -62,5 +62,4 @@ data class Normalization(val dimension: String, val value: String/*Int*/) {
         return 0
     }
 
-
 }

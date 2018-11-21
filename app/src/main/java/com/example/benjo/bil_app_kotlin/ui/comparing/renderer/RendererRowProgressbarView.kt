@@ -4,36 +4,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.benjo.bil_app_kotlin.ui.comparing.constants.Companion.TYPE_COMMONN
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.data.model.Normalization
+import com.example.benjo.bil_app_kotlin.utils.Constants.Companion.RENDERER_TYPE_COMMON
 import kotlinx.android.synthetic.main.view_compare_row_include.view.*
 
-class CommonHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val title = itemView.tv_comparing_title
 
-    val carModelOne = itemView.tv_comparing_model_one
-    val carOneData = itemView.tv_compare_row_text_model_one_val
-    val barCarOne = itemView.bar_comparing_model_one
-
-    val carModelTwo = itemView.tv_comparing_model_two
-    val carTwoData = itemView.tv_comparing_model_two_val
-    val barCarTwo = itemView.bar_comparing_model_two
-}
-
-data class CompareData(
-        val TYPE: Int = TYPE_COMMONN,
-        val title: String?,
-        val carModelOne: String?,
-        val carOneData: String?,
-        val carModelTwo: String?,
-        val carTwoData: String?
-) : ItemModel {
-
-    override fun getType(): Int = TYPE
-}
-
-class RendererCompareRow : Renderer<CompareData, CommonHolder>() {
+class RendererRowProgressbarView : Renderer<CompareData, CommonHolder>() {
 
     override fun createViewHolder(parent: ViewGroup?): CommonHolder {
         return CommonHolder(
@@ -49,19 +26,44 @@ class RendererCompareRow : Renderer<CompareData, CommonHolder>() {
         val carOneData = model.carOneData
         val carTwoData = model.carTwoData
 
-        holder.title.text = model.title ?: "N/A"
-        holder.carModelOne.text = model.carModelOne ?: "NA"
+        holder.title.text = model.title
+        holder.carOneModel.text = model.carOneModel ?: "NA"
         holder.carOneData.text = model.carOneData ?: "NA"
-        holder.carModelTwo.text = model.carModelTwo ?: "NA"
+        holder.carTwoModel.text = model.carTwoModel ?: "NA"
         holder.carTwoData.text = model.carTwoData ?: "NA"
 
-        if (carOneData != null ) {
+        if (carOneData != null) {
             holder.barCarOne.progress = Normalization(holder.title.text.toString(), carOneData).perform()
         }
-        
+
         if (carTwoData != null) {
             holder.barCarTwo.progress = Normalization(holder.title.text.toString(), carTwoData).perform()
         }
     }
 
 }
+
+data class CompareData(
+        val TYPE: Int = RENDERER_TYPE_COMMON,
+        val title: String,
+        val carOneModel: String?,
+        val carOneData: String?,
+        val carTwoModel: String?,
+        val carTwoData: String?
+) : ItemModel {
+
+    override fun getType(): Int = TYPE
+}
+
+class CommonHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    val title = itemView.tv_comparing_title
+
+    val carOneModel = itemView.tv_comparing_model_one
+    val carOneData = itemView.tv_compare_row_text_model_one_val
+    val barCarOne = itemView.bar_comparing_model_one
+
+    val carTwoModel = itemView.tv_comparing_model_two
+    val carTwoData = itemView.tv_comparing_model_two_val
+    val barCarTwo = itemView.bar_comparing_model_two
+}
+

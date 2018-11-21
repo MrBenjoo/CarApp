@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.ui.comparing.constants.Companion.TYPE_ENVIRONMENT
+import com.example.benjo.bil_app_kotlin.utils.Constants.Companion.RENDERER_TYPE_ENVIRONMENT
 import kotlinx.android.synthetic.main.view_compare_text_include.view.*
 import kotlinx.android.synthetic.main.fragment_environment.view.*
 
-class EnvRender : Renderer<EnvModel, EnvViewHolder>() {
+class RendererEnvironmentView : Renderer<EnvModel, EnvironmentViewHolder>() {
 
-    override fun createViewHolder(parent: ViewGroup?): EnvViewHolder {
-        return EnvViewHolder(
+    override fun createViewHolder(parent: ViewGroup?): EnvironmentViewHolder {
+        return EnvironmentViewHolder(
                 LayoutInflater.from(parent?.context).inflate(
                         R.layout.fragment_environment,
                         parent,
@@ -21,27 +21,27 @@ class EnvRender : Renderer<EnvModel, EnvViewHolder>() {
         )
     }
 
-    override fun bindView(model: EnvModel, holder: EnvViewHolder) {
+    override fun bindView(model: EnvModel, holder: EnvironmentViewHolder) {
         with(holder) {
-            fuelTitle.text = model.fuelTitle ?: "N/A"
+            fuelTitle.text = model.fuelTitle
             fuelCarOne.text = model.fuelCarOne ?: "N/A"
             fuelCarOneVal.text = model.fuelCarOneVal ?: "N/A"
             fuelCarTwo.text = model.fuelCarTwo ?: "N/A"
             fuelCarTwoVal.text = model.fuelCarTwoVal ?: "N/A"
 
-            ecoTitle.text = model.ecoTitle ?: "N/A"
+            ecoTitle.text = model.ecoTitle
             ecoCarOne.text = model.ecoCarOne ?: "N/A"
             ecoCarOneVal.text = model.ecoCarOneVal ?: "N/A"
             ecoCarTwo.text = model.ecoCarTwo ?: "N/A"
             ecoCarTwoVal.text = model.ecoCarTwoVal ?: "N/A"
 
-            fourTitle.text = model.fourTitle ?: "N/A"
+            fourTitle.text = model.fourTitle
             fourCarOne.text = model.fourCarOne ?: "N/A"
             fourCarOneVal.text = model.fourCarOneVal ?: "N/A"
             fourCarTwo.text = model.fourCarTwo ?: "N/A"
             fourCarTwoVal.text = model.fourCarTwoVal ?: "N/A"
 
-            transmissionTitle.text = model.transmissionTitle ?: "N/A"
+            transmissionTitle.text = model.transmissionTitle
             transmissionCarOne.text = model.transmissionCarOne ?: "N/A"
             transmissionCarOneVal.text = model.transmissionCarOneVal ?: "N/A"
             transmissionCarTwo.text = model.transmissionCarTwo ?: "N/A"
@@ -51,7 +51,7 @@ class EnvRender : Renderer<EnvModel, EnvViewHolder>() {
 }
 
 data class EnvModel(
-        val TYPE: Int = TYPE_ENVIRONMENT,
+        val TYPE: Int = RENDERER_TYPE_ENVIRONMENT,
         val fuelTitle: String,
         val fuelCarOne: String?,
         val fuelCarOneVal: String?,
@@ -77,7 +77,7 @@ data class EnvModel(
 }
 
 
-class EnvViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class EnvironmentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val fuelTitle = itemView.fuel.tv_compare_title
     val fuelCarOne = itemView.fuel.tv_compare_car_one
     val fuelCarOneVal = itemView.fuel.tv_compare_car_one_val

@@ -58,4 +58,6 @@ class HomeView : BaseFragment(), SearchView.OnQueryTextListener, HomeContract.Vi
 
     override fun onQueryTextChange(newText: String?): Boolean = false
 
+    override fun showResponseCode(code: Int) = showText("Response code: " + code.toString())
+
 }

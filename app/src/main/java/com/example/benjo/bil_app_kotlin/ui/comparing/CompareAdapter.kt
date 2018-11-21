@@ -1,10 +1,10 @@
-package com.example.benjo.bil_app_kotlin.ui.comparing.tabs
+package com.example.benjo.bil_app_kotlin.ui.comparing
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 
-class TabCompareAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
+class CompareAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
     private val fragmentList = arrayListOf<Fragment?>()
     private val titleList = arrayListOf<String>()
 

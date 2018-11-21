@@ -24,8 +24,8 @@ class TabsPresenter(val view: TabsContract.ViewTabs, val carRepository: CarRepos
     override fun search(reg: String?) {
         Log.d(TAG, "search($reg) -> before searchReal($reg)")
         launch {
-            //async { searchReal(reg) }.await()
-            async { searchFake(reg) }.await()
+            async { searchReal(reg) }.await()
+            //async { searchFake(reg) }.await()
         }
     }
 

@@ -74,5 +74,14 @@ class Constants {
         const val EMISS_CLASS = "emission_class"
         const val EURO_NCAP = "euro_ncap"
 
+
+        const val EVENT_GET_COMPARE_DATA = "EVENT_GET_COMPARE_DATA"
+
+
+        const val RENDERER_TYPE_ENVIRONMENT = 10
+        const val RENDERER_TYPE_COMMON = 20
+        const val RENDERER_TYPE_TECH_OTHER = 30
+        const val RENDERER_TYPE_VEHICLE = 40
+
     }
 }

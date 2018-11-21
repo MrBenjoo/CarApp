@@ -37,7 +37,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="model"
+        android:text="techModel"
         android:textColor="@color/colorBlack400"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_saved_model"
