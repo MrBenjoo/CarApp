@@ -1,6 +1,7 @@
 package com.example.benjo.bil_app_kotlin.ui.tab
 
 
+import android.content.Context
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
@@ -29,16 +30,27 @@ import org.greenrobot.eventbus.EventBus
 
 class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.ViewTabs {
     private val TAG = "TabsView"
-
     private lateinit var tabsAdapter: TabsAdapter
     override lateinit var presenter: TabsContract.TabsPresenter
     private lateinit var receiver: ConnectivityHandler
 
+    override fun layoutId(): Int = R.layout.fragment_tabs
+
     companion object {
-        var startComparing = false
+        var isComparing = false
     }
 
-    override fun layoutId(): Int = R.layout.fragment_tabs
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        presenter = TabsPresenter(this, CarRepositoryImpl(CarDataBase.getInstance(context!!)!!))
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initTabs()
+        initListeners()
+        img_tabs_compare.isSelected = isComparing
+    }
 
     override fun onQueryTextSubmit(reg: String?) = when (reg?.length) {
         in 2..7 -> {
@@ -62,25 +74,8 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
         }
     }
 
-    override fun setProgressVisible() {
-        progressbar_tabs.visibility = View.VISIBLE
-    }
-
-    override fun setProgressInvisible() {
-        progressbar_tabs.visibility = View.INVISIBLE
-    }
-
-    override fun showCompareView(result: Result) {
-        val homeActivity = activity as MainActivity
-        onCloseSearchCompare()
-        // convert the cars result to json and send it to CompareMenuView to compare
-        val gson = GsonBuilder().create()
-        val action = TabsViewDirections.actionTabsFragmentToMenuFragment(
-                gson.toJson(homeActivity.resultCar1),
-                gson.toJson(result))
-
-        // navigate to CompareMenuView
-        Navigation.findNavController(view!!).navigate(action)
+    override fun updateResult(result: Result) {
+        EventBus.getDefault().post(result)
     }
 
     private fun onImgSaveClick() {
@@ -88,17 +83,34 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
         presenter.onImgSaveClicked(result)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        presenter = TabsPresenter(this, CarRepositoryImpl(CarDataBase.getInstance(context)!!))
-        initTabs()
-        initListeners()
-        img_tabs_compare.isSelected = startComparing
+    override fun navigateToCompareView(result: Result) {
+        val homeActivity = (activity as MainActivity)
+        closeCompareSearch()
+
+        val gson = GsonBuilder().create()
+        val jsonCarOne = gson.toJson(homeActivity.resultCar1)
+        val jsonCarTwo = gson.toJson(result)
+
+        val action = TabsViewDirections.actionTabsFragmentToMenuFragment(jsonCarOne, jsonCarTwo)
+
+        // navigate to CompareMenuView
+        Navigation.findNavController(view!!).navigate(action)
     }
 
-    private fun initBroadcast() {
-        receiver = ConnectivityHandler(this)
-        activity!!.registerReceiver(receiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+    private fun onComparing() {
+        if (isComparing) {
+            showBottomCompareText()
+            searchview_tabs.isIconified = false
+        } else hideBottomCompareText()
+    }
+
+    override fun closeCompareSearch(): Boolean {
+        if (isComparing) {
+            img_tabs_compare.isSelected = false
+            isComparing = false
+            hideBottomCompareText()
+        }
+        return false
     }
 
     private fun initTabs() {
@@ -115,34 +127,39 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
     private fun initListeners() {
         img_tabs_save.setOnClickListener { onImgSaveClick() }
         searchview_tabs.setOnQueryTextListener(this)
-        searchview_tabs.setOnCloseListener { onCloseSearchCompare() }
+        searchview_tabs.setOnCloseListener { closeCompareSearch() }
         img_tabs_compare.setOnClickListener {
             with(img_tabs_compare) {
                 isSelected = !isSelected
-                startComparing = isSelected
+                isComparing = isSelected
             }
             onComparing()
         }
     }
 
-    override fun updateResult(result: Result) {
-        EventBus.getDefault().post(result)
+    override fun onResume() {
+        initBroadcast()
+        super.onResume()
     }
 
-    override fun onCloseSearchCompare(): Boolean {
-        if (startComparing) {
-            img_tabs_compare.isSelected = false
-            startComparing = false
-            hideBottomCompareText()
-        }
-        return false
+    private fun initBroadcast() {
+        receiver = ConnectivityHandler(this)
+        activity!!.registerReceiver(receiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
     }
 
-    private fun onComparing() {
-        if (startComparing) {
-            showBottomCompareText()
-            searchview_tabs.isIconified = false
-        } else hideBottomCompareText()
+    override fun onPause() {
+        super.onPause()
+        (activity as MainActivity).unregisterReceiver(receiver)
+    }
+
+    override fun isComparing(): Boolean = isComparing
+
+    override fun setProgressVisible() {
+        progressbar_tabs.visibility = View.VISIBLE
+    }
+
+    override fun setProgressInvisible() {
+        progressbar_tabs.visibility = View.INVISIBLE
     }
 
     private fun showBottomCompareText() {
@@ -168,19 +185,10 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
 
     override fun showMsgCarAlreadySaved() = showText(R.string.view_tabs_car_not_saved)
 
-    override fun isComparing(): Boolean = startComparing
-
-    override fun onResume() {
-        initBroadcast()
-        super.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        (activity as MainActivity).unregisterReceiver(receiver)
-    }
-
     override fun onQueryTextChange(newText: String?): Boolean = false
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.cancelJob()
+    }
 }

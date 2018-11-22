@@ -4,7 +4,6 @@ package com.example.benjo.bil_app_kotlin.ui.home
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.SearchView
-import android.util.Log
 import android.view.View
 import androidx.navigation.Navigation
 import com.example.benjo.bil_app_kotlin.R
@@ -22,6 +21,14 @@ class HomeView : BaseFragment(), SearchView.OnQueryTextListener, HomeContract.Vi
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         presenter = HomePresenter()
+    }
+
+    override fun showProgress() {
+        progressbar_home.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        progressbar_home.visibility = View.INVISIBLE
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,7 +53,7 @@ class HomeView : BaseFragment(), SearchView.OnQueryTextListener, HomeContract.Vi
 
     override fun onResume() {
         super.onResume()
-        if (TabsView.startComparing) tv_compare.visibility = View.VISIBLE
+        if (TabsView.isComparing) tv_compare.visibility = View.VISIBLE
         else tv_compare.visibility = View.GONE
     }
 

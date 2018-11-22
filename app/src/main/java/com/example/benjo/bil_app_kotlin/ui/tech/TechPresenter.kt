@@ -11,12 +11,12 @@ import com.google.gson.GsonBuilder
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 
 
-class TechPresenter(val adapter: SectionedRecyclerViewAdapter) : TabsContract.TechPresenter {
+class TechPresenter(val adapter: SectionedRecyclerViewAdapter) : TechContract.TechPresenter {
     private val TAG = "TechPresenter"
-    private lateinit var view: TabsContract.ViewTech
+    private lateinit var view: TechContract.ViewTech
 
 
-    override fun attachView(view: TabsContract.ViewTech) {
+    override fun attachView(view: TechContract.ViewTech) {
         this.view = view
     }
 

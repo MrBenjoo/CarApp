@@ -8,15 +8,14 @@ import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.MainActivity
 import com.example.benjo.bil_app_kotlin.domain.Result
-import com.example.benjo.bil_app_kotlin.ui.tab.TabsContract
 import kotlinx.android.synthetic.main.fragment_base.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
 
-class BasicView : BaseFragment(), TabsContract.ViewBasic {
+class BasicView : BaseFragment(), BasicContract.ViewBasic {
     private val TAG = "BasicView"
-    override lateinit var presenter: TabsContract.BasicPresenter
+    override lateinit var presenter: BasicContract.BasicPresenter
     override fun layoutId(): Int = R.layout.fragment_base
 
     init {

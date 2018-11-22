@@ -1,7 +1,6 @@
 package com.example.benjo.bil_app_kotlin.ui.tab
 
 import android.util.Log
-import android.util.MalformedJsonException
 import com.example.benjo.bil_app_kotlin.domain.Result
 import com.example.benjo.bil_app_kotlin.data.room.CarData
 import com.example.benjo.bil_app_kotlin.data.repository.CarRepository
@@ -10,7 +9,6 @@ import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
 import kotlinx.coroutines.*
-import java.lang.Exception
 import kotlin.coroutines.CoroutineContext
 import kotlin.random.Random
 
@@ -37,7 +35,7 @@ class TabsPresenter(val view: TabsContract.ViewTabs, val carRepository: CarRepos
             result = response.body()
             if (result != null) {
                 if (view.isComparing()) {
-                    view.showCompareView(result)
+                    view.navigateToCompareView(result)
                 } else {
                     view.updateResult(result)
                 }
@@ -57,7 +55,7 @@ class TabsPresenter(val view: TabsContract.ViewTabs, val carRepository: CarRepos
 
             if (result != null) {
                 if (view.isComparing()) {
-                    view.showCompareView(result)
+                    view.navigateToCompareView(result)
                 } else {
                     view.updateResult(result)
                 }
@@ -66,7 +64,7 @@ class TabsPresenter(val view: TabsContract.ViewTabs, val carRepository: CarRepos
             }
         } catch (jsonException: JsonSyntaxException) {
             Log.d(TAG, "jsonException")
-            view.onCloseSearchCompare()
+            view.closeCompareSearch()
             view.showText(jsonException.message)
         }
         view.setProgressInvisible()
@@ -94,6 +92,10 @@ class TabsPresenter(val view: TabsContract.ViewTabs, val carRepository: CarRepos
                 //saveToDatabase(CarData(i.toLong(), reg, model, modelYear, type, i.toString()/*vin*/, json))
             }
         }
+    }
+
+    override fun cancelJob() {
+        jobTracker.cancel()
     }
 
 

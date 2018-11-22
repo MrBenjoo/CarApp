@@ -9,15 +9,14 @@ import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapt
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.MainActivity
 import com.example.benjo.bil_app_kotlin.domain.Result
-import com.example.benjo.bil_app_kotlin.ui.tab.TabsContract
 import kotlinx.android.synthetic.main.fragment_base.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
 
-class TechView : BaseFragment(), TabsContract.ViewTech {
+class TechView : BaseFragment(), TechContract.ViewTech {
     private val TAG = "TechView"
-    override lateinit var presenter: TabsContract.TechPresenter
+    override lateinit var presenter: TechContract.TechPresenter
 
     init {
         EventBus.getDefault().register(this)

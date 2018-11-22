@@ -12,7 +12,7 @@ import kotlin.coroutines.CoroutineContext
 
 class HomePresenter : HomeContract.Presenter, CoroutineScope {
     private val TAG = "HomePresenter"
-    private lateinit var view : HomeContract.View
+    private lateinit var view: HomeContract.View
     private var jobTracker: Job = Job()
 
     override fun attachView(view: HomeContract.View) {
@@ -23,16 +23,15 @@ class HomePresenter : HomeContract.Presenter, CoroutineScope {
         get() = Dispatchers.Main + jobTracker
 
     override fun search(reg: String?) {
-       /* launch {
-            async { searchReal(reg) }.await()
-        }*/
+         /*launch {
+             async { searchReal(reg) }.await()
+         }*/
 
-        processResponse(null) // test...
-
+        searchFake() // test...
     }
 
-    private fun processResponse(body: Result?) {
-        /* ------------------------------------------------------------- Används endast för att testa UI -------------------------------------------------------------*/
+
+    private fun searchFake() {
         val jsonCarOne = CommonUtils().loadJSONFromAsset(view.getContext(), "bil_1.json")
         val result = GsonBuilder().create().fromJson(jsonCarOne, Result::class.java)
         EventBus.getDefault().post(result) // saves the result in MainActivity and updates Basic- and TechView list
@@ -40,17 +39,23 @@ class HomePresenter : HomeContract.Presenter, CoroutineScope {
     }
 
     private suspend fun searchReal(reg: String?): Result? {
+        view.showProgress()
         var result: Result? = null
         val request = SearchRegProvider.provideSearchReg().searchReg(reg)
         val response = request.await()
         if (response.isSuccessful) {
             result = response.body()
             if (result != null) {
-                EventBus.getDefault().post(result) // saves the result in MainActivity and updates Basic- and TechView list
+                EventBus.getDefault().post(result) // saves the result in MainActivity and update Basic- and TechView list
                 view.navigateToTabs()
             } else Log.d(TAG, "searchReal($reg) -> result == null")
         } else view.showResponseCode(response.code())
+        view.hideProgress()
         return result
+    }
+
+    override fun cancelJob() {
+        jobTracker.cancel()
     }
 
 }

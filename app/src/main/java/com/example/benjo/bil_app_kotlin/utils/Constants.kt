@@ -8,7 +8,6 @@ class Constants {
         const val TITLE_TAB_3 = "Historik"
 
 
-
         /* API OBJECTS */
         const val MAKE = "make"
         const val MODEL = "model"

@@ -10,11 +10,11 @@ import com.google.gson.GsonBuilder
 import com.example.benjo.bil_app_kotlin.domain.Result
 
 
-class BasicPresenter(val adapter: BasicAdapter) : TabsContract.BasicPresenter {
+class BasicPresenter(val adapter: BasicAdapter) : BasicContract.BasicPresenter {
     private val TAG = "BasicPresenter"
-    private lateinit var view: TabsContract.ViewBasic
+    private lateinit var view: BasicContract.ViewBasic
 
-    override fun attachView(view: TabsContract.ViewBasic) {
+    override fun attachView(view: BasicContract.ViewBasic) {
         this.view = view
     }
 
