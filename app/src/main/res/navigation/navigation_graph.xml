@@ -8,16 +8,25 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.benjo.bil_app_kotlin.ui.home.HomeView"
-        android:label="HomeFragment">
+        android:label="HomeFragment"
+        app:enterAnim="@android:anim/fade_in">
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
-            app:destination="@+id/settingsFragment" />
+            app:destination="@+id/settingsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_homeFragment_to_savedFragment2"
             app:destination="@id/savedFragment" />
         <action
             android:id="@+id/action_homeFragment_to_tabsFragment"
-            app:destination="@id/tabsFragment" />
+            app:destination="@id/tabsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
 
     <fragment
@@ -33,17 +42,21 @@
     <fragment
         android:id="@+id/tabsFragment"
         android:name="com.example.benjo.bil_app_kotlin.ui.tab.TabsView"
-        android:label="TabsFragment" >
+        android:label="TabsFragment">
         <action
             android:id="@+id/action_tabsFragment_to_menuFragment"
-            app:destination="@id/menuFragment" />
+            app:destination="@id/menuFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
 
     <fragment
         android:id="@+id/menuFragment"
         android:name="com.example.benjo.bil_app_kotlin.ui.comparing.CompareMenuView"
         android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" >
+        tools:layout="@layout/fragment_menu">
         <argument
             android:name="firstJson"
             app:argType="string" />

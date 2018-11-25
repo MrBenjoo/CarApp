@@ -14,7 +14,7 @@ class ToolbarManager constructor(
     fun prepareToolbar() : Toolbar? {
         var fragmentToolbar : Toolbar? = null
         if (builder.resId != FragmentToolbar.NO_TOOLBAR) {
-            /*val*/ fragmentToolbar = container.findViewById(builder.resId) as Toolbar
+            fragmentToolbar = container.findViewById(builder.resId) as Toolbar
             container.findViewById(builder.resId) as Toolbar
 
             if (builder.title != -1) {
@@ -35,6 +35,7 @@ class ToolbarManager constructor(
                 val navigation = container.findViewById(builder.navBackId) as? ImageView
                 navigation?.setOnClickListener { builder.navBackListener() }
             }
+
         }
         return fragmentToolbar
     }

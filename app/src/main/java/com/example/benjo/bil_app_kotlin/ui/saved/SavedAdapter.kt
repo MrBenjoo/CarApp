@@ -1,7 +1,9 @@
 package com.example.benjo.bil_app_kotlin.ui.saved
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.R
@@ -12,7 +14,6 @@ import org.greenrobot.eventbus.EventBus
 
 class SavedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var carList = ArrayList<CarData>()
-    var carActionModeList = ArrayList<CarData>()
     var isActionMode = false
 
 
@@ -53,27 +54,6 @@ class SavedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    fun selectAll() {
-        for(carData in carList) {
-            carData.isChecked = true
-        }
-        notifyDataSetChanged()
-    }
-
-    fun unSelectAll() {
-        for(carData in carList) {
-            carData.isChecked = false
-        }
-        notifyDataSetChanged()
-    }
-
-    fun isAllSelected() : Boolean {
-        for (car in carList) {
-            if (!car.isChecked) return false
-        }
-        return true
-    }
-
     override fun getItemViewType(position: Int): Int = if (isActionMode) 1 else 2
 
     override fun getItemCount(): Int = carList.size
@@ -83,8 +63,6 @@ class SavedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         this.carList.addAll(list)
         notifyDataSetChanged()
     }
-
-
 
     class ViewHolderSavedCars(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val reg = itemView.tv_saved_reg
@@ -96,8 +74,11 @@ class SavedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(row: CarData) {
             val eventData = EventData(row, adapterPosition)
             with(EventBus.getDefault()) {
-                itemView.setOnClickListener { post(SavedListEvent.OnShortClick(eventData)) }
+                itemView.setOnClickListener {
+                    Log.d("SavedPresenter", "ViewHolder SavedCars --> itemview onClickListener")
+                    post(SavedListEvent.OnShortClick(eventData)) }
                 itemView.setOnLongClickListener {
+                    Log.d("SavedPresenter", "ViewHolder SavedCars --> itemview onLongClickListener")
                     post(SavedListEvent.OnLongClick(eventData))
                     true
                 }
@@ -106,22 +87,21 @@ class SavedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     class ViewHolderActionMode(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val reg = itemView.row_saved_tv_reg_cb
-        val model = itemView.row_saved_tv_model_cb
-        val modelYear = itemView.row_saved_tv_model_year_cb
-        val type = itemView.row_saved_tv_type_cb
-        val cb = itemView.row_saved_cb
+        val reg = itemView.tv_saved_reg_cb
+        val model = itemView.tv_saved_model_cb
+        val modelYear = itemView.tv_saved_year_cb
+        val type = itemView.tv_saved_type_cb
+        val cb = itemView.cb_saved
+        val rootview = itemView.rootview_saved_row_cb
+
 
         fun bind(row: CarData) {
 
             val eventData = EventData(row, adapterPosition)
             with(EventBus.getDefault()) {
-                itemView.row_saved_cb.setOnClickListener { post(SavedListEvent.OnShortClick(eventData)) }
-                itemView.setOnClickListener { post(SavedListEvent.OnShortClick(eventData)) }
-                itemView.setOnLongClickListener {
-                    post(SavedListEvent.OnLongClick(eventData))
-                    true
-                }
+
+                rootview.setOnClickListener { Log.d("SavedAdapter", "onClickListener" )
+                    post(SavedListEvent.OnShortClick(eventData))}
             }
         }
     }

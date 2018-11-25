@@ -31,31 +31,12 @@
 
 
     <TextView
-        android:id="@+id/tv_history"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="130dp"
-        android:layout_marginEnd="10dp"
-        android:drawableStart="@drawable/ic_history"
-        android:drawableEnd="@drawable/ic_arrow_right"
-        android:drawablePadding="10dp"
-        android:text="Historik"
-        android:textAllCaps="true"
-        android:textColor="@color/textcolor"
-        android:textSize="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.09"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relative" />
-
-    <TextView
         android:id="@+id/tv_saved"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="8dp"
         android:drawableStart="@drawable/ic_save"
         android:drawableEnd="@drawable/ic_arrow_right"
         android:drawablePadding="10dp"
@@ -63,8 +44,9 @@
         android:textAllCaps="true"
         android:textColor="@color/textcolor"
         android:textSize="24dp"
-        app:layout_constraintStart_toStartOf="@+id/tv_history"
-        app:layout_constraintTop_toBottomOf="@+id/tv_history" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relative" />
 
     <TextView
         android:id="@+id/tv_settings"

@@ -22,25 +22,25 @@ class RendererTechOtherView : Renderer<OtherTechModel, TechOtherViewHolder>() {
         )
     }
 
-    override fun bindView(techModel: OtherTechModel, holder: TechOtherViewHolder) {
+    override fun bindView(model: OtherTechModel, holder: TechOtherViewHolder) {
         with(holder) {
-            passengerTitle.text = techModel.passengerTitle
-            passengerCarOne.text = techModel.passengerCarOne ?: "N/A"
-            passengerCarOneVal.text = techModel.passengerCarOneVal ?: "N/A"
-            passengerCarTwo.text = techModel.passengerCarTwo ?: "N/A"
-            passengerCarTwoVal.text = techModel.passengerCarTwoVal ?: "N/A"
+            passengerTitle.text = model.passengerTitle
+            passengerCarOne.text = model.passengerCarOne ?: "N/A"
+            passengerCarOneVal.text = model.passengerCarOneVal ?: "N/A"
+            passengerCarTwo.text = model.passengerCarTwo ?: "N/A"
+            passengerCarTwoVal.text = model.passengerCarTwoVal ?: "N/A"
 
-            passengerABTitle.text = techModel.passengerABTitle
-            passengerABCarOne.text = techModel.passengerABCarOne ?: "N/A"
-            passengerABCarOneVal.text = techModel.passengerABCarOneVal ?: "N/A"
-            passengerABCarTwo.text = techModel.passengerABCarTwo ?: "N/A"
-            passengerABCarTwoVal.text = techModel.passengerABCarTwoVal ?: "N/A"
+            passengerABTitle.text = model.passengerABTitle
+            passengerABCarOne.text = model.passengerABCarOne ?: "N/A"
+            passengerABCarOneVal.text = model.passengerABCarOneVal ?: "N/A"
+            passengerABCarTwo.text = model.passengerABCarTwo ?: "N/A"
+            passengerABCarTwoVal.text = model.passengerABCarTwoVal ?: "N/A"
 
-            hitchTitle.text = techModel.hitchTitle
-            hitchCarOne.text = techModel.hitchCarOne ?: "N/A"
-            hitchCarOneVal.text = techModel.hitchCarOneVal ?: "N/A"
-            hitchCarTwo.text = techModel.hitchCarTwo ?: "N/A"
-            hitchCarTwoVal.text = techModel.hitchCarTwoVal ?: "N/A"
+            hitchTitle.text = model.hitchTitle
+            hitchCarOne.text = model.hitchCarOne ?: "N/A"
+            hitchCarOneVal.text = model.hitchCarOneVal ?: "N/A"
+            hitchCarTwo.text = model.hitchCarTwo ?: "N/A"
+            hitchCarTwoVal.text = model.hitchCarTwoVal ?: "N/A"
         }
     }
 }

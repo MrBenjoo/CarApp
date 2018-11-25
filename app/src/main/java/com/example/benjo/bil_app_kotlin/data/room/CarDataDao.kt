@@ -10,7 +10,7 @@ import android.arch.persistence.room.Query
 interface CarDataDao {
 
     @Query("SELECT * from carDataTable")
-    fun getAll(): List<CarData>?
+    fun getAll(): List<CarData>
 
     @Insert(onConflict = REPLACE)
     fun insert(carData: CarData)

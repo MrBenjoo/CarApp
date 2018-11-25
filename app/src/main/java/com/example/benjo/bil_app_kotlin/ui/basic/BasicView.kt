@@ -18,10 +18,6 @@ class BasicView : BaseFragment(), BasicContract.ViewBasic {
     override lateinit var presenter: BasicContract.BasicPresenter
     override fun layoutId(): Int = R.layout.fragment_base
 
-    init {
-        EventBus.getDefault().register(this)
-    }
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         presenter = BasicPresenter(BasicAdapter(arrayListOf()))
@@ -43,16 +39,23 @@ class BasicView : BaseFragment(), BasicContract.ViewBasic {
         recyclerview_base.adapter = adapter
     }
 
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
     override fun onResume() {
         super.onResume()
         val result = (activity as MainActivity).resultCar1
         presenter.updateTab(result)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        EventBus.getDefault().unregister(this)
-    }
+
 
 
 }

@@ -26,6 +26,7 @@ class FragmentToolbar(@IdRes val resId: Int,
         private lateinit var navBackListener: () -> Unit
         private var navBackId: Int = -1
 
+
         fun withId(@IdRes resId: Int) = apply { this.resId = resId }
 
         fun withTitle(title: Int) = apply { this.title = title }
@@ -36,6 +37,8 @@ class FragmentToolbar(@IdRes val resId: Int,
             this.menuItems.addAll(menuItems)
             this.menuClicks.addAll(menuClicks)
         }
+
+
 
         fun withNavBackListener(listener: () -> Unit, navBackId: Int) = apply {
                     this.navBackListener = listener

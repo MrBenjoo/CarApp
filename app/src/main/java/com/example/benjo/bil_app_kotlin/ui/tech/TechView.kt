@@ -18,10 +18,6 @@ class TechView : BaseFragment(), TechContract.ViewTech {
     private val TAG = "TechView"
     override lateinit var presenter: TechContract.TechPresenter
 
-    init {
-        EventBus.getDefault().register(this)
-    }
-
     override fun layoutId(): Int = R.layout.fragment_base
 
     override fun onAttach(context: Context?) {
@@ -43,6 +39,16 @@ class TechView : BaseFragment(), TechContract.ViewTech {
     override fun setAdapter(adapter: SectionedRecyclerViewAdapter) {
         recyclerview_base.setHasFixedSize(true)
         recyclerview_base.adapter = adapter
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
     }
 
     override fun onResume() {

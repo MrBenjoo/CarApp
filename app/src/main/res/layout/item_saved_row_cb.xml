@@ -1,55 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root_view_row_saved_cb"
+    android:id="@+id/rootview_saved_row_cb"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginBottom="8dp"
-    android:background="@drawable/bg_row">
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="10dp"
-        android:text="type:"
-        android:textColor="@color/colorBlack400"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/row_saved_tv_model_year_cb" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="10dp"
-        android:text="year:"
-        android:textColor="@color/colorBlack400"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/row_saved_tv_model_cb" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="10dp"
-        android:text="techModel:"
-        android:textColor="@color/colorBlack400"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/row_saved_cb" />
+    android:layout_height="75dp"
+    android:background="@drawable/ripple_effect"
+    android:clickable="true">
 
     <CheckBox
-        android:id="@+id/row_saved_cb"
+        android:id="@+id/cb_saved"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -59,49 +21,62 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
-        android:id="@+id/row_saved_tv_reg_cb"
+        android:id="@+id/tv_saved_reg_cb"
         style="@style/CardViewText"
-        android:layout_height="19dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:ellipsize="end"
         android:maxEms="6"
-        android:text="XEF 850"
+        android:text="XEF580"
         android:textColor="#4FE3C1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintStart_toEndOf="@+id/cb_saved" />
 
     <TextView
-        android:id="@+id/row_saved_tv_model_cb"
+        android:id="@+id/tv_saved_model_cb"
         style="@style/CardViewText"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="Volvo v70"
         android:textColor="@color/colorBlack200"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/tv_saved_reg_cb"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
+
 
     <TextView
-        android:id="@+id/row_saved_tv_model_year_cb"
+        android:id="@+id/tv_saved_year_cb"
         style="@style/CardViewText"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="2018"
         android:textColor="@color/colorBlack200"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_saved_model_cb"
+        app:layout_constraintStart_toEndOf="@+id/tv_saved_model_cb" />
 
     <TextView
-        android:id="@+id/row_saved_tv_type_cb"
+        android:id="@+id/tv_saved_type_cb"
         style="@style/CardViewText"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="Personbil"
         android:textColor="@color/colorBlack200"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView3" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_saved_year_cb"
+        app:layout_constraintStart_toEndOf="@+id/tv_saved_year_cb" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
 
 </android.support.constraint.ConstraintLayout>
+
+
+

@@ -39,27 +39,23 @@ data class Normalization(val dimension: String, val value: String/*Int*/) {
 
     fun perform(): Int {
         val maxValue = mapNormalizations[dimension]
-        var valueInt = 0
-        var valueFloat = 0F
+        val valueInt: Int
+        val valueFloat: Float
 
-        try {
+        /* 0.17, 177, 0.0019 */
+        return try {
             valueInt = value.toInt()
-            return when (maxValue) {
+            when (maxValue) {
                 null -> 0
                 else -> ((valueInt / maxValue) * 100).toInt()
             }
         } catch (exception: NumberFormatException) {
-            try {
-                valueFloat = value.toFloat()
-                return when (maxValue) {
-                    null -> 0
-                    else -> ((valueFloat / maxValue) * 100).toInt()
-                }
-            } catch (exception: NumberFormatException) {
-
+            valueFloat = value.toFloat()
+            when (maxValue) {
+                null -> 0
+                else -> ((valueFloat / maxValue) * 100).toInt()
             }
         }
-        return 0
     }
 
 }

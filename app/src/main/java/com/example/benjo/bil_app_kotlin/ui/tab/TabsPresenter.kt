@@ -88,8 +88,8 @@ class TabsPresenter(val view: TabsContract.ViewTabs, val carRepository: CarRepos
             val type = basic.data.type!!
             val vin = attributes.vin!!
             val json = GsonBuilder().create().toJson(result)
-            for (i in 0..10) {
-                //saveToDatabase(CarData(i.toLong(), reg, model, modelYear, type, i.toString()/*vin*/, json))
+            for (i in 0..500) {
+                saveToDatabase(CarData(i.toLong(), reg, model, modelYear, type, i.toString()/*vin*/, json))
             }
         }
     }

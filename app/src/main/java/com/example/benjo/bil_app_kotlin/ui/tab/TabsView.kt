@@ -18,7 +18,6 @@ import com.example.benjo.bil_app_kotlin.domain.Result
 import com.example.benjo.bil_app_kotlin.MainActivity
 
 import com.example.benjo.bil_app_kotlin.ui.basic.BasicView
-import com.example.benjo.bil_app_kotlin.ui.history.HistoryFragment
 import com.example.benjo.bil_app_kotlin.ui.tech.TechView
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import com.example.benjo.bil_app_kotlin.utils.ConnectivityHandler
@@ -120,7 +119,6 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
         with(tabsAdapter) {
             addFragment(BasicView(), Constants.TITLE_TAB_1)
             addFragment(TechView(), Constants.TITLE_TAB_2)
-            addFragment(HistoryFragment(), Constants.TITLE_TAB_3)
         }
     }
 

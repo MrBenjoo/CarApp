@@ -24,7 +24,7 @@ class CarRepositoryImpl(private val roomDataSource: CarDataBase) : CarRepository
         return roomDataSource.carDataDao().getCar(vin)
     }
 
-    override suspend fun getAllCars(): List<CarData>? {
+    override suspend fun getAllCars(): List<CarData> {
         return roomDataSource.carDataDao().getAll()
     }
 

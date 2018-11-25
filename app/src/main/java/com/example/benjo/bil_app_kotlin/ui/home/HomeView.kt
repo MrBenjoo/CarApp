@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.widget.SearchView
 import android.view.View
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.ui.tab.TabsView
@@ -34,8 +35,9 @@ class HomeView : BaseFragment(), SearchView.OnQueryTextListener, HomeContract.Vi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.attachView(this)
-        tv_saved.setOnClickListener { Navigation.findNavController(it).navigate(R.id.savedFragment) }
-        tv_settings.setOnClickListener { Navigation.findNavController(it).navigate(R.id.settingsFragment) }
+
+        tv_saved.setOnClickListener (Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_savedFragment2))
+        tv_settings.setOnClickListener (Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_settingsFragment))
         home_search_view.setOnQueryTextListener(this)
     }
 
@@ -57,7 +59,7 @@ class HomeView : BaseFragment(), SearchView.OnQueryTextListener, HomeContract.Vi
         else tv_compare.visibility = View.GONE
     }
 
-    override fun navigateToTabs() = Navigation.findNavController(this.view!!).navigate(R.id.tabsFragment)
+    override fun navigateToTabs() = view!!.findNavController().navigate(R.id.action_homeFragment_to_tabsFragment)
 
     override fun onQueryTextChange(newText: String?): Boolean = false
 

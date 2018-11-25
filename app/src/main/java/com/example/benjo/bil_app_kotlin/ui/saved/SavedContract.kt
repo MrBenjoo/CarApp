@@ -15,6 +15,8 @@ interface SavedContract {
         fun showCar(car: CarData)
         fun showEmptyListMessage()
         fun showNumberOfDeletedCars(nbrOfDeletedCars : Int)
+        fun hideToolbarIcons()
+        fun showToolbarIcons()
     }
 
     interface Presenter : BasePresenter<View> {
@@ -27,6 +29,8 @@ interface SavedContract {
         fun onDeleteAllClickFromView()
         fun onDeleteAllClickFromActionMode()
         fun onEvent(event: SavedListEvent<EventData>)
+        fun unregister()
+        fun register()
     }
 }
 

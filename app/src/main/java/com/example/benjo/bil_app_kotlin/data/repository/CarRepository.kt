@@ -8,7 +8,7 @@ interface CarRepository {
 
     suspend fun getCar(vin: String): CarData?
 
-    suspend fun getAllCars(): List<CarData>?
+    suspend fun getAllCars(): List<CarData>
 
     suspend fun deleteAll()
 

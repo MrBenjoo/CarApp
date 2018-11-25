@@ -85,7 +85,6 @@ class CompareMenuView : BaseFragment(), OnChartValueSelectedListener {
        return JsonCompare().setupCompareJson(
                 GsonBuilder().create().fromJson(firstJson, Result::class.java),
                 GsonBuilder().create().fromJson(secondJson, Result::class.java))
-        return null
     }
 
     override fun onValueSelected(e: Entry?, h: Highlight?) = when (e?.y) {

@@ -3,7 +3,6 @@ package com.example.benjo.bil_app_kotlin.ui.saved
 
 import android.view.ActionMode
 import com.example.benjo.bil_app_kotlin.data.repository.CarRepository
-import com.example.benjo.bil_app_kotlin.data.room.CarData
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import kotlinx.coroutines.*
 import org.greenrobot.eventbus.EventBus
@@ -12,23 +11,20 @@ import kotlin.coroutines.CoroutineContext
 
 
 class SavedPresenter(val carRepository: CarRepository,
-                     val adapter: SavedAdapter) : SavedContract.Presenter, CoroutineScope {
+                     val adapter: SavedAdapter,
+                     val savedVM: SavedViewModel) : SavedContract.Presenter, CoroutineScope {
 
     private val TAG = "SavedPresenter"
-    private lateinit var view: SavedContract.View
-    private var carList = arrayListOf<CarData>()
-    private var isActionMode = false
     private var mActionMode: ActionMode? = null
     private var jobTracker: Job = Job()
     private var checks = 0
+    private lateinit var view: SavedContract.View
+
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + jobTracker
 
     override fun getListAdapter(): SavedAdapter = adapter
 
-    init {
-        EventBus.getDefault().register(this)
-    }
 
     override fun attachView(view: SavedContract.View) {
         this.view = view
@@ -47,7 +43,7 @@ class SavedPresenter(val carRepository: CarRepository,
     }
 
     private fun onShortClick(data: EventData) {
-        if (isActionMode) onClickInActionMode(data.position)
+        if (savedVM.isActionMode) onClickInActionMode(data.position)
         else {
             launch {
                 val car = async(Dispatchers.IO) { carRepository.getCar(data.row.vin) }.await()
@@ -57,112 +53,162 @@ class SavedPresenter(val carRepository: CarRepository,
     }
 
     private fun onLongClick(data: EventData) {
-        if (!isActionMode) startActionMode()
+        if (!savedVM.isActionMode) startActionMode()
         onClickInActionMode(data.position)
     }
 
-    /* SavedView - deleteAll  */
+
     override fun onDeleteAllClickFromView() {
-        if (carList.isNotEmpty()) {
+        if (savedVM.carList.isNotEmpty()) {
             startActionMode()
-            adapter.selectAll()
-            checks = carList.size
+            selectAll()
+            checks = savedVM.carList.size
             mActionMode?.title = checks.toString()
         } else {
             view.showEmptyListMessage()
         }
     }
 
-    /* SavedView - delete  */
+    private fun selectAll() {
+        for (row in savedVM.carList) row.isChecked = true
+        adapter.setList(savedVM.carList)
+    }
+
+    private fun unSelectAll() {
+        for (row in savedVM.carList) row.isChecked = false
+        adapter.setList(savedVM.carList)
+    }
+
+    private fun isAllSelected(): Boolean {
+        for (row in savedVM.carList) {
+            if (!row.isChecked) return false
+        }
+        return true
+    }
+
     private fun onDeleteClickFromView() {
-        if (carList.isNotEmpty()) startActionMode()
+        if (savedVM.carList.isNotEmpty()) startActionMode()
         else view.showEmptyListMessage()
     }
 
-    /* ActionMode - deleteAll */
     override fun onDeleteAllClickFromActionMode() {
-        if (carList.isNotEmpty()) {
-            checks = when (adapter.isAllSelected()) {
+        if (savedVM.carList.isNotEmpty()) {
+            checks = when (isAllSelected()) {
                 true -> {
-                    adapter.unSelectAll()
+                    unSelectAll()
                     0
                 }
                 false -> {
-                    adapter.selectAll()
-                    carList.size
+                    selectAll()
+                    savedVM.carList.size
                 }
             }
-            mActionMode?.title = checks.toString()
+            if(checks == 0) {
+                mActionMode?.title = "välj bil"
+            } else {
+                mActionMode?.title = checks.toString()
+            }
         }
     }
 
-    /* ActionMode - delete */
     override fun onDeleteClickFromActionMode() {
         launch {
-            if (carList.isNotEmpty()) {
-                async(Dispatchers.IO) { carRepository.deleteAll() }.await()
-                // keep car list and database list in sync
-                for (car in carList) {
-                    async(Dispatchers.IO) { carRepository.insertCar(car) }.await()
-                }
-                val nbrOfDeletedCars = async(Dispatchers.IO) { carRepository.deleteCheckedCars() }.await()
-                val cars = async(Dispatchers.IO) { carRepository.getAllCars() }.await()
+            val listOfCars = savedVM.carList
+            var nbrOfDeletedCars = 0
 
-                if (cars != null && cars.isNotEmpty()) carList = CommonUtils().listToArrayList(cars)
-                else carList.clear()
+            if (!listOfCars.isEmpty()) {
+                for (row in listOfCars) {
+                    if (row.isChecked) {
+                        async(Dispatchers.IO) { carRepository.deleteCar(row.vin) }.await()
+                        nbrOfDeletedCars++
+                    }
+                }
+                val listOfCarsDB = async(Dispatchers.IO) { carRepository.getAllCars() }.await()
+
+                if (!listOfCarsDB.isNullOrEmpty()) {
+                    savedVM.carList = CommonUtils().listToArrayList(listOfCarsDB)
+                } else {
+                    savedVM.carList.clear()
+                }
                 if (nbrOfDeletedCars > 0) view.showNumberOfDeletedCars(nbrOfDeletedCars)
             }
+
             mActionMode?.finish()
         }
     }
 
     override fun startActionMode() {
-        if (!isActionMode) {
+        if (!savedVM.isActionMode) {
             mActionMode = view.startActionMode()
-            isActionMode = true
-            adapter.isActionMode = isActionMode
-            mActionMode?.title = "0"
+            savedVM.isActionMode = true
+            adapter.isActionMode = true
+            mActionMode?.title = "välj bil"
             adapter.notifyDataSetChanged() // needs to be here otherwise wont show checkboxes when delete icon clicked
         }
     }
 
-    private fun onClickInActionMode(position: Int) = with(carList[position]) {
-        if (isChecked) {
-            isChecked = false
+    private fun onClickInActionMode(position: Int) {
+        val row = savedVM.carList[position]
+        if (row.isChecked) {
+            row.isChecked = false
             checks--
         } else {
-            isChecked = true
+            row.isChecked = true
             checks++
         }
-        mActionMode?.title = checks.toString()
-        adapter.setList(carList)
+        if(checks == 0) {
+            mActionMode?.title = "välj bil"
+        } else {
+            mActionMode?.title = checks.toString()
+        }
+        adapter.setList(savedVM.carList)
     }
 
 
     override fun checkAll() {
-        adapter.selectAll()
-        checks = carList.size
+        selectAll()
+        checks = savedVM.carList.size
         mActionMode?.title = checks.toString()
     }
 
     override fun loadSavedCars() {
         launch {
-            val listOfCarData = async(Dispatchers.IO) { carRepository.getAllCars() }.await()
-            if (listOfCarData != null && listOfCarData.isNotEmpty()) {
-                carList = CommonUtils().listToArrayList(listOfCarData)
-                adapter.setList(carList)
+            with(savedVM.carList) {
+                if (isNotEmpty()) {
+                    adapter.setList(this)
+                    view.showToolbarIcons()
+                } else {
+                    val listOfCarData = async(Dispatchers.IO) { carRepository.getAllCars() }.await()
+                    if (listOfCarData.isNotEmpty()) {
+                        addAll(CommonUtils().listToArrayList(listOfCarData))
+                        adapter.setList(this)
+                        view.showToolbarIcons()
+                    } else {
+                        view.hideToolbarIcons()
+                    }
+                }
             }
         }
     }
 
+    override fun unregister() {
+        EventBus.getDefault().unregister(this)
+    }
+
+    override fun register() {
+        EventBus.getDefault().register(this)
+    }
+
     override fun onDestroyActionMode() {
         mActionMode = null
-        isActionMode = false
-        adapter.isActionMode = isActionMode
+        savedVM.isActionMode = false
+        adapter.isActionMode = false
         checks = 0
-        adapter.setList(carList)
-        adapter.unSelectAll()
-        adapter.notifyDataSetChanged()
+        adapter.setList(savedVM.carList)
+        unSelectAll()
+        if(savedVM.carList.isEmpty()) {
+            view.hideToolbarIcons()
+        }
     }
 
 
