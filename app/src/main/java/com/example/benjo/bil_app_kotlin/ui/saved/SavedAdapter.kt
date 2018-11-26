@@ -64,21 +64,24 @@ class SavedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
+    fun updatePosition(carData: CarData, position: Int) {
+        carList[position] = carData
+        notifyItemChanged(position)
+    }
+
     class ViewHolderSavedCars(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val reg = itemView.tv_saved_reg
         val model = itemView.tv_saved_model
         val modelYear = itemView.tv_saved_year
         val type = itemView.tv_saved_type
 
-
         fun bind(row: CarData) {
             val eventData = EventData(row, adapterPosition)
             with(EventBus.getDefault()) {
                 itemView.setOnClickListener {
-                    Log.d("SavedPresenter", "ViewHolder SavedCars --> itemview onClickListener")
-                    post(SavedListEvent.OnShortClick(eventData)) }
+                    post(SavedListEvent.OnShortClick(eventData))
+                }
                 itemView.setOnLongClickListener {
-                    Log.d("SavedPresenter", "ViewHolder SavedCars --> itemview onLongClickListener")
                     post(SavedListEvent.OnLongClick(eventData))
                     true
                 }
@@ -100,8 +103,10 @@ class SavedAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val eventData = EventData(row, adapterPosition)
             with(EventBus.getDefault()) {
 
-                rootview.setOnClickListener { Log.d("SavedAdapter", "onClickListener" )
-                    post(SavedListEvent.OnShortClick(eventData))}
+                rootview.setOnClickListener {
+                    Log.d("SavedAdapter", "onClickListener")
+                    post(SavedListEvent.OnShortClick(eventData))
+                }
             }
         }
     }

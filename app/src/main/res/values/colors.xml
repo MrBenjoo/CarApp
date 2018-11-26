@@ -7,6 +7,7 @@
     <color name="colorAccent">#4FE3C1</color>
 
     <!-- Dark scale -->
+    <color name="colorBlack700">#393939</color>
     <color name="colorBlack600">#575757</color>
     <color name="colorBlack500">#7d7d7d</color>
     <color name="colorBlack400">#757c8e</color>

@@ -126,6 +126,10 @@
     <!-- TabsActivity related messages -->
     <string name="view_tabs_car_not_saved">Bilen har redan sparats.</string>
     <string name="view_tabs_car_saved">Bilen sparades till din lista.</string>
+    <string name="title_dialog_saved">Radera fordon?</string>
+    <string name="dialog_saved_positive_btn">Radera</string>
+    <string name="dialog_saved_negative_btn">Avbryt</string>
+    <string name="title_action_mode">välj bil</string>
 
 
 </resources>

@@ -9,39 +9,39 @@ import com.example.benjo.bil_app_kotlin.data.room.CarData
 interface SavedContract {
 
     interface View : BaseView<Presenter> {
-        fun startActionMode(): ActionMode?
+        fun startActionMode()
         fun showDialogOnMultipleDeletion()
         fun setAdapter(savedAdapter: SavedAdapter)
         fun showCar(car: CarData)
-        fun showEmptyListMessage()
         fun showNumberOfDeletedCars(nbrOfDeletedCars : Int)
         fun hideToolbarIcons()
         fun showToolbarIcons()
+        fun setActionModeTitle(title: String)
+        fun finishActionMode()
     }
 
     interface Presenter : BasePresenter<View> {
         fun loadSavedCars()
         fun onDestroyActionMode()
-        fun onDeleteClickFromActionMode()
+        fun onDeleteClickActionMode()
         fun getListAdapter(): SavedAdapter
-        fun checkAll()
+        fun selectAllRows()
         fun startActionMode()
-        fun onDeleteAllClickFromView()
-        fun onDeleteAllClickFromActionMode()
+        fun onDeleteAllClickView()
+        fun onDeleteAllClickActionMode()
         fun onEvent(event: SavedListEvent<EventData>)
         fun unregister()
         fun register()
     }
 }
 
-data class EventData(val row : CarData,
-                     val position : Int)
+data class EventData(val row : CarData, val position : Int)
 
 sealed class SavedListEvent<out T> {
     data class OnLongClick<out EventData>(val data: EventData) : SavedListEvent<EventData>()
     data class OnShortClick<out EventData>(val data: EventData) : SavedListEvent<EventData>()
-    object OnDeleteAllClickFromActionMode : SavedListEvent<Nothing>()
-    object OnDeleteClickFromActionMode : SavedListEvent<Nothing>()
-    object OnDeleteAllClickFromView : SavedListEvent<Nothing>()
-    object OnDeleteClickFromView : SavedListEvent<Nothing>()
+    object OnDeleteAllClickActionMode : SavedListEvent<Nothing>()
+    object OnDeleteClickActionMode : SavedListEvent<Nothing>()
+    object OnDeleteAllClickView : SavedListEvent<Nothing>()
+    object OnDeleteClickView : SavedListEvent<Nothing>()
 }
