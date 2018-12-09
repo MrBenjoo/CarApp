@@ -1,4 +1,4 @@
-package com.example.benjo.bil_app_kotlin.data.room
+package com.example.benjo.bil_app_kotlin.data.db
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.migration.Migration
-
+import com.example.benjo.bil_app_kotlin.data.db.model.CarData
 
 
 @Database(entities = arrayOf(CarData::class), version = 3)

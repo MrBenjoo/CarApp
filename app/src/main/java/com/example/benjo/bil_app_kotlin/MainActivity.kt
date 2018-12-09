@@ -1,12 +1,13 @@
 package com.example.benjo.bil_app_kotlin
 
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import androidx.navigation.findNavController
 import com.example.benjo.bil_app_kotlin.ui.comparing.Compare
-import com.example.benjo.bil_app_kotlin.domain.Result
-import com.example.benjo.bil_app_kotlin.utils.Constants.Companion.EVENT_GET_COMPARE_DATA
+import com.example.benjo.bil_app_kotlin.data.network.model.Result
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
@@ -19,25 +20,31 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        EventBus.getDefault().register(this)
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.mainNavigationFragment).navigateUp()
+
+    override fun attachBaseContext(newBase: Context?) {
+        Log.d("LifeCycles", "MainActivity -> attachBaseContext")
+        super.attachBaseContext(App.localeManager.setLocale(newBase!!))
+    }
 
     @Subscribe
     fun onEventResult(result: Result?) {
         resultCar1 = result
     }
 
-    @Subscribe
-    fun onEvent(message: String) = when (message) {
-        EVENT_GET_COMPARE_DATA -> EventBus.getDefault().post(compare)
-        else -> Unit
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onPause() {
+        super.onPause()
         EventBus.getDefault().unregister(this)
     }
+
+
+
 
 }

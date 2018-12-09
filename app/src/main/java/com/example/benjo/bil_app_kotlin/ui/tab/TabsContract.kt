@@ -2,7 +2,7 @@ package com.example.benjo.bil_app_kotlin.ui.tab
 
 
 import com.example.benjo.bil_app_kotlin.base.BaseView
-import com.example.benjo.bil_app_kotlin.domain.Result
+import com.example.benjo.bil_app_kotlin.data.network.model.Result
 
 interface TabsContract {
 

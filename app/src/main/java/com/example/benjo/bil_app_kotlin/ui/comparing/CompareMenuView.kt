@@ -8,7 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
-import com.example.benjo.bil_app_kotlin.domain.Result
+import com.example.benjo.bil_app_kotlin.data.network.model.Result
 import com.example.benjo.bil_app_kotlin.MainActivity
 import com.example.benjo.bil_app_kotlin.utils.JsonCompare
 import com.github.mikephil.charting.animation.Easing
@@ -26,14 +26,13 @@ class CompareMenuView : BaseFragment(), OnChartValueSelectedListener {
     private val TAG = "CompareMenuView"
     private lateinit var dataSet: PieDataSet
     private lateinit var pieData: PieData
+    private lateinit var navController: NavController
 
     companion object {
         val DIMENSIONER = 1.0001F
         val TEKNISK = 1.0002F
         val FORDONSDATA = 1.0003F
     }
-
-    private lateinit var navController: NavController
 
     override fun layoutId(): Int = R.layout.fragment_menu
 
@@ -50,10 +49,9 @@ class CompareMenuView : BaseFragment(), OnChartValueSelectedListener {
 
     private fun initDataSet() {
         val entries = ArrayList<PieEntry>()
-
-        entries.add(PieEntry(TEKNISK, "Tekniskdata"))
-        entries.add(PieEntry(DIMENSIONER, "Dimensioner"))
-        entries.add(PieEntry(FORDONSDATA, "Fordonsdata"))
+        entries.add(PieEntry(TEKNISK, getString(R.string.compare_menu_technical)))
+        entries.add(PieEntry(DIMENSIONER, getString(R.string.compare_menu_dimensions)))
+        entries.add(PieEntry(FORDONSDATA, getString(R.string.compare_menu_vehicle)))
 
         dataSet = PieDataSet(entries, "")
         with(dataSet) {

@@ -1,9 +1,10 @@
-package com.example.benjo.bil_app_kotlin.data.room
+package com.example.benjo.bil_app_kotlin.data.db
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import android.arch.persistence.room.Query
+import com.example.benjo.bil_app_kotlin.data.db.model.CarData
 
 
 @Dao
@@ -25,7 +26,7 @@ interface CarDataDao {
     fun deleteCar(vin: String)
 
     @Query("DELETE FROM carDataTable WHERE isChecked like 1")
-    fun deleteCheckedCars() : Int
+    fun deleteCheckedCars(): Int
 
 
 }

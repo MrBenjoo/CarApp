@@ -1,10 +1,10 @@
 package com.example.benjo.bil_app_kotlin.ui.tab
 
 import android.util.Log
-import com.example.benjo.bil_app_kotlin.domain.Result
-import com.example.benjo.bil_app_kotlin.data.room.CarData
-import com.example.benjo.bil_app_kotlin.data.repository.CarRepository
-import com.example.benjo.bil_app_kotlin.domain.SearchRegProvider
+import com.example.benjo.bil_app_kotlin.data.network.model.Result
+import com.example.benjo.bil_app_kotlin.data.db.model.CarData
+import com.example.benjo.bil_app_kotlin.data.db.repository.CarRepository
+import com.example.benjo.bil_app_kotlin.data.network.SearchRegProvider
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
@@ -88,7 +88,7 @@ class TabsPresenter(val view: TabsContract.ViewTabs, val carRepository: CarRepos
             val type = basic.data.type!!
             val vin = attributes.vin!!
             val json = GsonBuilder().create().toJson(result)
-            for (i in 0..500) {
+            for (i in 0..11) {
                 saveToDatabase(CarData(i.toLong(), reg, model, modelYear, type, i.toString()/*vin*/, json))
             }
         }

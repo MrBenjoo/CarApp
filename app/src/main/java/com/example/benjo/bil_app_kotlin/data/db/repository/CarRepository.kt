@@ -1,6 +1,6 @@
-package com.example.benjo.bil_app_kotlin.data.repository
+package com.example.benjo.bil_app_kotlin.data.db.repository
 
-import com.example.benjo.bil_app_kotlin.data.room.CarData
+import com.example.benjo.bil_app_kotlin.data.db.model.CarData
 
 interface CarRepository {
 
@@ -14,6 +14,6 @@ interface CarRepository {
 
     suspend fun deleteCar(vin: String)
 
-    suspend fun deleteCheckedCars() : Int
+    suspend fun deleteCheckedCars(): Int
 
 }

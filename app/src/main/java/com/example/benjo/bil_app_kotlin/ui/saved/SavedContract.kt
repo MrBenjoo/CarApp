@@ -1,14 +1,14 @@
 package com.example.benjo.bil_app_kotlin.ui.saved
 
 
-import android.view.ActionMode
 import com.example.benjo.bil_app_kotlin.base.BasePresenter
 import com.example.benjo.bil_app_kotlin.base.BaseView
-import com.example.benjo.bil_app_kotlin.data.room.CarData
+import com.example.benjo.bil_app_kotlin.data.db.model.CarData
 
 interface SavedContract {
 
     interface View : BaseView<Presenter> {
+        fun isShowingDeleteIcon(): Boolean
         fun startActionMode()
         fun showDialogOnMultipleDeletion()
         fun setAdapter(savedAdapter: SavedAdapter)
@@ -18,17 +18,19 @@ interface SavedContract {
         fun showToolbarIcons()
         fun setActionModeTitle(title: String)
         fun finishActionMode()
+        fun showDeleteIcon()
+        fun hideDeleteIcon()
     }
 
     interface Presenter : BasePresenter<View> {
         fun loadSavedCars()
         fun onDestroyActionMode()
-        fun onDeleteClickActionMode()
+        fun onDeleteClick()
         fun getListAdapter(): SavedAdapter
         fun selectAllRows()
         fun startActionMode()
-        fun onDeleteAllClickView()
-        fun onDeleteAllClickActionMode()
+        fun onEditClick()
+        fun onSelectAllClick()
         fun onEvent(event: SavedListEvent<EventData>)
         fun unregister()
         fun register()
@@ -40,8 +42,8 @@ data class EventData(val row : CarData, val position : Int)
 sealed class SavedListEvent<out T> {
     data class OnLongClick<out EventData>(val data: EventData) : SavedListEvent<EventData>()
     data class OnShortClick<out EventData>(val data: EventData) : SavedListEvent<EventData>()
-    object OnDeleteAllClickActionMode : SavedListEvent<Nothing>()
-    object OnDeleteClickActionMode : SavedListEvent<Nothing>()
-    object OnDeleteAllClickView : SavedListEvent<Nothing>()
-    object OnDeleteClickView : SavedListEvent<Nothing>()
+    object OnSelectAllClick : SavedListEvent<Nothing>()
+    object OnDeleteClick : SavedListEvent<Nothing>()
+    object OnEditClick : SavedListEvent<Nothing>()
+
 }

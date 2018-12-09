@@ -12,9 +12,9 @@ import androidx.navigation.Navigation
 
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
-import com.example.benjo.bil_app_kotlin.data.repository.CarRepositoryImpl
-import com.example.benjo.bil_app_kotlin.data.room.CarDataBase
-import com.example.benjo.bil_app_kotlin.domain.Result
+import com.example.benjo.bil_app_kotlin.data.db.repository.CarRepositoryImpl
+import com.example.benjo.bil_app_kotlin.data.db.CarDataBase
+import com.example.benjo.bil_app_kotlin.data.network.model.Result
 import com.example.benjo.bil_app_kotlin.MainActivity
 
 import com.example.benjo.bil_app_kotlin.ui.basic.BasicView
@@ -117,8 +117,8 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
         tabsAdapter = TabsAdapter(childFragmentManager)
         viewpager_tabs.adapter = tabsAdapter
         with(tabsAdapter) {
-            addFragment(BasicView(), Constants.TITLE_TAB_1)
-            addFragment(TechView(), Constants.TITLE_TAB_2)
+            addFragment(BasicView(), string(R.string.tabs_first))
+            addFragment(TechView(), string(R.string.tabs_second))
         }
     }
 
@@ -133,6 +133,10 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
             }
             onComparing()
         }
+    }
+
+    fun string(id: Int): String {
+        return context?.resources?.getString(id) ?: "N/A"
     }
 
     override fun onResume() {
@@ -179,9 +183,9 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
 
     override fun showResponseCode(code: Int) = showText("Response code: " + code.toString())
 
-    override fun showMsgCarSaved() = showText(R.string.view_tabs_car_saved)
+    override fun showMsgCarSaved() = showText(R.string.tabs_car_saved)
 
-    override fun showMsgCarAlreadySaved() = showText(R.string.view_tabs_car_not_saved)
+    override fun showMsgCarAlreadySaved() = showText(R.string.tabs_car_already_saved)
 
     override fun onQueryTextChange(newText: String?): Boolean = false
 

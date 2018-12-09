@@ -1,7 +1,9 @@
 package com.example.benjo.bil_app_kotlin.utils
 
-import com.example.benjo.bil_app_kotlin.domain.*
-import com.example.benjo.bil_app_kotlin.domain.Technical
+import com.example.benjo.bil_app_kotlin.data.network.model.CarInfo
+import com.example.benjo.bil_app_kotlin.data.network.model.Result
+import com.example.benjo.bil_app_kotlin.data.network.model.Technical
+import com.example.benjo.bil_app_kotlin.data.network.model.TechnicalInfo
 import com.example.benjo.bil_app_kotlin.ui.comparing.*
 
 

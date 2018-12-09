@@ -118,18 +118,34 @@
     <string name="error_reg_limit">Antalet tecken måste vara mellan 2&#8211;7</string>
 
     <!-- SavedView related -->
-    <string name="frag_save_car_deleted">Bilen togs bort från listan.</string>
-    <string name="frag_save_car_not_deleted">Det gick inte att ta bort bilen från listan.</string>
+    <string name="saved_car_deleted">Bilen togs bort från listan.</string>
+    <string name="saved_car_not_deleted">Det gick inte att ta bort bilen från listan.</string>
     <string name="saved_list_empty">Listan är tom</string>
     <string name="saved_list_nbr_deleted_cars">%1$d bilar togs bort från listan</string>
+    <string name="saved_dialog_title">Radera fordon?</string>
+    <string name="saved_dialog_positive_btn">Radera</string>
+    <string name="saved_dialog_negative_btn">Avbryt</string>
+    <string name="saved_action_mode_title">välj bil</string>
 
-    <!-- TabsActivity related messages -->
-    <string name="view_tabs_car_not_saved">Bilen har redan sparats.</string>
-    <string name="view_tabs_car_saved">Bilen sparades till din lista.</string>
-    <string name="title_dialog_saved">Radera fordon?</string>
-    <string name="dialog_saved_positive_btn">Radera</string>
-    <string name="dialog_saved_negative_btn">Avbryt</string>
-    <string name="title_action_mode">välj bil</string>
+    <!-- TabView related -->
+    <string name="tabs_car_already_saved">Bilen har redan sparats.</string>
+    <string name="tabs_car_saved">Bilen sparades till din lista.</string>
+    <string name="tabs_first">Grundläggande</string>
+    <string name="tabs_second">Teknisk</string>
+
+
+    <!-- Compare menu related -->
+    <string name="compare_menu_technical">Teknisk</string>
+    <string name="compare_menu_dimensions">Dimensioner</string>
+    <string name="compare_menu_vehicle">Grundläggande</string>
+
+
+    <!-- Settings related -->
+    <string name="settings_change_language_btn">Byt språk</string>
+
+    <!-- Home related -->
+    <string name="home_saved">Sparat</string>
+    <string name="home_settings">Inställningar</string>
 
 
 </resources>

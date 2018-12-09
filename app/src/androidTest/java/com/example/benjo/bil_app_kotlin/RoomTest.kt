@@ -5,9 +5,9 @@ import android.support.test.runner.AndroidJUnit4
 import org.junit.runner.RunWith
 import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
-import com.example.benjo.bil_app_kotlin.data.room.CarData
-import com.example.benjo.bil_app_kotlin.data.room.CarDataBase
-import com.example.benjo.bil_app_kotlin.data.room.CarDataDao
+import com.example.benjo.bil_app_kotlin.data.db.model.CarData
+import com.example.benjo.bil_app_kotlin.data.db.CarDataBase
+import com.example.benjo.bil_app_kotlin.data.db.CarDataDao
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.Before

@@ -1,9 +1,8 @@
-package com.example.benjo.bil_app_kotlin.data.repository
+package com.example.benjo.bil_app_kotlin.data.db.repository
 
 
-import android.util.Log
-import com.example.benjo.bil_app_kotlin.data.room.CarData
-import com.example.benjo.bil_app_kotlin.data.room.CarDataBase
+import com.example.benjo.bil_app_kotlin.data.db.model.CarData
+import com.example.benjo.bil_app_kotlin.data.db.CarDataBase
 
 
 /*
@@ -36,7 +35,7 @@ class CarRepositoryImpl(private val roomDataSource: CarDataBase) : CarRepository
         roomDataSource.carDataDao().deleteCar(vin)
     }
 
-    override suspend fun deleteCheckedCars() : Int {
+    override suspend fun deleteCheckedCars(): Int {
         return roomDataSource.carDataDao().deleteCheckedCars()
     }
 }

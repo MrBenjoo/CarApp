@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">bil-app-kotlin</string>
+
+    <!-- ******* Basic data ******* -->
+    <string name="api_make">Make</string>
+    <string name="api_model">Model</string>
+    <string name="api_status">Status</string>
+    <string name="api_color">Color</string>
+    <string name="api_type">Type</string>
+    <string name="api_vehicle_year">Vehicle year</string>
+    <string name="api_model_year">Model year</string>
+    <!-- ************************** -->
+
+    <!-- ************** Technical data ************** -->
+    <string name="api_power_hp_1">Horsepower</string>
+    <string name="api_power_kw_1">Engine output</string>
+    <string name="api_cylinder_volume">Cylinder volume</string>
+    <string name="api_top_speed">Top speed</string>
+    <string name="api_fuel_1">Fuel</string>
+    <string name="api_consumption_1">Consumption</string>
+    <string name="api_co2_1">Emission CO2</string>
+    <string name="api_transmission">Transmission</string>
+    <string name="api_four_wheel_drive">Four-wheel drive</string>
+    <string name="api_sound_level">Sound level</string>
+    <string name="api_number_of_passengers">Number of passengers</string>
+    <string name="api_passenger_airbag">Passenger airbag</string>
+    <string name="api_hitch">Hitch</string>
+    <string name="api_chassi_code_1">Chassi code</string>
+    <string name="api_chassi">Chassi</string>
+    <string name="api_length">Length</string>
+    <string name="api_width">Width</string>
+    <string name="api_height">Height</string>
+    <string name="api_kerb_weight">Kerb weight</string>
+    <string name="api_total_weight">Total weight</string>
+    <string name="api_load_weight">Load weight</string>
+    <string name="api_trailer_weight">Trailer weight</string>
+    <string name="api_unbraked_trailer_weight">Unbraked trailer weight</string>
+    <string name="api_trailer_weight_b">Trailer weight (B)</string>
+    <string name="api_trailer_weight_be">Trailer weight (B+)</string>
+    <string name="api_carriage_weight">Carriage weight</string>
+    <string name="api_tire_front">Tire front</string>
+    <string name="api_tire_back">Tire back</string>
+    <string name="api_rim_front">Rim front</string>
+    <string name="api_rim_back">Rim back</string>
+    <string name="api_axel_width">Axel width</string>
+    <string name="api_category">Category EU</string>
+    <string name="api_eeg">Approval number</string>
+    <string name="api_nox_1">Nitrogen oxides (NOx)</string>
+    <string name="api_thc_nox_1">Hydrocarbons &amp; nitrogen oxides </string>
+    <string name="api_eco_class">Eco class</string>
+    <string name="api_emission_class">Emission class</string>
+    <string name="api_euro_ncap">Euro NCAP</string>
+
+
+    <!-- ''''''''''''''''''''''''''''' Comparing titles ''''''''''''''''''''''''''''' -->
+    <!-- *********************** FORDONSDATA *********************** -->
+    <string name="title_compare_model_year">Model year</string>
+    <string name="title_compare_vehicle_year">Vehicle year</string>
+    <string name="title_compare_vehicle_type">Vehicle type</string>
+    <string name="title_compare_reg">Registration</string>
+    <string name="title_compare_status">Status</string>
+    <string name="title_compare_color">Color</string>
+    <string name="title_compare_chassi">Chassi</string>
+    <string name="title_compare_category">Category EU</string>
+    <string name="title_compare_eeg">Approval number</string>
+    <!-- ************************************************************* -->
+
+    <!-- *********************** DIMENSIONER *********************** -->
+    <string name="title_compare_kerb_weight">Kerb weight [kg]</string>
+    <string name="title_compare_total_weight">Total weight [kg]</string>
+    <string name="title_compare_load_weight">Load weight [kg]</string>
+    <string name="title_compare_trailer_weight_be">Trailer weight (B+) [kg]</string>
+    <string name="title_compare_trailer_weight_b">Trailer weight (B) [kg]</string>
+    <string name="title_compare_unbraked_trailer_weight">Unbraked trailer weight [kg]</string>
+    <string name="title_compare_trailer_weight">Trailer weight [kg]</string>
+    <string name="title_compare_carriage_weight">wtf is carriage weight [kg]</string>
+
+    <string name="title_compare_length">Length [mm]</string>
+    <string name="title_compare_width">Width [mm]</string>
+    <string name="title_compare_height">Height [mm]</string>
+    <string name="title_compare_axel_width">Axel width</string>
+
+    <string name="title_compare_tire_back">back</string>
+    <string name="title_compare_wheel">Wheel</string>
+    <string name="title_compare_tire_front">front</string>
+    <string name="title_compare_rim_title">Rim</string>
+    <!-- *********************************************************** -->
+
+    <!-- *********************** ENVIRONMENT *********************** -->
+    <string name="title_compare_fuel">Fuel</string>
+    <string name="title_compare_eco_class">Eco class</string>
+    <string name="title_compare_four_wheel_drive">Four-wheel drive</string>
+    <string name="title_compare_transmission">Transmission</string>
+    <string name="title_compare_consumption">Consumption [liter/100km]</string>
+    <string name="title_compare_co2">Emission CO2 [g/km]</string>
+    <string name="title_compare_nox">Nitrogen oxides (NOX) [mg/km]</string>
+    <string name="title_compare_thc_nox">Oförbränt bränsle (Thc+NOX)</string>
+
+    <string name="title_compare_horsepower">Horsepower</string>
+    <string name="title_compare_kilowatt">Engine output [kW]</string>
+    <string name="title_compare_cylinder_volume">Cylinder volume [cm^3]</string>
+    <string name="title_compare_top_speed">Top speed [km/h]</string>
+
+    <string name="title_compare_number_of_passengers">Number of passengers</string>
+    <string name="title_compare_passenger_airbag">Passenger airbag</string>
+    <string name="title_compare_hitch">Hitch</string>
+    <string name="title_compare_sound_level">Sound level [dB]</string>
+    <!-- *********************************************************** -->
+    <!-- ''''''''''''''''''''''''''' COMPARING TITLES END ''''''''''''''''''''''''''''' -->
+
+
+    <!-- Errors -->
+    <string name="error_no_internet">No internet connection.</string>
+    <string name="error_api_failure">Failed to read data from server.</string>
+    <string name="error_http_code">Something went wrong with server/client.</string>
+    <string name="error_reg_limit">Max characters between 2&#8211;7.</string>
+
+    <!-- SavedView related -->
+    <string name="saved_car_deleted">Car was deleted from the list.</string>
+    <string name="saved_car_not_deleted">Car was not deleted from the list.</string>
+    <string name="saved_list_empty">The list is empty.</string>
+    <string name="saved_list_nbr_deleted_cars">%1$d cars were removed from the list.</string>
+    <string name="saved_dialog_title">Delete car?</string>
+    <string name="saved_dialog_positive_btn">Delete</string>
+    <string name="saved_dialog_negative_btn">Cancel</string>
+    <string name="saved_action_mode_title">Choose car</string>
+
+    <!-- TabView related -->
+    <string name="tabs_car_already_saved">Car already saved.</string>
+    <string name="tabs_car_saved">Car saved to the list.</string>
+    <string name="tabs_first">Basic</string>
+    <string name="tabs_second">Technical</string>
+
+    <!-- Compare menu related -->
+    <string name="compare_menu_technical">Technical</string>
+    <string name="compare_menu_dimensions">Dimensions</string>
+    <string name="compare_menu_vehicle">Basic</string>
+
+
+    <!-- Settings related -->
+    <string name="settings_change_language_btn">Change language</string>
+
+    <!-- Home related -->
+    <string name="home_saved">Saved</string>
+    <string name="home_settings">Settings</string>
+
+
+</resources>

@@ -1,8 +1,8 @@
 package com.example.benjo.bil_app_kotlin.ui.home
 
 import android.util.Log
-import com.example.benjo.bil_app_kotlin.domain.Result
-import com.example.benjo.bil_app_kotlin.domain.SearchRegProvider
+import com.example.benjo.bil_app_kotlin.data.network.model.Result
+import com.example.benjo.bil_app_kotlin.data.network.SearchRegProvider
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.*

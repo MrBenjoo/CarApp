@@ -2,9 +2,9 @@ package com.example.benjo.bil_app_kotlin
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import com.example.benjo.bil_app_kotlin.data.repository.CarRepository
-import com.example.benjo.bil_app_kotlin.domain.BilUppgifterApi
-import com.example.benjo.bil_app_kotlin.domain.SearchReg
+import com.example.benjo.bil_app_kotlin.data.db.repository.CarRepository
+import com.example.benjo.bil_app_kotlin.data.network.BilUppgifterApi
+import com.example.benjo.bil_app_kotlin.data.network.SearchReg
 import com.example.benjo.bil_app_kotlin.ui.tab.TabsContract
 import com.example.benjo.bil_app_kotlin.ui.tab.TabsPresenter
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils

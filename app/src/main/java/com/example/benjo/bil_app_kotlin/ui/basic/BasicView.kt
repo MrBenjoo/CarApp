@@ -7,7 +7,7 @@ import android.view.View
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.MainActivity
-import com.example.benjo.bil_app_kotlin.domain.Result
+import com.example.benjo.bil_app_kotlin.data.network.model.Result
 import kotlinx.android.synthetic.main.fragment_base.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe

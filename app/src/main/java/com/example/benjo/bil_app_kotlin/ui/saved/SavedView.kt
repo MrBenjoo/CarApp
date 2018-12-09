@@ -1,24 +1,22 @@
 package com.example.benjo.bil_app_kotlin.ui.saved
 
 
-import android.arch.lifecycle.ViewModelProviders
 import android.content.DialogInterface
 import android.content.DialogInterface.BUTTON_POSITIVE
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.ActionMode
 
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.MainActivity
-import com.example.benjo.bil_app_kotlin.data.room.CarData
+import com.example.benjo.bil_app_kotlin.data.db.model.CarData
 import android.view.*
 import androidx.navigation.Navigation
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
-import com.example.benjo.bil_app_kotlin.data.repository.CarRepositoryImpl
-import com.example.benjo.bil_app_kotlin.data.room.CarDataBase
-import com.example.benjo.bil_app_kotlin.domain.Result
+import com.example.benjo.bil_app_kotlin.data.db.repository.CarRepositoryImpl
+import com.example.benjo.bil_app_kotlin.data.db.CarDataBase
+import com.example.benjo.bil_app_kotlin.data.network.model.Result
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_saved.*
 
@@ -28,6 +26,8 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback, Toolb
     override lateinit var presenter: SavedContract.Presenter
     private var mActionMode: ActionMode? = null
     private var showToolbarIcons = false
+    private var showingDeleteIcon = false
+    private var edit: MenuItem? = null
 
 
     override fun layoutId(): Int = R.layout.fragment_saved
@@ -50,18 +50,17 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback, Toolb
 
     private fun initPresenter() {
         val room = CarDataBase.getInstance(activity!!.applicationContext)!!
-        val savedViewModel = ViewModelProviders.of(activity!!).get(SavedViewModel::class.java)
-        presenter = SavedPresenter(CarRepositoryImpl(room), SavedAdapter(), savedViewModel)
+        presenter = SavedPresenter(CarRepositoryImpl(room), SavedAdapter(arrayListOf()))
         presenter.attachView(this)
     }
 
     override fun startActionMode() {
         mActionMode = activity!!.startActionMode(this)
-        mActionMode?.title = getString(R.string.title_action_mode)
+        mActionMode?.title = getString(R.string.saved_action_mode_title)
     }
 
     override fun setActionModeTitle(title: String) = when (title) {
-        "0" -> mActionMode?.title = getString(R.string.title_action_mode)
+        "0" -> mActionMode?.title = getString(R.string.saved_action_mode_title)
         else -> mActionMode?.title = title
     }
 
@@ -76,7 +75,7 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback, Toolb
                     true
                 }
                 R.id.action_delete_all_saved_view -> {
-                    presenter.onEvent(SavedListEvent.OnDeleteAllClickActionMode)
+                    presenter.onEvent(SavedListEvent.OnSelectAllClick)
                     true
                 }
                 else -> false
@@ -84,15 +83,15 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback, Toolb
 
     override fun showDialogOnMultipleDeletion() {
         AlertDialog.Builder(activity!!, R.style.CustomDialogTheme)
-                .setTitle(getString(R.string.title_dialog_saved))
-                .setPositiveButton(getString(R.string.dialog_saved_positive_btn)) { dialog, which -> onDialogButtonClick(dialog, which) }
-                .setNegativeButton(R.string.dialog_saved_negative_btn) { dialog, which -> onDialogButtonClick(dialog, which) }
+                .setTitle(getString(R.string.saved_dialog_title))
+                .setPositiveButton(getString(R.string.saved_dialog_positive_btn)) { dialog, which -> onDialogButtonClick(dialog, which) }
+                .setNegativeButton(R.string.saved_dialog_negative_btn) { dialog, which -> onDialogButtonClick(dialog, which) }
                 .show()
     }
 
     private fun onDialogButtonClick(dialog: DialogInterface?, which: Int) {
         if (which == BUTTON_POSITIVE) {
-            presenter.onEvent(SavedListEvent.OnDeleteClickActionMode)
+            presenter.onEvent(SavedListEvent.OnDeleteClick)
         }
         dialog?.cancel()
     }
@@ -106,7 +105,6 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback, Toolb
     }
 
     override fun showCar(car: CarData) {
-        showText("showCar: " + car.vin + " (TODO)")
         (activity as MainActivity).resultCar1 = GsonBuilder().create().fromJson(car.json, Result::class.java)
         Navigation.findNavController(this.view!!).navigate(R.id.tabsFragment)
     }
@@ -116,8 +114,20 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback, Toolb
         presenter.onDestroyActionMode()
     }
 
+    override fun showDeleteIcon() {
+        mActionMode!!.menu.findItem(R.id.action_delete_saved_view).isVisible = true
+        showingDeleteIcon = true
+    }
+
+    override fun hideDeleteIcon() {
+        mActionMode!!.menu.findItem(R.id.action_delete_saved_view).isVisible = false
+        showingDeleteIcon = false
+    }
+
+    override fun isShowingDeleteIcon(): Boolean = showingDeleteIcon
+
     override fun onCreateActionMode(mode: android.view.ActionMode, menu: Menu): Boolean {
-        mode.menuInflater.inflate(R.menu.menu_saved_view, menu)
+        mode.menuInflater.inflate(R.menu.menu_saved_action_mode, menu)
         return true
     }
 
@@ -125,29 +135,18 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback, Toolb
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.menu_saved_view, menu)
 
-        val deleteAllItem = menu?.findItem(R.id.action_delete_all_saved_view)
-        val deleteItem = menu?.findItem(R.id.action_delete_saved_view)
+        edit = menu?.findItem(R.id.action_edit)
 
         when (showToolbarIcons) {
-            true -> {
-                deleteAllItem?.isVisible = true
-                deleteItem?.isVisible = true
-            }
-            false -> {
-                deleteAllItem?.isVisible = false
-                deleteItem?.isVisible = false
-            }
+            true -> edit?.isVisible = true
+            false -> edit?.isVisible = false
         }
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.action_delete_all_saved_view -> {
-                presenter.onEvent(SavedListEvent.OnDeleteAllClickView)
-                return true
-            }
-            R.id.action_delete_saved_view -> {
-                presenter.onEvent(SavedListEvent.OnDeleteClickView)
+            R.id.action_edit -> {
+                presenter.onEvent(SavedListEvent.OnEditClick)
                 return true
             }
         }
@@ -156,12 +155,12 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback, Toolb
 
     override fun hideToolbarIcons() {
         showToolbarIcons = false
-        activity!!.invalidateOptionsMenu()
+        edit?.isVisible = false
     }
 
     override fun showToolbarIcons() {
         showToolbarIcons = true
-        activity!!.invalidateOptionsMenu()
+        edit?.isVisible = true
     }
 
     override fun showNumberOfDeletedCars(nbrOfDeletedCars: Int) {

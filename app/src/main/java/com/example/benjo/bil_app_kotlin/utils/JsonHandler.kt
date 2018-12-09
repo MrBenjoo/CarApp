@@ -1,10 +1,8 @@
-package com.example.benjo.bil_app_kotlin.domain
+package com.example.benjo.bil_app_kotlin.utils
 
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.ui.tab.Row
-import com.example.benjo.bil_app_kotlin.utils.Constants
-import com.example.benjo.bil_app_kotlin.utils.ExplanationHandler
-import com.example.benjo.bil_app_kotlin.utils.MemoryLeaks
+import com.example.benjo.bil_app_kotlin.App
 
 class JsonHandler {
 
@@ -141,6 +139,6 @@ class JsonHandler {
     }
 
     private fun row(id: Int, data: String?): Row = Row(desc(id), data)
-    private fun desc(id: Int): String = MemoryLeaks.getContext().resources.getString(id)
+    private fun desc(id: Int): String = App.getContext().resources.getString(id)
 
 }

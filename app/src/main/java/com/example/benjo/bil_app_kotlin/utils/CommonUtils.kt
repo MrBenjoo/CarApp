@@ -3,7 +3,7 @@ package com.example.benjo.bil_app_kotlin.utils
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import com.example.benjo.bil_app_kotlin.data.room.CarData
+import com.example.benjo.bil_app_kotlin.data.db.model.CarData
 import java.io.IOException
 
 

@@ -2,7 +2,7 @@ package com.example.benjo.bil_app_kotlin.ui.comparing
 
 
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.utils.MemoryLeaks
+import com.example.benjo.bil_app_kotlin.App
 import java.lang.NumberFormatException
 
 
@@ -10,7 +10,7 @@ data class Normalization(val dimension: String, val value: String/*Int*/) {
     private val mapNormalizations = HashMap<String, Float>()
 
     init {
-        with(MemoryLeaks.getContext().resources) {
+        with(App.getContext().resources) {
             mapNormalizations[getString(R.string.title_compare_horsepower)] = 1500F
             mapNormalizations[getString(R.string.title_compare_kilowatt)] = 400F
             mapNormalizations[getString(R.string.title_compare_cylinder_volume)] = 7000F
