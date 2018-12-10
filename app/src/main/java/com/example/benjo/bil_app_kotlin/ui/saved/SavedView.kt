@@ -40,11 +40,9 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback, Toolb
     }
 
     private fun initToolbar() {
-        with(activity as MainActivity) {
-            setSupportActionBar(toolbar_saved)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.title = null
-        }
+        (activity as MainActivity).setSupportActionBar(toolbar_saved)
+        (activity as MainActivity).supportActionBar?.title = null
+        toolbar_saved.setNavigationOnClickListener { activity?.onBackPressed() }
         toolbar_saved.setOnMenuItemClickListener(this)
     }
 

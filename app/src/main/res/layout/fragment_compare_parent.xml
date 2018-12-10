@@ -18,13 +18,9 @@
             android:id="@+id/toolbar_compare_parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways">
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:navigationIcon="?attr/homeAsUpIndicator">
 
-            <ImageView
-                android:id="@+id/img_compare_parent_nav_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_menu_arrow_back" />
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
