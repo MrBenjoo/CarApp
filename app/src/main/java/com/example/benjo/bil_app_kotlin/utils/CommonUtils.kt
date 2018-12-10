@@ -1,8 +1,12 @@
 package com.example.benjo.bil_app_kotlin.utils
 
 import android.content.Context
+import android.graphics.Rect
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.util.Log
+import android.view.TouchDelegate
+import android.view.View
 import com.example.benjo.bil_app_kotlin.data.db.model.CarData
 import java.io.IOException
 
@@ -35,5 +39,6 @@ class CommonUtils {
         }
         return arrayList
     }
+
 
 }

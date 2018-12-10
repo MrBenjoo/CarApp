@@ -148,4 +148,7 @@
     <string name="home_settings">Inställningar</string>
 
 
+    <string name="compare_mode_text">Jämförelseläge aktiverat, välj bil för att jämföra.</string>
+
+
 </resources>

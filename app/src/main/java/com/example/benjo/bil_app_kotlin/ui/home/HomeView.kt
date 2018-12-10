@@ -36,14 +36,14 @@ class HomeView : BaseFragment(), SearchView.OnQueryTextListener, HomeContract.Vi
         super.onViewCreated(view, savedInstanceState)
         presenter.attachView(this)
 
-        tv_saved.setOnClickListener (Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_savedFragment2))
-        tv_settings.setOnClickListener (Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_settingsFragment))
-        home_search_view.setOnQueryTextListener(this)
+        tv_saved_home.setOnClickListener (Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_savedFragment2))
+        tv_settings_home.setOnClickListener (Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_settingsFragment))
+        search_view_home.setOnQueryTextListener(this)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean = when (query?.length) {
         in 2..7 -> {
-            home_search_view.onActionViewCollapsed()
+            search_view_home.onActionViewCollapsed()
             presenter.search(query?.trim())
             true
         }
@@ -55,8 +55,8 @@ class HomeView : BaseFragment(), SearchView.OnQueryTextListener, HomeContract.Vi
 
     override fun onResume() {
         super.onResume()
-        if (TabsView.isComparing) tv_compare.visibility = View.VISIBLE
-        else tv_compare.visibility = View.GONE
+        if (TabsView.isComparing) tv_compare_home.visibility = View.VISIBLE
+        else tv_compare_home.visibility = View.GONE
     }
 
     override fun navigateToTabs() = view!!.findNavController().navigate(R.id.action_homeFragment_to_tabsFragment)

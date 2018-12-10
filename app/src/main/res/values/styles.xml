@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:actionModeBackground">@color/colorPrimary</item>
         <item name="android:windowBackground">@drawable/bg_main</item>
-        <item name="android:homeAsUpIndicator">@drawable/ic_menu_arrow_back</item>
+        <item name="android:homeAsUpIndicator">?attr/homeAsUpIndicator</item>
         <item name="actionModeCloseDrawable">@drawable/ic_action_mode_clear</item>
         <item name="android:windowActionBarOverlay">false</item>
         <item name="windowActionModeOverlay">true</item>
@@ -58,14 +58,14 @@
         <item name="android:textSize">16sp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorBlack300</item>
+        <item name="android:textColor">@color/primaryText</item>
     </style>
 
     <style name="CarCompare">
         <item name="android:textSize">14sp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorBlack400</item>
+        <item name="android:textColor">@color/secondaryText</item>
     </style>
 
     <style name="CarCompareVal">
@@ -88,18 +88,29 @@
 
 
     <style name="SmartTabLayout">
-        <item name="stl_defaultTabTextColor">#FFFFFF</item>
+        <item name="stl_defaultTabTextColor">@color/colorAccent</item>
         <item name="stl_defaultTabTextHorizontalPadding">18dp</item>
         <item name="stl_dividerColor">@android:color/transparent</item>
         <item name="stl_dividerThickness">0dp</item>
         <item name="stl_indicatorAlwaysInCenter">true</item>
-        <item name="stl_indicatorColor">@color/colorBlack600</item>
+        <item name="stl_indicatorColor">@color/colorBlack700</item>
         <item name="stl_indicatorCornerRadius">18dp</item>
         <item name="stl_indicatorGravity">center</item>
         <item name="stl_indicatorInterpolation">smart</item>
         <item name="stl_indicatorThickness">36dp</item>
         <item name="stl_underlineColor">@android:color/transparent</item>
         <item name="stl_underlineThickness">0dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+    </style>
+
+
+    <style name="Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="layout_scrollFlags">scroll|enterAlways</item>
+        <item name="navigationIcon">?attr/homeAsUpIndicator</item>
     </style>
 
     <style name="CustomDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
@@ -109,6 +120,18 @@
         <item name="android:textColorPrimary">@color/colorBlack100</item>
         <!--dialog background-->
         <item name="android:windowBackground">@drawable/dialog_delete_car</item>
+    </style>
+
+    <style name="TextStyleHomeRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/textcolor</item>
+        <item name="android:textSize">24dp</item>
+        <item name="android:drawableEnd">@drawable/ic_arrow_right</item>
     </style>
 
 

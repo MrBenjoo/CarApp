@@ -21,7 +21,7 @@ import com.example.benjo.bil_app_kotlin.ui.basic.BasicView
 import com.example.benjo.bil_app_kotlin.ui.tech.TechView
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import com.example.benjo.bil_app_kotlin.utils.ConnectivityHandler
-import com.example.benjo.bil_app_kotlin.utils.Constants
+import com.example.benjo.bil_app_kotlin.utils.increaseTouchArea
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_tabs.*
 import org.greenrobot.eventbus.EventBus
@@ -48,12 +48,21 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
         super.onViewCreated(view, savedInstanceState)
         initTabs()
         initListeners()
+        initToolbarIcons()
         img_tabs_compare.isSelected = isComparing
+    }
+
+    private fun initToolbarIcons() {
+        // (add 12 to each side = 48 x 48, assuming icon is already 24 x 24)
+        val touchPixelsMaterialDesign = (12 * resources.displayMetrics.density).toInt()
+
+        img_tabs_compare.increaseTouchArea(relative_layout_tabs_toolbar, touchPixelsMaterialDesign)
+        img_tabs_save.increaseTouchArea(relative_layout_tabs_toolbar, touchPixelsMaterialDesign)
     }
 
     override fun onQueryTextSubmit(reg: String?) = when (reg?.length) {
         in 2..7 -> {
-            searchview_tabs.onActionViewCollapsed()
+            search_view_tabs.onActionViewCollapsed()
             val connected = CommonUtils().isConnected(context)
             if (connected) {
                 // problemet jag hade innan var att jag anropade
@@ -99,7 +108,7 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
     private fun onComparing() {
         if (isComparing) {
             showBottomCompareText()
-            searchview_tabs.isIconified = false
+            search_view_tabs.isIconified = false
         } else hideBottomCompareText()
     }
 
@@ -113,19 +122,21 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
     }
 
     private fun initTabs() {
-        tablayout_tabs.setupWithViewPager(viewpager_tabs)
+        tab_layout_tabs.setupWithViewPager(viewpager_tabs)
         tabsAdapter = TabsAdapter(childFragmentManager)
         viewpager_tabs.adapter = tabsAdapter
         with(tabsAdapter) {
             addFragment(BasicView(), string(R.string.tabs_first))
             addFragment(TechView(), string(R.string.tabs_second))
         }
+
+
     }
 
     private fun initListeners() {
         img_tabs_save.setOnClickListener { onImgSaveClick() }
-        searchview_tabs.setOnQueryTextListener(this)
-        searchview_tabs.setOnCloseListener { closeCompareSearch() }
+        search_view_tabs.setOnQueryTextListener(this)
+        search_view_tabs.setOnCloseListener { closeCompareSearch() }
         img_tabs_compare.setOnClickListener {
             with(img_tabs_compare) {
                 isSelected = !isSelected
@@ -133,6 +144,7 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
             }
             onComparing()
         }
+
     }
 
     fun string(id: Int): String {

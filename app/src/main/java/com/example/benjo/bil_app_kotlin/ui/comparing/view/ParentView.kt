@@ -35,7 +35,7 @@ class ParentView : BaseFragment() {
         for ((key, value) in mapFragments) adapterTabsPage.addFragment(value, key)
 
         // Set tablayout with viewpager
-        smarttab_compare_parent.setViewPager(viewpager_compare_parent)
+        smart_tab_layout_compare_parent.setViewPager(viewpager_compare_parent)
 
         Log.d("ParentView", (activity as MainActivity).compare.toString())
 

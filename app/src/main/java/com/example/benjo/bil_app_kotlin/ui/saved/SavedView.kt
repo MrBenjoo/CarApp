@@ -95,7 +95,7 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback, Toolb
     }
 
     override fun setAdapter(savedAdapter: SavedAdapter) {
-        with(recyclerview_saved) {
+        with(recycler_view_saved) {
             setHasFixedSize(true)
             adapter = savedAdapter
             addItemDecoration(ItemDivideDecoration(context))
