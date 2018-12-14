@@ -26,7 +26,7 @@ class TechView : BaseFragment(), TechContract.ViewTech {
     }
 
     @Subscribe
-    fun onEventResult(result : Result?) {
+    fun onEventResult(result: Result?) {
         presenter.updateTab(result)
     }
 
@@ -55,6 +55,18 @@ class TechView : BaseFragment(), TechContract.ViewTech {
         super.onResume()
         val result = (activity as MainActivity).resultCar1
         presenter.updateTab(result)
+    }
+
+    override fun getTechnicalTitle(): String {
+        return context.resources?.getString(R.string.tabs_technical_title) ?: "Teknisk"
+    }
+
+    override fun getDimensionsTitle(): String {
+        return context.resources?.getString(R.string.tabs_dimensions_title) ?: "Dimensioner"
+    }
+
+    override fun getOtherTitle(): String {
+        return context.resources?.getString(R.string.tabs_other_title) ?: "Övrigt"
     }
 
     override fun onDestroy() {

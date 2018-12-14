@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.data.network.model.Result
@@ -80,7 +81,7 @@ class CompareMenuView : BaseFragment(), OnChartValueSelectedListener {
 
 
     private fun setupCompareJson(firstJson: String, secondJson: String): Compare? {
-       return JsonCompare().setupCompareJson(
+        return JsonCompare().setupCompareJson(
                 GsonBuilder().create().fromJson(firstJson, Result::class.java),
                 GsonBuilder().create().fromJson(secondJson, Result::class.java))
     }
@@ -88,19 +89,18 @@ class CompareMenuView : BaseFragment(), OnChartValueSelectedListener {
     override fun onValueSelected(e: Entry?, h: Highlight?) = when (e?.y) {
         TEKNISK -> {
             (activity as MainActivity).selected = TEKNISK
-            navController.navigate(R.id.baseCompareFragment)
+            navController.navigate(R.id.action_menuFragment_to_baseCompareFragment)
         }
         DIMENSIONER -> {
             (activity as MainActivity).selected = DIMENSIONER
-            navController.navigate(R.id.baseCompareFragment)
+            navController.navigate(R.id.action_menuFragment_to_baseCompareFragment)
         }
         FORDONSDATA -> {
             (activity as MainActivity).selected = FORDONSDATA
-            navController.navigate(R.id.baseCompareFragment)
+            navController.navigate(R.id.action_menuFragment_to_baseCompareFragment)
         }
         else -> Unit
     }
-
 
     override fun onNothingSelected() {}
 

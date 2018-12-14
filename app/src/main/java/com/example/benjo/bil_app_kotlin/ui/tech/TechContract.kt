@@ -9,6 +9,9 @@ interface TechContract {
 
     interface ViewTech : BaseView<TechPresenter> {
         fun setAdapter(adapter: SectionedRecyclerViewAdapter)
+        fun getTechnicalTitle(): String
+        fun getDimensionsTitle(): String
+        fun getOtherTitle(): String
     }
 
     interface TechPresenter : BasePresenter<ViewTech> {

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_wifi"
+        android:icon="@drawable/ic_stat_wifi_off"
+        android:title="No internet"
+        android:visible="false"
+        app:showAsAction="always">
+    </item>
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search"
+        android:title="Search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
+
+    <item
+        android:id="@+id/action_save"
+        android:icon="@drawable/ic_save"
+        android:title="Save"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_compare"
+        android:icon="@drawable/selector_iv_compare"
+        android:title="Compare"
+        app:showAsAction="always" />
+
+</menu>

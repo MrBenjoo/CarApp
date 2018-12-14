@@ -43,19 +43,23 @@ class ParentView : BaseFragment() {
 
     private fun prepareFragmentsMap() = when ((activity as MainActivity).selected) {
         CompareMenuView.TEKNISK -> {
-            mapFragments["Motor"] = MotorView()
-            mapFragments["Miljö"] = EnvironmentView()
-            mapFragments["Övrigt"] = OtherTechView()
+            mapFragments[string(R.string.compare_tab_motor)] = MotorView()
+            mapFragments[string(R.string.compare_tab_environment)] = EnvironmentView()
+            mapFragments[string(R.string.compare_tab_other)] = OtherTechView()
         }
         CompareMenuView.DIMENSIONER -> {
-            mapFragments["Vikter"] = WeightsView()
-            mapFragments["Hjul"] = WheelsView()
-            mapFragments["Övrigt"] = OtherDimensionsView()
+            mapFragments[string(R.string.compare_tab_weights)] = WeightsView()
+            mapFragments[string(R.string.compare_tab_wheels)] = WheelsView()
+            mapFragments[string(R.string.compare_tab_other)] = OtherDimensionsView()
         }
         CompareMenuView.FORDONSDATA -> {
-            mapFragments["Fordonsdata"] = VehicleView()
+            mapFragments[string(R.string.compare_tab_vehicle_data)] = VehicleView()
         }
         else -> Unit
+    }
+
+    private fun string(id: Int): String {
+        return context?.resources?.getString(id) ?: "N/A"
     }
 
 }

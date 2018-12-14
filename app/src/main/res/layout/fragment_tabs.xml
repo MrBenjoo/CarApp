@@ -10,50 +10,60 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_tabs"
-            style="@style/Toolbar">
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-            <RelativeLayout
-                android:id="@+id/relative_layout_tabs_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:minHeight="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:navigationIcon="@drawable/ic_arrow_back">
+            <!--
+                        <RelativeLayout
+                            android:id="@+id/relative_layout_tabs_toolbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/img_tabs_wifi_off"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_toStartOf="@id/search_view_tabs"
-                    android:background="@drawable/ic_stat_wifi_off"
-                    android:visibility="invisible" />
 
-                <android.support.v7.widget.SearchView
-                    android:id="@+id/search_view_tabs"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_toStartOf="@id/img_tabs_save"
-                    android:theme="@style/Theme.SearchView" />
+                            <ImageView
+                                android:id="@+id/img_tabs_wifi_off"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="8dp"
+                                android:layout_toStartOf="@id/search_view_tabs"
+                                android:background="@drawable/ic_stat_wifi_off"
+                                android:visibility="invisible" />
 
-                <ImageView
-                    android:id="@+id/img_tabs_save"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="20dp"
-                    android:layout_toStartOf="@id/img_tabs_compare"
-                    android:background="@drawable/ic_save" />
+                            <android.support.v7.widget.SearchView
+                                android:id="@+id/search_view_tabs"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="12dp"
+                                android:layout_toStartOf="@id/img_tabs_save"
+                                android:theme="@style/Theme.SearchView" />
 
-                <ImageView
-                    android:id="@+id/img_tabs_compare"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/selector_iv_compare" />
+                            <ImageView
+                                android:id="@+id/img_tabs_save"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="24dp"
+                                android:layout_toStartOf="@id/img_tabs_compare"
+                                android:background="@drawable/ic_save" />
+
+                            <ImageView
+                                android:id="@+id/img_tabs_compare"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="16dp"
+                                android:background="@drawable/selector_iv_compare" />
+
+
             </RelativeLayout>
+               -->
         </android.support.v7.widget.Toolbar>
 
         <View

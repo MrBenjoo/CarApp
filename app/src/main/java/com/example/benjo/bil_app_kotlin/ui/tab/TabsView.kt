@@ -6,11 +6,12 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.v7.widget.SearchView
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import androidx.navigation.Navigation
 
-import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.data.db.repository.CarRepositoryImpl
 import com.example.benjo.bil_app_kotlin.data.db.CarDataBase
@@ -21,17 +22,23 @@ import com.example.benjo.bil_app_kotlin.ui.basic.BasicView
 import com.example.benjo.bil_app_kotlin.ui.tech.TechView
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import com.example.benjo.bil_app_kotlin.utils.ConnectivityHandler
-import com.example.benjo.bil_app_kotlin.utils.increaseTouchArea
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_tabs.*
 import org.greenrobot.eventbus.EventBus
+import com.example.benjo.bil_app_kotlin.R
 
 
 class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.ViewTabs {
     private val TAG = "TabsView"
-    private lateinit var tabsAdapter: TabsAdapter
+
     override lateinit var presenter: TabsContract.TabsPresenter
+    private lateinit var tabsAdapter: TabsAdapter
     private lateinit var receiver: ConnectivityHandler
+    private lateinit var internetStatusMenuItem: MenuItem
+    private lateinit var searchMenuItem: MenuItem
+    private lateinit var compareMenuItem: MenuItem
+    private lateinit var searchView: SearchView
+
 
     override fun layoutId(): Int = R.layout.fragment_tabs
 
@@ -47,32 +54,72 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initTabs()
-        initListeners()
-        initToolbarIcons()
-        img_tabs_compare.isSelected = isComparing
+        setupToolbar()
     }
 
-    private fun initToolbarIcons() {
-        // (add 12 to each side = 48 x 48, assuming icon is already 24 x 24)
-        val touchPixelsMaterialDesign = (12 * resources.displayMetrics.density).toInt()
+    private fun initTabs() {
+        tab_layout_tabs.setupWithViewPager(viewpager_tabs)
+        tabsAdapter = TabsAdapter(childFragmentManager)
+        viewpager_tabs.adapter = tabsAdapter
+        with(tabsAdapter) {
+            addFragment(BasicView(), string(R.string.tabs_first))
+            addFragment(TechView(), string(R.string.tabs_second))
+        }
+    }
 
-        img_tabs_compare.increaseTouchArea(relative_layout_tabs_toolbar, touchPixelsMaterialDesign)
-        img_tabs_save.increaseTouchArea(relative_layout_tabs_toolbar, touchPixelsMaterialDesign)
+    private fun setupToolbar() = with(activity as MainActivity) {
+        setSupportActionBar(toolbar_tabs)
+        supportActionBar?.title = null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.menu_tabs, menu)
+        menu?.let {
+            internetStatusMenuItem = it.findItem(R.id.action_wifi)
+            searchMenuItem = it.findItem(R.id.action_search)
+            compareMenuItem = it.findItem(R.id.action_compare)
+        }
+
+        searchView = (searchMenuItem.actionView as SearchView).apply {
+            setOnQueryTextListener(this@TabsView)
+            setOnCloseListener { closeCompareSearch() }
+            queryHint = string(R.string.tabs_search_hint)
+        }
+
+        when (isComparing) {
+            true -> compareMenuItem.setIcon(R.drawable.ic_compare_selected)
+            false -> compareMenuItem.setIcon(R.drawable.ic_compare_unselected)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (item?.itemId) {
+        R.id.action_save -> onActionSave()
+        R.id.action_compare -> onActionCompare()
+        else -> super.onOptionsItemSelected(item)
+    }
+
+    private fun onActionCompare(): Boolean {
+        isComparing = !isComparing
+        if (isComparing) {
+            compareMenuItem.setIcon(R.drawable.ic_compare_selected)
+            searchMenuItem.expandActionView()
+            showBottomCompareText()
+
+        } else {
+            compareMenuItem.setIcon(R.drawable.ic_compare_unselected)
+            hideBottomCompareText()
+            searchMenuItem.collapseActionView()
+        }
+        return true
     }
 
     override fun onQueryTextSubmit(reg: String?) = when (reg?.length) {
         in 2..7 -> {
-            search_view_tabs.onActionViewCollapsed()
             val connected = CommonUtils().isConnected(context)
             if (connected) {
-                // problemet jag hade innan var att jag anropade
-                // homeActivity.saveResultCar1(presenter.search(reg?.trim()))
-                // vilket resultera i att search funktionen returnerade result
-                // som var null eftersom launch inte väntade på resultatet.
-                // Detta fixade jag genom att i search funktionen vänta på resultatet
-                // och sen anropa (activity as MainActivity).saveResultCar1(result)
-                // via view.updateResult(result: Result)
                 presenter.search(reg?.trim())
+                searchMenuItem.collapseActionView()
             }
             true
         }
@@ -86,9 +133,10 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
         EventBus.getDefault().post(result)
     }
 
-    private fun onImgSaveClick() {
+    private fun onActionSave(): Boolean {
         val result = (activity as MainActivity).resultCar1
         presenter.onImgSaveClicked(result)
+        return true
     }
 
     override fun navigateToCompareView(result: Result) {
@@ -105,50 +153,19 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
         Navigation.findNavController(view!!).navigate(action)
     }
 
-    private fun onComparing() {
-        if (isComparing) {
-            showBottomCompareText()
-            search_view_tabs.isIconified = false
-        } else hideBottomCompareText()
-    }
 
     override fun closeCompareSearch(): Boolean {
         if (isComparing) {
-            img_tabs_compare.isSelected = false
             isComparing = false
+            compareMenuItem.setIcon(R.drawable.ic_compare_unselected)
             hideBottomCompareText()
         }
         return false
     }
 
-    private fun initTabs() {
-        tab_layout_tabs.setupWithViewPager(viewpager_tabs)
-        tabsAdapter = TabsAdapter(childFragmentManager)
-        viewpager_tabs.adapter = tabsAdapter
-        with(tabsAdapter) {
-            addFragment(BasicView(), string(R.string.tabs_first))
-            addFragment(TechView(), string(R.string.tabs_second))
-        }
-
-
-    }
-
-    private fun initListeners() {
-        img_tabs_save.setOnClickListener { onImgSaveClick() }
-        search_view_tabs.setOnQueryTextListener(this)
-        search_view_tabs.setOnCloseListener { closeCompareSearch() }
-        img_tabs_compare.setOnClickListener {
-            with(img_tabs_compare) {
-                isSelected = !isSelected
-                isComparing = isSelected
-            }
-            onComparing()
-        }
-
-    }
 
     fun string(id: Int): String {
-        return context?.resources?.getString(id) ?: "N/A"
+        return context.resources?.getString(id) ?: "N/A"
     }
 
     override fun onResume() {
@@ -186,11 +203,15 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
 
     override fun internetOff() {
         showText(R.string.error_no_internet)
-        img_tabs_wifi_off.visibility = ImageView.VISIBLE
+        internetStatusMenuItem.isVisible = true
+        searchMenuItem.isVisible = false
+        compareMenuItem.isVisible = false
     }
 
     override fun internetOn() {
-        img_tabs_wifi_off.visibility = ImageView.INVISIBLE
+        internetStatusMenuItem.isVisible = false
+        searchMenuItem.isVisible = true
+        compareMenuItem.isVisible = true
     }
 
     override fun showResponseCode(code: Int) = showText("Response code: " + code.toString())

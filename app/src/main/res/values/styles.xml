@@ -1,22 +1,18 @@
 <resources>
 
 
-    <!-- ************** Base application theme ************** -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:actionModeBackground">@color/colorPrimary</item>
         <item name="android:windowBackground">@drawable/bg_main</item>
-        <item name="android:homeAsUpIndicator">?attr/homeAsUpIndicator</item>
-        <item name="actionModeCloseDrawable">@drawable/ic_action_mode_clear</item>
-        <item name="android:windowActionBarOverlay">false</item>
         <item name="windowActionModeOverlay">true</item>
-        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBarOverlay">false</item>
+        <item name="android:actionModeBackground">@color/colorPrimary</item>
+        <item name="actionModeCloseDrawable">@drawable/ic_action_mode_clear</item>
     </style>
-    <!-- **************************************************** -->
 
-    <!-- ************** CardView ************** -->
     <style name="CardViewStyle" parent="Base.CardView">
         <item name="cardCornerRadius">12dp</item>
     </style>
@@ -26,10 +22,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">14sp</item>
     </style>
-    <!-- **************************************** -->
 
-
-    <!-- ************** SearchView ************** -->
     <style name="Theme.SearchView" parent="Theme.AppCompat">
         <item name="searchViewStyle">@style/MySearchViewStyle</item>
     </style>
@@ -39,10 +32,7 @@
         <item name="searchIcon">@drawable/ic_search</item>
         <item name="queryBackground">@android:color/transparent</item>
     </style>
-    <!-- **************************************** -->
 
-
-    <!-- ************** TabLayout ************** -->
     <style name="TabLayout" parent="Widget.Design.TabLayout">
         <item name="tabSelectedTextColor">@color/colorAccent</item>
         <item name="tabTextColor">@color/colorBlack400</item>
@@ -51,8 +41,6 @@
         <item name="tabMode">fixed</item>
         <item name="tabBackground">?attr/colorPrimary</item>
     </style>
-    <!-- **************************************** -->
-
 
     <style name="TitleCompare">
         <item name="android:textSize">16sp</item>
@@ -86,7 +74,6 @@
         <item name="cardCornerRadius">10dp</item>
     </style>
 
-
     <style name="SmartTabLayout">
         <item name="stl_defaultTabTextColor">@color/colorAccent</item>
         <item name="stl_defaultTabTextHorizontalPadding">18dp</item>
@@ -102,15 +89,6 @@
         <item name="stl_underlineThickness">0dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
-    </style>
-
-
-    <style name="Toolbar">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">?attr/actionBarSize</item>
-        <item name="layout_scrollFlags">scroll|enterAlways</item>
-        <item name="navigationIcon">?attr/homeAsUpIndicator</item>
     </style>
 
     <style name="CustomDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">

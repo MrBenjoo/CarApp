@@ -65,7 +65,11 @@
             app:argType="string" />
         <action
             android:id="@+id/action_menuFragment_to_baseCompareFragment"
-            app:destination="@id/baseCompareFragment" />
+            app:destination="@id/baseCompareFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/baseCompareFragment"

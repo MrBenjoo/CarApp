@@ -132,6 +132,10 @@
     <string name="tabs_car_saved">Bilen sparades till din lista.</string>
     <string name="tabs_first">Grundläggande</string>
     <string name="tabs_second">Teknisk</string>
+    <string name="tabs_technical_title">Teknisk</string>
+    <string name="tabs_dimensions_title">Dimensioner</string>
+    <string name="tabs_other_title">Övrigt</string>
+    <string name="tabs_search_hint">SÖK REG</string>
 
 
     <!-- Compare menu related -->
@@ -149,6 +153,15 @@
 
 
     <string name="compare_mode_text">Jämförelseläge aktiverat, välj bil för att jämföra.</string>
+
+    <!-- Parent view (compare) related -->
+    <string name="compare_tab_motor">Motor</string>
+    <string name="compare_tab_environment">Miljö</string>
+    <string name="compare_tab_other">Övrigt</string>
+    <string name="compare_tab_weights">Vikter</string>
+    <string name="compare_tab_wheels">Hjul</string>
+    <string name="compare_tab_vehicle_data">Fordonsdata</string>
+
 
 
 </resources>

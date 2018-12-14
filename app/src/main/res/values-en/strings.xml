@@ -131,6 +131,10 @@
     <string name="tabs_car_saved">Car saved to the list.</string>
     <string name="tabs_first">Basic</string>
     <string name="tabs_second">Technical</string>
+    <string name="tabs_technical_title">Technical</string>
+    <string name="tabs_dimensions_title">Dimensions</string>
+    <string name="tabs_other_title">Other</string>
+    <string name="tabs_search_hint">SEARCH REG</string>
 
     <!-- Compare menu related -->
     <string name="compare_menu_technical">Technical</string>
@@ -146,6 +150,15 @@
     <string name="home_settings">Settings</string>
 
     <string name="compare_mode_text">Comparison mode enabled, choose car to compare.</string>
+
+
+    <!-- Parent view (compare) related -->
+    <string name="compare_tab_motor">Motor</string>
+    <string name="compare_tab_environment">Environment</string>
+    <string name="compare_tab_other">Other</string>
+    <string name="compare_tab_weights">Weights</string>
+    <string name="compare_tab_wheels">Wheels</string>
+    <string name="compare_tab_vehicle_data">Basic vehicle data</string>
 
 
 </resources>

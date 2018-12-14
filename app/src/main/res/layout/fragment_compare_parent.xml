@@ -15,7 +15,12 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_compare_parent"
-            style="@style/Toolbar" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:navigationIcon="@drawable/ic_arrow_back" />
 
         <com.ogaclejapan.smarttablayout.SmartTabLayout
             android:id="@+id/smart_tab_layout_compare_parent"

@@ -45,9 +45,9 @@ class TechPresenter(val adapter: SectionedRecyclerViewAdapter) : TechContract.Te
             val dimensionsSection = dimensionsSectionList(map)
             val otherSection = otherSectionList(map)
             adapter.removeAllSections()
-            if (!techSection.isEmpty()) updateList("Teknisk data", techSection)
-            if (!dimensionsSection.isEmpty()) updateList("Dimensioner", dimensionsSection)
-            if (!otherSection.isEmpty()) updateList("Övrigt", otherSection)
+            if (!techSection.isEmpty()) updateList(view.getTechnicalTitle(), techSection)
+            if (!dimensionsSection.isEmpty()) updateList(view.getDimensionsTitle(), dimensionsSection)
+            if (!otherSection.isEmpty()) updateList(view.getOtherTitle(), otherSection)
         }
     }
 
