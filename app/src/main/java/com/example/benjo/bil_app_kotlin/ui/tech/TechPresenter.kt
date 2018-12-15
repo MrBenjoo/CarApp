@@ -10,7 +10,7 @@ import com.google.gson.GsonBuilder
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 
 
-class TechPresenter(val adapter: SectionedRecyclerViewAdapter) : TechContract.TechPresenter {
+class TechPresenter(private val adapter: SectionedRecyclerViewAdapter) : TechContract.TechPresenter {
     private val TAG = "TechPresenter"
     private lateinit var view: TechContract.ViewTech
 

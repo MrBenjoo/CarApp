@@ -9,6 +9,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
+import com.example.benjo.bil_app_kotlin.di.CarServiceLocator.provideCarService
 import com.example.benjo.bil_app_kotlin.ui.tab.TabsView
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -21,7 +22,7 @@ class HomeView : BaseFragment(), SearchView.OnQueryTextListener, HomeContract.Vi
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        presenter = HomePresenter()
+        presenter = HomePresenter(provideCarService())
     }
 
     override fun showProgress() {

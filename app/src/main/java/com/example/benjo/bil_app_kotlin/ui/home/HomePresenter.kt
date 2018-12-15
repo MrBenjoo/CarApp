@@ -1,8 +1,8 @@
 package com.example.benjo.bil_app_kotlin.ui.home
 
 import android.util.Log
+import com.example.benjo.bil_app_kotlin.data.network.CarService
 import com.example.benjo.bil_app_kotlin.data.network.model.Result
-import com.example.benjo.bil_app_kotlin.data.network.SearchRegProvider
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.*
@@ -10,7 +10,7 @@ import org.greenrobot.eventbus.EventBus
 import kotlin.coroutines.CoroutineContext
 
 
-class HomePresenter : HomeContract.Presenter, CoroutineScope {
+class HomePresenter(val carService : CarService) : HomeContract.Presenter, CoroutineScope {
     private val TAG = "HomePresenter"
     private lateinit var view: HomeContract.View
     private var jobTracker: Job = Job()
@@ -23,11 +23,11 @@ class HomePresenter : HomeContract.Presenter, CoroutineScope {
         get() = Dispatchers.Main + jobTracker
 
     override fun search(reg: String?) {
-         /*launch {
+         launch {
              async { searchReal(reg) }.await()
-         }*/
+         }
 
-        searchFake() // test...
+        //searchFake() // test...
     }
 
 
@@ -41,8 +41,7 @@ class HomePresenter : HomeContract.Presenter, CoroutineScope {
     private suspend fun searchReal(reg: String?): Result? {
         view.showProgress()
         var result: Result? = null
-        val request = SearchRegProvider.provideSearchReg().searchReg(reg)
-        val response = request.await()
+        val response = carService.searchReg(reg).await()
         if (response.isSuccessful) {
             result = response.body()
             if (result != null) {

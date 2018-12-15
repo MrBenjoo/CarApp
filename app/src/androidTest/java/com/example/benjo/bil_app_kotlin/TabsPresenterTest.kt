@@ -4,7 +4,7 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.example.benjo.bil_app_kotlin.data.db.repository.CarRepository
 import com.example.benjo.bil_app_kotlin.data.network.BilUppgifterApi
-import com.example.benjo.bil_app_kotlin.data.network.SearchReg
+import com.example.benjo.bil_app_kotlin.data.network.CarService
 import com.example.benjo.bil_app_kotlin.ui.tab.TabsContract
 import com.example.benjo.bil_app_kotlin.ui.tab.TabsPresenter
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class TabsPresenterTest {
 
     private lateinit var server: MockWebServer
-    private lateinit var adapter: SearchReg
+    private lateinit var adapter: CarService
     private lateinit var jsonCar1 : String
     private lateinit var presenter : TabsContract.TabsPresenter
     private val view : TabsContract.ViewTabs = mockk()
@@ -41,7 +41,7 @@ class TabsPresenterTest {
         server.start()
 
         // setup retrofit with fake baseUrl
-        adapter = SearchReg(Retrofit.Builder()
+        adapter = CarService(Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(server.url("/").toString())
                 .build()

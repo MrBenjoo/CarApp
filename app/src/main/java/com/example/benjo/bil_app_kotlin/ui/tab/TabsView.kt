@@ -26,6 +26,7 @@ import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_tabs.*
 import org.greenrobot.eventbus.EventBus
 import com.example.benjo.bil_app_kotlin.R
+import com.example.benjo.bil_app_kotlin.di.CarServiceLocator.provideCarService
 
 
 class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.ViewTabs {
@@ -48,7 +49,7 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        presenter = TabsPresenter(this, CarRepositoryImpl(CarDataBase.getInstance(context!!)!!))
+        presenter = TabsPresenter(this, CarRepositoryImpl(CarDataBase.getInstance(context!!)!!), provideCarService())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

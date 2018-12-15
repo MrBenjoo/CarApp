@@ -9,7 +9,7 @@ import com.google.gson.GsonBuilder
 import com.example.benjo.bil_app_kotlin.data.network.model.Result
 
 
-class BasicPresenter(val adapter: BasicAdapter) : BasicContract.BasicPresenter {
+class BasicPresenter(private val adapter: BasicAdapter) : BasicContract.BasicPresenter {
     private val TAG = "BasicPresenter"
     private lateinit var view: BasicContract.ViewBasic
 

@@ -6,7 +6,7 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import com.example.benjo.bil_app_kotlin.ui.tab.TabsContract
 
-class ConnectivityHandler(val view: TabsContract.ViewTabs) : BroadcastReceiver() {
+class ConnectivityHandler(private val view: TabsContract.ViewTabs) : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) = when (intent?.action) {
         ConnectivityManager.CONNECTIVITY_ACTION ->

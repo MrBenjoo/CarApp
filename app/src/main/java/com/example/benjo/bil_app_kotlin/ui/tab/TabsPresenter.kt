@@ -4,7 +4,7 @@ import android.util.Log
 import com.example.benjo.bil_app_kotlin.data.network.model.Result
 import com.example.benjo.bil_app_kotlin.data.db.model.CarData
 import com.example.benjo.bil_app_kotlin.data.db.repository.CarRepository
-import com.example.benjo.bil_app_kotlin.data.network.SearchRegProvider
+import com.example.benjo.bil_app_kotlin.data.network.CarService
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
@@ -12,7 +12,10 @@ import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 import kotlin.random.Random
 
-class TabsPresenter(val view: TabsContract.ViewTabs, val carRepository: CarRepository) : TabsContract.TabsPresenter, CoroutineScope {
+class TabsPresenter(private val view: TabsContract.ViewTabs,
+                    private val carRepository: CarRepository,
+                    private val carService: CarService) : TabsContract.TabsPresenter, CoroutineScope {
+
     private val TAG = "TabsPresenter"
     private var jobTracker: Job = Job()
 
@@ -22,18 +25,25 @@ class TabsPresenter(val view: TabsContract.ViewTabs, val carRepository: CarRepos
     override fun search(reg: String?) {
         Log.d(TAG, "search($reg) -> before searchReal($reg)")
         launch {
-            //async { searchReal(reg) }.await()
-            async { searchFake(reg) }.await()
+            async { searchReal(reg) }.await()
+            //async { searchFake(reg) }.await()
         }
     }
 
     private suspend fun searchReal(reg: String?): Result? {
         var result: Result? = null
-        val request = SearchRegProvider.provideSearchReg().searchReg(reg)
-        val response = request.await()
+
+        val response = carService.searchReg(reg).await()
         if (response.isSuccessful) {
             result = response.body()
             if (result != null) {
+                if (response.raw().cacheResponse() != null) {
+                    Log.d(TAG, "cache response")
+                }
+                if (response.raw().networkResponse() != null) {
+                    Log.d(TAG, "network response")
+                }
+
                 if (view.isComparing()) {
                     view.navigateToCompareView(result)
                 } else {
