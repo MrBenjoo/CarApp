@@ -3,7 +3,7 @@ package com.example.benjo.bil_app_kotlin.data.network.model
 import com.google.gson.annotations.SerializedName
 
 
-data class Result(@SerializedName("data") val carInfo: CarInfo?)
+data class SearchResponse(@SerializedName("data") val carInfo: CarInfo?)
 
 data class CarInfo(val attributes: Attributes?, val basic: Basic?, val technical: Technical?)
 

@@ -9,7 +9,9 @@ interface HomeContract {
         fun navigateToTabs()
         fun showProgress()
         fun hideProgress()
-        fun showResponseCode(code: Int)
+        fun showExceptionError(error: Exception)
+        fun showClientError()
+        fun showServerError()
     }
 
     interface Presenter : BasePresenter<View> {

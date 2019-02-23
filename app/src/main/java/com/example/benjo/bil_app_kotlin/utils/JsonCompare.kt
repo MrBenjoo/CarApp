@@ -1,7 +1,7 @@
 package com.example.benjo.bil_app_kotlin.utils
 
 import com.example.benjo.bil_app_kotlin.data.network.model.CarInfo
-import com.example.benjo.bil_app_kotlin.data.network.model.Result
+import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 import com.example.benjo.bil_app_kotlin.data.network.model.Technical
 import com.example.benjo.bil_app_kotlin.data.network.model.TechnicalInfo
 import com.example.benjo.bil_app_kotlin.ui.comparing.*
@@ -9,21 +9,21 @@ import com.example.benjo.bil_app_kotlin.ui.comparing.*
 
 class JsonCompare {
 
-    fun setupCompareJson(car1Result: Result?, car2Result: Result?): Compare? =
-            Compare(setupCarOne(car1Result), setupCarTwo(car2Result))
+    fun setupCompareJson(car1SearchResponse: SearchResponse?, car2SearchResponse: SearchResponse?): Compare? =
+            Compare(setupCarOne(car1SearchResponse), setupCarTwo(car2SearchResponse))
 
 
-    private fun setupCarOne(car1Result: Result?): CompareData? =
-            CompareData(setupVehicleData(car1Result?.carInfo),
-                    setupTechnicalData(car1Result?.carInfo?.technical),
-                    setupDimensionData(car1Result?.carInfo?.technical),
-                    car1Result?.carInfo?.basic?.data?.model)
+    private fun setupCarOne(car1SearchResponse: SearchResponse?): CompareData? =
+            CompareData(setupVehicleData(car1SearchResponse?.carInfo),
+                    setupTechnicalData(car1SearchResponse?.carInfo?.technical),
+                    setupDimensionData(car1SearchResponse?.carInfo?.technical),
+                    car1SearchResponse?.carInfo?.basic?.data?.model)
 
-    private fun setupCarTwo(car2Result: Result?): CompareData? =
-            CompareData(setupVehicleData(car2Result?.carInfo),
-                    setupTechnicalData(car2Result?.carInfo?.technical),
-                    setupDimensionData(car2Result?.carInfo?.technical),
-                    car2Result?.carInfo?.basic?.data?.model)
+    private fun setupCarTwo(car2SearchResponse: SearchResponse?): CompareData? =
+            CompareData(setupVehicleData(car2SearchResponse?.carInfo),
+                    setupTechnicalData(car2SearchResponse?.carInfo?.technical),
+                    setupDimensionData(car2SearchResponse?.carInfo?.technical),
+                    car2SearchResponse?.carInfo?.basic?.data?.model)
 
 
     private fun setupVehicleData(carInfo: CarInfo?): CompareVehicleData? {

@@ -4,14 +4,10 @@ package com.example.benjo.bil_app_kotlin.ui.comparing
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
-import com.example.benjo.bil_app_kotlin.data.network.model.Result
-import com.example.benjo.bil_app_kotlin.MainActivity
-import com.example.benjo.bil_app_kotlin.utils.JsonCompare
+import com.example.benjo.bil_app_kotlin.utils.mainActivity
+import com.example.benjo.bil_app_kotlin.utils.navigate
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
@@ -19,7 +15,6 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_menu.*
 
 
@@ -27,7 +22,6 @@ class CompareMenuView : BaseFragment(), OnChartValueSelectedListener {
     private val TAG = "CompareMenuView"
     private lateinit var dataSet: PieDataSet
     private lateinit var pieData: PieData
-    private lateinit var navController: NavController
 
     companion object {
         val DIMENSIONER = 1.0001F
@@ -42,10 +36,6 @@ class CompareMenuView : BaseFragment(), OnChartValueSelectedListener {
         initDataSet()
         initPieData()
         initPieChart()
-        navController = Navigation.findNavController(view)
-        (activity as MainActivity).compare = with(CompareMenuViewArgs.fromBundle(arguments)) {
-            setupCompareJson(firstJson, secondJson)!!
-        }
     }
 
     private fun initDataSet() {
@@ -79,27 +69,13 @@ class CompareMenuView : BaseFragment(), OnChartValueSelectedListener {
         piechart_menu.setOnChartValueSelectedListener(this)
     }
 
-
-    private fun setupCompareJson(firstJson: String, secondJson: String): Compare? {
-        return JsonCompare().setupCompareJson(
-                GsonBuilder().create().fromJson(firstJson, Result::class.java),
-                GsonBuilder().create().fromJson(secondJson, Result::class.java))
-    }
-
-    override fun onValueSelected(e: Entry?, h: Highlight?) = when (e?.y) {
-        TEKNISK -> {
-            (activity as MainActivity).selected = TEKNISK
-            navController.navigate(R.id.action_menuFragment_to_baseCompareFragment)
+    override fun onValueSelected(e: Entry?, h: Highlight?) {
+        when (e?.y) {
+            TEKNISK -> mainActivity().selected = TEKNISK
+            DIMENSIONER -> mainActivity().selected = DIMENSIONER
+            FORDONSDATA -> mainActivity().selected = FORDONSDATA
         }
-        DIMENSIONER -> {
-            (activity as MainActivity).selected = DIMENSIONER
-            navController.navigate(R.id.action_menuFragment_to_baseCompareFragment)
-        }
-        FORDONSDATA -> {
-            (activity as MainActivity).selected = FORDONSDATA
-            navController.navigate(R.id.action_menuFragment_to_baseCompareFragment)
-        }
-        else -> Unit
+        navigate(R.id.action_menuFragment_to_baseCompareFragment)
     }
 
     override fun onNothingSelected() {}

@@ -2,9 +2,11 @@ package com.example.benjo.bil_app_kotlin.ui.comparing.view
 
 
 import com.example.benjo.bil_app_kotlin.utils.Constants.Companion.RENDERER_TYPE_COMMON
-import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.CompareData
 import com.example.benjo.bil_app_kotlin.R
+import com.example.benjo.bil_app_kotlin.data.motorDataOne
+import com.example.benjo.bil_app_kotlin.data.motorDataTwo
 import com.example.benjo.bil_app_kotlin.ui.comparing.BaseCompareView
+import com.example.benjo.bil_app_kotlin.ui.comparing.model.CompareData
 import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.RendererRowProgressbarView
 
 

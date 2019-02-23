@@ -2,28 +2,40 @@ package com.example.benjo.bil_app_kotlin.ui.tab
 
 
 import com.example.benjo.bil_app_kotlin.base.BaseView
-import com.example.benjo.bil_app_kotlin.data.network.model.Result
+import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
+import com.example.benjo.bil_app_kotlin.ui.comparing.Compare
 
 interface TabsContract {
 
     interface ViewTabs : BaseView<TabsPresenter> {
-        fun internetOn()
-        fun internetOff()
-        fun showResponseCode(code: Int)
-        fun updateResult(result: Result)
-        fun showMsgCarSaved()
-        fun showMsgCarAlreadySaved()
+        fun updateResult(searchResponse: SearchResponse)
+
         fun isComparing(): Boolean
-        fun navigateToCompareView(result: Result)
+        fun closeCompareSearch(): Boolean
         fun setProgressVisible()
         fun setProgressInvisible()
-        fun closeCompareSearch(): Boolean
+        fun stateInternetOn()
+        fun stateInternetOff()
+        fun showExceptionError(exception: Exception)
+        fun showClientError()
+        fun showServerError()
+        fun showTextCarSaved()
+        fun showTextCarAlreadySaved()
+        fun getResponseCarOne(): SearchResponse?
+
+        fun navigateToCompareView(action: TabsViewDirections.ActionTabsFragmentToMenuFragment)
+        fun navigateToCompareView(compare: Compare)
+
+        fun compareModeSelected()
+        fun compareModeUnselected()
     }
 
     interface TabsPresenter {
         fun search(reg: String?)
-        fun onImgSaveClicked(result: Result?)
+        fun onActionSaveFake(searchResponse: SearchResponse?) : Boolean
         fun cancelJob()
+        fun onActionCompare(): Boolean
+        fun onActionSave(): Boolean
     }
 
 }

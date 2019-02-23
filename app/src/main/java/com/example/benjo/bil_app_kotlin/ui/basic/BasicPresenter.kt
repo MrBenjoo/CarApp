@@ -6,7 +6,7 @@ import android.util.MalformedJsonException
 import com.example.benjo.bil_app_kotlin.utils.JsonHandler
 import com.example.benjo.bil_app_kotlin.ui.tab.Row
 import com.google.gson.GsonBuilder
-import com.example.benjo.bil_app_kotlin.data.network.model.Result
+import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 
 
 class BasicPresenter(private val adapter: BasicAdapter) : BasicContract.BasicPresenter {
@@ -17,9 +17,9 @@ class BasicPresenter(private val adapter: BasicAdapter) : BasicContract.BasicPre
         this.view = view
     }
 
-    override fun updateTab(result: Result?) {
+    override fun updateTab(searchResponse: SearchResponse?) {
         val gson = GsonBuilder().create()
-        val jsonBasic = gson.toJson(result?.carInfo?.basic?.data)
+        val jsonBasic = gson.toJson(searchResponse?.carInfo?.basic?.data)
         try {
             val mapBasic = gson.fromJson(jsonBasic, HashMap<String, String?>()::class.java)
             if (!mapBasic.isNullOrEmpty()) {

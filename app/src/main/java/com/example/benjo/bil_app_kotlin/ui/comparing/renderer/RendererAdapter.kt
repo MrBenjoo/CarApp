@@ -3,6 +3,7 @@ package com.example.benjo.bil_app_kotlin.ui.comparing.renderer
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.util.SparseArray
+import com.example.benjo.bil_app_kotlin.ui.comparing.model.ItemModel
 
 class RendererAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var listOfItems = arrayListOf<ItemModel>()

@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.R
+import com.example.benjo.bil_app_kotlin.data.calculate
 import com.example.benjo.bil_app_kotlin.ui.comparing.Normalization
-import com.example.benjo.bil_app_kotlin.utils.Constants.Companion.RENDERER_TYPE_COMMON
+import com.example.benjo.bil_app_kotlin.ui.comparing.model.CompareData
+
 import kotlinx.android.synthetic.main.view_compare_row_include.view.*
 
 
@@ -33,26 +35,14 @@ class RendererRowProgressbarView : Renderer<CompareData, CommonHolder>() {
         holder.carTwoData.text = model.carTwoData ?: "NA"
 
         if (carOneData != null) {
-            holder.barCarOne.progress = Normalization(holder.title.text.toString(), carOneData).perform()
+            holder.barCarOne.progress = Normalization(holder.title.text.toString(), carOneData).calculate()
         }
 
         if (carTwoData != null) {
-            holder.barCarTwo.progress = Normalization(holder.title.text.toString(), carTwoData).perform()
+            holder.barCarTwo.progress = Normalization(holder.title.text.toString(), carTwoData).calculate()
         }
     }
 
-}
-
-data class CompareData(
-        val TYPE: Int = RENDERER_TYPE_COMMON,
-        val title: String,
-        val carOneModel: String?,
-        val carOneData: String?,
-        val carTwoModel: String?,
-        val carTwoData: String?
-) : ItemModel {
-
-    override fun getType(): Int = TYPE
 }
 
 class CommonHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

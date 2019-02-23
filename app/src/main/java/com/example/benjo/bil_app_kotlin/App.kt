@@ -3,6 +3,8 @@ package com.example.benjo.bil_app_kotlin
 import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.util.Log
 import com.squareup.leakcanary.LeakCanary
 import java.lang.ref.WeakReference
@@ -20,6 +22,12 @@ class App : Application() {
 
         fun getContext(): Context {
             return mContext.get()!!
+        }
+
+        fun isConnected(): Boolean {
+            val cm = getContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+            return activeNetwork?.isConnected == true
         }
 
     }

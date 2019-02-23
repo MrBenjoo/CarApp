@@ -2,7 +2,7 @@ package com.example.benjo.bil_app_kotlin.ui.basic
 
 import com.example.benjo.bil_app_kotlin.base.BasePresenter
 import com.example.benjo.bil_app_kotlin.base.BaseView
-import com.example.benjo.bil_app_kotlin.data.network.model.Result
+import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 
 interface BasicContract {
 
@@ -12,7 +12,7 @@ interface BasicContract {
 
     interface BasicPresenter : BasePresenter<ViewBasic> {
         fun bind()
-        fun updateTab(result: Result?)
+        fun updateTab(searchResponse: SearchResponse?)
     }
 
 }

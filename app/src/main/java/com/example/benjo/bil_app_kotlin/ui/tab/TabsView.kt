@@ -6,6 +6,7 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.v7.widget.SearchView
+import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -15,21 +16,19 @@ import androidx.navigation.Navigation
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.data.db.repository.CarRepositoryImpl
 import com.example.benjo.bil_app_kotlin.data.db.CarDataBase
-import com.example.benjo.bil_app_kotlin.data.network.model.Result
-import com.example.benjo.bil_app_kotlin.MainActivity
+import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 
 import com.example.benjo.bil_app_kotlin.ui.basic.BasicView
 import com.example.benjo.bil_app_kotlin.ui.tech.TechView
-import com.example.benjo.bil_app_kotlin.utils.CommonUtils
-import com.example.benjo.bil_app_kotlin.utils.ConnectivityHandler
-import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_tabs.*
 import org.greenrobot.eventbus.EventBus
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.di.CarServiceLocator.provideCarService
+import com.example.benjo.bil_app_kotlin.ui.comparing.Compare
+import com.example.benjo.bil_app_kotlin.utils.*
 
 
-class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.ViewTabs {
+class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.ViewTabs, Toolbar.OnMenuItemClickListener {
     private val TAG = "TabsView"
 
     override lateinit var presenter: TabsContract.TabsPresenter
@@ -39,7 +38,6 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
     private lateinit var searchMenuItem: MenuItem
     private lateinit var compareMenuItem: MenuItem
     private lateinit var searchView: SearchView
-
 
     override fun layoutId(): Int = R.layout.fragment_tabs
 
@@ -52,13 +50,22 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
         presenter = TabsPresenter(this, CarRepositoryImpl(CarDataBase.getInstance(context!!)!!), provideCarService())
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initTabs()
-        setupToolbar()
+    override fun onMenuItemClick(item: MenuItem?): Boolean = when (item?.itemId) {
+        R.id.action_save -> {
+            //presenter.onActionSave()
+            presenter.onActionSaveFake(getResponseCarOne())
+        }
+        R.id.action_compare -> presenter.onActionCompare()
+        else -> false
     }
 
-    private fun initTabs() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupTabLayout()
+        setupToolbar(toolbar_tabs, this)
+    }
+
+    private fun setupTabLayout() {
         tab_layout_tabs.setupWithViewPager(viewpager_tabs)
         tabsAdapter = TabsAdapter(childFragmentManager)
         viewpager_tabs.adapter = tabsAdapter
@@ -68,92 +75,56 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
         }
     }
 
-    private fun setupToolbar() = with(activity as MainActivity) {
-        setSupportActionBar(toolbar_tabs)
-        supportActionBar?.title = null
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.menu_tabs, menu)
-        menu?.let {
-            internetStatusMenuItem = it.findItem(R.id.action_wifi)
-            searchMenuItem = it.findItem(R.id.action_search)
-            compareMenuItem = it.findItem(R.id.action_compare)
-        }
-
-        searchView = (searchMenuItem.actionView as SearchView).apply {
-            setOnQueryTextListener(this@TabsView)
-            setOnCloseListener { closeCompareSearch() }
-            queryHint = string(R.string.tabs_search_hint)
-        }
-
+        initMenuItems(menu)
+        setupSearchView(searchMenuItem.actionView as SearchView)
         when (isComparing) {
             true -> compareMenuItem.setIcon(R.drawable.ic_compare_selected)
             false -> compareMenuItem.setIcon(R.drawable.ic_compare_unselected)
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (item?.itemId) {
-        R.id.action_save -> onActionSave()
-        R.id.action_compare -> onActionCompare()
-        else -> super.onOptionsItemSelected(item)
+    private fun setupSearchView(searchView: SearchView) {
+        this.searchView = searchView.apply {
+            setOnQueryTextListener(this@TabsView)
+            setOnCloseListener { closeCompareSearch() }
+            queryHint = string(R.string.tabs_search_hint)
+        }
     }
 
-    private fun onActionCompare(): Boolean {
-        isComparing = !isComparing
-        if (isComparing) {
-            compareMenuItem.setIcon(R.drawable.ic_compare_selected)
-            searchMenuItem.expandActionView()
-            showBottomCompareText()
-
-        } else {
-            compareMenuItem.setIcon(R.drawable.ic_compare_unselected)
-            hideBottomCompareText()
-            searchMenuItem.collapseActionView()
+    private fun initMenuItems(menu: Menu?) {
+        menu?.let {
+            internetStatusMenuItem = it.findItem(R.id.action_wifi)
+            searchMenuItem = it.findItem(R.id.action_search)
+            compareMenuItem = it.findItem(R.id.action_compare)
         }
-        return true
+    }
+
+    override fun compareModeSelected() {
+        compareMenuItem.setIcon(R.drawable.ic_compare_selected)
+        searchMenuItem.expandActionView()
+        showBottomCompareText()
+    }
+
+    override fun compareModeUnselected() {
+        compareMenuItem.setIcon(R.drawable.ic_compare_unselected)
+        hideBottomCompareText()
+        searchMenuItem.collapseActionView()
     }
 
     override fun onQueryTextSubmit(reg: String?) = when (reg?.length) {
         in 2..7 -> {
-            val connected = CommonUtils().isConnected(context)
-            if (connected) {
-                presenter.search(reg?.trim())
-                searchMenuItem.collapseActionView()
-            }
+            presenter.search(reg?.trim())
+            searchMenuItem.collapseActionView()
             true
         }
         else -> {
-            showText(resources.getString(R.string.error_reg_limit))
+            showText(string(R.string.error_reg_limit))
             false
         }
     }
-
-    override fun updateResult(result: Result) {
-        EventBus.getDefault().post(result)
-    }
-
-    private fun onActionSave(): Boolean {
-        val result = (activity as MainActivity).resultCar1
-        presenter.onImgSaveClicked(result)
-        return true
-    }
-
-    override fun navigateToCompareView(result: Result) {
-        val homeActivity = (activity as MainActivity)
-        closeCompareSearch()
-
-        val gson = GsonBuilder().create()
-        val jsonCarOne = gson.toJson(homeActivity.resultCar1)
-        val jsonCarTwo = gson.toJson(result)
-
-        val action = TabsViewDirections.actionTabsFragmentToMenuFragment(jsonCarOne, jsonCarTwo)
-
-        // navigate to CompareMenuView
-        Navigation.findNavController(view!!).navigate(action)
-    }
-
 
     override fun closeCompareSearch(): Boolean {
         if (isComparing) {
@@ -164,67 +135,74 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
         return false
     }
 
-
-    fun string(id: Int): String {
-        return context.resources?.getString(id) ?: "N/A"
-    }
-
     override fun onResume() {
-        initBroadcast()
+        registerConnectionBroadcast()
         super.onResume()
     }
 
-    private fun initBroadcast() {
+
+    private fun registerConnectionBroadcast() {
         receiver = ConnectivityHandler(this)
-        activity!!.registerReceiver(receiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+        registerReceiver(receiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
     }
 
     override fun onPause() {
         super.onPause()
-        (activity as MainActivity).unregisterReceiver(receiver)
+        unregisterReceiver(receiver)
     }
+
+    private fun showBottomCompareText() = showView(tv_tabs_compare)
+
+    private fun hideBottomCompareText() = hideView(tv_tabs_compare)
+
+    override fun getResponseCarOne(): SearchResponse? = mainActivity().searchResponseCar1
+
+    override fun updateResult(searchResponse: SearchResponse) = EventBus.getDefault().post(searchResponse)
 
     override fun isComparing(): Boolean = isComparing
 
-    override fun setProgressVisible() {
-        progressbar_tabs.visibility = View.VISIBLE
+    override fun setProgressVisible() = showProgessBar(progressbar_tabs)
+
+    override fun setProgressInvisible() = hideProgressBar(progressbar_tabs)
+
+    override fun showExceptionError(exception: Exception) = showText(exception.message)
+
+    override fun showClientError() = showText(R.string.api_error_client)
+
+    override fun showServerError() = showText(R.string.api_error_server)
+
+    override fun showTextCarSaved() = showText(R.string.tabs_car_saved)
+
+    override fun showTextCarAlreadySaved() = showText(R.string.tabs_car_already_saved)
+
+    override fun onQueryTextChange(newText: String?): Boolean = false
+
+    override fun navigateToCompareView(action: TabsViewDirections.ActionTabsFragmentToMenuFragment) {
+        Navigation.findNavController(view!!).navigate(action)
     }
 
-    override fun setProgressInvisible() {
-        progressbar_tabs.visibility = View.INVISIBLE
+    override fun navigateToCompareView(compare: Compare) {
+        mainActivity().compare = compare
+        navigate(R.id.action_tabsFragment_to_menuFragment)
     }
 
-    private fun showBottomCompareText() {
-        tv_tabs_compare.visibility = View.VISIBLE
-    }
-
-    private fun hideBottomCompareText() {
-        tv_tabs_compare.visibility = View.GONE
-    }
-
-    override fun internetOff() {
+    override fun stateInternetOff() {
         showText(R.string.error_no_internet)
         internetStatusMenuItem.isVisible = true
         searchMenuItem.isVisible = false
         compareMenuItem.isVisible = false
     }
 
-    override fun internetOn() {
-        internetStatusMenuItem.isVisible = false
+    override fun stateInternetOn() {
+        /*internetStatusMenuItem.isVisible = false
         searchMenuItem.isVisible = true
         compareMenuItem.isVisible = true
+        */
     }
-
-    override fun showResponseCode(code: Int) = showText("Response code: " + code.toString())
-
-    override fun showMsgCarSaved() = showText(R.string.tabs_car_saved)
-
-    override fun showMsgCarAlreadySaved() = showText(R.string.tabs_car_already_saved)
-
-    override fun onQueryTextChange(newText: String?): Boolean = false
 
     override fun onDestroy() {
         super.onDestroy()
         presenter.cancelJob()
     }
+
 }

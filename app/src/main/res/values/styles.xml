@@ -98,6 +98,10 @@
         <item name="android:textColorPrimary">@color/colorBlack100</item>
         <!--dialog background-->
         <item name="android:windowBackground">@drawable/dialog_delete_car</item>
+        <item name="android:textColorAlertDialogListItem">@color/color_dialog_choice_items</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/secondaryText</item>
     </style>
 
     <style name="TextStyleHomeRow">

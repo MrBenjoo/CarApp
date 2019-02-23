@@ -39,4 +39,6 @@ abstract class BaseFragment : Fragment() {
 
     override fun getContext(): Context = activity!!.applicationContext
 
+
+
 }

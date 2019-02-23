@@ -8,7 +8,7 @@ import com.example.benjo.bil_app_kotlin.R
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.MainActivity
-import com.example.benjo.bil_app_kotlin.data.network.model.Result
+import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 import kotlinx.android.synthetic.main.fragment_base.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -26,8 +26,8 @@ class TechView : BaseFragment(), TechContract.ViewTech {
     }
 
     @Subscribe
-    fun onEventResult(result: Result?) {
-        presenter.updateTab(result)
+    fun onEventResult(searchResponse: SearchResponse?) {
+        presenter.updateTab(searchResponse)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,7 +53,7 @@ class TechView : BaseFragment(), TechContract.ViewTech {
 
     override fun onResume() {
         super.onResume()
-        val result = (activity as MainActivity).resultCar1
+        val result = (activity as MainActivity).searchResponseCar1
         presenter.updateTab(result)
     }
 

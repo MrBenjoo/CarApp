@@ -5,6 +5,8 @@ import android.view.View
 import com.example.benjo.bil_app_kotlin.MainActivity
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
+import com.example.benjo.bil_app_kotlin.data.wheelsDataOne
+import com.example.benjo.bil_app_kotlin.data.wheelsDataTwo
 import com.example.benjo.bil_app_kotlin.ui.comparing.Compare
 import kotlinx.android.synthetic.main.fragment_wheels.*
 

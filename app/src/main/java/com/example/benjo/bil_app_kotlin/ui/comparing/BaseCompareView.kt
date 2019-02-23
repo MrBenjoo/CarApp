@@ -7,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.MainActivity
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.ItemModel
+import com.example.benjo.bil_app_kotlin.di.CarServiceLocator
+import com.example.benjo.bil_app_kotlin.ui.comparing.model.ItemModel
 import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.RendererAdapter
 import kotlinx.android.synthetic.main.fragment_base.*
 
@@ -27,12 +28,14 @@ abstract class BaseCompareView : Fragment() {
             savedInstanceState: Bundle?):
             View? {
         setHasOptionsMenu(true)
+
         compare = (activity as MainActivity).compare
         adapterRenderer = RendererAdapter()
         carOneModel = compare.carOneData?.carModel
         carTwoModel = compare.carTwoData?.carModel
         initListItems()
         adapterRenderer.setItems(listOfItems)
+
         return inflater.inflate(R.layout.fragment_base, container, false)
     }
 

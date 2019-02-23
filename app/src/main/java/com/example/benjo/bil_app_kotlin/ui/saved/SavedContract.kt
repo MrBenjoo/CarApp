@@ -34,16 +34,16 @@ interface SavedContract {
         fun onEvent(event: SavedListEvent<EventData>)
         fun unregister()
         fun register()
+        fun unBind()
     }
 }
 
 data class EventData(val row : CarData, val position : Int)
 
 sealed class SavedListEvent<out T> {
-    data class OnLongClick<out EventData>(val data: EventData) : SavedListEvent<EventData>()
     data class OnShortClick<out EventData>(val data: EventData) : SavedListEvent<EventData>()
+    data class OnLongClick<out EventData>(val data: EventData) : SavedListEvent<EventData>()
+    object OnEditClick : SavedListEvent<Nothing>()
     object OnSelectAllClick : SavedListEvent<Nothing>()
     object OnDeleteClick : SavedListEvent<Nothing>()
-    object OnEditClick : SavedListEvent<Nothing>()
-
 }

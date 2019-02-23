@@ -113,8 +113,8 @@
 
     <!-- Errors -->
     <string name="error_no_internet">Ingen internetanslutning</string>
-    <string name="error_api_failure">Kunde inte läsa in data från server</string>
-    <string name="error_http_code">Klientfel eller serverfel</string>
+    <string name="api_error_client">Kunde inte läsa in data från server</string>
+    <string name="api_error_server">Serverfel</string>
     <string name="error_reg_limit">Antalet tecken måste vara mellan 2&#8211;7</string>
 
     <!-- SavedView related -->
@@ -161,7 +161,7 @@
     <string name="compare_tab_weights">Vikter</string>
     <string name="compare_tab_wheels">Hjul</string>
     <string name="compare_tab_vehicle_data">Fordonsdata</string>
-
+    <string name="settings_cache_dialog_title">Hur länge ska information vara tillgänglig utan internet?</string>
 
 
 </resources>

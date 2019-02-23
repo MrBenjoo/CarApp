@@ -13,13 +13,13 @@ class MyDiffUtil(private val oldList: ArrayList<CarData>,
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         val sameItems = oldList[oldItemPosition].vin == newList[newItemPosition].vin
-        Log.d("MyDiffUtil", "areItemsTheSame -> " + sameItems.toString())
+        Log.d("MyDiffUtil", "areItemsTheSame, oldItemPosition = $oldItemPosition, newItemPosition = $newItemPosition ->" + sameItems.toString())
         return sameItems
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val same = oldList[oldItemPosition] == newList[newItemPosition]
-        Log.d("MyDiffUtil", "areContentsTheSame -> " + same.toString())
+        val same = oldList[oldItemPosition].isChecked == newList[newItemPosition].isChecked
+        Log.d("MyDiffUtil", "areContentsTheSame, oldItemPosition = $oldItemPosition, newItemPosition = $newItemPosition -> " + same.toString())
         return same
     }
 

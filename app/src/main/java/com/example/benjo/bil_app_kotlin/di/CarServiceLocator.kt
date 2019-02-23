@@ -16,15 +16,24 @@ import java.io.File
 import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
+
+
 /**
  * This class is used to define the implementation of the Api Service, separate of the
  * class implementing it.
  */
 object CarServiceLocator {
+    const val TAG = "CarServiceLocator"
+    private var carService: CarService? = null
 
     fun provideCarService(): CarService {
-        return CarService(provideRetrofit().create(BilUppgifterApi::class.java))
+        if (carService == null) {
+            Log.d(TAG, "provideCarService --> creating new instance")
+            carService = CarService(provideRetrofit().create(BilUppgifterApi::class.java))
+        }
+        return carService!!
     }
+
 
     private fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
@@ -43,13 +52,12 @@ object CarServiceLocator {
     }
 
     private fun provideCacheInterceptor(): Interceptor {
-
         return Interceptor { chain ->
             val response = chain.proceed(chain.request())
 
             // re-write response header to force use of cache
             val cacheControl = CacheControl.Builder()
-                    .maxAge(5, TimeUnit.DAYS)
+                    .maxAge(1, TimeUnit.DAYS)
                     .build()
 
             response.newBuilder()
@@ -67,8 +75,8 @@ object CarServiceLocator {
         } catch (exception: Exception) {
             Log.d("BilUppgifterApi", "Could not create Cache!")
         }
-
         return cache
     }
+
 
 }

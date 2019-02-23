@@ -1,24 +1,47 @@
 package com.example.benjo.bil_app_kotlin.ui.settings
 
 
+import android.content.Context
 import android.os.Bundle
 import com.example.benjo.bil_app_kotlin.App
 import kotlinx.android.synthetic.main.fragment_settings.*
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import android.content.Intent
-import android.util.Log
+
+import android.view.View
 import com.example.benjo.bil_app_kotlin.MainActivity
 
 
-class SettingsFragment : BaseFragment() {
+class SettingsFragment : BaseFragment(), SettingsContract.View {
+    val TAG = "SettingsFragment"
+    val days = arrayOf("1", "2", "3", "4", "5", "6", "7")
+    var nbrOfDays = 0
+    override lateinit var presenter: SettingsContract.Presenter
 
     override fun layoutId(): Int = R.layout.fragment_settings
 
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        presenter = SettingsPresenter()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        presenter.attachView(this)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        Log.d("LifeCycles", "SettingsFragment -> onActivityCreated")
         settings_btn_change_lang.setOnClickListener { onChangeLanguageClick() }
+    }
+
+    override fun showTextCacheMaxAge() {
+        showText(nbrOfDays.toString())
+    }
+
+    override fun showTextErrorCacheMaxAge() {
+        showText("Error.")
     }
 
     private fun onChangeLanguageClick() {

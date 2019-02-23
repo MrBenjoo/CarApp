@@ -7,14 +7,14 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import androidx.navigation.findNavController
 import com.example.benjo.bil_app_kotlin.ui.comparing.Compare
-import com.example.benjo.bil_app_kotlin.data.network.model.Result
+import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
 
 class MainActivity : AppCompatActivity() {
     var selected: Float = 0F
-    var resultCar1: Result? = null
+    var searchResponseCar1: SearchResponse? = null
     lateinit var compare: Compare
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     @Subscribe
-    fun onEventResult(result: Result?) {
-        resultCar1 = result
+    fun onEventResult(searchResponse: SearchResponse?) {
+        searchResponseCar1 = searchResponse
     }
 
     override fun onStart() {
@@ -43,8 +43,5 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
         EventBus.getDefault().unregister(this)
     }
-
-
-
 
 }

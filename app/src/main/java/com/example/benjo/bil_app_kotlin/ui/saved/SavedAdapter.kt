@@ -66,11 +66,6 @@ class SavedAdapter(private val carList: ArrayList<CarData>) : RecyclerView.Adapt
         carList.addAll(newList)
     }
 
-    fun getListSize() : Int {
-        return carList.size
-    }
-
-
     class ViewHolderDefault(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val reg = itemView.tv_saved_reg
         val model = itemView.tv_saved_model

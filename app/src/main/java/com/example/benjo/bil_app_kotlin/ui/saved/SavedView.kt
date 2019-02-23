@@ -16,7 +16,7 @@ import androidx.navigation.Navigation
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.data.db.repository.CarRepositoryImpl
 import com.example.benjo.bil_app_kotlin.data.db.CarDataBase
-import com.example.benjo.bil_app_kotlin.data.network.model.Result
+import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_saved.*
 
@@ -103,7 +103,7 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback, Toolb
     }
 
     override fun showCar(car: CarData) {
-        (activity as MainActivity).resultCar1 = GsonBuilder().create().fromJson(car.json, Result::class.java)
+        (activity as MainActivity).searchResponseCar1 = GsonBuilder().create().fromJson(car.json, SearchResponse::class.java)
         Navigation.findNavController(this.view!!).navigate(R.id.tabsFragment)
     }
 
@@ -187,6 +187,11 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback, Toolb
     override fun onStop() {
         super.onStop()
         presenter.unregister()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.unBind()
     }
 
     override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean = false

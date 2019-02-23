@@ -112,8 +112,8 @@
 
     <!-- Errors -->
     <string name="error_no_internet">No internet connection.</string>
-    <string name="error_api_failure">Failed to read data from server.</string>
-    <string name="error_http_code">Something went wrong with server/client.</string>
+    <string name="api_error_client">Failed to read data from server.</string>
+    <string name="api_error_server">Something went wrong with server/client.</string>
     <string name="error_reg_limit">Max characters between 2&#8211;7.</string>
 
     <!-- SavedView related -->

@@ -2,6 +2,7 @@ package com.example.benjo.bil_app_kotlin.ui.comparing.renderer
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import com.example.benjo.bil_app_kotlin.ui.comparing.model.ItemModel
 
 
 abstract class Renderer<M : ItemModel, VH : RecyclerView.ViewHolder> {

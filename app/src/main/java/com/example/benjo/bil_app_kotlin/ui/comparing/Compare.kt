@@ -1,50 +1,7 @@
 package com.example.benjo.bil_app_kotlin.ui.comparing
 
 
-data class Compare(val carOneData: CompareData?, val carTwoData: CompareData?) {
-
-    fun motorDataOne(): CompareMotor? = carOneData?.technical?.motor
-
-
-    fun motorDataTwo(): CompareMotor? = carTwoData?.technical?.motor
-
-
-    fun otherTechDataOne(): CompareTechnicalOther? = carOneData?.technical?.other
-
-
-    fun otherTechDataTwo(): CompareTechnicalOther? = carTwoData?.technical?.other
-
-
-    fun environmentDataOne(): CompareEnvironment? = carOneData?.technical?.environment
-
-
-    fun environmentDataTwo(): CompareEnvironment? = carTwoData?.technical?.environment
-
-
-    fun weightsDataOne(): CompareWeights? = carOneData?.dimensions?.weights
-
-
-    fun weightsDataTwo(): CompareWeights? = carTwoData?.dimensions?.weights
-
-
-    fun otherDimensionsDataOne(): CompareDimensionOther? = carOneData?.dimensions?.other
-
-
-    fun otherDimensionsDataTwo(): CompareDimensionOther? = carTwoData?.dimensions?.other
-
-
-    fun wheelsDataOne(): CompareWheels? = carOneData?.dimensions?.wheels
-
-
-    fun wheelsDataTwo(): CompareWheels? = carTwoData?.dimensions?.wheels
-
-
-    fun vehicleDataOne(): CompareVehicleData? = carOneData?.vehicle
-
-
-    fun vehicleDataTwo(): CompareVehicleData? = carTwoData?.vehicle
-
-}
+data class Compare(val carOneData: CompareData?, val carTwoData: CompareData?)
 
 
 data class CompareData(val vehicle: CompareVehicleData?,

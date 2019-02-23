@@ -4,7 +4,7 @@ package com.example.benjo.bil_app_kotlin.ui.tech
 import android.util.Log
 import android.util.MalformedJsonException
 import com.example.benjo.bil_app_kotlin.utils.JsonHandler
-import com.example.benjo.bil_app_kotlin.data.network.model.Result
+import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 import com.example.benjo.bil_app_kotlin.ui.tab.Row
 import com.google.gson.GsonBuilder
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
@@ -23,10 +23,10 @@ class TechPresenter(private val adapter: SectionedRecyclerViewAdapter) : TechCon
         view.setAdapter(adapter)
     }
 
-    override fun updateTab(result: Result?) {
+    override fun updateTab(searchResponse: SearchResponse?) {
         try {
             val gson = GsonBuilder().create()
-            val jsonStringTech = gson.toJson(result?.carInfo?.technical?.data)
+            val jsonStringTech = gson.toJson(searchResponse?.carInfo?.technical?.data)
             val mapTech = gson.fromJson(jsonStringTech, HashMap<String, String?>()::class.java)
             if (!mapTech.isNullOrEmpty()) {
                 updateTechSections(mapTech)
