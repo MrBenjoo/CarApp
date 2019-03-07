@@ -1,66 +1,30 @@
-package com.example.benjo.bil_app_kotlin.ui.comparing.view
+package com.example.benjo.bil_app_kotlin.ui.compare.tabs
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.benjo.bil_app_kotlin.ui.comparing.BaseCompareView
 import com.example.benjo.bil_app_kotlin.utils.Constants.Companion.RENDERER_TYPE_COMMON
-import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.*
-import com.example.benjo.bil_app_kotlin.utils.ExplanationHandler
+import com.example.benjo.bil_app_kotlin.ui.compare.renderer.*
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.data.otherTechDataOne
-import com.example.benjo.bil_app_kotlin.data.otherTechDataTwo
-import com.example.benjo.bil_app_kotlin.ui.comparing.model.CompareData
-import com.example.benjo.bil_app_kotlin.ui.comparing.model.OtherTechModel
+import com.example.benjo.bil_app_kotlin.ui.compare.CompareBaseView
+import com.example.benjo.bil_app_kotlin.ui.compare.CompareContract
+import com.example.benjo.bil_app_kotlin.ui.compare.SelectedPageEvent
+import com.example.benjo.bil_app_kotlin.ui.compare.data.model.OtherTechModel
 import com.example.benjo.bil_app_kotlin.utils.Constants.Companion.RENDERER_TYPE_TECH_OTHER
 import kotlinx.android.synthetic.main.fragment_tech_other.view.*
 import kotlinx.android.synthetic.main.view_compare_text_include.view.*
 
 
-class OtherTechView : BaseCompareView() {
+class OtherTechView : CompareBaseView(), CompareContract.View {
 
     override fun initListItems() {
-        val carOneData = compare.otherTechDataOne()
-        val carTwoData = compare.otherTechDataTwo()
         val rendererUncommon = RendererTechOtherView().also { it.type = RENDERER_TYPE_TECH_OTHER }
         val rendererCommon = RendererRowProgressbarView().also { it.type = RENDERER_TYPE_COMMON }
-
-        with(ExplanationHandler()) {
-            listOfItems.add(
-                    OtherTechModel(RENDERER_TYPE_TECH_OTHER,
-                            string(R.string.title_compare_number_of_passengers),
-                            carOneModel,
-                            carOneData?.passengers,
-                            carTwoModel,
-                            carTwoData?.passengers,
-
-                            string(R.string.title_compare_passenger_airbag),
-                            carOneModel,
-                            boolType(carOneData?.passengerAirbag),
-                            carTwoModel,
-                            boolType(carTwoData?.passengerAirbag),
-
-                            string(R.string.title_compare_hitch),
-                            carOneModel,
-                            carOneData?.hitch,
-                            carTwoModel,
-                            carTwoData?.hitch)
-            )
-        }
-
-        listOfItems.add(
-                CompareData(RENDERER_TYPE_COMMON,
-                        string(R.string.title_compare_sound_level),
-                        carOneModel,
-                        carOneData?.soundLevel,
-                        carTwoModel,
-                        carTwoData?.soundLevel)
-        )
-
+        presenter.attachView(this)
+        listOfItems = presenter.onPageSelected(SelectedPageEvent.OnTechnicalClick(titleOther()))
         adapterRenderer.registerRenderer(rendererUncommon)
         adapterRenderer.registerRenderer(rendererCommon)
-
     }
 
 }
@@ -100,8 +64,6 @@ class RendererTechOtherView : Renderer<OtherTechModel, TechOtherViewHolder>() {
         }
     }
 }
-
-
 
 
 class TechOtherViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

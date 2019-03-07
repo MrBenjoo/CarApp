@@ -1,4 +1,4 @@
-package com.example.benjo.bil_app_kotlin.ui.comparing.view
+package com.example.benjo.bil_app_kotlin.ui.compare.tabs
 
 import android.os.Bundle
 import android.view.View
@@ -7,14 +7,14 @@ import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.data.wheelsDataOne
 import com.example.benjo.bil_app_kotlin.data.wheelsDataTwo
-import com.example.benjo.bil_app_kotlin.ui.comparing.Compare
+import com.example.benjo.bil_app_kotlin.ui.compare.data.model.Compare
 import kotlinx.android.synthetic.main.fragment_wheels.*
 
 class WheelsView : BaseFragment() {
     private lateinit var compare: Compare
+    private val TAG = "WheelsView"
 
     override fun layoutId(): Int = R.layout.fragment_wheels
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

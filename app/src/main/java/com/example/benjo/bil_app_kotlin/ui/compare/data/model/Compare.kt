@@ -1,4 +1,4 @@
-package com.example.benjo.bil_app_kotlin.ui.comparing
+package com.example.benjo.bil_app_kotlin.ui.compare.data.model
 
 
 data class Compare(val carOneData: CompareData?, val carTwoData: CompareData?)

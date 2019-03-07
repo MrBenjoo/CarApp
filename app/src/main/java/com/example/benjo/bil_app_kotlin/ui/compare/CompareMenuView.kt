@@ -1,4 +1,4 @@
-package com.example.benjo.bil_app_kotlin.ui.comparing
+package com.example.benjo.bil_app_kotlin.ui.compare
 
 
 import android.graphics.Color

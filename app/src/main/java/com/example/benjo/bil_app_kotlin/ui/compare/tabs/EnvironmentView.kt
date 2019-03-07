@@ -1,96 +1,29 @@
-package com.example.benjo.bil_app_kotlin.ui.comparing.view
+package com.example.benjo.bil_app_kotlin.ui.compare.tabs
 
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.benjo.bil_app_kotlin.ui.comparing.BaseCompareView
-import com.example.benjo.bil_app_kotlin.utils.ExplanationHandler
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.data.environmentDataOne
-import com.example.benjo.bil_app_kotlin.data.environmentDataTwo
-import com.example.benjo.bil_app_kotlin.ui.comparing.model.CompareData
-import com.example.benjo.bil_app_kotlin.ui.comparing.model.EnvModel
-import com.example.benjo.bil_app_kotlin.ui.comparing.renderer.*
+import com.example.benjo.bil_app_kotlin.ui.compare.CompareBaseView
+import com.example.benjo.bil_app_kotlin.ui.compare.CompareContract
+import com.example.benjo.bil_app_kotlin.ui.compare.SelectedPageEvent
+import com.example.benjo.bil_app_kotlin.ui.compare.data.model.EnvModel
+import com.example.benjo.bil_app_kotlin.ui.compare.renderer.*
 import com.example.benjo.bil_app_kotlin.utils.Constants.Companion.RENDERER_TYPE_COMMON
 import com.example.benjo.bil_app_kotlin.utils.Constants.Companion.RENDERER_TYPE_ENVIRONMENT
 import kotlinx.android.synthetic.main.fragment_environment.view.*
 import kotlinx.android.synthetic.main.view_compare_text_include.view.*
 
 
-class EnvironmentView : BaseCompareView() {
+class EnvironmentView : CompareBaseView(), CompareContract.View {
 
     override fun initListItems() {
-        val carOneData = compare.environmentDataOne()
-        val carTwoData = compare.environmentDataTwo()
         val rendererEnvironment = RendererEnvironmentView().also { it.type = RENDERER_TYPE_ENVIRONMENT }
         val rendererCommon = RendererRowProgressbarView().also { it.type = RENDERER_TYPE_COMMON }
-
-        with(ExplanationHandler()) {
-            listOfItems.add(
-                    EnvModel(RENDERER_TYPE_ENVIRONMENT,
-                            string(R.string.title_compare_fuel),
-                            carOneModel,
-                            fuelType(carOneData?.fuel),
-                            carTwoModel,
-                            fuelType(carTwoData?.fuel),
-
-                            string(R.string.title_compare_eco_class),
-                            carOneModel,
-                            ecoClassType(carOneData?.ecoClass),
-                            carTwoModel,
-                            ecoClassType(carTwoData?.ecoClass),
-
-                            string(R.string.title_compare_four_wheel_drive),
-                            carOneModel,
-                            boolType(carOneData?.fourWheelDrive),
-                            carTwoModel,
-                            boolType(carTwoData?.fourWheelDrive),
-
-                            string(R.string.title_compare_transmission),
-                            carOneModel,
-                            transType(carOneData?.transmission),
-                            carTwoModel,
-                            transType(carTwoData?.transmission)
-                    ))
-
-            listOfItems.add(
-                    CompareData(RENDERER_TYPE_COMMON,
-                            string(R.string.title_compare_consumption),
-                            carOneModel,
-                            carOneData?.consumption,
-                            carTwoModel,
-                            carTwoData?.consumption)
-            )
-
-            listOfItems.add(
-                    CompareData(RENDERER_TYPE_COMMON,
-                            string(R.string.title_compare_co2),
-                            carOneModel,
-                            carOneData?.co2,
-                            carTwoModel,
-                            carTwoData?.co2)
-            )
-
-            listOfItems.add(
-                    CompareData(RENDERER_TYPE_COMMON,
-                            string(R.string.title_compare_nox),
-                            carOneModel,
-                            carOneData?.nox,
-                            carTwoModel,
-                            carTwoData?.nox)
-            )
-
-            listOfItems.add(
-                    CompareData(RENDERER_TYPE_COMMON,
-                            string(R.string.title_compare_thc_nox),
-                            carOneModel,
-                            carOneData?.thcNox,
-                            carTwoModel,
-                            carTwoData?.thcNox)
-            )
-        }
+        presenter.attachView(this)
+        listOfItems = presenter.onPageSelected(SelectedPageEvent.OnTechnicalClick(titleEnvironment()))
         adapterRenderer.registerRenderer(rendererEnvironment)
         adapterRenderer.registerRenderer(rendererCommon)
     }
