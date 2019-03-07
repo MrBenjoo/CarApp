@@ -5,7 +5,7 @@
     android:id="@+id/view_wheels"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.comparing.view.ParentView"
+    tools:context=".ui.compare.tabs.TabsParentView"
     tools:layout_editor_absoluteY="25dp">
 
 

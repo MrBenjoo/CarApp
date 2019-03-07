@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import androidx.navigation.findNavController
-import com.example.benjo.bil_app_kotlin.ui.comparing.Compare
+import com.example.benjo.bil_app_kotlin.ui.compare.data.model.Compare
 import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe

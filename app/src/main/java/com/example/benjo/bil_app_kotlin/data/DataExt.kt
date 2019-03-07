@@ -2,7 +2,8 @@ package com.example.benjo.bil_app_kotlin.data
 
 import com.example.benjo.bil_app_kotlin.data.db.model.CarData
 import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
-import com.example.benjo.bil_app_kotlin.ui.comparing.*
+import com.example.benjo.bil_app_kotlin.ui.compare.data.Normalization
+import com.example.benjo.bil_app_kotlin.ui.compare.data.model.*
 import com.google.gson.GsonBuilder
 import java.lang.NumberFormatException
 

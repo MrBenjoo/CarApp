@@ -4,7 +4,7 @@ import com.example.benjo.bil_app_kotlin.data.network.model.CarInfo
 import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 import com.example.benjo.bil_app_kotlin.data.network.model.Technical
 import com.example.benjo.bil_app_kotlin.data.network.model.TechnicalInfo
-import com.example.benjo.bil_app_kotlin.ui.comparing.*
+import com.example.benjo.bil_app_kotlin.ui.compare.data.model.*
 
 
 class JsonCompare {

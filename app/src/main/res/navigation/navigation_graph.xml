@@ -54,7 +54,7 @@
 
     <fragment
         android:id="@+id/menuFragment"
-        android:name="com.example.benjo.bil_app_kotlin.ui.comparing.CompareMenuView"
+        android:name="com.example.benjo.bil_app_kotlin.ui.compare.CompareMenuView"
         android:label="fragment_menu"
         tools:layout="@layout/fragment_menu">
         <argument
@@ -73,7 +73,7 @@
     </fragment>
     <fragment
         android:id="@+id/baseCompareFragment"
-        android:name="com.example.benjo.bil_app_kotlin.ui.comparing.view.ParentView"
+        android:name="com.example.benjo.bil_app_kotlin.ui.compare.tabs.TabsParentView"
         android:label="fragment_base_compare"
         tools:layout="@layout/fragment_compare_parent" />
 
