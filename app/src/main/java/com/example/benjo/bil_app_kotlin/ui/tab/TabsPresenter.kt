@@ -2,7 +2,6 @@ package com.example.benjo.bil_app_kotlin.ui.tab
 
 import android.util.Log
 import com.example.benjo.bil_app_kotlin.App
-import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.data.Result
 import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 import com.example.benjo.bil_app_kotlin.data.db.model.CarData
@@ -10,7 +9,8 @@ import com.example.benjo.bil_app_kotlin.data.db.repository.CarRepository
 import com.example.benjo.bil_app_kotlin.data.network.CarService
 import com.example.benjo.bil_app_kotlin.data.toCarData
 import com.example.benjo.bil_app_kotlin.data.toCompareData
-import com.example.benjo.bil_app_kotlin.ui.comparing.Compare
+import com.example.benjo.bil_app_kotlin.ui.compare.CompareViewModel
+import com.example.benjo.bil_app_kotlin.ui.compare.data.model.Compare
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
@@ -21,7 +21,8 @@ import kotlin.random.Random
 
 class TabsPresenter(private val view: TabsContract.ViewTabs,
                     private val carRepository: CarRepository,
-                    private val carService: CarService) : TabsContract.TabsPresenter, CoroutineScope {
+                    private val carService: CarService,
+                    private val compareViewModel : CompareViewModel) : TabsContract.TabsPresenter, CoroutineScope {
 
     private val TAG = "TabsPresenter"
     private var jobTracker: Job = Job()
@@ -100,6 +101,7 @@ class TabsPresenter(private val view: TabsContract.ViewTabs,
         */
 
         val compare = Compare(responseCarOne.toCompareData(), responseCarTwo.toCompareData())
+        compareViewModel.setCompareData(compare)
         view.navigateToCompareView(compare)
 
     }

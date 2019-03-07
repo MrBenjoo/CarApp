@@ -1,6 +1,7 @@
 package com.example.benjo.bil_app_kotlin.ui.tab
 
 
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.IntentFilter
 import android.net.ConnectivityManager
@@ -24,7 +25,8 @@ import kotlinx.android.synthetic.main.fragment_tabs.*
 import org.greenrobot.eventbus.EventBus
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.di.CarServiceLocator.provideCarService
-import com.example.benjo.bil_app_kotlin.ui.comparing.Compare
+import com.example.benjo.bil_app_kotlin.ui.compare.CompareViewModel
+import com.example.benjo.bil_app_kotlin.ui.compare.data.model.Compare
 import com.example.benjo.bil_app_kotlin.utils.*
 
 
@@ -47,7 +49,10 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        presenter = TabsPresenter(this, CarRepositoryImpl(CarDataBase.getInstance(context!!)!!), provideCarService())
+        presenter = TabsPresenter(this,
+                CarRepositoryImpl(CarDataBase.getInstance(context!!)!!),
+                provideCarService(),
+                ViewModelProviders.of(activity!!).get(CompareViewModel::class.java))
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean = when (item?.itemId) {

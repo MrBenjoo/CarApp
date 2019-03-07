@@ -3,7 +3,7 @@ package com.example.benjo.bil_app_kotlin.ui.tab
 
 import com.example.benjo.bil_app_kotlin.base.BaseView
 import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
-import com.example.benjo.bil_app_kotlin.ui.comparing.Compare
+import com.example.benjo.bil_app_kotlin.ui.compare.data.model.Compare
 
 interface TabsContract {
 
