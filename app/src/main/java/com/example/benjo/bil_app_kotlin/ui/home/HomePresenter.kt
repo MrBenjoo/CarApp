@@ -1,16 +1,12 @@
 package com.example.benjo.bil_app_kotlin.ui.home
 
-import android.util.Log
 import com.example.benjo.bil_app_kotlin.data.network.CarService
 import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
-import com.example.benjo.bil_app_kotlin.utils.CommonUtils
-import com.google.gson.GsonBuilder
 import kotlinx.coroutines.*
 import org.greenrobot.eventbus.EventBus
 import kotlin.coroutines.CoroutineContext
 import com.example.benjo.bil_app_kotlin.data.Result
 import retrofit2.Response
-
 
 class HomePresenter(private var carService: CarService) : HomeContract.Presenter, CoroutineScope {
     private val TAG = "HomePresenter"
@@ -25,21 +21,17 @@ class HomePresenter(private var carService: CarService) : HomeContract.Presenter
         get() = Dispatchers.Main + jobTracker
 
     override fun search(reg: String?) {
-        launch { searchReal(reg) }
+        launch {
+            val searched = searchReg(reg)
 
-        //searchFake()
-    }
-
-    private suspend fun searchReal(reg: String?) {
-        val searched = registrationSearch(reg)
-
-        when (searched) {
-            is Result.Value -> handleServerValue(searched.value)
-            is Result.Error -> handleError(searched.error)
+            when (searched) {
+                is Result.Value -> handleResponse(searched.value)
+                is Result.Error -> view.showExceptionError(searched.error)
+            }
         }
     }
 
-    private suspend fun registrationSearch(reg: String?): Result<Exception, Response<SearchResponse>> {
+    private suspend fun searchReg(reg: String?): Result<Exception, Response<SearchResponse>> {
         return try {
             view.showProgress()
             Result.build { carService.searchReg(reg).await() }
@@ -50,26 +42,24 @@ class HomePresenter(private var carService: CarService) : HomeContract.Presenter
         }
     }
 
-    private fun handleServerValue(response: Response<SearchResponse>) {
+    private fun handleResponse(response: Response<SearchResponse>) {
         when (response.isSuccessful) { // 200..300 OK
             true -> processResponseBody(response.body())
             false -> handleResponseCodes(response.code())
         }
     }
 
-    private fun handleError(error: Exception) {
-        view.showExceptionError(error)
-    }
-
+    /**
+     * EventBus sends data to MainActivity so that Basic- and TechnicalView can
+     * retrieve it in their onResume method.
+     */
     private fun processResponseBody(body: SearchResponse?) {
         when (body != null) {
             true -> {
                 EventBus.getDefault().post(body)
                 view.navigateToTabs()
             }
-            false -> {
-                Log.d(TAG, "processResponseBody -> body == null")
-            }
+            false -> view.showServerError()
         }
     }
 
@@ -83,13 +73,5 @@ class HomePresenter(private var carService: CarService) : HomeContract.Presenter
     override fun cancelJob() {
         jobTracker.cancel()
     }
-
-    private fun searchFake() {
-        val jsonCarOne = CommonUtils().loadJSONFromAsset(view.getContext(), "bil_1.json")
-        val result = GsonBuilder().create().fromJson(jsonCarOne, SearchResponse::class.java)
-        EventBus.getDefault().post(result) // saves the result in MainActivity and updates Basic- and TechView list
-        view.navigateToTabs()
-    }
-
 
 }

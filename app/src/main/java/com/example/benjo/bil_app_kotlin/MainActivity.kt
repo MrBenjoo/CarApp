@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     var selected: Float = 0F
     var searchResponseCar1: SearchResponse? = null
     lateinit var compare: Compare
+    private val TAG = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     @Subscribe
     fun onEventResult(searchResponse: SearchResponse?) {
+        Log.d(TAG, "onEventResult called")
         searchResponseCar1 = searchResponse
     }
 

@@ -10,9 +10,7 @@ import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.di.CarServiceLocator.provideCarService
 import com.example.benjo.bil_app_kotlin.ui.tab.TabsView
-import com.example.benjo.bil_app_kotlin.utils.hideProgressBar
-import com.example.benjo.bil_app_kotlin.utils.navigate
-import com.example.benjo.bil_app_kotlin.utils.showProgessBar
+import com.example.benjo.bil_app_kotlin.utils.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -30,7 +28,6 @@ class HomeView : BaseFragment(), SearchView.OnQueryTextListener, HomeContract.Vi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.attachView(this)
-
         tv_saved_home.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_savedFragment2))
         tv_settings_home.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_settingsFragment))
         search_view_home.setOnQueryTextListener(this)
@@ -50,33 +47,29 @@ class HomeView : BaseFragment(), SearchView.OnQueryTextListener, HomeContract.Vi
 
     override fun onResume() {
         super.onResume()
-        if (TabsView.isComparing) tv_compare_home.visibility = View.VISIBLE
-        else tv_compare_home.visibility = View.GONE
+        when (TabsView.isComparing) {
+            true -> showView(tv_compare_home)
+            false -> hideView(tv_compare_home)
+        }
     }
 
-    override fun showExceptionError(error: Exception) {
-        showText(error.message)
-    }
+    override fun showExceptionError(error: Exception) = showText(error.message)
 
-    override fun showClientError() {
-        showText(R.string.api_error_client)
-    }
+    override fun showClientError() = showText(R.string.api_error_client)
 
-    override fun showServerError() {
-        showText(R.string.api_error_server)
-    }
+    override fun showServerError() = showText(R.string.api_error_server)
 
-    override fun showProgress() {
-        showProgessBar(progressbar_home)
-    }
+    override fun showProgress() = showProgessBar(progressbar_home)
 
-    override fun hideProgress() {
-        hideProgressBar(progressbar_home)
-    }
+    override fun hideProgress() = hideProgressBar(progressbar_home)
 
     override fun navigateToTabs() = navigate(R.id.action_homeFragment_to_tabsFragment)
 
     override fun onQueryTextChange(newText: String?): Boolean = false
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.cancelJob()
+    }
 
 }
