@@ -21,4 +21,6 @@
     <!-- Main background color -->
     <color name="colorMainBackground">#1B181C</color>
 
+    <color name="colorInternetRestored">#2e7d32</color>
+
 </resources>

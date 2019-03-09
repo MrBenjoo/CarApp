@@ -1,7 +1,5 @@
 package com.example.benjo.bil_app_kotlin.ui.tab
 
-import android.util.Log
-import com.example.benjo.bil_app_kotlin.App
 import com.example.benjo.bil_app_kotlin.data.Result
 import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 import com.example.benjo.bil_app_kotlin.data.db.model.CarData
@@ -11,18 +9,16 @@ import com.example.benjo.bil_app_kotlin.data.toCarData
 import com.example.benjo.bil_app_kotlin.data.toCompareData
 import com.example.benjo.bil_app_kotlin.ui.compare.CompareViewModel
 import com.example.benjo.bil_app_kotlin.ui.compare.data.model.Compare
-import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import com.google.gson.GsonBuilder
-import com.google.gson.JsonSyntaxException
 import kotlinx.coroutines.*
+import org.greenrobot.eventbus.EventBus
 import retrofit2.Response
 import kotlin.coroutines.CoroutineContext
-import kotlin.random.Random
 
 class TabsPresenter(private val view: TabsContract.ViewTabs,
                     private val carRepository: CarRepository,
                     private val carService: CarService,
-                    private val compareViewModel : CompareViewModel) : TabsContract.TabsPresenter, CoroutineScope {
+                    private val compareViewModel: CompareViewModel) : TabsContract.TabsPresenter, CoroutineScope {
 
     private val TAG = "TabsPresenter"
     private var jobTracker: Job = Job()
@@ -30,32 +26,35 @@ class TabsPresenter(private val view: TabsContract.ViewTabs,
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + jobTracker
 
-    override fun search(reg: String?) {
+
+    override fun onEvent(event: TabsEvent<String>) {
+        when (event) {
+            is TabsEvent.OnSearch -> onSearch(event.reg)
+            is TabsEvent.OnActionSave -> onActionSave()
+            is TabsEvent.OnActionCompare -> onActionCompare()
+            is TabsEvent.OnDestroy -> jobTracker.cancel()
+        }
+    }
+
+    private fun onSearch(reg: String?) {
         launch {
-            if (App.isConnected()) {
-                searchReal(reg)
+            val searched = searchReg(reg)
+
+            when (searched) {
+                is Result.Value -> handleServerValue(searched.value)
+                is Result.Error -> view.showExceptionError(searched.error)
             }
         }
-        //async { searchFake(reg) }.await()
     }
 
-    private suspend fun searchReal(reg: String?) {
-        val searched = registrationSearch(reg)
-
-        when (searched) {
-            is Result.Value -> handleServerValue(searched.value)
-            is Result.Error -> handleError(searched.error)
-        }
-    }
-
-    private suspend fun registrationSearch(reg: String?): Result<Exception, Response<SearchResponse>> {
+    private suspend fun searchReg(reg: String?): Result<Exception, Response<SearchResponse>> {
         return try {
-            view.setProgressVisible()
+            view.showProgress()
             Result.build { carService.searchReg(reg).await() }
         } catch (e: Exception) {
             Result.build { throw e }
         } finally {
-            view.setProgressInvisible()
+            view.hideProgress()
         }
     }
 
@@ -66,44 +65,22 @@ class TabsPresenter(private val view: TabsContract.ViewTabs,
         }
     }
 
-    private fun handleError(error: Exception) {
-        view.showExceptionError(error)
-    }
-
     private fun processResponseBody(response: SearchResponse?) {
         when (response != null) {
             true -> {
                 when (view.isComparing()) {
                     true -> navigateToCompareView(view.getResponseCarOne()!!, response)
-                    false -> view.updateResult(response)
+                    false -> EventBus.getDefault().post(response)
                 }
             }
-            false -> {
-                Log.d(TAG, "processResponseBody -> body == null")
-            }
+            false -> view.showServerError()
         }
     }
 
     private fun navigateToCompareView(responseCarOne: SearchResponse, responseCarTwo: SearchResponse) {
-        view.closeCompareSearch()
-
-        /*val responseCarOne = view.getResponseCarOne()
-
-        val gson = GsonBuilder().create()
-        val jsonCarOne = gson.toJson(responseCarOne)
-        val jsonCarTwo = gson.toJson(responseCarTwo)
-
-        Compare(responseCarOne?.toCompareData(), responseCarTwo.toCompareData())
-
-        val action = TabsViewDirections.actionTabsFragmentToMenuFragment(jsonCarOne, jsonCarTwo)
-
-        view.navigateToCompareView(action)
-        */
-
         val compare = Compare(responseCarOne.toCompareData(), responseCarTwo.toCompareData())
         compareViewModel.setCompareData(compare)
-        view.navigateToCompareView(compare)
-
+        view.navigateToCompareView()
     }
 
     private fun handleResponseCodes(code: Int) {
@@ -113,16 +90,16 @@ class TabsPresenter(private val view: TabsContract.ViewTabs,
         }
     }
 
-    override fun onActionCompare(): Boolean {
+    private fun onActionCompare(): Boolean {
         TabsView.isComparing = !TabsView.isComparing
         when (view.isComparing()) {
-            true -> view.compareModeSelected()
-            false -> view.compareModeUnselected()
+            true -> view.showCompareMode()
+            false -> view.hideCompareMode()
         }
         return true
     }
 
-    override fun onActionSave(): Boolean {
+    private fun onActionSave(): Boolean {
         val carData = view.getResponseCarOne()!!.toCarData()
         saveToDatabase(carData)
         return true
@@ -143,42 +120,14 @@ class TabsPresenter(private val view: TabsContract.ViewTabs,
 
     private fun saveToDatabase(car: CarData) = launch {
         val carDatabase = withContext(Dispatchers.IO) { carRepository.getCar(car.vin) }
-        if (carDatabase == null) {
-            withContext(Dispatchers.IO) { carRepository.insertCar(car) }
-            val saved = withContext(Dispatchers.IO) { carRepository.getCar(car.vin) }
-            if (saved != null) view.showTextCarSaved()
-        } else view.showTextCarAlreadySaved()
-    }
-
-
-    override fun cancelJob() {
-        jobTracker.cancel()
-    }
-
-    private fun searchFake(reg: String?) = launch {
-        view.setProgressVisible()
-        val randomInt = Random.nextInt(3) + 1 // between 0 (inclusive) and n (exclusive)
-        val jsonFileName = "bil_" + randomInt.toString() + ".json"
-        try {
-            val result = GsonBuilder().create().fromJson(CommonUtils().loadJSONFromAsset(
-                    view.getContext(),
-                    jsonFileName), SearchResponse::class.java)
-
-            if (result != null) {
-                if (view.isComparing()) {
-                    //navigateToCompareView(result)
-                } else {
-                    view.updateResult(result)
-                }
-            } else {
-                Log.d(TAG, "searchFake($reg) -> result == null")
+        when (carDatabase) {
+            null -> {
+                withContext(Dispatchers.IO) { carRepository.insertCar(car) }
+                val saved = withContext(Dispatchers.IO) { carRepository.getCar(car.vin) }
+                if (saved != null) view.showTextCarSaved()
             }
-        } catch (jsonException: JsonSyntaxException) {
-            Log.d(TAG, "jsonException")
-            view.closeCompareSearch()
-            view.showText(jsonException.message)
+            else -> view.showTextCarAlreadySaved()
         }
-        view.setProgressInvisible()
     }
 
 }

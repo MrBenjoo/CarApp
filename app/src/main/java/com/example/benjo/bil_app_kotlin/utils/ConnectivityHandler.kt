@@ -12,9 +12,9 @@ class ConnectivityHandler(private val view: TabsContract.ViewTabs) : BroadcastRe
         ConnectivityManager.CONNECTIVITY_ACTION ->
             with(view) {
                 if (CommonUtils().isConnected(view.getContext())) {
-                    stateInternetOn()
+                    showInternetOn()
                 } else {
-                    stateInternetOff()
+                    showInternetOff()
                 }
             }
         else -> Unit

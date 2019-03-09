@@ -3,39 +3,38 @@ package com.example.benjo.bil_app_kotlin.ui.tab
 
 import com.example.benjo.bil_app_kotlin.base.BaseView
 import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
-import com.example.benjo.bil_app_kotlin.ui.compare.data.model.Compare
 
 interface TabsContract {
 
     interface ViewTabs : BaseView<TabsPresenter> {
-        fun updateResult(searchResponse: SearchResponse)
-
+        fun showCompareMode()
+        fun hideCompareMode()
+        fun navigateToCompareView()
+        fun showInternetOff()
+        fun showInternetOn()
+        fun getResponseCarOne(): SearchResponse?
         fun isComparing(): Boolean
-        fun closeCompareSearch(): Boolean
-        fun setProgressVisible()
-        fun setProgressInvisible()
-        fun stateInternetOn()
-        fun stateInternetOff()
+        fun showProgress()
+        fun hideProgress()
         fun showExceptionError(exception: Exception)
         fun showClientError()
         fun showServerError()
         fun showTextCarSaved()
         fun showTextCarAlreadySaved()
-        fun getResponseCarOne(): SearchResponse?
-
-        fun navigateToCompareView(action: TabsViewDirections.ActionTabsFragmentToMenuFragment)
-        fun navigateToCompareView(compare: Compare)
-
-        fun compareModeSelected()
-        fun compareModeUnselected()
     }
 
     interface TabsPresenter {
-        fun search(reg: String?)
-        fun onActionSaveFake(searchResponse: SearchResponse?) : Boolean
-        fun cancelJob()
-        fun onActionCompare(): Boolean
-        fun onActionSave(): Boolean
+        fun onEvent(event: TabsEvent<String>)
+        fun onActionSaveFake(searchResponse: SearchResponse?): Boolean
     }
 
+}
+
+data class Row(var desc: String?, var data: String?)
+
+sealed class TabsEvent<out T> {
+    data class OnSearch<out String>(val reg: String) : TabsEvent<String>()
+    object OnActionSave : TabsEvent<Nothing>()
+    object OnActionCompare : TabsEvent<Nothing>()
+    object OnDestroy : TabsEvent<Nothing>()
 }

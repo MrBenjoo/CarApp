@@ -161,4 +161,7 @@
     <string name="compare_tab_vehicle_data">Basic vehicle data</string>
 
 
+    <string name="connection_restored">Connection restored</string>
+
+
 </resources>

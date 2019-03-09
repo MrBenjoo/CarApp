@@ -4,13 +4,18 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.IntentFilter
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.TextView
 
 import androidx.navigation.findNavController
 import com.example.benjo.bil_app_kotlin.MainActivity
+import com.example.benjo.bil_app_kotlin.R
 
 
 fun Fragment.getSharedPreferences(): SharedPreferences {
@@ -51,6 +56,10 @@ fun Fragment.hideView(view: View) {
 
 fun Fragment.showView(view: View) {
     view.visibility = View.VISIBLE
+}
+
+fun Fragment.showText(textID: Int) {
+    Snackbar.make(mainActivity().findViewById<View>(android.R.id.content), textID, Snackbar.LENGTH_LONG).show()
 }
 
 fun Fragment.setupToolbar(toolbar: Toolbar, listener: Toolbar.OnMenuItemClickListener) {

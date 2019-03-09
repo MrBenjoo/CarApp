@@ -47,7 +47,7 @@
         android:visibility="invisible" />
 
     <TextView
-        android:id="@+id/tv_tabs_compare"
+        android:id="@+id/tv_tabs_bottom_compare_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
