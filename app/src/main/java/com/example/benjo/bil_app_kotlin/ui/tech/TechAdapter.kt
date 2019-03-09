@@ -19,10 +19,36 @@ class TechAdapter(private val title: String?,
         .headerResourceId(R.layout.item_tabs_expandable_row)
         .build()) {
 
-    internal var expanded = true
 
+    private var expanded = true
 
     override fun getContentItemsTotal(): Int = if (expanded) list.size else 0
+
+    /* -------------------------------------- Parent related ------------------------------------- */
+    override fun onBindHeaderViewHolder(holder: RecyclerView.ViewHolder?) {
+        val parentHolder = holder as TechParentViewHolder
+        parentHolder.title?.text = title
+        parentHolder.rootView?.setOnClickListener { onExpansionClick(parentHolder) }
+        sectionAdapter.notifyDataSetChanged()
+    }
+
+    private fun onExpansionClick(holder: TechAdapter.TechParentViewHolder) {
+        expanded = !expanded
+        when (expanded) {
+            true -> holder.image?.setImageResource(R.drawable.ic_arrow_up)
+            false -> holder.image?.setImageResource(R.drawable.ic_arrow_down)
+        }
+    }
+
+    override fun getHeaderViewHolder(view: View?): RecyclerView.ViewHolder = TechParentViewHolder(view)
+
+
+    class TechParentViewHolder(view: View?) : RecyclerView.ViewHolder(view!!) {
+        val rootView = view?.expandable_header
+        val title = view?.header_text
+        val image = view?.header_img
+    }
+    /* ------------------------------------------------------------------------------------------- */
 
 
     /* -------------------------------------- Child related -------------------------------------- */
@@ -33,41 +59,11 @@ class TechAdapter(private val title: String?,
         }
     }
 
-    override fun getItemViewHolder(view: View?): RecyclerView.ViewHolder {
-        return TechChildViewHolder(view)
-    }
+    override fun getItemViewHolder(view: View?): RecyclerView.ViewHolder = TechChildViewHolder(view)
 
     class TechChildViewHolder(childView: View?) : RecyclerView.ViewHolder(childView!!) {
         val descRow = childView?.row_tv_desc
         val dataRow = childView?.row_tv_data
-    }
-    /* ------------------------------------------------------------------------------------------- */
-
-
-    /* -------------------------------------- Parent related ------------------------------------- */
-    override fun onBindHeaderViewHolder(holder: RecyclerView.ViewHolder?) {
-        with(holder as TechParentViewHolder) {
-            headerText?.text = title
-            rootView?.setOnClickListener {
-                expanded = !expanded
-                if (expanded) {
-                    imgView?.setImageResource(R.drawable.ic_arrow_up)
-                } else {
-                    imgView?.setImageResource(R.drawable.ic_arrow_down)
-                }
-                sectionAdapter.notifyDataSetChanged()
-            }
-        }
-    }
-
-    override fun getHeaderViewHolder(view: View?): RecyclerView.ViewHolder {
-        return TechParentViewHolder(view)
-    }
-
-    class TechParentViewHolder(headerView: View?) : RecyclerView.ViewHolder(headerView!!) {
-        val rootView = headerView?.expandable_header
-        val headerText = headerView?.header_text
-        val imgView = headerView?.header_img
     }
     /* ------------------------------------------------------------------------------------------- */
 

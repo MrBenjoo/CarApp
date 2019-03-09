@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.TouchDelegate
 import android.view.View
 import com.example.benjo.bil_app_kotlin.data.db.model.CarData
+import com.google.gson.GsonBuilder
 import java.io.IOException
 
 
@@ -39,6 +40,5 @@ class CommonUtils {
         }
         return arrayList
     }
-
 
 }

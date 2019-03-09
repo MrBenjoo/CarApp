@@ -3,6 +3,7 @@ package com.example.benjo.bil_app_kotlin.ui.basic
 
 import android.util.Log
 import android.util.MalformedJsonException
+import com.example.benjo.bil_app_kotlin.data.network.model.BasicInfo
 import com.example.benjo.bil_app_kotlin.utils.JsonHandler
 import com.example.benjo.bil_app_kotlin.ui.tab.Row
 import com.google.gson.GsonBuilder
@@ -18,19 +19,27 @@ class BasicPresenter(private val adapter: BasicAdapter) : BasicContract.BasicPre
     }
 
     override fun updateTab(searchResponse: SearchResponse?) {
-        val gson = GsonBuilder().create()
-        val jsonBasic = gson.toJson(searchResponse?.carInfo?.basic?.data)
         try {
-            val mapBasic = gson.fromJson(jsonBasic, HashMap<String, String?>()::class.java)
-            if (!mapBasic.isNullOrEmpty()) {
-                val list = JsonHandler().removeEmptyValues(mapBasic)
-                if (!list.isEmpty()) updateList(list)
-            } else {
-                Log.d(TAG, "updateTab --> mapBasic isNullOrEmpty")
-            }
+            processMap(getMapFromResponse(searchResponse?.carInfo?.basic?.data))
         } catch (jsonException: MalformedJsonException) {
             view.showText(jsonException.message)
         }
+    }
+
+    private fun processMap(mapFromResponse: HashMap<String, String?>) {
+        when (mapFromResponse.isNullOrEmpty()) {
+            false -> {
+                val list = JsonHandler().removeEmptyValues(mapFromResponse)
+                if (!list.isEmpty()) updateList(list)
+            }
+            true -> Log.d(TAG, "updateTab --> mapBasic isNullOrEmpty")
+        }
+    }
+
+    private fun getMapFromResponse(data: BasicInfo?): HashMap<String, String?> {
+        val gson = GsonBuilder().create()
+        val jsonBasic = gson.toJson(data)
+        return gson.fromJson(jsonBasic, HashMap<String, String?>()::class.java)
     }
 
     override fun bind() {

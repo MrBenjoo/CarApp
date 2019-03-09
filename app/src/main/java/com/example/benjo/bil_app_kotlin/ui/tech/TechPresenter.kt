@@ -5,6 +5,7 @@ import android.util.Log
 import android.util.MalformedJsonException
 import com.example.benjo.bil_app_kotlin.utils.JsonHandler
 import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
+import com.example.benjo.bil_app_kotlin.data.network.model.TechnicalInfo
 import com.example.benjo.bil_app_kotlin.ui.tab.Row
 import com.google.gson.GsonBuilder
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
@@ -25,18 +26,23 @@ class TechPresenter(private val adapter: SectionedRecyclerViewAdapter) : TechCon
 
     override fun updateTab(searchResponse: SearchResponse?) {
         try {
-            val gson = GsonBuilder().create()
-            val jsonStringTech = gson.toJson(searchResponse?.carInfo?.technical?.data)
-            val mapTech = gson.fromJson(jsonStringTech, HashMap<String, String?>()::class.java)
-            if (!mapTech.isNullOrEmpty()) {
-                updateTechSections(mapTech)
-            } else {
-                Log.d(TAG, "updateTab -> mapTech.isNullOrEmpty()")
-            }
+            processMap(getMapFromResponse(searchResponse?.carInfo?.technical?.data))
         } catch (jsonException: MalformedJsonException) {
             view.showText(jsonException.message)
         }
+    }
 
+    private fun getMapFromResponse(data: TechnicalInfo?): HashMap<String, String?> {
+        val gson = GsonBuilder().create()
+        val jsonTech = gson.toJson(data)
+        return gson.fromJson(jsonTech, HashMap<String, String?>()::class.java)
+    }
+
+    private fun processMap(mapFromResponse: HashMap<String, String?>) {
+        when (mapFromResponse.isNullOrEmpty()) {
+            false -> updateTechSections(mapFromResponse)
+            true -> Log.d(TAG, "updateTab --> mapBasic isNullOrEmpty")
+        }
     }
 
     private fun updateTechSections(map: HashMap<String, String?>) {

@@ -7,8 +7,8 @@ import android.view.View
 import com.example.benjo.bil_app_kotlin.R
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
-import com.example.benjo.bil_app_kotlin.MainActivity
 import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
+import com.example.benjo.bil_app_kotlin.utils.mainActivity
 import kotlinx.android.synthetic.main.fragment_base.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -53,8 +53,7 @@ class TechView : BaseFragment(), TechContract.ViewTech {
 
     override fun onResume() {
         super.onResume()
-        val result = (activity as MainActivity).searchResponseCar1
-        presenter.updateTab(result)
+        presenter.updateTab(mainActivity().searchResponseCar1)
     }
 
     override fun getTechnicalTitle(): String {
@@ -73,4 +72,5 @@ class TechView : BaseFragment(), TechContract.ViewTech {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
     }
+
 }
