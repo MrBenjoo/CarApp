@@ -10,11 +10,11 @@ import com.google.gson.GsonBuilder
 import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 
 
-class BasicPresenter(private val adapter: BasicAdapter) : BasicContract.BasicPresenter {
-    private val TAG = "BasicPresenter"
-    private lateinit var view: BasicContract.ViewBasic
+class BasicPresenter(private val adapter: BasicAdapter) : BasicContract.Presenter {
+    private val TAG = "Presenter"
+    private lateinit var view: BasicContract.View
 
-    override fun attachView(view: BasicContract.ViewBasic) {
+    override fun attachView(view: BasicContract.View) {
         this.view = view
     }
 
@@ -22,7 +22,7 @@ class BasicPresenter(private val adapter: BasicAdapter) : BasicContract.BasicPre
         try {
             processMap(getMapFromResponse(searchResponse?.carInfo?.basic?.data))
         } catch (jsonException: MalformedJsonException) {
-            view.showText(jsonException.message)
+            view.showTextMalformedJson()
         }
     }
 

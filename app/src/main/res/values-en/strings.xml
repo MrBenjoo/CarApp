@@ -163,5 +163,7 @@
 
     <string name="connection_restored">Connection restored</string>
 
+    <string name="error_malformed_json">Something wrong with the server. Try again later.</string>
+
 
 </resources>

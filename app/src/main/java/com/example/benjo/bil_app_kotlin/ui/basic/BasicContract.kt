@@ -6,11 +6,12 @@ import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 
 interface BasicContract {
 
-    interface ViewBasic : BaseView<BasicPresenter> {
+    interface View : BaseView<Presenter> {
         fun setAdapter(adapter : BasicAdapter)
+        fun showTextMalformedJson()
     }
 
-    interface BasicPresenter : BasePresenter<ViewBasic> {
+    interface Presenter : BasePresenter<View> {
         fun bind()
         fun updateTab(searchResponse: SearchResponse?)
     }

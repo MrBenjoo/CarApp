@@ -11,12 +11,12 @@ import com.google.gson.GsonBuilder
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 
 
-class TechPresenter(private val adapter: SectionedRecyclerViewAdapter) : TechContract.TechPresenter {
-    private val TAG = "TechPresenter"
-    private lateinit var view: TechContract.ViewTech
+class TechPresenter(private val adapter: SectionedRecyclerViewAdapter) : TechContract.Presenter {
+    private val TAG = "Presenter"
+    private lateinit var view: TechContract.View
 
 
-    override fun attachView(view: TechContract.ViewTech) {
+    override fun attachView(view: TechContract.View) {
         this.view = view
     }
 
@@ -28,7 +28,7 @@ class TechPresenter(private val adapter: SectionedRecyclerViewAdapter) : TechCon
         try {
             processMap(getMapFromResponse(searchResponse?.carInfo?.technical?.data))
         } catch (jsonException: MalformedJsonException) {
-            view.showText(jsonException.message)
+            view.showTextMalformedJson()
         }
     }
 

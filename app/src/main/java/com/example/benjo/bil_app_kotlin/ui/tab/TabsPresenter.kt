@@ -4,7 +4,7 @@ import com.example.benjo.bil_app_kotlin.data.Result
 import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 import com.example.benjo.bil_app_kotlin.data.db.model.CarData
 import com.example.benjo.bil_app_kotlin.data.db.repository.CarRepository
-import com.example.benjo.bil_app_kotlin.data.network.CarService
+import com.example.benjo.bil_app_kotlin.data.network.ApiHelper
 import com.example.benjo.bil_app_kotlin.data.toCarData
 import com.example.benjo.bil_app_kotlin.data.toCompareData
 import com.example.benjo.bil_app_kotlin.ui.compare.CompareViewModel
@@ -15,12 +15,12 @@ import org.greenrobot.eventbus.EventBus
 import retrofit2.Response
 import kotlin.coroutines.CoroutineContext
 
-class TabsPresenter(private val view: TabsContract.ViewTabs,
+class TabsPresenter(private val view: TabsContract.View,
                     private val carRepository: CarRepository,
-                    private val carService: CarService,
-                    private val compareViewModel: CompareViewModel) : TabsContract.TabsPresenter, CoroutineScope {
+                    private val apiHelper: ApiHelper,
+                    private val compareViewModel: CompareViewModel) : TabsContract.Presenter, CoroutineScope {
 
-    private val TAG = "TabsPresenter"
+    private val TAG = "Presenter"
     private var jobTracker: Job = Job()
 
     override val coroutineContext: CoroutineContext
@@ -50,7 +50,7 @@ class TabsPresenter(private val view: TabsContract.ViewTabs,
     private suspend fun searchReg(reg: String?): Result<Exception, Response<SearchResponse>> {
         return try {
             view.showProgress()
-            Result.build { carService.searchReg(reg).await() }
+            Result.build { apiHelper.searchRegAsync(reg).await() }
         } catch (e: Exception) {
             Result.build { throw e }
         } finally {

@@ -48,7 +48,13 @@ fun ArrayList<CarData>.selectAll() {
     for (row in this) row.isChecked = true
 }
 
-
+fun List<CarData>.toArrayList() : ArrayList<CarData> {
+    val arrayList = arrayListOf<CarData>()
+    for (item in this) {
+        arrayList.add(CarData(null, item.reg, item.model, item.modelYear, item.type, item.vin, item.json))
+    }
+    return arrayList
+}
 
 fun SearchResponse.toCarData(): CarData {
     val reg = carInfo?.attributes?.regno!!

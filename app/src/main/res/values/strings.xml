@@ -161,8 +161,9 @@
     <string name="compare_tab_weights">Vikter</string>
     <string name="compare_tab_wheels">Hjul</string>
     <string name="compare_tab_vehicle_data">Fordonsdata</string>
-    <string name="settings_cache_dialog_title">Hur länge ska information vara tillgänglig utan internet?</string>
+
     <string name="connection_restored">Anslutning återupprättad</string>
+    <string name="error_malformed_json">Fel på datan från servern. Försök igen senare.</string>
 
 
 </resources>

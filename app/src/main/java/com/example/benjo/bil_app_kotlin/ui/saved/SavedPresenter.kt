@@ -2,12 +2,9 @@ package com.example.benjo.bil_app_kotlin.ui.saved
 
 
 import android.os.Handler
+import com.example.benjo.bil_app_kotlin.data.*
 import com.example.benjo.bil_app_kotlin.data.db.model.CarData
 import com.example.benjo.bil_app_kotlin.data.db.repository.CarRepository
-import com.example.benjo.bil_app_kotlin.data.deepCopy
-import com.example.benjo.bil_app_kotlin.data.isAllSelected
-import com.example.benjo.bil_app_kotlin.data.selectAll
-import com.example.benjo.bil_app_kotlin.data.unCheckAll
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
 import kotlinx.coroutines.*
 import org.greenrobot.eventbus.EventBus
@@ -128,10 +125,10 @@ class SavedPresenter(private val carRepository: CarRepository,
 
             if (deletions > 0) {
                 listCarData.clear()
-                val listDatabase = withContext(Dispatchers.IO) { carRepository.getAllCars() }
+                val listDatabase = withContext(Dispatchers.IO) { carRepository.getAllCars().toArrayList() }
 
                 if (listDatabase.isNotEmpty()) {
-                    listCarData.addAll(CommonUtils().toArrayList(listDatabase))
+                    listCarData.addAll(listDatabase)
                 }
                 view?.finishActionMode()
                 view?.showNumberOfDeletedCars(deletions)
@@ -203,9 +200,9 @@ class SavedPresenter(private val carRepository: CarRepository,
     }
 
     private suspend fun getCarsFromDatabase() {
-        val listDatabase = withContext(Dispatchers.IO) { carRepository.getAllCars() }
+        val listDatabase = withContext(Dispatchers.IO) { carRepository.getAllCars().toArrayList() }
         if (listDatabase.isNotEmpty()) {
-            listCarData = CommonUtils().toArrayList(listDatabase)
+            listCarData = listDatabase
             adapter.updateList(listCarData)
             view?.showToolbarIcons()
         } else {

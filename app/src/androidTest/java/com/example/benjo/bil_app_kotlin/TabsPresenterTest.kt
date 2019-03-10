@@ -3,8 +3,8 @@ package com.example.benjo.bil_app_kotlin
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.example.benjo.bil_app_kotlin.data.db.repository.CarRepository
-import com.example.benjo.bil_app_kotlin.data.network.BilUppgifterApi
-import com.example.benjo.bil_app_kotlin.data.network.CarService
+import com.example.benjo.bil_app_kotlin.data.network.ApiInterface
+import com.example.benjo.bil_app_kotlin.data.network.ApiHelper
 import com.example.benjo.bil_app_kotlin.ui.tab.TabsContract
 import com.example.benjo.bil_app_kotlin.ui.tab.TabsPresenter
 import com.example.benjo.bil_app_kotlin.utils.CommonUtils
@@ -25,10 +25,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 class TabsPresenterTest {
 
     private lateinit var server: MockWebServer
-    private lateinit var adapter: CarService
+    private lateinit var adapter: ApiHelper
     private lateinit var jsonCar1 : String
-    private lateinit var presenter : TabsContract.TabsPresenter
-    private val view : TabsContract.ViewTabs = mockk()
+    private lateinit var presenter : TabsContract.Presenter
+    private val view : TabsContract.View = mockk()
     private val repository : CarRepository = mockk()
 
     @Before
@@ -41,11 +41,11 @@ class TabsPresenterTest {
         server.start()
 
         // setup retrofit with fake baseUrl
-        adapter = CarService(Retrofit.Builder()
+        adapter = ApiHelper(Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(server.url("/").toString())
                 .build()
-                .create(BilUppgifterApi::class.java))
+                .create(ApiInterface::class.java))
 
         // used throughout the test to fake json response
         jsonCar1 = CommonUtils().loadJSONFromAsset(
@@ -62,7 +62,7 @@ class TabsPresenterTest {
                 .setResponseCode(200)
                 .setBody(jsonCar1))
 
-        val response = adapter.searchReg("RON810").execute()
+        val response = adapter.searchRegAsync("RON810").execute()
         val result = presenter.validateResponse(response)
 
         assertNotNull(result)
@@ -74,7 +74,7 @@ class TabsPresenterTest {
                 .setResponseCode(404)
                 .setBody(""))
 
-        val response = adapter.searchReg("RON810").execute()
+        val response = adapter.searchRegAsync("RON810").execute()
         val result = presenter.validateResponse(response)
 
         assertNull(result)

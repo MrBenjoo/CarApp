@@ -8,7 +8,7 @@ import android.view.View
 import androidx.navigation.Navigation
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
-import com.example.benjo.bil_app_kotlin.di.CarServiceLocator.provideCarService
+import com.example.benjo.bil_app_kotlin.servicelocator.CarServiceLocator.provideCarService
 import com.example.benjo.bil_app_kotlin.ui.tab.TabsView
 import com.example.benjo.bil_app_kotlin.utils.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -59,9 +59,9 @@ class HomeView : BaseFragment(), SearchView.OnQueryTextListener, HomeContract.Vi
 
     override fun showServerError() = showText(R.string.api_error_server)
 
-    override fun showProgress() = showProgessBar(progressbar_home)
+    override fun showProgress() = showView(progressbar_home)
 
-    override fun hideProgress() = hideProgressBar(progressbar_home)
+    override fun hideProgress() = hideView(progressbar_home)
 
     override fun navigateToTabs() = navigate(R.id.action_homeFragment_to_tabsFragment)
 

@@ -28,8 +28,10 @@ class TechAdapter(private val title: String?,
     override fun onBindHeaderViewHolder(holder: RecyclerView.ViewHolder?) {
         val parentHolder = holder as TechParentViewHolder
         parentHolder.title?.text = title
-        parentHolder.rootView?.setOnClickListener { onExpansionClick(parentHolder) }
-        sectionAdapter.notifyDataSetChanged()
+        parentHolder.rootView?.setOnClickListener {
+            onExpansionClick(parentHolder)
+            sectionAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun onExpansionClick(holder: TechAdapter.TechParentViewHolder) {

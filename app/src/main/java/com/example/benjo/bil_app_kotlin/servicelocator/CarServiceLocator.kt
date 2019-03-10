@@ -2,8 +2,8 @@ package com.example.benjo.bil_app_kotlin.servicelocator
 
 import android.util.Log
 import com.example.benjo.bil_app_kotlin.App
-import com.example.benjo.bil_app_kotlin.data.network.BilUppgifterApi
-import com.example.benjo.bil_app_kotlin.data.network.CarService
+import com.example.benjo.bil_app_kotlin.data.network.ApiInterface
+import com.example.benjo.bil_app_kotlin.data.network.ApiHelper
 import com.example.benjo.bil_app_kotlin.data.network.UrlManager
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Cache
@@ -24,14 +24,14 @@ import java.util.concurrent.TimeUnit
  */
 object CarServiceLocator {
     const val TAG = "CarServiceLocator"
-    private var carService: CarService? = null
+    private var apiHelper: ApiHelper? = null
 
-    fun provideCarService(): CarService {
-        if (carService == null) {
+    fun provideCarService(): ApiHelper {
+        if (apiHelper == null) {
             Log.d(TAG, "provideCarService --> creating new instance")
-            carService = CarService(provideRetrofit().create(BilUppgifterApi::class.java))
+            apiHelper = ApiHelper(provideRetrofit().create(ApiInterface::class.java))
         }
-        return carService!!
+        return apiHelper!!
     }
 
 
@@ -71,9 +71,9 @@ object CarServiceLocator {
 
         try {
             cache = Cache(File(App.getContext().cacheDir, "http-cache"), 10 * 1024 * 1024)
-            Log.d("BilUppgifterApi", "Created cache.")
+            Log.d("ApiInterface", "Created cache.")
         } catch (exception: Exception) {
-            Log.d("BilUppgifterApi", "Could not create Cache!")
+            Log.d("ApiInterface", "Could not create Cache!")
         }
         return cache
     }

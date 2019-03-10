@@ -13,9 +13,9 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
 
-class BasicView : BaseFragment(), BasicContract.ViewBasic {
+class BasicView : BaseFragment(), BasicContract.View {
     private val TAG = "BasicView"
-    override lateinit var presenter: BasicContract.BasicPresenter
+    override lateinit var presenter: BasicContract.Presenter
     override fun layoutId(): Int = R.layout.fragment_base
 
     override fun onAttach(context: Context?) {
@@ -54,4 +54,7 @@ class BasicView : BaseFragment(), BasicContract.ViewBasic {
         presenter.updateTab(mainActivity().searchResponseCar1)
     }
 
+    override fun showTextMalformedJson() {
+        showText(R.string.error_malformed_json)
+    }
 }

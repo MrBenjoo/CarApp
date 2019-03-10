@@ -14,9 +14,9 @@ import com.example.benjo.bil_app_kotlin.data.db.model.CarData
 import android.view.*
 import androidx.navigation.Navigation
 import com.example.benjo.bil_app_kotlin.base.BaseFragment
-import com.example.benjo.bil_app_kotlin.data.db.repository.CarRepositoryImpl
-import com.example.benjo.bil_app_kotlin.data.db.CarDataBase
 import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
+import com.example.benjo.bil_app_kotlin.servicelocator.PresenterServiceLocator
+import com.example.benjo.bil_app_kotlin.utils.mainActivity
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_saved.*
 
@@ -47,8 +47,7 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback, Toolb
     }
 
     private fun initPresenter() {
-        val room = CarDataBase.getInstance(activity!!.applicationContext)!!
-        presenter = SavedPresenter(CarRepositoryImpl(room), SavedAdapter(arrayListOf()))
+        presenter = PresenterServiceLocator.provideSavedPresenter(mainActivity())
         presenter.attachView(this)
     }
 

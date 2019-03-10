@@ -6,7 +6,7 @@ import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 
 interface TabsContract {
 
-    interface ViewTabs : BaseView<TabsPresenter> {
+    interface View : BaseView<Presenter> {
         fun showCompareMode()
         fun hideCompareMode()
         fun navigateToCompareView()
@@ -23,7 +23,7 @@ interface TabsContract {
         fun showTextCarAlreadySaved()
     }
 
-    interface TabsPresenter {
+    interface Presenter {
         fun onEvent(event: TabsEvent<String>)
         fun onActionSaveFake(searchResponse: SearchResponse?): Boolean
     }

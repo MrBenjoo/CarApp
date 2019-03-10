@@ -14,9 +14,9 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
 
-class TechView : BaseFragment(), TechContract.ViewTech {
+class TechView : BaseFragment(), TechContract.View {
     private val TAG = "TechView"
-    override lateinit var presenter: TechContract.TechPresenter
+    override lateinit var presenter: TechContract.Presenter
 
     override fun layoutId(): Int = R.layout.fragment_base
 
@@ -66,6 +66,10 @@ class TechView : BaseFragment(), TechContract.ViewTech {
 
     override fun getOtherTitle(): String {
         return context.resources?.getString(R.string.tabs_other_title) ?: "Övrigt"
+    }
+
+    override fun showTextMalformedJson() {
+        showText(R.string.error_malformed_json)
     }
 
     override fun onDestroy() {

@@ -20,18 +20,18 @@ import com.example.benjo.bil_app_kotlin.ui.basic.BasicView
 import com.example.benjo.bil_app_kotlin.ui.tech.TechView
 import kotlinx.android.synthetic.main.fragment_tabs.*
 import com.example.benjo.bil_app_kotlin.R
-import com.example.benjo.bil_app_kotlin.di.PresenterServiceLocator
+import com.example.benjo.bil_app_kotlin.servicelocator.PresenterServiceLocator
 import com.example.benjo.bil_app_kotlin.utils.*
 
 
-class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.ViewTabs, Toolbar.OnMenuItemClickListener {
+class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.View, Toolbar.OnMenuItemClickListener {
     private val TAG = "TabsView"
     private lateinit var receiver: ConnectivityHandler
     private lateinit var internetStatusMenuItem: MenuItem
     private lateinit var searchMenuItem: MenuItem
     private lateinit var compareMenuItem: MenuItem
     private lateinit var searchView: SearchView
-    override lateinit var presenter: TabsContract.TabsPresenter
+    override lateinit var presenter: TabsContract.Presenter
 
 
     override fun layoutId(): Int = R.layout.fragment_tabs
@@ -173,9 +173,9 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
 
     override fun isComparing(): Boolean = isComparing
 
-    override fun showProgress() = showProgessBar(progressbar_tabs)
+    override fun showProgress() = showView(progressbar_tabs)
 
-    override fun hideProgress() = hideProgressBar(progressbar_tabs)
+    override fun hideProgress() = hideView(progressbar_tabs)
 
     override fun showExceptionError(exception: Exception) = showText(exception.message)
 

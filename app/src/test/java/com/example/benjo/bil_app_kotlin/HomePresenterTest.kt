@@ -1,7 +1,6 @@
 package com.example.benjo.bil_app_kotlin
 
-import com.example.benjo.bil_app_kotlin.data.network.CarService
-import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
+import com.example.benjo.bil_app_kotlin.data.network.ApiHelper
 import com.example.benjo.bil_app_kotlin.ui.home.HomeContract
 import com.example.benjo.bil_app_kotlin.ui.home.HomePresenter
 import io.mockk.every
@@ -12,9 +11,9 @@ import org.junit.Test
 import retrofit2.Response
 
 class HomePresenterTest {
-    private val carService : CarService = mockk()
+    private val apiHelper : ApiHelper = mockk()
     private val view : HomeContract.View = mockk()
-    private val presenter = HomePresenter(carService)
+    private val presenter = HomePresenter(apiHelper)
 
     @Before
     fun setupMocks() {
@@ -27,7 +26,7 @@ class HomePresenterTest {
 
         val response : Deferred<Response<Exception("test")>> = mockk()
 
-        every { carService.searchReg(REG) } returns Exception("test")
+        every { apiHelper.searchRegAsync(REG) } returns Exception("test")
     }
 
 

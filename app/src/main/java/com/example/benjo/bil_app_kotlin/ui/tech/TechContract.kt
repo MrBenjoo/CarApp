@@ -7,14 +7,15 @@ import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapt
 
 interface TechContract {
 
-    interface ViewTech : BaseView<TechPresenter> {
+    interface View : BaseView<Presenter> {
         fun setAdapter(adapter: SectionedRecyclerViewAdapter)
         fun getTechnicalTitle(): String
         fun getDimensionsTitle(): String
         fun getOtherTitle(): String
+        fun showTextMalformedJson()
     }
 
-    interface TechPresenter : BasePresenter<ViewTech> {
+    interface Presenter : BasePresenter<View> {
         fun bind()
         fun updateTab(searchResponse: SearchResponse?)
     }
