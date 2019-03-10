@@ -1,4 +1,4 @@
-package com.example.benjo.bil_app_kotlin.di
+package com.example.benjo.bil_app_kotlin.servicelocator
 
 import android.util.Log
 import com.example.benjo.bil_app_kotlin.App
