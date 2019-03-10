@@ -1,4 +1,4 @@
-package com.example.benjo.bil_app_kotlin.data.db
+package com.example.benjo.bil_app_kotlin.data.db.model
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
@@ -8,7 +8,7 @@ import com.example.benjo.bil_app_kotlin.data.db.model.CarData
 
 
 @Dao
-interface CarDataDao {
+interface RoomDbDao {
 
     @Query("SELECT * from carDataTable")
     fun getAll(): List<CarData>

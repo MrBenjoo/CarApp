@@ -7,25 +7,26 @@ import android.content.Context
 import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.migration.Migration
 import com.example.benjo.bil_app_kotlin.data.db.model.CarData
+import com.example.benjo.bil_app_kotlin.data.db.model.RoomDbDao
 
 
 @Database(entities = arrayOf(CarData::class), version = 3)
-abstract class CarDataBase : RoomDatabase() {
+abstract class RoomDb : RoomDatabase() {
 
-    abstract fun carDataDao(): CarDataDao
+    abstract fun carDataDao(): RoomDbDao
 
     /**
      * each RoomDatabase instance is fairly expensive, and you rarely need access to multiple instances. That why
      * I use singleton
      */
     companion object {
-        private var INSTANCE: CarDataBase? = null
+        private var INSTANCE: RoomDb? = null
 
-        fun getInstance(context: Context): CarDataBase? {
+        fun getInstance(context: Context): RoomDb? {
             if (INSTANCE == null) {
-                synchronized(CarDataBase::class) {
+                synchronized(RoomDb::class) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            CarDataBase::class.java, "cars.db")
+                            RoomDb::class.java, "cars.db")
                             .fallbackToDestructiveMigration()
                             .build()
                 }

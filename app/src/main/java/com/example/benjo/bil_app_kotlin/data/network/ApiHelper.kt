@@ -4,10 +4,8 @@ import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 
-class CarService(private val api: BilUppgifterApi) {
+class ApiHelper(private val api: ApiInterface) {
 
-    fun searchReg(reg: String?): Deferred<Response<SearchResponse>> {
-        return api.search(reg)
-    }
+    fun searchRegAsync(reg: String?): Deferred<Response<SearchResponse>> = api.searchAsync(reg)
 
 }
