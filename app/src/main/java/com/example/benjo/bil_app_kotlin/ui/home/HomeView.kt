@@ -53,7 +53,7 @@ class HomeView : BaseFragment(), SearchView.OnQueryTextListener, HomeContract.Vi
         }
     }
 
-    override fun showExceptionError(error: Exception) = showText(error.message)
+    override fun showExceptionError(error: Exception) = showText(error.message ?: "Exception")
 
     override fun showClientError() = showText(R.string.api_error_client)
 

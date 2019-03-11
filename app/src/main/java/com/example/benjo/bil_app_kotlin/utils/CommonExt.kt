@@ -42,6 +42,14 @@ fun Fragment.showText(textID: Int) {
             .show()
 }
 
+fun Fragment.showText(text: String) {
+    Snackbar.make(
+            mainActivity().findViewById<View>(android.R.id.content),
+            text,
+            Snackbar.LENGTH_LONG)
+            .show()
+}
+
 fun Fragment.setupToolbar(toolbar: Toolbar, listener: Toolbar.OnMenuItemClickListener) {
     mainActivity().setSupportActionBar(toolbar)
     mainActivity().supportActionBar?.title = null

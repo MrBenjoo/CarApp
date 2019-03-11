@@ -177,7 +177,8 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
 
     override fun hideProgress() = hideView(progressbar_tabs)
 
-    override fun showExceptionError(exception: Exception) = showText(exception.message)
+    override fun showExceptionError(exception: Exception) = showText(exception.message
+            ?: "Exception")
 
     override fun showClientError() = showText(R.string.api_error_client)
 

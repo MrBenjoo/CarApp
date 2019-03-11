@@ -11,6 +11,7 @@ import android.content.Intent
 
 import android.view.View
 import com.example.benjo.bil_app_kotlin.MainActivity
+import com.example.benjo.bil_app_kotlin.utils.showText
 
 
 class SettingsFragment : BaseFragment(), SettingsContract.View {
@@ -39,11 +40,7 @@ class SettingsFragment : BaseFragment(), SettingsContract.View {
     override fun showTextCacheMaxAge() {
         showText(nbrOfDays.toString())
     }
-
-    override fun showTextErrorCacheMaxAge() {
-        showText("Error.")
-    }
-
+    
     private fun onChangeLanguageClick() {
         val currentLanguage = App.localeManager.getLanguage()
         with(LocaleManager) {

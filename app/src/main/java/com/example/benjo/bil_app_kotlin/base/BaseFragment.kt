@@ -29,16 +29,6 @@ abstract class BaseFragment : Fragment() {
         viewForSnackbar = (activity as MainActivity).findViewById<View>(android.R.id.content)
     }
 
-    fun showText(textID: Int) {
-        Snackbar.make(viewForSnackbar, textID, Snackbar.LENGTH_LONG).show()
-    }
-
-    fun showText(text: String?) {
-        Snackbar.make(viewForSnackbar, text.toString(), Snackbar.LENGTH_LONG).show()
-    }
-
     override fun getContext(): Context = activity!!.applicationContext
-
-
 
 }

@@ -11,6 +11,5 @@ interface SettingsContract {
 
     interface View : BaseView<Presenter> {
         fun showTextCacheMaxAge()
-        fun showTextErrorCacheMaxAge()
     }
 }

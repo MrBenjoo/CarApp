@@ -17,6 +17,7 @@ import com.example.benjo.bil_app_kotlin.base.BaseFragment
 import com.example.benjo.bil_app_kotlin.data.network.model.SearchResponse
 import com.example.benjo.bil_app_kotlin.servicelocator.PresenterServiceLocator
 import com.example.benjo.bil_app_kotlin.utils.mainActivity
+import com.example.benjo.bil_app_kotlin.utils.showText
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.fragment_saved.*
 
