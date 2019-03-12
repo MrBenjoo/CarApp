@@ -1,6 +1,6 @@
 package com.example.benjo.bil_app_kotlin.ui.compare.renderer
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +45,7 @@ class RendererRowProgressbarView : Renderer<CommonCompareModel, CommonHolder>() 
 
 }
 
-class CommonHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class CommonHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
     val title = itemView.tv_comparing_title
 
     val carOneModel = itemView.tv_comparing_model_one

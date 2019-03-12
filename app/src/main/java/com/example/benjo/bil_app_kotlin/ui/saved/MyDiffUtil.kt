@@ -1,6 +1,6 @@
 package com.example.benjo.bil_app_kotlin.ui.saved
 
-import android.support.v7.util.DiffUtil
+import androidx.recyclerview.widget.DiffUtil
 import android.util.Log
 import com.example.benjo.bil_app_kotlin.data.db.model.CarData
 

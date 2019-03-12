@@ -1,6 +1,6 @@
 package com.example.benjo.bil_app_kotlin.servicelocator
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import com.example.benjo.bil_app_kotlin.MainActivity
 import com.example.benjo.bil_app_kotlin.data.db.RoomDb
 import com.example.benjo.bil_app_kotlin.data.db.repository.CarRepositoryImpl

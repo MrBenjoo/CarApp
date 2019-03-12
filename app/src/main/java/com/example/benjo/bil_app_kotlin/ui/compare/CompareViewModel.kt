@@ -1,6 +1,6 @@
 package com.example.benjo.bil_app_kotlin.ui.compare
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.example.benjo.bil_app_kotlin.ui.compare.data.model.Compare
 
 class CompareViewModel : ViewModel() {

@@ -1,7 +1,7 @@
 package com.example.benjo.bil_app_kotlin.ui.compare.tabs
 
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,7 +72,7 @@ class RendererEnvironmentView : Renderer<EnvModel, EnvironmentViewHolder>() {
     }
 }
 
-class EnvironmentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class EnvironmentViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
     val fuelTitle = itemView.fuel.tv_compare_title
     val fuelCarOne = itemView.fuel.tv_compare_car_one
     val fuelCarOneVal = itemView.fuel.tv_compare_car_one_val

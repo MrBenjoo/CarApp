@@ -1,6 +1,6 @@
 package com.example.benjo.bil_app_kotlin.ui.tech
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.ui.tab.Row
@@ -25,7 +25,7 @@ class TechAdapter(private val title: String?,
     override fun getContentItemsTotal(): Int = if (expanded) list.size else 0
 
     /* -------------------------------------- Parent related ------------------------------------- */
-    override fun onBindHeaderViewHolder(holder: RecyclerView.ViewHolder?) {
+    override fun onBindHeaderViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder?) {
         val parentHolder = holder as TechParentViewHolder
         parentHolder.title?.text = title
         parentHolder.rootView?.setOnClickListener {
@@ -42,10 +42,10 @@ class TechAdapter(private val title: String?,
         }
     }
 
-    override fun getHeaderViewHolder(view: View?): RecyclerView.ViewHolder = TechParentViewHolder(view)
+    override fun getHeaderViewHolder(view: View?): androidx.recyclerview.widget.RecyclerView.ViewHolder = TechParentViewHolder(view)
 
 
-    class TechParentViewHolder(view: View?) : RecyclerView.ViewHolder(view!!) {
+    class TechParentViewHolder(view: View?) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view!!) {
         val rootView = view?.expandable_header
         val title = view?.header_text
         val image = view?.header_img
@@ -54,16 +54,16 @@ class TechAdapter(private val title: String?,
 
 
     /* -------------------------------------- Child related -------------------------------------- */
-    override fun onBindItemViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindItemViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder?, position: Int) {
         with(holder as TechChildViewHolder) {
             descRow?.text = list[position].desc
             dataRow?.text = list[position].data
         }
     }
 
-    override fun getItemViewHolder(view: View?): RecyclerView.ViewHolder = TechChildViewHolder(view)
+    override fun getItemViewHolder(view: View?): androidx.recyclerview.widget.RecyclerView.ViewHolder = TechChildViewHolder(view)
 
-    class TechChildViewHolder(childView: View?) : RecyclerView.ViewHolder(childView!!) {
+    class TechChildViewHolder(childView: View?) : androidx.recyclerview.widget.RecyclerView.ViewHolder(childView!!) {
         val descRow = childView?.row_tv_desc
         val dataRow = childView?.row_tv_data
     }

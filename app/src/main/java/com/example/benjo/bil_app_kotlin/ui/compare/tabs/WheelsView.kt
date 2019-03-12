@@ -1,5 +1,6 @@
 package com.example.benjo.bil_app_kotlin.ui.compare.tabs
 
+
 import android.os.Bundle
 import android.view.View
 import com.example.benjo.bil_app_kotlin.MainActivity
@@ -15,6 +16,7 @@ class WheelsView : BaseFragment() {
     private val TAG = "WheelsView"
 
     override fun layoutId(): Int = R.layout.fragment_wheels
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,5 +46,6 @@ class WheelsView : BaseFragment() {
         tv_rim_back_2.text = carTwoData?.rimBack
         tv_rim_front_2.text = carTwoData?.rimFront
     }
+
 
 }

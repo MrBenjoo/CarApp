@@ -22,7 +22,7 @@ class SettingsFragment : BaseFragment(), SettingsContract.View {
 
     override fun layoutId(): Int = R.layout.fragment_settings
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         presenter = SettingsPresenter()
     }

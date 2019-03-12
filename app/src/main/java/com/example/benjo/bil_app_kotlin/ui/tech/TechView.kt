@@ -21,7 +21,7 @@ class TechView : BaseFragment(), TechContract.View {
 
     override fun layoutId(): Int = R.layout.fragment_base
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         presenter = TechPresenter(SectionedRecyclerViewAdapter())
     }

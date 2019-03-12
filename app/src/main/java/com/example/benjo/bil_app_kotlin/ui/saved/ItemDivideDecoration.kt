@@ -2,15 +2,15 @@ package com.example.benjo.bil_app_kotlin.ui.saved
 
 import android.content.Context
 import android.graphics.Canvas
-import android.support.v4.content.res.ResourcesCompat
-import android.support.v7.widget.RecyclerView
+import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.example.benjo.bil_app_kotlin.R
 
 
-class ItemDivideDecoration(context: Context) : RecyclerView.ItemDecoration() {
+class ItemDivideDecoration(context: Context) : androidx.recyclerview.widget.RecyclerView.ItemDecoration() {
     private val divider = ResourcesCompat.getDrawable(context.resources, R.drawable.line_divider_list, null)
 
-    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+    override fun onDrawOver(c: Canvas, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
         super.onDrawOver(c, parent, state)
         if (divider != null) {
             val left = parent.paddingLeft
@@ -20,7 +20,7 @@ class ItemDivideDecoration(context: Context) : RecyclerView.ItemDecoration() {
             for (i in 0 until childCount) {
                 val child = parent.getChildAt(i)
 
-                val params = child.layoutParams as RecyclerView.LayoutParams
+                val params = child.layoutParams as androidx.recyclerview.widget.RecyclerView.LayoutParams
 
                 val top = child.bottom + params.bottomMargin
                 val bottom = top + divider.intrinsicHeight

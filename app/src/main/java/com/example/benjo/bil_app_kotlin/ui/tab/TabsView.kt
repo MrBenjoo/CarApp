@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.support.v7.widget.SearchView
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -40,7 +40,7 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
         var isComparing = false
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         presenter = PresenterServiceLocator.provideTabsPresenter(mainActivity(), this)
     }
@@ -86,9 +86,9 @@ class TabsView : BaseFragment(), SearchView.OnQueryTextListener, TabsContract.Vi
         tabsAdapter.addFragment(TechView(), string(R.string.tabs_second))
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.menu_tabs, menu)
+        inflater.inflate(R.menu.menu_tabs, menu)
         initMenuItems(menu)
         setupSearchView(searchMenuItem.actionView as SearchView)
         when (isComparing) {

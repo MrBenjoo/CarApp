@@ -1,11 +1,11 @@
 package com.example.benjo.bil_app_kotlin.ui.compare.renderer
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.util.SparseArray
 import com.example.benjo.bil_app_kotlin.ui.compare.data.model.ItemModel
 
-class RendererAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RendererAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
     private var listOfItemModel = arrayListOf<ItemModel>()
     private var arrayOfRenderer = SparseArray<Renderer<*, *>>()
 
@@ -16,7 +16,7 @@ class RendererAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
      * The view type is obtained from the getItemViewType method above.
      * If no view type is found, throw RuntimeException -> Not supported Item View Type.
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val renderer = arrayOfRenderer[viewType]
         if (renderer != null) return renderer.createViewHolder(parent)
         throw RuntimeException("Not supported Item View Type: $viewType")
@@ -36,9 +36,9 @@ class RendererAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
      * Calls the bindView method in a specific view (that is defined by the view type and is
      * obtained from the listOfItemModel).
      */
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         val itemModel = listOfItemModel[position]
-        val renderer = arrayOfRenderer[itemModel.getType()] as? Renderer<ItemModel, RecyclerView.ViewHolder>
+        val renderer = arrayOfRenderer[itemModel.getType()] as? Renderer<ItemModel, androidx.recyclerview.widget.RecyclerView.ViewHolder>
         if (renderer != null) renderer.bindView(itemModel, holder)
         else throw RuntimeException("Not supported View Holder: $holder")
     }

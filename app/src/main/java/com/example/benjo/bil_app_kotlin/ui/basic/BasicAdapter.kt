@@ -1,6 +1,6 @@
 package com.example.benjo.bil_app_kotlin.ui.basic
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import com.example.benjo.bil_app_kotlin.R
 import com.example.benjo.bil_app_kotlin.ui.tab.Row
 import kotlinx.android.synthetic.main.item_tabs_row.view.*
 
-class BasicAdapter(val data: ArrayList<Row>?) : RecyclerView.Adapter<BasicAdapter.BasicViewHolder>() {
+class BasicAdapter(val data: ArrayList<Row>?) : androidx.recyclerview.widget.RecyclerView.Adapter<BasicAdapter.BasicViewHolder>() {
     private val TAG = "BasicAdapter"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BasicViewHolder {
@@ -35,7 +35,7 @@ class BasicAdapter(val data: ArrayList<Row>?) : RecyclerView.Adapter<BasicAdapte
         notifyDataSetChanged()
     }
 
-    class BasicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class BasicViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         val descRow = itemView.row_tv_desc
         val dataRow = itemView.row_tv_data
     }

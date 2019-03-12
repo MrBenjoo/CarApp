@@ -3,7 +3,7 @@ package com.example.benjo.bil_app_kotlin.ui.home
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import android.view.View
 import androidx.navigation.Navigation
 import com.example.benjo.bil_app_kotlin.R
@@ -20,7 +20,7 @@ class HomeView : BaseFragment(), SearchView.OnQueryTextListener, HomeContract.Vi
 
     override fun layoutId(): Int = R.layout.fragment_home
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         presenter = HomePresenter(provideCarService())
     }

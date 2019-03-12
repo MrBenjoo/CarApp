@@ -3,7 +3,7 @@ package com.example.benjo.bil_app_kotlin
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import androidx.navigation.findNavController
 import com.example.benjo.bil_app_kotlin.ui.compare.data.model.Compare

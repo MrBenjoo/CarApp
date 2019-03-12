@@ -1,11 +1,11 @@
 package com.example.benjo.bil_app_kotlin.ui.compare.renderer
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import com.example.benjo.bil_app_kotlin.ui.compare.data.model.ItemModel
 
 
-abstract class Renderer<M : ItemModel, VH : RecyclerView.ViewHolder> {
+abstract class Renderer<M : ItemModel, VH : androidx.recyclerview.widget.RecyclerView.ViewHolder> {
 
     var type = -1
 

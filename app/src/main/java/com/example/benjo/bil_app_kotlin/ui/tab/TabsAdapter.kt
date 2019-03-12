@@ -1,15 +1,15 @@
 package com.example.benjo.bil_app_kotlin.ui.tab
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 
-class TabsAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
-    private val fragmentList = arrayListOf<Fragment?>()
+class TabsAdapter(fm: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentPagerAdapter(fm) {
+    private val fragmentList = arrayListOf<androidx.fragment.app.Fragment>()
     private val titleList = arrayListOf<String>()
 
 
-    fun addFragment(fragment: Fragment?, title: String) {
+    fun addFragment(fragment: androidx.fragment.app.Fragment, title: String) {
         fragmentList.add(fragment)
         titleList.add(title)
         notifyDataSetChanged()
@@ -17,7 +17,7 @@ class TabsAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
 
     override fun getPageTitle(position: Int): CharSequence? = titleList[position]
 
-    override fun getItem(position: Int): Fragment? = fragmentList[position]
+    override fun getItem(position: Int): androidx.fragment.app.Fragment = fragmentList[position]
 
     override fun getCount(): Int = fragmentList.size
 

@@ -1,6 +1,5 @@
 package com.example.benjo.bil_app_kotlin.ui.compare.tabs
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +47,7 @@ class RendererVehicleView : Renderer<VehicleModel, VehicleViewHolder>() {
 }
 
 
-class VehicleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class VehicleViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
     val title = itemView.tv_compare_row_text_title
     val carModelOne = itemView.tv_compare_row_text_model_one
     val carOneData = itemView.tv_compare_row_text_model_one_val

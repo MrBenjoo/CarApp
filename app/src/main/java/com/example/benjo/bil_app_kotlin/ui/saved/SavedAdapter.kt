@@ -1,8 +1,8 @@
 package com.example.benjo.bil_app_kotlin.ui.saved
 
 
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,28 +13,28 @@ import kotlinx.android.synthetic.main.item_saved_row_cb.view.*
 import org.greenrobot.eventbus.EventBus
 
 
-class SavedAdapter(private val carList: ArrayList<CarData>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SavedAdapter(private val carList: ArrayList<CarData>) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
     var isActionMode = false
 
     override fun getItemViewType(position: Int): Int = if (isActionMode) 1 else 2
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder = when (viewType) {
         1 -> viewActionMode(parent)
         else -> viewDefault(parent)
     }
 
-    private fun viewActionMode(parent: ViewGroup): RecyclerView.ViewHolder =
+    private fun viewActionMode(parent: ViewGroup): androidx.recyclerview.widget.RecyclerView.ViewHolder =
             ViewHolderActionMode(LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_saved_row_cb, parent, false))
 
-    private fun viewDefault(parent: ViewGroup): RecyclerView.ViewHolder {
+    private fun viewDefault(parent: ViewGroup): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         return ViewHolderDefault(LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_saved_row, parent, false))
     }
 
     override fun getItemCount(): Int = carList.size
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = when (holder.itemViewType) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) = when (holder.itemViewType) {
         1 -> {
             with(holder as ViewHolderActionMode) {
                 val car = carList[position]
@@ -66,7 +66,7 @@ class SavedAdapter(private val carList: ArrayList<CarData>) : RecyclerView.Adapt
         carList.addAll(newList)
     }
 
-    class ViewHolderDefault(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolderDefault(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         val reg = itemView.tv_saved_reg
         val model = itemView.tv_saved_model
         val modelYear = itemView.tv_saved_year
@@ -86,7 +86,7 @@ class SavedAdapter(private val carList: ArrayList<CarData>) : RecyclerView.Adapt
         }
     }
 
-    class ViewHolderActionMode(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolderActionMode(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         val reg = itemView.tv_saved_reg_cb
         val model = itemView.tv_saved_model_cb
         val modelYear = itemView.tv_saved_year_cb

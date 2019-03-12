@@ -1,17 +1,13 @@
 package com.example.benjo.bil_app_kotlin.ui.compare
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.util.Log
 
-class CompareAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
-    private val fragmentList = arrayListOf<Fragment?>()
+class CompareAdapter(fm: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentPagerAdapter(fm) {
+    private val fragmentList = arrayListOf<androidx.fragment.app.Fragment>()
     private val titleList = arrayListOf<String>()
     private val TAG = "CompareAdapter"
 
 
-    fun addFragment(fragment: Fragment?, title: String) {
+    fun addFragment(fragment: androidx.fragment.app.Fragment, title: String) {
         fragmentList.add(fragment)
         titleList.add(title)
         notifyDataSetChanged()
@@ -19,7 +15,7 @@ class CompareAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
 
     override fun getPageTitle(position: Int): CharSequence? = titleList[position]
 
-    override fun getItem(position: Int): Fragment? = fragmentList[position]
+    override fun getItem(position: Int): androidx.fragment.app.Fragment = fragmentList[position]
 
     override fun getCount(): Int = fragmentList.size
 

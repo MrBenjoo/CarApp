@@ -1,7 +1,7 @@
 package com.example.benjo.bil_app_kotlin
 
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import com.example.benjo.bil_app_kotlin.data.db.repository.CarRepository
 import com.example.benjo.bil_app_kotlin.data.network.ApiInterface
 import com.example.benjo.bil_app_kotlin.data.network.ApiHelper
@@ -66,7 +66,7 @@ class TabsPresenterTest {
         val result = presenter.validateResponse(response)
 
         assertNotNull(result)
-    }
+    }>
 
     @Test
     fun responseIsNotSuccessfulAndIsNull() {

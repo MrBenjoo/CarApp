@@ -4,8 +4,8 @@ package com.example.benjo.bil_app_kotlin.ui.saved
 import android.content.DialogInterface
 import android.content.DialogInterface.BUTTON_POSITIVE
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.Toolbar
 import android.view.ActionMode
 
 import com.example.benjo.bil_app_kotlin.R
@@ -129,11 +129,12 @@ class SavedView : BaseFragment(), SavedContract.View, ActionMode.Callback, Toolb
         return true
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.menu_saved_view, menu)
 
-        edit = menu?.findItem(R.id.action_edit)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_saved_view, menu)
+
+        edit = menu.findItem(R.id.action_edit)
 
         when (showToolbarIcons) {
             true -> edit?.isVisible = true

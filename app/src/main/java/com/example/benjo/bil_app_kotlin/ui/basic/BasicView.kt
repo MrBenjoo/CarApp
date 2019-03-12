@@ -19,7 +19,7 @@ class BasicView : BaseFragment(), BasicContract.View {
     override lateinit var presenter: BasicContract.Presenter
     override fun layoutId(): Int = R.layout.fragment_base
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         presenter = BasicPresenter(BasicAdapter(arrayListOf()))
     }
