@@ -1,2 +1,2 @@
-# CarApp
-CarApp is an Android application which shows vehicle information
+# SweCar
+SweCar is an Android application that shows information about vehicles registered in Sweden.

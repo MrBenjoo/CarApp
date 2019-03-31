@@ -36,11 +36,11 @@
         app:layout_constraintTop_toBottomOf="@+id/relative_layout_home_search" />
 
     <TextView
-        android:id="@+id/tv_settings_home"
+        android:id="@+id/tv_language_home"
         style="@style/TextStyleHomeRow"
         android:layout_marginTop="28dp"
-        android:drawableStart="@drawable/ic_settings"
-        android:text="@string/home_settings"
+        android:drawableStart="@drawable/ic_language"
+        android:text="@string/home_language"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_saved_home"
         app:layout_constraintTop_toBottomOf="@+id/tv_saved_home" />

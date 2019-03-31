@@ -7,16 +7,9 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.benjo.bil_app_kotlin.ui.home.HomeView"
+        android:name="com.example.benjo.swecar.ui.home.HomeView"
         android:label="HomeFragment"
         app:enterAnim="@android:anim/fade_in">
-        <action
-            android:id="@+id/action_homeFragment_to_settingsFragment"
-            app:destination="@+id/settings_btn_change_lang"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_homeFragment_to_savedFragment2"
             app:destination="@id/savedFragment" />
@@ -24,37 +17,32 @@
             android:id="@+id/action_homeFragment_to_tabsFragment"
             app:destination="@id/tabsFragment"
             app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
+            app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
-        android:id="@+id/settings_btn_change_lang"
-        android:name="com.example.benjo.bil_app_kotlin.ui.settings.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
-    <fragment
         android:id="@+id/savedFragment"
-        android:name="com.example.benjo.bil_app_kotlin.ui.saved.SavedView"
+        android:name="com.example.benjo.swecar.ui.saved.SavedView"
         android:label="fragment_saved"
         tools:layout="@layout/fragment_saved" />
     <fragment
         android:id="@+id/tabsFragment"
-        android:name="com.example.benjo.bil_app_kotlin.ui.tab.TabsView"
+        android:name="com.example.benjo.swecar.ui.tab.TabsView"
         android:label="TabsFragment">
         <action
             android:id="@+id/action_tabsFragment_to_menuFragment"
             app:destination="@id/menuFragment"
             app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
+            app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/menuFragment"
-        android:name="com.example.benjo.bil_app_kotlin.ui.compare.CompareMenuView"
+        android:name="com.example.benjo.swecar.ui.compare.CompareMenuView"
         android:label="fragment_menu"
         tools:layout="@layout/fragment_menu">
         <argument
@@ -67,13 +55,13 @@
             android:id="@+id/action_menuFragment_to_baseCompareFragment"
             app:destination="@id/baseCompareFragment"
             app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
+            app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/baseCompareFragment"
-        android:name="com.example.benjo.bil_app_kotlin.ui.compare.tabs.TabsParentView"
+        android:name="com.example.benjo.swecar.ui.compare.tabs.TabsParentView"
         android:label="fragment_base_compare"
         tools:layout="@layout/fragment_compare_parent" />
 

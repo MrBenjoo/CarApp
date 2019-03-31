@@ -14,7 +14,7 @@ apply plugin: 'androidx.navigation.safeargs'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.benjo.bil_app_kotlin"
+        applicationId "com.example.benjo.swecar"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -52,6 +52,8 @@ dependencies {
 
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0-alpha02'
     annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.1.0-alpha02'
+
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
 
 }

@@ -147,7 +147,7 @@
 
     <!-- Home related -->
     <string name="home_saved">Saved</string>
-    <string name="home_settings">Settings</string>
+    <string name="home_language">Change Language</string>
 
     <string name="compare_mode_text">Comparison mode enabled, choose car to compare.</string>
 
